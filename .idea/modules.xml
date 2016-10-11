@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/slides/3_god-mvc/god (1).iml" filepath="$PROJECT_DIR$/slides/3_god-mvc/god (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/slides/3_god-non-mvc/god (2).iml" filepath="$PROJECT_DIR$/slides/3_god-non-mvc/god (2).iml" />
+      <module fileurl="file://$PROJECT_DIR$/baseProject/team1-room-platform.iml" filepath="$PROJECT_DIR$/baseProject/team1-room-platform.iml" />
+    </modules>
+  </component>
+</project>
