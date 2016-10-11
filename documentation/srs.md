@@ -40,9 +40,9 @@ Manager: User that wants to advertise a flat
 Use cases with no explanation are seen to be self explanatory and a description would be redundant.
 
 
-| Name        | Actor           | Description  |
-| ------------- |:-------------:| ------|
-| Sign up      | guest     |  Create an account.  |
+| Name        | Actor           | Description  | Precondition | Normal Flow |
+| ------------- |:-------------:| ------| ------| ------|
+| Sign up      | guest     |  Create an account.  | 1) the user visited the home page of flatfindr 2) The user has no active account | button login -> "sign up" button -> user fills the form |
 | View schedule | user      | The accepted enquiries for visiting flats are shown. |
 | View alerts | user      |     |
 | Create alert | user      | Create an alert by specifying the criteria for matching new ads. If a new ad matches the search criteria, an alert will be send to the user. 
