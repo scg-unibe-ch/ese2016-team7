@@ -77,8 +77,73 @@ We might conclude that, as most users atelre quite familiar with web pages and b
 
 <h2>3. Specific requirements</h2>
 **Functional requirements**
+
+***User***
+
+Placing an ad
+
+A User must specify the general infos of the flat ad:
+He must add a title, the address (containing a Street and a City).
+Further he has to add the date of the move-in and (optional) can add a move-out-date.
+He adds the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
+For the flat he must add a description in the room and can tick the following options:
+Animals allowed, garden, Cellar or Attic, Cable TV, WiFi, Smoking inside allowed, balcony or patio, furnished, garage
+If the roommates have Flatfinder accounts, then the user can add them by mail and can add a description of them. This is optional.
+Also optional is a field for the preferences
+He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
+The user can add visiting times by choosing them in a calendar and setting the time.
+
+My rooms
+
+In an overview the user sees all the ads he has posted and all the ads he has bookmarked.
+
+Messages
+In the messages he can choose between the following three options:
+Inbox: In a table, messages received are shown in a table, ordered by subject, sender, recipient and date sent. If a message is unread, its blue, otherwise white. If clicked on it,  the message is shown below.
+New: a window pops up in which the user must enter the mail address of the recipient (title “To:”), the subject of the message (title: “Subject”) and (optional) a message (title: “message”) if he wants to send a message. He then has a Send and a Cancel button
+Sent: the mails sent by the user, displayed the same way as in the inbox
+
+  Enquiries
+
+The Enquiries are displayed in a table, sorted by sender, ad, date of the visit, date sent, and an Action. The user can either accept or decline an enquiry and if done so it is displayed.
+
+Schedule
+
+The schedule contains of two lists: The users presentations and the users visits.
+
+In both, he sees the address, date, time of the visit/presentation and can enter the ad of the flat visited/presented and if he's the presenter he can enter a list of the users who visit the property, sorted by name, username, profile which he can enter and the rating of the visiting user.
+
+Alerts
+
+The user can create a new alert for either a romm or a studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel.
+Further he has a table of his active alerts, sorted by type, city, radius, max Price and an option to delete the alert.
+
+ User Profile
+
+His picture, username, name and description are displayed with the options to message and edit profile if its the users.
+
+Edit Profile
+He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
+
+***Home***
+
+The user sees the newest ads. An ad contains the picture, title, prize, type, address and move-in-date. He has the profile options and the search.
+
+***Search***
+
+He can tick the type and must enter a city code, radius and a price and can then search or cancel.
+
+Display search
+
+He sees the result and can sort them by the sortoptions and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
+
+Display Ad
+The users sees the title, the details (tpye, address, avaiable from, move-out-date, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.
+
 **Non-functional requirements (external, performance, etc.)**
 
+This website should work flawlessly on all browsers.
+An ad/user should be unique.
 
 
 
