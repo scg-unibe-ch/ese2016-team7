@@ -42,7 +42,7 @@ Use cases with no explanation are seen to be self explanatory and a description 
 
 | Name        | Actor           | Description  | Precondition | Normal Flow |
 | ------------- |:-------------:| ------| ------------| ------------|
-| Sign up      | guest     |  Create an account.  | 1) the user visited the home page of flatfindr 2) The user has no active account | button login -> "sign up" button -> user fills the form |
+| Sign up      | guest     |  Create an account.  | the user visited the home page of flatfindr and The user has no active account | button login -> "sign up" button -> user fills the form |
 | View schedule | user      | The accepted enquiries for visiting flats are shown. | User has already logged in | makes waterfall menu drop from his profile picture -> clicks on "Schedule" -> all planned visits and their details are accordingly displayed |
 | View alerts | user      |     | The user had a succesful log in | User drops waterfall menu from his profile picture -> clicks on "Alerts" -> list of alerts is displayed |
 | Create alert | user      | Create an alert by specifying the criteria for matching new ads. If a new ad matches the search criteria, an alert will be send to the user | User is logged in | 
