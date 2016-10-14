@@ -1,5 +1,18 @@
+# Eclipse Stuff
+.classpath
+.settings/
+.metadata
+bin/
+
+# Intellij Stuff
 .idea/
-
-/baseProject/target/
-
 *.iml
+*.iws
+
+# Mac Stuff
+.DS_Store
+
+# Maven Stuff
+log/
+target/
+temp/
