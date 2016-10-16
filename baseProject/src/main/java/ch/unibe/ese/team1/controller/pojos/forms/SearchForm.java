@@ -107,6 +107,7 @@ public class SearchForm {
 	private boolean garage;
 	private boolean internet;
 
+
 	private boolean roomHelper;
 
 	// the ugly stuff

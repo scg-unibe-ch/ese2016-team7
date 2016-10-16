@@ -89,33 +89,7 @@ function sort_div_attribute() {
 }
 </script>
 
-<script>
-	$(document).ready(function() {
-		$("#city").autocomplete({
-			minLength : 2
-		});
-		$("#city").autocomplete({
-			source : <c:import url="getzipcodes.jsp" />
-		});
-		$("#city").autocomplete("option", {
-			enabled : true,
-			autoFocus : true
-		});
-		
-		$("#field-earliestMoveInDate").datepicker({
-			dateFormat : 'dd-mm-yy'
-		});
-		$("#field-latestMoveInDate").datepicker({
-			dateFormat : 'dd-mm-yy'
-		});
-		$("#field-earliestMoveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
-		});
-		$("#field-latestMoveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
-		});
-	});
-</script>
+
 
 <h1>Search results:</h1>
 
