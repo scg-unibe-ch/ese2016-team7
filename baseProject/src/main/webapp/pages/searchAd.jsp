@@ -87,9 +87,14 @@
 
 <script>
     function advancedSearch() {
-        if($("#advanced").css("display") == "none")
-        $("#advanced").css("display","");
-        else $("#advanced").css("display","none");
+        if($("#advanced").css("display") == "none") {
+            $("#advanced").css("display","");
+            $("#advancedSearch").html("Hide Advanced Search");
+        }else {
+            $("#advanced").css("display", "none");
+            $("#advancedSearch").html("Show Advanced Search");
+
+        }
     }
 </script>
 
@@ -123,7 +128,7 @@
         CHF
         <form:errors path="prize" cssClass="validationErrorText"/><br/>
 
-        <a href="javascript:void(0);" onclick="advancedSearch();" style="color: #ff00ff">Advanced Search</a><br>
+        <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #ff00ff">Show Advanced Search</a><br>
         <br>
         <hr class="slim">
 
