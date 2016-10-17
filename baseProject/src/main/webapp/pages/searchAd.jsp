@@ -21,6 +21,19 @@
             autoFocus: true
         });
 
+        $("#field-earliestMoveInDate").datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+        $("#field-latestMoveInDate").datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+        $("#field-earliestMoveOutDate").datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+        $("#field-latestMoveOutDate").datepicker({
+            dateFormat: 'dd-mm-yy'
+        });
+
         var price = document.getElementById('prizeInput');
         var radius = document.getElementById('radiusInput');
 
@@ -36,53 +49,22 @@
     function validateType(form) {
         var room = document.getElementById('room');
         var studio = document.getElementById('studio');
-        var neither = document.getElementById('neither');
         var both = document.getElementById('both');
         var type = document.getElementById('type');
         var filtered = document.getElementById('filtered');
 
         if (room.checked && studio.checked) {
             both.checked = true;
-            neither.checked = false;
         }
         else if (!room.checked && !studio.checked) {
             both.checked = false;
-            neither.checked = true;
         }
         else {
             both.checked = false;
-            neither.checked = false;
             type.checked = studio.checked;
         }
         filtered.checked = true;
     }
-</script>
-<script>
-    $(document).ready(function () {
-        $("#city").autocomplete({
-            minLength: 2
-        });
-        $("#city").autocomplete({
-            source: <c:import url="getzipcodes.jsp" />
-        });
-        $("#city").autocomplete("option", {
-            enabled: true,
-            autoFocus: true
-        });
-
-        $("#field-earliestMoveInDate").datepicker({
-            dateFormat: 'dd-mm-yy'
-        });
-        $("#field-latestMoveInDate").datepicker({
-            dateFormat: 'dd-mm-yy'
-        });
-        $("#field-earliestMoveOutDate").datepicker({
-            dateFormat: 'dd-mm-yy'
-        });
-        $("#field-latestMoveOutDate").datepicker({
-            dateFormat: 'dd-mm-yy'
-        });
-    });
 </script>
 
 <script>
@@ -93,7 +75,6 @@
         }else {
             $("#advanced").css("display", "none");
             $("#advancedSearch").html("Show Advanced Search");
-
         }
     }
 </script>
@@ -106,11 +87,10 @@
         <form:checkbox name="room" id="room" path="roomHelper"/><label>Room</label>
         <form:checkbox name="studio" id="studio" path="studioHelper"/><label>Studio</label>
 
-        <form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio"/>
         <form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio"/>
         <form:checkbox style="display:none" name="type" id="type" path="studio"/>
         <form:checkbox style="display:none" name="filtered" id="filtered" path="filtered"/>
-        <form:errors path="noRoomNoStudio" cssClass="validationErrorText"/> <br/>
+        <br />
 
         <label for="city">City / zip code:</label>
         <form:input type="text" name="city" id="city" path="city"
@@ -129,7 +109,7 @@
         <form:errors path="prize" cssClass="validationErrorText"/><br/>
 
         <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #ff00ff">Show Advanced Search</a><br>
-        <br>
+        <br />
         <hr class="slim">
 
         <table id="advanced" style="width: 80%; display: none;">
