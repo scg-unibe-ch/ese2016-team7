@@ -27,9 +27,6 @@ public class SearchForm {
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
 
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
-
 	private boolean bothRoomAndStudio;
 
 	public String getCity() {
@@ -62,14 +59,6 @@ public class SearchForm {
 
 	public void setStudio(boolean studio) {
 		this.studio = studio;
-	}
-
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
-	}
-
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
 	}
 
 	public boolean getBothRoomAndStudio() {
@@ -106,6 +95,7 @@ public class SearchForm {
 	private boolean cable;
 	private boolean garage;
 	private boolean internet;
+
 
 	private boolean roomHelper;
 
