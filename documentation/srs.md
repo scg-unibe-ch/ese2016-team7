@@ -2,13 +2,13 @@
 
 <h2>1. Introduction</h2>
 **Purpose**
-The purpose of this SRS is to describe the FlatFindr online platform and specify the reuqirements of the project. For now, the SRS only describes the system-as-is and is thus only of interest to the developer team. Once the requirements of the customer are added, this document serves as a kind of contract between the customer and the developers and acts as a common ground for the stakeholders, where either one of them can check whether their understanding and vision of the product to be built is the same as the one of the other party.
+The purpose of this SRS is to describe the FlatFindr online platform and specify the reuqirements of the project. This document serves as a kind of contract between the customer and the developers and acts as a common ground for the stakeholders, where either one of them can check whether their understanding and vision of the product to be built is the same as the one of the other party.
 To fulfill its purpose, the SRS is always to be kept up-to-date by the developer team.
 
 **Stakeholders**
 The customer defines the requirements.
 The users uses the product.
-The developer team “ESE 2016 Team 7” collect the requirement and build the product.
+The developer team “ESE 2016 Team 7” collect the requirements and build the product.
 
 **Scope**
 The software product produced for the customer is an online platform named FlatFindr.
@@ -93,6 +93,8 @@ Also optional is a field for the preferences
 He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
 The user can add visiting times by choosing them in a calendar and setting the time.
 
+Users should be able to add ads for renting rooms and studios, but also for selling them. Furthermore, he should be able to hold auctions for a room/studio where users can bid for a selling price or rent in a given time window (specified by the user who placed the ad). Ads should also be able to have both an instant buy/rent option and an auction/bids (_To be done_).
+
 My rooms
 
 In an overview the user sees all the ads he has posted and all the ads he has bookmarked.
@@ -103,7 +105,7 @@ Inbox: In a table, messages received are shown in a table, ordered by subject, s
 New: a window pops up in which the user must enter the mail address of the recipient (title “To:”), the subject of the message (title: “Subject”) and (optional) a message (title: “message”) if he wants to send a message. He then has a Send and a Cancel button
 Sent: the mails sent by the user, displayed the same way as in the inbox
 
-  Enquiries
+Enquiries
 
 The Enquiries are displayed in a table, sorted by sender, ad, date of the visit, date sent, and an Action. The user can either accept or decline an enquiry and if done so it is displayed.
 
@@ -115,8 +117,10 @@ In both, he sees the address, date, time of the visit/presentation and can enter
 
 Alerts
 
-The user can create a new alert for either a romm or a studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel.
-Further he has a table of his active alerts, sorted by type, city, radius, max Price and an option to delete the alert.
+The user can create a new alert for either a room or a studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel. If new ad(s), which would satisfy his subscribed search criteria, are added, he gets an alert/a message (to be clarified) of the new add(s) fitting his search criteria.   
+The relevant search criteria should be the price, the time and the location of the add. The others are not that relevant and either don't need to fit or only need to be 'somewhat close' to the search criteria (_To be done_).
+Further he has a table of his active alerts, sorted by type, city, radius, max price and an option to delete the alert.  
+
 
  User Profile
 
@@ -135,15 +139,19 @@ He can tick the type and must enter a city code, radius and a price and can then
 
 Display search
 
-He sees the result and can sort them by the sortoptions and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
+He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
 
 Display Ad
-The users sees the title, the details (tpye, address, avaiable from, move-out-date, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.
+The users sees the title, the details (tpye, address, avaiable from, move-out-date, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
+The filter should be removed and the filter criteria added to the search criteria (_Done_).  
+The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).   
+   
 
 **Non-functional requirements (external, performance, etc.)**
 
 This website should work flawlessly on all browsers.
-An ad/user should be unique.
+An ad/user should be unique.  
+The website should be designed elegantly and modern. The primary color should be pink (Set primary color to pink: _Done_)
 
 
 
