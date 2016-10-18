@@ -36,6 +36,7 @@ It can be compared to other online platforms which allow the user to search for 
 User: A Person signed in to the website
 Guest: A Person not signed in to the website
 Manager: User that wants to advertise a flat
+Premium User: A User that pays for his account.  
 
 Use cases with no explanation are seen to be self explanatory and a description would be redundant.
 
@@ -56,12 +57,12 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Send message | user      |     | user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Messages" -> user's messages are displayed -> user clicks on the button "New" -> user specifies the receiver, message object and text -> user clicks on the button "send" |
 | Send enquiry | user      |     | user is already logged in | user clicks on one Ad -> possible viiting times are displayed -> user clicks on "Send enquiry to advertiser" |
 | View ad location | user      |     | The user is already viewing an Ad | user clicks on the Adress on the Ad ->  the browser direcly opens GoogleMaps pointing the exact location of the object described on the Ad |
-| Create ad | manager      |  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit"
+| Create ad | manager      | Only possible if the maximal amount of ads for this user is not reached (_To be done_)  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit"
+| Create ad |Premium user| | The premium user is already logged in| user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit" |
 | Accept enquiry | manager      | A manager accepts an enquiry that a user sent to him.| the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Accept" |
 | Decline enquiry | manager      |  A manager declines an enquiry that a user sent to him.  | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Decline" |
 | View enquiries | manager      |     | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown
 | View visitors | manager      |   Shows when the users visit the managers flat. | The user (real estate manager) is already logged in an already created an ad | user drops waterfall menu from his profile picture -> clicks on the button "Schedule" -> a list containing all planned visits appears -> the user clicks on the button "see visitors" for a specific enquiry -> a list containing all visitors and their arrival time is displayed, each visitor has also a rating |
-
 
 
 
@@ -93,6 +94,13 @@ He can add pictures (optional) by uploading them. If he has uploaded pictures, h
 The user can add visiting times by choosing them in a calendar and setting the time.
 
 Users should be able to add ads for renting rooms and studios, but also for selling them. Furthermore, he should be able to hold auctions for a room/studio where users can bid for a selling price or rent in a given time window (specified by the user who placed the ad). Ads should also be able to have both an instant buy/rent option and an auction/bids (_To be done_).
+
+More types of properties will be defined and added. (_To be done_)
+
+Auctions (_To be done_)
+
+There will be no possibility for a direct buy. If a user gets overbidden, he will be messaged. (_To be done_)
+
 
 My rooms
 
@@ -149,6 +157,7 @@ The user should be able to have an 'advanced search' option with which he can hi
 **Non-functional requirements (external, performance, etc.)**
 
 This website should work flawlessly on all browsers.
+A non premium user can not create more than a certain number of ads. (_To be done_)
 An ad/user should be unique.  
 The website should be designed elegantly and modern. The primary color should be pink (Set primary color to pink: _Done_)
 
