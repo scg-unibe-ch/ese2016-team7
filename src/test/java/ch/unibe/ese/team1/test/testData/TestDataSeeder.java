@@ -34,6 +34,9 @@ public class TestDataSeeder implements InitializingBean {
 	
 	@Autowired
 	private RatingTestDataSaver ratingTestDataSaver;
+
+	@Autowired
+	private BidTestDataSaver bidTestDataSaver;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -46,6 +49,7 @@ public class TestDataSeeder implements InitializingBean {
 		alertDataSaver.saveTestData();
 		bookmarkTestDataSaver.saveTestData();
 		ratingTestDataSaver.saveTestData();
+		bidTestDataSaver.saveTestData();
 	}
 
 }

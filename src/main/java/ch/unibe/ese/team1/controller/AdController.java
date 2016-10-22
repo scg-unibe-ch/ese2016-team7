@@ -21,6 +21,7 @@ import ch.unibe.ese.team1.controller.service.BookmarkService;
 import ch.unibe.ese.team1.controller.service.MessageService;
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
+import ch.unibe.ese.team1.controller.service.BidService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 
@@ -46,6 +47,9 @@ public class AdController {
 	@Autowired
 	private VisitService visitService;
 
+	@Autowired
+	private BidService bidService;
+
 	/** Gets the ad description page for the ad with the given id. */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public ModelAndView ad(@RequestParam("id") long id, Principal principal) {
@@ -59,6 +63,7 @@ public class AdController {
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
 
 		model.addObject("visits", visitService.getVisitsByAd(ad));
+		model.addObject("bids", bidService.getBidsByAd(ad));
 
 		return model;
 	}
