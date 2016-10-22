@@ -29,14 +29,13 @@ System_as_is.md: Found on Github on ese2016-team7 under documentation.
 <h2>2. Overall description</h2>
 **Product Perspective**
 The FlatFindr platform is a self-contained, independent product.
-It can be compared to other online platforms which allow the user to search for rooms to rent or advertise rooms to be rent, like the platform the SUB mantains. However, FlatFindr has some unique features that no other comparable platform we know of has, like the enquiry system.
+It can be compared to other online platforms which allow the user to search for rooms, studios or apartments to buy or advertise rooms to be bidden for, like the platform the SUB mantains. However, FlatFindr has some unique features that no other comparable platform we know of has, like the enquiry system.
 
 **Use cases**
 
 User: A Person signed in to the website
 Guest: A Person not signed in to the website
 Manager: User that wants to advertise a flat
-Premium User: A User that pays for his account.  
 
 Use cases with no explanation are seen to be self explanatory and a description would be redundant.
 
@@ -54,11 +53,12 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Search ads | user      |     | user (which doesn't necessarily have to own an account) is on the home page | user clicks button "search" -> search form is displayed -> users fills form according to his needs -> user clicks on "search" -> the application shows a list of apartments that fullfil the user's needs |
 | Sort search results | user      |     | User is on a page the shows search results | user choses criteria -> users clicks on button "Sort" -> results are accordingly displayed |
 | View ad | user      |     | user is on a page that already shows a specific ad | user clicks the button "Visit profile" on the section about the user that published the ad -> application shows advertiser's infos |
+| Bid | user      |     | user is already logged in and is already viewing an Ad| user enters his bid -> user clicks on the "Submit" button |
 | Send message | user      |     | user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Messages" -> user's messages are displayed -> user clicks on the button "New" -> user specifies the receiver, message object and text -> user clicks on the button "send" |
 | Send enquiry | user      |     | user is already logged in | user clicks on one Ad -> possible viiting times are displayed -> user clicks on "Send enquiry to advertiser" |
 | View ad location | user      |     | The user is already viewing an Ad | user clicks on the Adress on the Ad ->  the browser direcly opens GoogleMaps pointing the exact location of the object described on the Ad |
-| Create ad | manager      | Only possible if the maximal amount of ads for this user is not reached (_To be done_)  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit"
-| Create ad |Premium user| | The premium user is already logged in| user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit" |
+| Create ad | manager      |  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit"
+| Create premium ad |manager| Only possible if the manager has added a credit card and the maximal amount of premium ads isn't reached | The manager is already logged in| user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies Roommates -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit" |
 | Accept enquiry | manager      | A manager accepts an enquiry that a user sent to him.| the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Accept" |
 | Decline enquiry | manager      |  A manager declines an enquiry that a user sent to him.  | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Decline" |
 | View enquiries | manager      |     | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown
@@ -84,18 +84,18 @@ Placing an ad
 
 A User must specify the general infos of the flat ad:
 He must add a title, the address (containing a Street and a City).
-Further he has to add the date of the move-in and (optional) can add a move-out-date.
-He adds the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
-For the flat he must add a description in the room and can tick the following options:
-Animals allowed, garden, Cellar or Attic, Cable TV, WiFi, Smoking inside allowed, balcony or patio, furnished, garage
+Further he has to add the date of the move-in. (no move-out date: _To be done_)
+He adds the prize, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
+For the flat he must add a description of the property, including the amount of rooms (_To be done_) and can tick the following options:
+Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage
 If the roommates have Flatfinder accounts, then the user can add them by mail and can add a description of them. This is optional.
 Also optional is a field for the preferences
 He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
 The user can add visiting times by choosing them in a calendar and setting the time.
+An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, 
+if he hasn't he is asked to do so. (_To be done_)
 
-Users should be able to add ads for renting rooms and studios, but also for selling them. Furthermore, he should be able to hold auctions for a room/studio where users can bid for a selling price or rent in a given time window (specified by the user who placed the ad). Ads should also be able to have both an instant buy/rent option and an auction/bids (_To be done_).
-
-More types of properties will be defined and added. (_To be done_)
+Users should be able to add ads for selling rooms and studios via auctions.(_To be done_).
 
 Auctions (_To be done_)
 
@@ -135,6 +135,7 @@ His picture, username, name and description are displayed with the options to me
 
 Edit Profile
 He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
+The user can add a credit card to his profile. (_To be done_)
 
 ***Home***
 
@@ -147,19 +148,22 @@ He can tick the type and must enter a city code, radius and a price and can then
 Display search
 
 He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
+A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_To be done_)
 
 Display Ad
-The users sees the title, the details (tpye, address, avaiable from, move-out-date, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
+The users sees the title, the details (tpye, address, avaiable from, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
 The filter should be removed and the filter criteria added to the search criteria (_Done_).  
-The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).   
+The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).  
+The user sees a log of the bids, the remaining time and has the option to enter his bid (_To be done_)
+
    
 
 **Non-functional requirements (external, performance, etc.)**
 
 This website should work flawlessly on all browsers.
-A non premium user can not create more than a certain number of ads. (_To be done_)
 An ad/user should be unique.  
 The website should be designed elegantly and modern. The primary color should be pink (Set primary color to pink: _Done_)
+There mustn't be more than a fixed amount of premium ads. 
 
 
 
