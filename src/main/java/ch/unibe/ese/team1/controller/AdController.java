@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.controller.pojos.forms.BidForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,8 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
+		model.addObject("bidForm", new BidForm());
+
 
 		String loggedInUserEmail = (principal == null) ? "" : principal
 				.getName();
@@ -80,12 +83,25 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
+		model.addObject("bidForm", new BidForm());
+
 
 		if (!bindingResult.hasErrors()) {
 			messageService.saveFrom(messageForm);
 		}
 		return model;
 	}
+
+
+	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
+	public @ResponseBody void makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
+										  Principal principal) {
+		User user = userService.findUserByUsername(principal.getName());
+		Ad ad = adService.getAdById(id);
+		bidService.makeBid(amount,user,ad);
+	}
+
+
 
 	/**
 	 * Checks if the adID passed as post parameter is already inside user's

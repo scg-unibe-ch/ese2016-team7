@@ -21,8 +21,7 @@ public class Bid {
     @ManyToOne
     private Ad ad;
 
-    @Fetch(FetchMode.SELECT)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private User user;
 
     @JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
@@ -42,9 +41,7 @@ public class Bid {
         this.amount = amount;
     }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
     public void setId(long id) {
         this.id = id;

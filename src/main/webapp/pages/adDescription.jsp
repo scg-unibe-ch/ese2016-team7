@@ -111,6 +111,17 @@
 				})
 			}
 		});
+
+		$("#makeBid").click(function (){
+			if($("#bidAmount").val() != ""){
+				var amount = $("#bidAmount").val();
+                var id = ${shownAd.id};
+				$.post("ad/makeBid", {amount: amount,id: id}, function(){
+					alert("You bid: " + amount + " CHF");
+					$("#bidAmount").val("");
+				})
+			}
+		});
 	});
 		
 </script>
@@ -158,8 +169,29 @@
 	<br>
 
 
-	<div id="bidList" class="adDescDiv">
+
+
+
+
+    <div id="bidList" class="adDescDiv">
+        <c:choose>
+            <c:when test="${loggedIn}">
+                <div id="bidDiv">
+                    <form class="bdForm">
+                        <input  class="bidInput" type="number" id="bidAmount" placeholder="Amount" />
+                        <button type="button" id="makeBid">Bid</button>
+                    </form>
+                </div>
+            </c:when>
+            <c:otherwise>
+                Login to make bids.
+            </c:otherwise>
+        </c:choose>
+        <br></br>
+
+
 		<h2>Bids</h2>
+		Make Bid:
 		<table>
 			<c:forEach items="${bids }" var="bid">
 				<tr>
