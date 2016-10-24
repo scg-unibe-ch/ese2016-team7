@@ -160,9 +160,9 @@
 				<td><label for="field-SquareFootage">Square Meters</label></td>
 			</tr>
 			<tr>
-				<td><form:input id="field-Prize" type="number" path="prize"
+				<td><form:input id="field-Prize" type="number" path="price"
 						placeholder="Prize per month" step="50" /> <form:errors
-						path="prize" cssClass="validationErrorText" /></td>
+						path="price" cssClass="validationErrorText" /></td>
 				<td><form:input id="field-SquareFootage" type="number"
 						path="squareFootage" placeholder="Prize per month" step="5" /> <form:errors
 						path="squareFootage" cssClass="validationErrorText" /></td>

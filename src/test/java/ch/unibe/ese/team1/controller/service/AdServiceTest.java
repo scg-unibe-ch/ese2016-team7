@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controller.service;
 
+import static ch.unibe.ese.team1.model.Property.STUDIO;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -56,14 +57,12 @@ public class AdServiceTest {
 		placeAdForm.setCity("3018 - Bern");
 		placeAdForm.setPreferences("Test preferences");
 		placeAdForm.setRoomDescription("Test Room description");
-		placeAdForm.setRoommates("Test Roommate description");
-		placeAdForm.setPrize(600);
+		placeAdForm.setPrice(600);
 		placeAdForm.setSquareFootage(50);
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
-		placeAdForm.setStudio(true);
+		placeAdForm.setProperty(STUDIO);
 		placeAdForm.setMoveInDate("27-02-2015");
-		placeAdForm.setMoveOutDate("27-04-2015");
 		
 		placeAdForm.setSmokers(true);
 		placeAdForm.setAnimals(false);
@@ -71,9 +70,7 @@ public class AdServiceTest {
 		placeAdForm.setBalcony(false);
 		placeAdForm.setCellar(true);
 		placeAdForm.setFurnished(false);
-		placeAdForm.setCable(false);
 		placeAdForm.setGarage(true);
-		placeAdForm.setInternet(false);
 		
 		ArrayList<String> filePaths = new ArrayList<>();
 		filePaths.add("/img/test/ad1_1.jpg");
@@ -100,8 +97,7 @@ public class AdServiceTest {
 		assertEquals(3018, ad.getZipcode());
 		assertEquals("Test preferences", ad.getPreferences());
 		assertEquals("Test Room description", ad.getRoomDescription());
-		assertEquals("Test Roommate description", ad.getRoommates());
-		assertEquals(600, ad.getPrizePerMonth());
+		assertEquals(600, ad.getPrice());
 		assertEquals(50, ad.getSquareFootage());
 		assertEquals("title", ad.getTitle());
 		assertEquals("Hauptstrasse 13", ad.getStreet());

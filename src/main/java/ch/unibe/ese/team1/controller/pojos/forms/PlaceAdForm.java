@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import ch.unibe.ese.team1.model.Property;
 import org.hibernate.validator.constraints.NotBlank;
 
 /** This form is used when a user wants to place a new ad. */
@@ -21,32 +22,26 @@ public class PlaceAdForm {
 	
 	@NotBlank(message = "Required")
 	private String moveInDate;
-	
-	private String moveOutDate;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int prize;
+	private int price;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
+
+    @Min(value = 1, message = "Has to be equal to 1 or more")
+    private float numberRooms;
 
 	@NotBlank(message = "Required")
 	private String roomDescription;
 
 	private String preferences;
-
-	// optional free text description
-	private String roommates;
-	
-	// First user are added as strings, then transformed
-	// to Users and added to the DB in through adService
-	private List<String> registeredRoommateEmails;
 	
 	// optional for input
 	private String roomFriends;
 	
 	//true if studio, false if room
-	private boolean studio;
+	private Property property;
 	
 	private boolean smokers;
 	private boolean animals;
@@ -54,9 +49,7 @@ public class PlaceAdForm {
 	private boolean balcony;
 	private boolean cellar;
 	private boolean furnished;
-	private boolean cable;
 	private boolean garage;
-	private boolean internet;
 	
 	private List<String> visits;
 
@@ -68,12 +61,12 @@ public class PlaceAdForm {
 		this.city = city;
 	}
 
-	public int getPrize() {
-		return prize;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setPrize(int prize) {
-		this.prize = prize;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getRoomDescription() {
@@ -100,13 +93,13 @@ public class PlaceAdForm {
 		this.squareFootage = squareFootage;
 	}
 
-	public String getRoommates() {
-		return roommates;
-	}
+    public float getNumberRooms() {
+        return numberRooms;
+    }
 
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
+    public void setNumberRooms(float numberRooms) {
+        this.numberRooms = numberRooms;
+    }
 
 	public boolean isSmokers() {
 		return smokers;
@@ -155,14 +148,6 @@ public class PlaceAdForm {
 	public void setFurnished(boolean furnished) {
 		this.furnished = furnished;
 	}
-
-	public boolean getCable() {
-		return cable;
-	}
-
-	public void setCable(boolean cable) {
-		this.cable = cable;
-	}
 	
 	public boolean getGarage() {
 		return garage;
@@ -172,28 +157,12 @@ public class PlaceAdForm {
 		this.garage = garage;
 	}
 
-	public boolean getInternet() {
-		return internet;
-	}
-
-	public void setInternet(boolean internet) {
-		this.internet = internet;
-	}
-
 	public String getMoveInDate() {
 		return moveInDate;
 	}
 
 	public void setMoveInDate(String moveInDate) {
 		this.moveInDate = moveInDate;
-	}
-
-	public String getMoveOutDate() {
-		return moveOutDate;
-	}
-
-	public void setMoveOutDate(String moveOutDate) {
-		this.moveOutDate = moveOutDate;
 	}
 
 	public String getTitle() {
@@ -220,20 +189,12 @@ public class PlaceAdForm {
 		this.roomFriends = roomFriends;
 	}
 	
-	public boolean getStudio() {
-		return studio;
+	public Property getProperty() {
+		return property;
 	}
 	
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public List<String> getRegisteredRoommateEmails() {
-		return registeredRoommateEmails;
-	}
-
-	public void setRegisteredRoommateEmails(List<String> registeredRoommateEmails) {
-		this.registeredRoommateEmails = registeredRoommateEmails;
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 
 	public List<String> getVisits() {

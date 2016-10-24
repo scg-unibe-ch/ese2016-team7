@@ -1,6 +1,5 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,7 +24,7 @@ public class SearchForm {
 	
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
-	private Integer prize;
+	private Integer price;
 
 	private boolean bothRoomAndStudio;
 
@@ -45,12 +44,12 @@ public class SearchForm {
 		this.radius = radius;
 	}
 
-	public Integer getPrize() {
-		return prize;
+	public Integer getPrice() {
+		return price;
 	}
 
-	public void setPrize(Integer prize) {
-		this.prize = prize;
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 	public boolean getStudio() {

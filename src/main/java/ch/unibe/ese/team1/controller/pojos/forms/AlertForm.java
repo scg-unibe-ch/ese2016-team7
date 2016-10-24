@@ -15,7 +15,12 @@ public class AlertForm {
 	private User user;
 
 	private boolean studio;
-	private boolean room;
+	private boolean house;
+	private boolean apartment;
+    private boolean bothHouseAndStudio;
+    private boolean bothApartmentAndHouse;
+    private boolean bothApartmenteAndStudio;
+    private boolean apartmentHouseAndStudio;
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -31,10 +36,6 @@ public class AlertForm {
 	
 	private int zipCode;
 
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
-
-	private boolean bothRoomAndStudio;
 
 	public String getCity() {
 		return city;
@@ -75,28 +76,20 @@ public class AlertForm {
 		this.studio = studio;
 	}
 
-	public boolean getRoom() {
-		return room;
+	public boolean getApartment() {
+		return apartment;
 	}
 
-	public void setRoom(boolean room) {
-		this.room = room;
+	public void setApartment(boolean apartment) {
+		this.apartment = apartment;
 	}
 
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
+	public boolean getHouse() {
+		return house;
 	}
 
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
-	}
-
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
+	public void setHouse(boolean house) {
+		this.house = house;
 	}
 	
 	public User getUser() {
@@ -106,4 +99,36 @@ public class AlertForm {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public boolean getApartmentHouseAndStudio() {
+		return apartmentHouseAndStudio;
+	}
+
+	public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) {
+		this.apartmentHouseAndStudio = apartmentHouseAndStudio;
+	}
+
+    public boolean getBothHouseAndStudio() {
+        return bothHouseAndStudio;
+    }
+
+    public void setBothHouseAndStudio(boolean bothHouseAndStudio) {
+        this.bothHouseAndStudio = bothHouseAndStudio;
+    }
+
+    public boolean getBothApartmentAndHouse() {
+        return bothApartmentAndHouse;
+    }
+
+    public void setBothApartmentAndHouse(boolean bothApartmentAndHouse) {
+        this.bothApartmentAndHouse = bothApartmentAndHouse;
+    }
+
+    public boolean getBothApartmenteAndStudio() {
+        return bothApartmenteAndStudio;
+    }
+
+    public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) {
+        this.bothApartmenteAndStudio = bothApartmenteAndStudio;
+    }
 }

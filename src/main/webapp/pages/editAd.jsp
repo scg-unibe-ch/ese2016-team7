@@ -191,9 +191,9 @@
 			</tr>
 			<tr>
 				<td>
-					<form:input id="field-Prize" type="number" path="prize"
-						placeholder="Prize per month" step="50" value="${ad.prizePerMonth }"/> <form:errors
-						path="prize" cssClass="validationErrorText" />
+					<form:input id="field-Prize" type="number" path="price"
+						placeholder="Prize per month" step="50" value="${ad.price }"/> <form:errors
+						path="price" cssClass="validationErrorText" />
 				</td>
 				<td>
 					<form:input id="field-SquareFootage" type="number"
