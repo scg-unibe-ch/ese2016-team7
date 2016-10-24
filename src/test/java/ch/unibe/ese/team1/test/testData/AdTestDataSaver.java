@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import com.mysql.jdbc.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +41,11 @@ public class AdTestDataSaver {
 		regRoommatesAdBern.add(mathilda);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+
+
+
+		Date date = new Date();
+
 		
 		Date creationDate1 = formatter.parse("03.10.2014");
 		Date creationDate2 = formatter.parse("11.10.2014");
@@ -100,6 +107,8 @@ public class AdTestDataSaver {
 		adBern.setCable(true);
 		adBern.setGarage(true);
 		adBern.setInternet(true);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adBern.setExpireDate(date);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));
@@ -145,6 +154,8 @@ public class AdTestDataSaver {
 		adBern2.setCable(false);
 		adBern2.setGarage(false);
 		adBern2.setInternet(true);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adBern2.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));
 		pictures.add(createPicture(adBern2, "/img/test/ad2_2.jpg"));
@@ -188,6 +199,8 @@ public class AdTestDataSaver {
 		adBasel.setCable(false);
 		adBasel.setGarage(false);
 		adBasel.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adBasel.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBasel, "/img/test/ad3_1.jpg"));
 		pictures.add(createPicture(adBasel, "/img/test/ad3_2.jpg"));
@@ -227,6 +240,8 @@ public class AdTestDataSaver {
 		adOlten.setCable(true);
 		adOlten.setGarage(false);
 		adOlten.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adOlten.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adOlten, "/img/test/ad4_1.png"));
 		pictures.add(createPicture(adOlten, "/img/test/ad4_2.png"));
@@ -265,6 +280,8 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCable(false);
 		adNeuchâtel.setGarage(false);
 		adNeuchâtel.setInternet(true);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adNeuchâtel.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_1.jpg"));
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_2.jpg"));
@@ -301,6 +318,8 @@ public class AdTestDataSaver {
 		adBiel.setCable(false);
 		adBiel.setGarage(false);
 		adBiel.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adBiel.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBiel, "/img/test/ad6_1.png"));
 		pictures.add(createPicture(adBiel, "/img/test/ad6_2.png"));
@@ -344,6 +363,8 @@ public class AdTestDataSaver {
 		adZurich.setCable(true);
 		adZurich.setGarage(true);
 		adZurich.setInternet(true);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adZurich.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adZurich, "/img/test/ad1_3.jpg"));
 		pictures.add(createPicture(adZurich, "/img/test/ad1_2.jpg"));
@@ -389,6 +410,8 @@ public class AdTestDataSaver {
 		adLuzern.setCable(false);
 		adLuzern.setGarage(false);
 		adLuzern.setInternet(true);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adLuzern.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_3.jpg"));
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_2.jpg"));
@@ -432,6 +455,8 @@ public class AdTestDataSaver {
 		adAarau.setCable(false);
 		adAarau.setGarage(false);
 		adAarau.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adAarau.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adAarau, "/img/test/ad3_3.jpg"));
 		pictures.add(createPicture(adAarau, "/img/test/ad3_2.jpg"));
@@ -474,6 +499,8 @@ public class AdTestDataSaver {
 		adDavos.setCable(true);
 		adDavos.setGarage(false);
 		adDavos.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adDavos.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adDavos, "/img/test/ad4_3.png"));
 		pictures.add(createPicture(adDavos, "/img/test/ad4_2.png"));
@@ -512,6 +539,8 @@ public class AdTestDataSaver {
 		adLausanne.setCable(false);
 		adLausanne.setGarage(false);
 		adLausanne.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adLausanne.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_3.jpg"));
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_2.jpg"));
@@ -548,6 +577,8 @@ public class AdTestDataSaver {
 		adLocarno.setCable(false);
 		adLocarno.setGarage(false);
 		adLocarno.setInternet(false);
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		adLocarno.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_3.png"));
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_2.png"));

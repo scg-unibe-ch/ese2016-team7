@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,10 @@ public class AdService {
 
 		Date now = new Date();
 		ad.setCreationDate(now);
+
+		// Set expire date to 3 days after creation
+		Date expire = new Date();
+		expire.setTime(expire.getTime() + TimeUnit.DAYS.toMillis(3));
 
 		ad.setTitle(placeAdForm.getTitle());
 

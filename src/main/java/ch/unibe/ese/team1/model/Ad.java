@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -42,6 +43,10 @@ public class Ad {
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
+
+	@JsonFormat(pattern = "HH:mm:ss, dd.MM.yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date expireDate;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -357,5 +362,13 @@ public class Ad {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public Date getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(Date expireDate) {
+		this.expireDate = expireDate;
 	}
 }

@@ -190,7 +190,7 @@
 
 
     <div id="bidList" class="adDescDiv">
-
+		<h2>Expire Date: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyy HH:mm:ss" /></h2>
 
 		<h2>Current Price: ${shownAd.prizePerMonth} CHF </h2>
 
