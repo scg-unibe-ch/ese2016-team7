@@ -107,7 +107,7 @@ public class AdTestDataSaver {
 		adBern.setCable(true);
 		adBern.setGarage(true);
 		adBern.setInternet(true);
-		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
 		adBern.setExpireDate(date);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
@@ -154,7 +154,7 @@ public class AdTestDataSaver {
 		adBern2.setCable(false);
 		adBern2.setGarage(false);
 		adBern2.setInternet(true);
-		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
 		adBern2.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));

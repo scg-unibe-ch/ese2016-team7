@@ -34,9 +34,6 @@ public class BidService {
     }
 
 
-
-
-
     /** Saves a new bid with the given parameters in the DB.
      */
     public void makeBid(Integer amount, User user, Ad ad) {

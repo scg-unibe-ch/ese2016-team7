@@ -118,6 +118,9 @@ public class Ad {
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
+	@Column(nullable = false)
+	private boolean expired = false;
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -370,5 +373,13 @@ public class Ad {
 
 	public void setExpireDate(Date expireDate) {
 		this.expireDate = expireDate;
+	}
+
+	public boolean getExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
 	}
 }

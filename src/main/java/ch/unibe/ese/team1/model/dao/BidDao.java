@@ -8,4 +8,6 @@ import ch.unibe.ese.team1.model.Bid;
 public interface BidDao extends CrudRepository<Bid, Long> {
     public Iterable<Bid> findByAd(Ad ad);
     public Iterable<Bid> findByAdOrderByTimestampDesc(Ad ad);
+    public Bid findTop1ByAdOrderByIdDesc(Ad ad);
+    public Long countByAd(Ad ad);
 }
