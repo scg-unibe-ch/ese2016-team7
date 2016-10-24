@@ -28,8 +28,13 @@ public class BidService {
      */
     @Transactional
     public Iterable<Bid> getBidsByAd(Ad ad) {
-        return bidDao.findByAd(ad);
+        //return bidDao.findByAd(ad);
+        return bidDao.findByAdOrderByTimestampDesc(ad);
+
     }
+
+
+
 
 
     /** Saves a new bid with the given parameters in the DB.

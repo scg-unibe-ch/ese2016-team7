@@ -116,10 +116,17 @@
 			if($("#bidAmount").val() != ""){
 				var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
-				$.post("ad/makeBid", {amount: amount,id: id}, function(){
-					alert("You bid: " + amount + " CHF");
-					$("#bidAmount").val("");
-				})
+                var currentPrice = ${shownAd.prizePerMonth};
+
+                if(amount > currentPrice) {
+                    $.post("ad/makeBid", {amount: amount, id: id}, function () {
+                        //alert("You bid: " + amount + " CHF");
+                        $("#bidAmount").val("");
+                        location.reload();
+                    })
+                }else{
+                    alert("You have to bid higher than the current price.")
+                }
 			}
 		});
 	});
@@ -169,30 +176,42 @@
 	<br>
 
 
-
-
+<script>
+	function showAllBids() {
+		if($("#bids").css("display") == "none") {
+			$("#bids").css("display","");
+			$("#showBids").html("Hide All Bids");
+		}else {
+			$("#bids").css("display", "none");
+			$("#showBids").html("Show All Bids");
+		}
+	}
+</script>
 
 
     <div id="bidList" class="adDescDiv">
+
+
+		<h2>Current Price: ${shownAd.prizePerMonth} CHF </h2>
+
         <c:choose>
             <c:when test="${loggedIn}">
-                <div id="bidDiv">
-                    <form class="bdForm">
-                        <input  class="bidInput" type="number" id="bidAmount" placeholder="Amount" />
-                        <button type="button" id="makeBid">Bid</button>
+                    <form>
+                        <input class="bidInput" type="number" id="bidAmount" placeholder="Amount" style='width:300px' />
+                        <br>
+                        <button type="button" id="makeBid" class="bidButton">Make Bid</button>
                     </form>
-                </div>
             </c:when>
             <c:otherwise>
                 Login to make bids.
             </c:otherwise>
         </c:choose>
-        <br></br>
+
+        <br>
+		<a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #ff00ff">Show All Bids</a><br>
 
 
-		<h2>Bids</h2>
-		Make Bid:
-		<table>
+		<table id="bids" style='display:none'>
 			<c:forEach items="${bids }" var="bid">
 				<tr>
 					<td>

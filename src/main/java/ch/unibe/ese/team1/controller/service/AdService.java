@@ -188,6 +188,14 @@ public class AdService {
 		return ad;
 	}
 
+	/** Changes the price of an ad. */
+	@Transactional
+	public void changePrice(Ad ad,int amount) {
+		ad.setPrizePerMonth(amount);
+		adDao.save(ad);
+	}
+
+
 	/**
 	 * Gets the ad that has the given id.
 	 * 

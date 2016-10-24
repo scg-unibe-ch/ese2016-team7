@@ -23,12 +23,13 @@ import ch.unibe.ese.team1.controller.service.MessageService;
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.controller.service.BidService;
+import ch.unibe.ese.team1.controller.service.AlertService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 
 /**
- * This controller handles all requests concerning displaying ads and
- * bookmarking them.
+ * This controller handles all requests concerning displaying ads,
+ * bookmarking and bidding on them.
  */
 @Controller
 public class AdController {
@@ -50,6 +51,9 @@ public class AdController {
 
 	@Autowired
 	private BidService bidService;
+
+    @Autowired
+    private AlertService alertService;
 
 	/** Gets the ad description page for the ad with the given id. */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
@@ -99,6 +103,11 @@ public class AdController {
 		User user = userService.findUserByUsername(principal.getName());
 		Ad ad = adService.getAdById(id);
 		bidService.makeBid(amount,user,ad);
+		adService.changePrice(ad,amount);
+
+        // triggers all alerts that match the placed ad.
+        //TODO: Make this work, it somehow triggers an error in AlertService.
+		//alertService.triggerAlerts(ad);
 	}
 
 
