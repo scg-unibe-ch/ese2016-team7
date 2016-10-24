@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import ch.unibe.ese.team1.controller.pojos.forms.BidForm;
+import ch.unibe.ese.team1.controller.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
-import ch.unibe.ese.team1.controller.service.AdService;
-import ch.unibe.ese.team1.controller.service.BookmarkService;
-import ch.unibe.ese.team1.controller.service.MessageService;
-import ch.unibe.ese.team1.controller.service.UserService;
-import ch.unibe.ese.team1.controller.service.VisitService;
-import ch.unibe.ese.team1.controller.service.BidService;
-import ch.unibe.ese.team1.controller.service.AlertService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 
@@ -54,6 +48,9 @@ public class AdController {
 
     @Autowired
     private AlertService alertService;
+
+    @Autowired
+    private AuctionService auctionService;
 
 	/** Gets the ad description page for the ad with the given id. */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
@@ -102,6 +99,7 @@ public class AdController {
 										  Principal principal) {
 		User user = userService.findUserByUsername(principal.getName());
 		Ad ad = adService.getAdById(id);
+        auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before
 		bidService.makeBid(amount,user,ad);
 		adService.changePrice(ad,amount);
 

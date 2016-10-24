@@ -97,4 +97,16 @@ public class AuctionService {
         messageBuilder.append("Please contact him as soon as possible");
         messageService.sendMessage(winner,owner,"Your action was successfully completed!",messageBuilder.toString());
     }
+
+
+    /**
+     * Sends Message to User who has been overbid
+     * @param ad Ad to bid on
+     * @param user User who overbids the last one
+     */
+    public void sendOverbiddenMessage(Ad ad, User user){
+        Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
+        User receiver = bid.getUser();
+        messageService.sendMessage(user,receiver,"Overbid","You have ben overbid by me :)");
+    }
 }
