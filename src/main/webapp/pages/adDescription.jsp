@@ -116,7 +116,7 @@
 			if($("#bidAmount").val() != ""){
 				var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
-                var currentPrice = ${shownAd.prizePerMonth};
+                var currentPrice = ${shownAd.price};
 
                 if(amount > currentPrice) {
                     $.post("ad/makeBid", {amount: amount, id: id}, function () {
@@ -140,15 +140,7 @@
 	type="date" pattern="dd.MM.yyyy" />
 <fmt:formatDate value="${shownAd.creationDate}" var="formattedCreationDate"
 	type="date" pattern="dd.MM.yyyy" />
-<c:choose>
-	<c:when test="${empty shownAd.moveOutDate }">
-		<c:set var="formattedMoveOutDate" value="unlimited" />
-	</c:when>
-	<c:otherwise>
-		<fmt:formatDate value="${shownAd.moveOutDate}"
-			var="formattedMoveOutDate" type="date" pattern="dd.MM.yyyy" />
-	</c:otherwise>
-</c:choose>
+
 
 
 <h1 id="shownAdTitle">${shownAd.title}
@@ -192,7 +184,7 @@
     <div id="bidList" class="adDescDiv">
 		<h2>Expire Date: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyy HH:mm:ss" /></h2>
 
-		<h2>Current Price: ${shownAd.prizePerMonth} CHF </h2>
+		<h2>Current Price: ${shownAd.price} CHF </h2>
 
         <c:choose>
             <c:when test="${loggedIn}">
@@ -234,8 +226,9 @@
 			<td><h2>Type</h2></td>
 			<td>
 				<c:choose>
-					<c:when test="${shownAd.studio}">Studio</c:when>
-					<c:otherwise>Room</c:otherwise>
+					<c:when test="${ad.property == 'HOUSE'}">House</c:when>
+					<c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
+					<c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
 				</c:choose>
 			</td>
 		</tr>
@@ -254,13 +247,8 @@
 		</tr>
 
 		<tr>
-			<td><h2>Move-out Date</h2></td>
-			<td>${formattedMoveOutDate}</td>
-		</tr>
-
-		<tr>
 			<td><h2>Monthly Rent</h2></td>
-			<td>${shownAd.prizePerMonth}&#32;CHF</td>
+			<td>${shownAd.price}&#32;CHF</td>
 		</tr>
 
 		<tr>
@@ -374,26 +362,6 @@
 			<td>
 				<c:choose>
 					<c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-		
-		<tr>
-			<td><h2>WiFi available</h2></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.internet}"><img src="/img/check-mark.png"></c:when>
-					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<tr>
-			<td><h2>Cable TV</h2></td>
-			<td>
-				<c:choose>
-					<c:when test="${shownAd.cable}"><img src="/img/check-mark.png"></c:when>
 					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
 				</c:choose>
 			</td>
