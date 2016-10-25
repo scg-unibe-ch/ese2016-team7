@@ -95,12 +95,12 @@
 			<tr>
 				<td><form:input id="field-title" path="title"
 						placeholder="Ad Title" /></td>
-				<td><form:radiobutton id="type-house" path="property" value="house"
+				<td><form:radiobutton id="type-house" path="property" value="HOUSE"
 						checked="checked" />House </td>
 				<td>	<form:radiobutton id="type-studio"
-										  path="property" value="studio" />Studio </td>
-
-
+										  path="property" value="STUDIO" />Studio </td>
+				<td>	<form:radiobutton id="type-apartment"
+										  path="property" value="APARTMENT" />Apartment </td>
 			</tr>
 
 			<tr>
@@ -124,8 +124,9 @@
 			</tr>
 
 			<tr>
-				<td><label for="field-Prize">Prize per month</label></td>
+				<td><label for="field-Prize">Price</label></td>
 				<td><label for="field-SquareFootage">Square Meters</label></td>
+				<td><label for="field-NumberRooms">Number of Rooms</label></td>
 			</tr>
 			<tr>
 				<td><form:input id="field-Prize" type="number" path="price"
@@ -134,6 +135,9 @@
 				<td><form:input id="field-SquareFootage" type="number"
 						path="squareFootage" placeholder="price" step="5" /> <form:errors
 						path="squareFootage" cssClass="validationErrorText" /></td>
+				<td><form:input id="field-NumberRooms" type="number"
+								path="numberRooms" placeholder="price" step="0.5" /> <form:errors
+						path="numberRooms" cssClass="validationErrorText" /></td>
 			</tr>
 		</table>
 	</fieldset>

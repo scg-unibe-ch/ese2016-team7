@@ -100,6 +100,7 @@ public class AdService {
 
 		ad.setPrice(placeAdForm.getPrice());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
+        ad.setNumberRooms(placeAdForm.getNumberRooms());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
