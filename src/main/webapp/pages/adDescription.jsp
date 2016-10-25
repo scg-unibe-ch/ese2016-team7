@@ -191,9 +191,9 @@
             if(current > expired){
                 $('#bidInfo').html("<h2>We are sorry but this acution is over!</h2>");
             }else{
-                var diff = expired - current;
-                var msec = diff;
+                var msec = expired - current;
                 var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+                msec -= dd * 1000 * 60 * 60 * 24;
                 var hh = Math.floor(msec / 1000 / 60 / 60);
                 msec -= hh * 1000 * 60 * 60;
                 var mm = Math.floor(msec / 1000 / 60);
