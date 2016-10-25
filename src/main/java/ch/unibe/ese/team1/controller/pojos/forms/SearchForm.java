@@ -241,8 +241,8 @@ public class SearchForm {
 	}
 
 	public Property getProperty() {
-		if(house) return Property.HOUSE;
-		if(apartment) return Property.APARTMENT;
+		if(houseHelper) return Property.HOUSE;
+		if(apartmentHelper) return Property.APARTMENT;
 		return Property.STUDIO;
 	}
 }
