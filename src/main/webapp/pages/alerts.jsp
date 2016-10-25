@@ -22,21 +22,10 @@ function validateType(form)
 {
 	var house = document.getElementById('house')
 	var studio = document.getElementById('studio');
+	var apartment = document.getElementById('apartment');
 	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	
-	if(house.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!house.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-	}
+	var bothHouseAndStudio = document.getElementById('bothHouseAndStudio');
+
 }
 </script>
 	
@@ -71,12 +60,9 @@ function validateType(form)
 	id="alertForm" autocomplete="off">
 
 	<fieldset>
+        <form:checkbox name="apartment" id="apartment" path="apartment" /><label>Apartment</label>
 		<form:checkbox name="house" id="house" path="house" /><label>House</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noProperty" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothHouseAndStudio" />
-		<form:errors path="noProperty" cssClass="validationErrorText" /><br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -122,15 +108,31 @@ function validateType(form)
 			<tr>
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothHouseAndStudio}">
-						Both
-					</c:when>
+                    <c:when test="${alert.apartment && alert.house && alert.studio}">
+                        Apartment, House & Studio
+                    </c:when>
+                    <c:when test="${alert.apartment && alert.house}">
+                        Apartment & House
+                    </c:when>
+                    <c:when test="${alert.apartment && alert.studio}">
+                        Apartment & Studio
+                    </c:when>
+                    <c:when test="${alert.house && alert.studio}">
+                        House & Studio
+                    </c:when>
 					<c:when test="${alert.studio}">
 						Studio
 					</c:when>
-					<c:otherwise>
-						Room
-					</c:otherwise>
+					<c:when test="${alert.house}">
+						House
+					</c:when>
+                    <c:when test="${alert.apartment}">
+                        Apartment
+                    </c:when>
+                    <!-- Display "None" if nothing was chosen -->
+                    <c:otherwise>
+                        None
+                    </c:otherwise>
 				</c:choose>
 				</td>
 				<td>${alert.city}</td>

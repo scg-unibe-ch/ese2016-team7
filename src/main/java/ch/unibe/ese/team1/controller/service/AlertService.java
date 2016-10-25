@@ -60,6 +60,7 @@ public class AlertService {
 		alert.setRadius(alertForm.getRadius());
 		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
+		alert.setApartment(alertForm.getApartment());
 		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
         alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getBothHouseAndStudio());
