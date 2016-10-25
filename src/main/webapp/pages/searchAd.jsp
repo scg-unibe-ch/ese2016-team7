@@ -47,6 +47,7 @@
 
 <script>
     function validateType(form) {
+
         var house = document.getElementById('house');
         var studio = document.getElementById('studio');
         var apartment = document.getElementById('apartment');
@@ -76,6 +77,7 @@
         else{
 
         }
+
         filtered.checked = true;
     }
 </script>
@@ -99,7 +101,7 @@
     <fieldset>
         <form:checkbox name="house" id="house" path="house"/><label>House</label>
         <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
-        <form:checkbox name="apartment" id="apartment" path="apartment  "/><label>Apartment</label>
+        <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
 
         <form:checkbox style="display:none" name="bothHouseAndStudio" id="bothHouseAndStudio" path="bothHouseAndStudio"/>
         <form:checkbox style="display:none" name="bothApartmentAndHouse" id="bothApartmentAndHouse" path="bothApartmentAndHouse"/>

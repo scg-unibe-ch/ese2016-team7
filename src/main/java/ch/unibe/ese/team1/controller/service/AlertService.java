@@ -63,8 +63,6 @@ public class AlertService {
 		alert.setStudio(alertForm.getStudio());
 		alert.setApartment(alertForm.getApartment());
 		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
-        alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
-        alert.setBothHouseAndStudio(alertForm.getBothHouseAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 
 		alert.setEarliestMoveInDate(alert.getEarliestMoveInDate());
