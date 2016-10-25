@@ -21,6 +21,7 @@ public class AlertForm {
     private boolean bothApartmentAndHouse;
     private boolean bothApartmenteAndStudio;
     private boolean apartmentHouseAndStudio;
+	private boolean noProperty;
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -131,4 +132,12 @@ public class AlertForm {
     public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) {
         this.bothApartmenteAndStudio = bothApartmenteAndStudio;
     }
+
+	public boolean getNoProperty() {
+		return noProperty;
+	}
+
+	public void setNoProperty(boolean noProperty) {
+		this.noProperty = noProperty;
+	}
 }

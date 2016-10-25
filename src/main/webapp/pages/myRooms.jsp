@@ -41,9 +41,10 @@
 						<br />
 						<p>
 							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
+								<c:when test="${ad.property == 'HOUSE'}">House</c:when>
+								<c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
+								<c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
+							</c:choose></i>
 						</p>
 					</div>
 					<div class="resultRight">
@@ -83,9 +84,10 @@
 						<br />
 						<p>
 							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
+								<c:when test="${ad.property == 'HOUSE'}">House</c:when>
+								<c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
+								<c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
+							</c:choose></i>
 						</p>
 					</div>
 					<div class="resultRight">

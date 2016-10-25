@@ -14,17 +14,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import ch.unibe.ese.team1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.AdPicture;
-import ch.unibe.ese.team1.model.Location;
-import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
@@ -223,15 +219,26 @@ public class AdService {
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
 
-		// we use this method if we are looking for rooms AND studios
-		if (searchForm.getBothRoomAndStudio()) {
+		// we use this method if we are looking for houses , studios AND apartments
+		if (searchForm.getApartmentHouseAndStudio()) {
 			results = adDao
 					.findByPriceLessThan(searchForm.getPrice() + 1);
 		}
-		// we use this method if we are looking EITHER for rooms OR for studios
+
+		//we use one of these if we are searching for two types
+		else if(searchForm.getBothApartmentAndHouse()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.HOUSE, searchForm.getPrice()+1);
+		}
+		else if(searchForm.getBothApartmentAndStudio()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.STUDIO,searchForm.getPrice()+1);
+		}
+		else if(searchForm.getBothHouseAndStudio()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.HOUSE,Property.STUDIO,searchForm.getPrice()+1);
+		}
+		// we use this method if we are looking EITHER for houses OR for studios OR for apartments
 		else {
 			results = adDao.findByPropertyAndPriceLessThan(
-					searchForm.getStudio(), searchForm.getPrice() + 1);
+					searchForm.getProperty(), searchForm.getPrice() + 1);
 		}
 
 		// filter out zipcode

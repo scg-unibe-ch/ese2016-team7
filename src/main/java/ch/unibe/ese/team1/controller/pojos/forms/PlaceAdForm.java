@@ -40,7 +40,7 @@ public class PlaceAdForm {
 	// optional for input
 	private String roomFriends;
 	
-	//true if studio, false if room
+
 	private Property property;
 	
 	private boolean smokers;
@@ -197,6 +197,7 @@ public class PlaceAdForm {
 		this.property = property;
 	}
 
+
 	public List<String> getVisits() {
 		return visits;
 	}
@@ -204,4 +205,20 @@ public class PlaceAdForm {
 	public void setVisits(List<String> visits) {
 		this.visits = visits;
 	}
+
+    public void  setProperty(String property){
+        property.toLowerCase();
+        switch (property){
+            case "house":
+                this.property=Property.HOUSE;
+                break;
+            case "apartment":
+                this.property=Property.APARTMENT;
+                break;
+            case "studio":
+                this.property=Property.STUDIO;
+                break;
+
+        }
+    }
 }

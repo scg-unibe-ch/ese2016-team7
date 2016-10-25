@@ -106,6 +106,23 @@ public class Ad {
 		return property;
 	}
 
+	public void  setProperty(String property){
+		property.toLowerCase();
+		switch (property){
+			case "house":
+				this.property=Property.HOUSE;
+				break;
+			case "apartment":
+				this.property=Property.APARTMENT;
+				break;
+			case "studio":
+				this.property=Property.STUDIO;
+				break;
+
+			}
+		}
+
+
 	public void setProperty(Property property) {
 		this.property = property;
 	}

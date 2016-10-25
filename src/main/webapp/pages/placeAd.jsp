@@ -34,43 +34,11 @@
 		$("#field-moveInDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
-		$("#field-moveOutDate").datepicker({
-			dateFormat : 'dd-mm-yy'
-		});
-		
+
 		$("#field-visitDay").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
-		
 
-		$("#addbutton").click(function() {
-			var text = $("#roomFriends").val();
-			var alreadyAdded = $("#addedRoommates").html();
-			if(validateForm(text)) {
-				$.post("/profile/placeAd/validateEmail",{email: text, alreadyIn: alreadyAdded}, function(data) {
-					if(validateForm(data)) {
-						var index = $("#roommateCell input.roommateInput").length;
-						$("#roommateCell").append("<input class='roommateInput' type='hidden' name='registeredRoommateEmails[" + index + "]' value='" + data + "' />");
-						$("#addedRoommates").append(data + "; ");
-					} else {
-						alert(data);
-					}});
-			}
-			else {
-				alert("Please enter an e-mail adress");
-			}
-			 
-			// Validates the input for Email Syntax
-			function validateForm(text) {
-			    var positionAt = text.indexOf("@");
-			    var positionDot = text.lastIndexOf(".");
-			    if (positionAt< 1 || positionDot<positionAt+2 || positionDot+2>=text.length) {
-			        return false;
-			    } else {
-			    	return true;
-			    }
-			}
-		});
 		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
@@ -121,15 +89,18 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-title">Ad Title</label></td>
-				<td><label for="type-room">Type:</label></td>
-			</tr>
+				<td><label for="type-house">Type:</label></td>
+				</tr>
 
 			<tr>
 				<td><form:input id="field-title" path="title"
 						placeholder="Ad Title" /></td>
-				<td><form:radiobutton id="type-room" path="studio" value="0"
-						checked="checked" />Room <form:radiobutton id="type-studio"
-						path="studio" value="1" />Studio</td>
+				<td><form:radiobutton id="type-house" path="property" value="house"
+						checked="checked" />House </td>
+				<td>	<form:radiobutton id="type-studio"
+										  path="property" value="studio" />Studio </td>
+
+
 			</tr>
 
 			<tr>
@@ -146,13 +117,10 @@
 
 			<tr>
 				<td><label for="moveInDate">Move-in date</label></td>
-				<td><label for="moveOutDate">Move-out date (optional)</label></td>
 			</tr>
 			<tr>
 				<td><form:input type="text" id="field-moveInDate"
 						path="moveInDate" /></td>
-				<td><form:input type="text" id="field-moveOutDate"
-						path="moveOutDate" /></td>
 			</tr>
 
 			<tr>
@@ -161,10 +129,10 @@
 			</tr>
 			<tr>
 				<td><form:input id="field-Prize" type="number" path="price"
-						placeholder="Prize per month" step="50" /> <form:errors
+						placeholder="price" step="50" /> <form:errors
 						path="price" cssClass="validationErrorText" /></td>
 				<td><form:input id="field-SquareFootage" type="number"
-						path="squareFootage" placeholder="Prize per month" step="5" /> <form:errors
+						path="squareFootage" placeholder="price" step="5" /> <form:errors
 						path="squareFootage" cssClass="validationErrorText" /></td>
 			</tr>
 		</table>
@@ -195,14 +163,8 @@
 						value="1" /><label>Furnished</label></td>
 			</tr>
 			<tr>
-				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>Cable
-						TV</label></td>
 				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label>
 				</td>
-			</tr>
-			<tr>
-				<td><form:checkbox id="field-internet" path="internet"
-						value="1" /><label>WiFi available</label></td>
 			</tr>
 
 		</table>
@@ -213,37 +175,6 @@
 	</fieldset>
 
 	<br />
-	<fieldset>
-		<legend>Roommates (optional)</legend>
-		<p>If your roommates have an account, simply add them by email.</p>
-
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="roomFriends">Add by email</label></td>
-			</tr>
-
-			<tr>
-				<td id="roommateCell"><form:input type="text" id="roomFriends"
-						path="roomFriends" placeholder="email" />
-
-					<div id="addbutton" class="smallPlusButton">+</div></td>
-			</tr>
-			<tr>
-				<td><p id="addedRoommates" path="addedRoommates">Added
-						roommates:</p></td>
-			</tr>
-		</table>
-
-		<br />
-		<p>If the roommates do not have accounts or you wish to give
-			further information, you can add a text in which you describe the
-			roommates.</p>
-		<br/>
-		<form:textarea path="roommates" rows="10" cols="100"
-			placeholder="Roommates" />
-		<form:errors path="roommates" cssClass="validationErrorText" />
-	</fieldset>
-
 	<br />
 	<fieldset>
 		<legend>Preferences (optional)</legend>

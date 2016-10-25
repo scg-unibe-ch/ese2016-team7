@@ -47,21 +47,35 @@
 
 <script>
     function validateType(form) {
-        var room = document.getElementById('room');
+        var house = document.getElementById('house');
         var studio = document.getElementById('studio');
-        var both = document.getElementById('both');
+        var apartment = document.getElementById('apartment');
+
+        var bothHouseAndStudio = document.getElementById('bothHouseAndStudio');
+        var bothHouseAndApartment=document.getElementById('bothApartmentAndHouse');
+        var bothApartmentAndStudio = document.getElementById('bothApartmentAndStudio');
+        var apartmentHouseAndStudio = document.getElementById('apartmentHouseAndStudio');
+
+
         var type = document.getElementById('type');
         var filtered = document.getElementById('filtered');
 
-        if (room.checked && studio.checked) {
-            both.checked = true;
+        if(house.checked && studio.checked && apartment.checked){
+            apartmentHouseAndStudio.checked=true;
         }
-        else if (!room.checked && !studio.checked) {
-            both.checked = false;
+
+        else if (house.checked && studio.checked) {
+            bothHouseAndStudio.checked = true;
         }
-        else {
-            both.checked = false;
-            type.checked = studio.checked;
+
+        else if (house.checked && apartment.checked) {
+            bothHouseAndApartment.checked = true;
+        }
+        else if(apartment.checked && studio.checked){
+            bothApartmentAndStudio.checked=true;
+        }
+        else{
+
         }
         filtered.checked = true;
     }
@@ -84,11 +98,15 @@
 <form:form method="post" modelAttribute="searchForm" action="/results"
            id="searchForm" autocomplete="off">
     <fieldset>
-        <form:checkbox name="room" id="room" path="roomHelper"/><label>Room</label>
+        <form:checkbox name="house" id="house" path="houseHelper"/><label>House</label>
         <form:checkbox name="studio" id="studio" path="studioHelper"/><label>Studio</label>
+        <form:checkbox name="apartment" id="apartment" path="apartmentHelper"/><label>Apartment</label>
 
-        <form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio"/>
-        <form:checkbox style="display:none" name="type" id="type" path="studio"/>
+        <form:checkbox style="display:none" name="bothHouseAndStudio" id="bothHouseAndStudio" path="bothHouseAndStudio"/>
+        <form:checkbox style="display:none" name="bothApartmentAndHouse" id="bothApartmentAndHouse" path="bothApartmentAndHouse"/>
+        <form:checkbox style="display:none" name="bothApartmentAndStudio" id="bothApartmentAndStudio" path="bothApartmentAndStudio"/>
+        <form:checkbox style="display:none" name="apartmentHouseAndStudio" id="apartmentHouseAndStudio" path="apartmentHouseAndStudio"/>
+
         <form:checkbox style="display:none" name="filtered" id="filtered" path="filtered"/>
         <br />
 
@@ -115,23 +133,17 @@
         <table id="advanced" style="width: 80%; display: none;">
             <tr>
                 <td><label for="earliestMoveInDate">Earliest move-in date</label></td>
-                <td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
             </tr>
             <tr>
                 <td><form:input type="text" id="field-earliestMoveInDate"
                                 path="earliestMoveInDate"/></td>
-                <td><form:input type="text" id="field-earliestMoveOutDate"
-                                path="earliestMoveOutDate"/></td>
             </tr>
             <tr>
                 <td><label for="latestMoveInDate">Latest move-in date</label></td>
-                <td><label for="latestMoveOutDate">Latest move-out date (optional)</label></td>
             </tr>
             <tr>
                 <td><form:input type="text" id="field-latestMoveInDate"
                                 path="latestMoveInDate"/></td>
-                <td><form:input type="text" id="field-latestMoveOutDate"
-                                path="latestMoveOutDate"/></td>
             </tr>
             <tr>
                 <td><form:checkbox id="field-smoker" path="smokers" value="1"/><label>Smoking inside
@@ -152,13 +164,8 @@
                                    value="1"/><label>Furnished</label></td>
             </tr>
             <tr>
-                <td><form:checkbox id="field-cable" path="cable" value="1"/><label>Cable
-                    TV</label></td>
                 <td><form:checkbox id="field-garage" path="garage" value="1"/><label>Garage</label>
                 </td>
-            </tr>
-            <tr>
-                <td><form:checkbox id="field-internet" path="internet" value="1"/><label>WiFi</label></td>
             </tr>
         </table>
 
