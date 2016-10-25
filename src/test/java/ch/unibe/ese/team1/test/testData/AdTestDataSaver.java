@@ -48,7 +48,7 @@ public class AdTestDataSaver {
 
 
 
-		Date date = formatter.parse("29.10.2016");
+		Date date = new Date();
 
 		
 		Date creationDate1 = formatter.parse("03.10.2014");
@@ -106,7 +106,7 @@ public class AdTestDataSaver {
 		adBern.setCellar(true);
 		adBern.setFurnished(true);
 		adBern.setGarage(true);
-		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
 		adBern.setExpireDate(date);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
@@ -149,7 +149,7 @@ public class AdTestDataSaver {
 		adBern2.setCellar(false);
 		adBern2.setFurnished(false);
 		adBern2.setGarage(false);
-		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
+		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
 		adBern2.setExpireDate(date);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));
