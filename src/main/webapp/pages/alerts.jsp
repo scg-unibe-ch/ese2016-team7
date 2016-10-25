@@ -26,6 +26,18 @@ function validateType(form)
 	var neither = document.getElementById('neither');
 	var bothHouseAndStudio = document.getElementById('bothHouseAndStudio');
 
+	if(house.checked && studio.checked) {
+		bothHouseAndStudio.checked = true;
+		neither.checked = false;
+	}
+	else if(!house.checked && !studio.checked) {
+		bothHouseAndStudio.checked = false;
+		neither.checked = true;
+	}
+	else {
+		bothHouseAndStudio.checked = false;
+		neither.checked = false;
+	}
 }
 </script>
 	
@@ -63,6 +75,10 @@ function validateType(form)
         <form:checkbox name="apartment" id="apartment" path="apartment" /><label>Apartment</label>
 		<form:checkbox name="house" id="house" path="house" /><label>House</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
+
+		<form:checkbox style="display:none" name="neither" id="neither" path="noProperty" />
+		<form:checkbox style="display:none" name="bothHouseAndStudio" id="bothHouseAndStudio" path="bothHouseAndStudio" />
+		<form:errors path="noProperty" cssClass="validationErrorText" /><br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -129,10 +145,6 @@ function validateType(form)
                     <c:when test="${alert.apartment}">
                         Apartment
                     </c:when>
-                    <!-- Display "None" if nothing was chosen -->
-                    <c:otherwise>
-                        None
-                    </c:otherwise>
 				</c:choose>
 				</td>
 				<td>${alert.city}</td>
