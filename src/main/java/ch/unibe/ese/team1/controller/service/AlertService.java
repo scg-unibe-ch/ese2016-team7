@@ -63,7 +63,7 @@ public class AlertService {
 		alert.setApartment(alertForm.getApartment());
 		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
         alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
-        alert.setApartmentHouseAndStudio(alertForm.getBothHouseAndStudio());
+        alert.setBothHouseAndStudio(alertForm.getBothHouseAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 		alert.setUser(user);
 		alertDao.save(alert);
@@ -146,7 +146,7 @@ public class AlertService {
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
 		if (!alert.getApartmentHouseAndStudio()
-				&& alert.hasProperty(ad.
+				&& !alert.hasProperty(ad.
 				getProperty()))
 			mismatch = true;
 		return mismatch;
