@@ -17,7 +17,7 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 import ch.unibe.ese.team1.model.dao.BidDao;
 
 /**
- * This inserts some visits test data into the database.
+ * This inserts some bids test data into the database.
  */
 @Service
 public class BidTestDataSaver{
@@ -51,6 +51,7 @@ public class BidTestDataSaver{
 
     @Transactional
     public void saveTestData() throws Exception {
+
         // load users
         bernerBaer = userDao.findByUsername("user@bern.com");
         testerMuster = userDao.findByUsername("ese@unibe.ch");
@@ -59,8 +60,6 @@ public class BidTestDataSaver{
 
         // load ads
         ad1 = adDao.findOne(1L);
-
-
         ad2 = adDao.findOne(2L);
         ad3 = adDao.findOne(3L);
         ad4 = adDao.findOne(4L);
@@ -77,7 +76,6 @@ public class BidTestDataSaver{
         Bid bid;
         DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
 
-        // Visits for Ad 1
         bid = new Bid();
         bid.setAd(ad1);
         bid.setUser(testerMuster);
@@ -102,9 +100,6 @@ public class BidTestDataSaver{
         bidDao.save(bid);
 
 
-
-
-        // Visits for Ad 1
         bid = new Bid();
         bid.setAd(ad2);
         bid.setUser(testerMuster);
@@ -120,56 +115,9 @@ public class BidTestDataSaver{
         bid = new Bid();
         bid.setAd(ad4);
         bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
+        bid.setTimestamp(dateFormat.parse("14:00 26.12.2015"));
         bidDao.save(bid);
 
-        bid = new Bid();
-        bid.setAd(ad5);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad6);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad7);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad8);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad9);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad10);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad11);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad12);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
 
     }
 

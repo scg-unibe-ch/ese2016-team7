@@ -10,7 +10,9 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/** A bid for a flat, has a timestamp. */
+/**
+ * Describes an bid. Users can make bids for an ad in an auction.
+ */
 @Entity
 public class Bid {
 
@@ -30,8 +32,7 @@ public class Bid {
 
     @Column(nullable = false)
     private int amount;
-
-
+    
 
     public int getAmount() {
         return amount;

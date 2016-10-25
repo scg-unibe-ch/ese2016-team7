@@ -118,9 +118,10 @@
                 var id = ${shownAd.id};
                 var currentPrice = ${shownAd.price};
 
+
                 if(amount > currentPrice) {
                     $.post("ad/makeBid", {amount: amount, id: id}, function () {
-                        //alert("You bid: " + amount + " CHF");
+                       // alert("You bid: " + amount + " CHF");
                         $("#bidAmount").val("");
                         location.reload();
                     })

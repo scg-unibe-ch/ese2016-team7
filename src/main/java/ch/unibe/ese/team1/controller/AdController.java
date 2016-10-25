@@ -97,6 +97,7 @@ public class AdController {
 	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
 	public @ResponseBody void makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
 										  Principal principal) {
+		System.out.println("hi");
 		User user = userService.findUserByUsername(principal.getName());
 		Ad ad = adService.getAdById(id);
         auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before

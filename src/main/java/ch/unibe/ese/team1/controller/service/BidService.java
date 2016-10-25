@@ -23,7 +23,7 @@ public class BidService {
 
     /**
      * Returns all bids for an advertisement.
-     *
+     * Sorted by timestamp in descending order.
      * @return an Iterable of all matching bids
      */
     @Transactional

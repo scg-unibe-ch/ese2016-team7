@@ -48,7 +48,7 @@ public class AdTestDataSaver {
 
 
 
-		Date date = new Date();
+		Date date = formatter.parse("29.10.2016");
 
 		
 		Date creationDate1 = formatter.parse("03.10.2014");

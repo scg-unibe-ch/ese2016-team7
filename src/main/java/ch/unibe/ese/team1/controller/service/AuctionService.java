@@ -32,11 +32,11 @@ public class AuctionService {
     private BidDao bidDao;
 
     /**
-     * Searches every second for finished auctions
+     * Searches every 10 seconds for finished auctions
      * and sends messages to the corresponding users
      */
     @Transactional
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 10000)
     public void checkForFinishedAuctions(){
         Iterable<Ad> expiredAds = adDao.findByExpireDateLessThanAndExpired(new Date(),false);
         for(Ad ad : expiredAds){
@@ -106,7 +106,12 @@ public class AuctionService {
      */
     public void sendOverbiddenMessage(Ad ad, User user){
         Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
-        User receiver = bid.getUser();
-        messageService.sendMessage(user,receiver,"Overbid","You have ben overbid by me :)");
+
+        //TODO: This should notify ALL users that where overbidden, not just the most recent one.
+        //Added null check in case there is no bid. (It didn't work without any bids before)
+        if(bid != null) {
+            User receiver = bid.getUser();
+            messageService.sendMessage(user, receiver, "Overbid", "You have been overbid by me :)");
+        }
     }
 }
