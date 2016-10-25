@@ -102,7 +102,6 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
         auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before
 		bidService.makeBid(amount,user,ad);
-		adService.changePrice(ad,amount);
 
         // triggers all alerts that match the placed ad.
         //TODO: Make this work, it somehow triggers an error in AlertService.

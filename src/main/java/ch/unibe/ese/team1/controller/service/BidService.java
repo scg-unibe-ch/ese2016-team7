@@ -11,7 +11,6 @@ import ch.unibe.ese.team1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import ch.unibe.ese.team1.model.dao.BidDao;
 
 /** Provides operations for getting and saving bids */
@@ -20,6 +19,9 @@ public class BidService {
 
     @Autowired
     private BidDao bidDao;
+
+    @Autowired
+    private AdService adService;
 
     /**
      * Returns all bids for an advertisement.
@@ -37,12 +39,17 @@ public class BidService {
     /** Saves a new bid with the given parameters in the DB.
      */
     public void makeBid(Integer amount, User user, Ad ad) {
-        Bid bid = new Bid();
-        bid.setAd(ad);
-        bid.setTimestamp(new Date());
-        bid.setUser(user);
-        bid.setAmount(amount);
-        bidDao.save(bid);
+        // Only allow making bids when auction is not over yet.
+        //(So that people can't use a direct link)
+        if(!ad.getExpired()) {
+            Bid bid = new Bid();
+            bid.setAd(ad);
+            bid.setTimestamp(new Date());
+            bid.setUser(user);
+            bid.setAmount(amount);
+            bidDao.save(bid);
+            adService.changePrice(ad, amount);
+        }
     }
 
 
