@@ -17,6 +17,29 @@ function deleteAlert(button) {
 }
 </script>
 
+<script>
+function validateType(form)
+{
+	var house = document.getElementById('house')
+	var studio = document.getElementById('studio');
+	var apartment = document.getElementById('apartment');
+	var neither = document.getElementById('neither');
+	var bothHouseAndStudio = document.getElementById('bothHouseAndStudio');
+
+	if(house.checked && studio.checked) {
+		bothHouseAndStudio.checked = true;
+		neither.checked = false;
+	}
+	else if(!house.checked && !studio.checked) {
+		bothHouseAndStudio.checked = false;
+		neither.checked = true;
+	}
+	else {
+		bothHouseAndStudio.checked = false;
+		neither.checked = false;
+	}
+}
+</script>
 	
 <script>
 	$(document).ready(function() {
@@ -63,22 +86,29 @@ function deleteAlert(button) {
 		<c:forEach var="alert" items="${alerts}">
 			<tr>
 				<td>
-                    <c:choose>
-                        <c:when test="${alert.getHouse()}">
-                            House
-                        </c:when>
-                    </c:choose>
-                    <c:choose>
-
-                    <c:when test="${alert.getApartment()}">
+				<c:choose>
+                    <c:when test="${alert.apartment && alert.house && alert.studio}">
+                        Apartment, House & Studio
+                    </c:when>
+                    <c:when test="${alert.apartment && alert.house}">
+                        Apartment & House
+                    </c:when>
+                    <c:when test="${alert.apartment && alert.studio}">
+                        Apartment & Studio
+                    </c:when>
+                    <c:when test="${alert.house && alert.studio}">
+                        House & Studio
+                    </c:when>
+					<c:when test="${alert.studio}">
+						Studio
+					</c:when>
+					<c:when test="${alert.house}">
+						House
+					</c:when>
+                    <c:when test="${alert.apartment}">
                         Apartment
                     </c:when>
-                    </c:choose>
-                    <c:choose>
-                    <c:when test="${alert.getStudio()}">
-                        Studio
-                    </c:when>
-                    </c:choose>
+				</c:choose>
 				</td>
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>

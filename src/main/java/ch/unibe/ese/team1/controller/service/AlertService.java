@@ -56,12 +56,15 @@ public class AlertService {
 		String zip = alertForm.getCity().substring(0, 4);
 		alert.setZipcode(Integer.parseInt(zip));
 		alert.setCity(alertForm.getCity().substring(7));
+
 		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
 		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
+		alert.setApartment(alertForm.getApartment());
 		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
-        alert.setApartmentHouseAndStudio(alertForm.getBothHouseAndStudio());
+        alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
+        alert.setBothHouseAndStudio(alertForm.getBothHouseAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 
 		alert.setEarliestMoveInDate(alert.getEarliestMoveInDate());
@@ -155,7 +158,7 @@ public class AlertService {
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
 		if (!alert.getApartmentHouseAndStudio()
-				&& alert.hasProperty(ad.
+				&& !alert.hasProperty(ad.
 				getProperty()))
 			mismatch = true;
 		return mismatch;

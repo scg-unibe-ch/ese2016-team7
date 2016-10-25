@@ -191,9 +191,9 @@
             if(current > expired){
                 $('#bidInfo').html("<h2>We are sorry but this acution is over!</h2>");
             }else{
-                var diff = expired - current;
-                var msec = diff;
+                var msec = expired - current;
                 var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+                msec -= dd * 1000 * 60 * 60 * 24;
                 var hh = Math.floor(msec / 1000 / 60 / 60);
                 msec -= hh * 1000 * 60 * 60;
                 var mm = Math.floor(msec / 1000 / 60);
@@ -254,9 +254,9 @@
             <td><h2>Type</h2></td>
             <td>
                 <c:choose>
-                    <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-                    <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-                    <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                    <c:when test="${shownAd.property == 'HOUSE'}">House</c:when>
+                    <c:when test="${shownAd.property == 'APARTMENT'}">Apartment</c:when>
+                    <c:when test="${shownAd.property == 'STUDIO'}">Studio</c:when>
                 </c:choose>
             </td>
         </tr>
@@ -276,14 +276,20 @@
         </tr>
 
         <tr>
-            <td><h2>Monthly Rent</h2></td>
+            <td><h2>Price</h2></td>
             <td>${shownAd.price}&#32;CHF</td>
+        </tr>
+
+        <tr>
+            <td><h2>Number of Rooms</h2></td>
+            <td>${shownAd.numberRooms}&#32;</td>
         </tr>
 
         <tr>
             <td><h2>Square Meters</h2></td>
             <td>${shownAd.squareFootage}&#32;m²</td>
         </tr>
+
         <tr>
             <td><h2>Ad created on</h2></td>
             <td>${formattedCreationDate}</td>

@@ -125,7 +125,6 @@ public class Ad {
 			}
 		}
 
-
 	public void setProperty(Property property) {
 		this.property = property;
 	}
