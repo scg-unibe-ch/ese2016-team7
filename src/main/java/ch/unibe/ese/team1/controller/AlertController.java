@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,7 +35,7 @@ public class AlertController {
 	/** Serves the page that allows the user to view their alerts. */
 	@RequestMapping(value = "/profile/alerts", method = RequestMethod.GET)
 	public ModelAndView alerts(Principal principal) {
-		return prepareAlertPage(principal, false, new AlertForm());
+		return prepareAlertPage(principal, false, new SearchForm());
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class AlertController {
 	 */
 	@RequestMapping(value = "/profile/alerts", method = RequestMethod.POST)
 	public ModelAndView savedAlert(Principal principal,
-			@Valid AlertForm alertForm, BindingResult result) {
+								   @Valid SearchForm alertForm, BindingResult result) {
 		if (!result.hasErrors())
 			return prepareAlertPage(principal, true, alertForm);
 		else
@@ -61,7 +62,7 @@ public class AlertController {
 	 * and the alerts of the user.
 	 */
 	private ModelAndView prepareAlertPage(Principal principal,
-			boolean alreadySet, AlertForm alertForm) {
+			boolean alreadySet, SearchForm alertForm) {
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
 		if (alreadySet)

@@ -56,7 +56,6 @@
         var bothApartmentAndStudio = document.getElementById('bothApartmentAndStudio');
         var apartmentHouseAndStudio = document.getElementById('apartmentHouseAndStudio');
 
-
         var type = document.getElementById('type');
         var filtered = document.getElementById('filtered');
 
@@ -98,9 +97,9 @@
 <form:form method="post" modelAttribute="searchForm" action="/results"
            id="searchForm" autocomplete="off">
     <fieldset>
-        <form:checkbox name="house" id="house" path="houseHelper"/><label>House</label>
-        <form:checkbox name="studio" id="studio" path="studioHelper"/><label>Studio</label>
-        <form:checkbox name="apartment" id="apartment" path="apartmentHelper"/><label>Apartment</label>
+        <form:checkbox name="house" id="house" path="house"/><label>House</label>
+        <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
+        <form:checkbox name="apartment" id="apartment" path="apartment  "/><label>Apartment</label>
 
         <form:checkbox style="display:none" name="bothHouseAndStudio" id="bothHouseAndStudio" path="bothHouseAndStudio"/>
         <form:checkbox style="display:none" name="bothApartmentAndHouse" id="bothApartmentAndHouse" path="bothApartmentAndHouse"/>
@@ -169,11 +168,12 @@
             </tr>
         </table>
 
-
-        <button type="submit" onClick="validateType(this.form)">Search</button>
+        <button type="submit" onClick="validateType(this.form);form.action='/results';">Search</button>
+        <button type="submit" onClick="validateType(this.form);form.action='/profile/alerts';">Subscribe</button>
         <button type="reset">Cancel</button>
     </fieldset>
 
 </form:form>
+
 
 <c:import url="template/footer.jsp"/>

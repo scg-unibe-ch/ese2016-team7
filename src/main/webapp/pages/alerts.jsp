@@ -17,28 +17,6 @@ function deleteAlert(button) {
 }
 </script>
 
-<script>
-function validateType(form)
-{
-	var house = document.getElementById('house')
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	
-	if(house.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!house.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-	}
-}
-</script>
 	
 <script>
 	$(document).ready(function() {
@@ -63,44 +41,8 @@ function validateType(form)
 	});
 </script>
 
-<h1>Create and manage alerts</h1>
+<h1>Manage alerts</h1>
 <hr />
-
-<h2>Create new alert</h2><br />
-<form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
-	id="alertForm" autocomplete="off">
-
-	<fieldset>
-		<form:checkbox name="house" id="house" path="house" /><label>House</label>
-		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noProperty" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothHouseAndStudio" />
-		<form:errors path="noProperty" cssClass="validationErrorText" /><br />
-		
-		<label for="city">City / zip code:</label>
-		<form:input type="text" name="city" id="city" path="city"
-			placeholder="e.g. Bern" tabindex="3" />
-		<form:errors path="city" cssClass="validationErrorText" />
-		
-		<label for="radius">Within radius of (max.):</label>
-		<form:input id="radiusInput" type="number" path="radius"
-			placeholder="e.g. 5" step="5" />
-		km
-		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="price">Price (max.):</label>
-		<form:input id="priceInput" type="number" path="price"
-			placeholder="e.g. 5" step="50" />
-		CHF
-		<form:errors path="price" cssClass="validationErrorText" />
-		<br />
-
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
-		<button type="reset" tabindex="8">Cancel</button>
-	</fieldset>
-
-</form:form> <br />
-<h2>Your active alerts</h2>
 
 <div id="alertsDiv" class="alertsDiv">			
 <c:choose>
@@ -121,17 +63,22 @@ function validateType(form)
 		<c:forEach var="alert" items="${alerts}">
 			<tr>
 				<td>
-				<c:choose>
-					<c:when test="${alert.bothHouseAndStudio}">
-						Both
-					</c:when>
-					<c:when test="${alert.studio}">
-						Studio
-					</c:when>
-					<c:otherwise>
-						Room
-					</c:otherwise>
-				</c:choose>
+                    <c:choose>
+                        <c:when test="${alert.getHouse()}">
+                            House
+                        </c:when>
+                    </c:choose>
+                    <c:choose>
+
+                    <c:when test="${alert.getApartment()}">
+                        Apartment
+                    </c:when>
+                    </c:choose>
+                    <c:choose>
+                    <c:when test="${alert.getStudio()}">
+                        Studio
+                    </c:when>
+                    </c:choose>
 				</td>
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>

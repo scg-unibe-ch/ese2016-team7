@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.lang.Math;
 
+import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,21 +50,30 @@ public class AlertService {
 	 *            the user to associate the new alert to
 	 */
 	@Transactional
-	public void saveFrom(AlertForm alertForm, User user) {
+	public void saveFrom(SearchForm alertForm, User user) {
 		Alert alert = new Alert();
 
 		String zip = alertForm.getCity().substring(0, 4);
 		alert.setZipcode(Integer.parseInt(zip));
 		alert.setCity(alertForm.getCity().substring(7));
-
 		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
 		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
 		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
-        alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getBothHouseAndStudio());
         alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
+
+		alert.setEarliestMoveInDate(alert.getEarliestMoveInDate());
+		alert.setLatestMoveInDate(alert.getLatestMoveInDate());
+		alert.setSmokers(alertForm.getSmokers());
+		alert.setAnimals(alertForm.getAnimals());
+		alert.setGarden(alertForm.getGarden());
+		alert.setBalcony(alertForm.getBalcony());
+		alert.setCellar(alertForm.getCellar());
+		alert.setFurnished(alertForm.getFurnished());
+		alert.setGarage(alertForm.getGarage());
+
 		alert.setUser(user);
 		alertDao.save(alert);
 	}

@@ -54,6 +54,34 @@ public class Alert {
     @Column
     private boolean apartmentHouseAndStudio;
 
+    @Column
+    private boolean smokers;
+
+    @Column
+    private boolean animals;
+
+    @Column
+    private boolean garden;
+
+    @Column
+    private boolean balcony;
+
+    @Column
+    private boolean cellar;
+
+    @Column
+    private boolean furnished;
+
+    @Column
+    private boolean garage;
+
+    @Column
+    private String latestMoveInDate;
+
+    @Column
+    private String earliestMoveInDate;
+
+
     public Alert() {
     }
 
@@ -129,37 +157,30 @@ public class Alert {
         return apartment;
     }
 
-    public boolean getApartmentHouseAndStudio() {
-        return apartmentHouseAndStudio;
-    }
+    public boolean getApartmentHouseAndStudio() { return apartmentHouseAndStudio; }
+    public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) { this.apartmentHouseAndStudio = apartmentHouseAndStudio; }
+    public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) { this.bothApartmenteAndStudio = bothApartmenteAndStudio; }
+    public void setBothHouseAndApartment(boolean bothHouseAndApartment) { this.bothHouseAndApartment = bothHouseAndApartment; }
 
-    public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) {
-        this.apartmentHouseAndStudio = apartmentHouseAndStudio;
-    }
+    public void setEarliestMoveInDate(String erliestMoveInDate) {this.earliestMoveInDate = erliestMoveInDate;}
+    public String getEarliestMoveInDate() {return this.earliestMoveInDate;}
+    public void setLatestMoveInDate(String latestMoveInDate) { this.latestMoveInDate = latestMoveInDate;}
+    public String getLatestMoveInDate() {return this.latestMoveInDate;}
+    public void setSmokers(boolean smokers) { this.smokers = smokers; }
+    public boolean getSmokers() { return this.smokers; }
+    public void setAnimals(boolean animals) { this.animals = animals; }
+    public boolean getAnimals() { return this.animals; }
+    public void setGarden(boolean garden) { this.garden = garden; }
+    public boolean getGarden() { return this.garden; }
+    public void setBalcony(boolean balcony) { this.balcony = balcony; }
+    public boolean getBalcony() { return this.balcony; }
+    public void setCellar(boolean cellar) { this.cellar = cellar; }
+    public boolean getCellar() { return this.cellar; }
+    public void setFurnished(boolean furnished) { this.furnished = furnished; }
+    public boolean getFurnished() { return this.furnished; }
+    public void setGarage(boolean garage) { this.garage = garage; }
+    public boolean getGarage() { return this.garage; }
 
-    public boolean getBothApartmenteAndStudio() {
-        return bothApartmenteAndStudio;
-    }
-
-    public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) {
-        this.bothApartmenteAndStudio = bothApartmenteAndStudio;
-    }
-
-    public boolean getBothHouseAndApartment() {
-        return bothHouseAndApartment;
-    }
-
-    public void setBothHouseAndApartment(boolean bothHouseAndApartment) {
-        this.bothHouseAndApartment = bothHouseAndApartment;
-    }
-
-    public boolean getBothHouseAndStudio() {
-        return bothHouseAndStudio;
-    }
-
-    public void setBothHouseAndStudio(boolean bothHouseAndStudio) {
-        this.bothHouseAndStudio = bothHouseAndStudio;
-    }
 
     public boolean hasProperty(Property property) {
         switch (property) {
