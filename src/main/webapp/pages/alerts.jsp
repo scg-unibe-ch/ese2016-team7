@@ -20,16 +20,16 @@ function deleteAlert(button) {
 <script>
 function validateType(form)
 {
-	var room = document.getElementById('room');
+	var house = document.getElementById('house')
 	var studio = document.getElementById('studio');
 	var neither = document.getElementById('neither');
 	var both = document.getElementById('both');
 	
-	if(room.checked && studio.checked) {
+	if(house.checked && studio.checked) {
 		both.checked = true;
 		neither.checked = false;
 	}
-	else if(!room.checked && !studio.checked) {
+	else if(!house.checked && !studio.checked) {
 		both.checked = false;
 		neither.checked = true;
 	}
@@ -38,17 +38,6 @@ function validateType(form)
 		neither.checked = false;
 	}
 }
-</script>
-
-<script>
-function typeOfAlert(alert) {
-	if(alert.getBothRoomAndStudio())
-		return "Both"
-	else if(alert.getStudio())
-		return "Studio"
-	else
-		return "Room"
-}	
 </script>
 	
 <script>
@@ -82,12 +71,12 @@ function typeOfAlert(alert) {
 	id="alertForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="house" id="house" path="house" /><label>House</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
+		<form:checkbox style="display:none" name="neither" id="neither" path="noProperty" />
+		<form:checkbox style="display:none" name="both" id="both" path="bothHouseAndStudio" />
+		<form:errors path="noProperty" cssClass="validationErrorText" /><br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -133,7 +122,7 @@ function typeOfAlert(alert) {
 			<tr>
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothRoomAndStudio}">
+					<c:when test="${alert.bothHouseAndStudio}">
 						Both
 					</c:when>
 					<c:when test="${alert.studio}">

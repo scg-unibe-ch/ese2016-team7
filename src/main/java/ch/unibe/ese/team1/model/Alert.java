@@ -14,103 +14,163 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Alert {
 
-	@Id
-	@GeneratedValue
-	private long id;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@ManyToOne
-	private User user;
+    @ManyToOne
+    private User user;
 
-	@Column(nullable = false)
-	private int zipcode;
+    @Column(nullable = false)
+    private int zipcode;
 
-	@Column(nullable = false)
-	private String city;
+    @Column(nullable = false)
+    private String city;
 
-	@Column(nullable = false)
-	private int price;
+    @Column(nullable = false)
+    private int price;
 
-	@Column(nullable = false)
-	private int radius;
+    @Column(nullable = false)
+    private int radius;
 
-	@Column
-	private boolean studio;
+    @Column
+    private boolean house;
 
-	@Column
-	private boolean room;
+    @Column
+    private boolean studio;
 
-	@Column
-	private boolean bothRoomAndStudio;
+    @Column
+    private boolean apartment;
 
-	public long getId() {
-		return id;
-	}
+    @Column
+    private boolean bothHouseAndStudio;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Column
+    private boolean bothHouseAndApartment;
 
-	public User getUser() {
-		return user;
-	}
+    @Column
+    private boolean bothApartmenteAndStudio;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @Column
+    private boolean apartmentHouseAndStudio;
 
-	public int getZipcode() {
-		return zipcode;
-	}
+    public Alert() {
+    }
 
-	public void setZipcode(int zipcode) {
-		this.zipcode = zipcode;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public int getRadius() {
-		return radius;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
+    public int getZipcode() {
+        return zipcode;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public boolean getStudio() {
-		return studio;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
+    public int getRadius() {
+        return radius;
+    }
 
-	public boolean getRoom() {
-		return room;
-	}
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
 
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
+    public boolean getStudio() {
+        return studio;
+    }
+
+    public void setStudio(boolean studio) {
+        this.studio = studio;
+    }
+
+    public void setHouse(boolean house) {
+        this.house = house;
+    }
+
+    public boolean getHouse() {
+        return house;
+    }
+
+    public void setApartment(boolean apartment) {
+        this.apartment = apartment;
+    }
+
+    public boolean getApartment() {
+        return apartment;
+    }
+
+    public boolean getApartmentHouseAndStudio() {
+        return apartmentHouseAndStudio;
+    }
+
+    public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) {
+        this.apartmentHouseAndStudio = apartmentHouseAndStudio;
+    }
+
+    public boolean getBothApartmenteAndStudio() {
+        return bothApartmenteAndStudio;
+    }
+
+    public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) {
+        this.bothApartmenteAndStudio = bothApartmenteAndStudio;
+    }
+
+    public boolean getBothHouseAndApartment() {
+        return bothHouseAndApartment;
+    }
+
+    public void setBothHouseAndApartment(boolean bothHouseAndApartment) {
+        this.bothHouseAndApartment = bothHouseAndApartment;
+    }
+
+    public boolean getBothHouseAndStudio() {
+        return bothHouseAndStudio;
+    }
+
+    public void setBothHouseAndStudio(boolean bothHouseAndStudio) {
+        this.bothHouseAndStudio = bothHouseAndStudio;
+    }
+
+    public boolean hasProperty(Property property) {
+        switch (property) {
+            case HOUSE:
+                return house;
+            case APARTMENT:
+                return apartment;
+            case STUDIO:
+                return studio;
+        }
+        // if nothing was matched in the switch statement, return false
+        return false;
+    }
 }

@@ -27,22 +27,23 @@
 			<c:forEach var="ad" items="${newest}">
 				<div class="resultAd">
 					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
-						</p>
+                        <a href="<c:url value='/ad?id=${ad.id}' />"><img
+                                src="${ad.pictures[0].filePath}" /></a>
+                        <h2>
+                            <a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
+                        </h2>
+                        <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+                        <br />
+                        <p>
+                            <i><c:choose>
+                                <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                <c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                <c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
+                            </c:choose></i>
+                        </p>
 					</div>
 					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
+						<h2>CHF ${ad.price }</h2>
 						<br /> <br />
 
 						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"

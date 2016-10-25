@@ -85,7 +85,7 @@ Placing an ad
 A User must specify the general infos of the flat ad:
 He must add a title, the address (containing a Street and a City).
 Further he has to add the date of the move-in. (no move-out date: _To be done_)
-He adds the prize, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
+He adds the price, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
 For the flat he must add a description of the property, including the amount of rooms (_To be done_) and can tick the following options:
 Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage
 If the roommates have Flatfinder accounts, then the user can add them by mail and can add a description of them. This is optional.
@@ -139,7 +139,7 @@ The user can add a credit card to his profile. (_To be done_)
 
 ***Home***
 
-The user sees the newest ads. An ad contains the picture, title, prize, type, address and move-in-date. He has the profile options and the search.
+The user sees the newest ads. An ad contains the picture, title, price, type, address and move-in-date. He has the profile options and the search.
 
 ***Search***
 
@@ -147,7 +147,7 @@ He can tick the type and must enter a city code, radius and a price and can then
 
 Display search
 
-He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the prize, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
+He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the price, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
 A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_To be done_)
 
 Display Ad

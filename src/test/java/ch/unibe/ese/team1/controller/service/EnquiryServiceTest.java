@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controller.service;
 
+import static ch.unibe.ese.team1.model.Property.HOUSE;
 import static org.junit.Assert.assertEquals;
 
 import java.text.SimpleDateFormat;
@@ -73,14 +74,13 @@ public class EnquiryServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPrice(1200);
 		oltenResidence.setSquareFootage(42);
-		oltenResidence.setStudio(false);
+		oltenResidence.setProperty(HOUSE);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
 		oltenResidence.setPreferences("blah");
-		oltenResidence.setRoommates("None");
 		oltenResidence.setUser(thomyF);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");
@@ -89,9 +89,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setBalcony(false);
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
-		oltenResidence.setCable(false);
 		oltenResidence.setGarage(false);
-		oltenResidence.setInternet(false);
 		adDao.save(oltenResidence);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
@@ -135,14 +133,13 @@ public class EnquiryServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPrice(1200);
 		oltenResidence.setSquareFootage(42);
-		oltenResidence.setStudio(false);
+		oltenResidence.setProperty(HOUSE);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
 		oltenResidence.setPreferences("blah");
-		oltenResidence.setRoommates("None");
 		oltenResidence.setUser(adolfOgi);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");
@@ -151,9 +148,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setBalcony(false);
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
-		oltenResidence.setCable(false);
 		oltenResidence.setGarage(false);
-		oltenResidence.setInternet(false);
 		adDao.save(oltenResidence);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");

@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controller.service;
 
+import static ch.unibe.ese.team1.model.Property.HOUSE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -58,8 +59,8 @@ public class AlertServiceTest {
 		// Create 2 alerts for Adolf Ogi
 		Alert alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(false);
+		alert.setBothApartmenteAndStudio(false);
+		alert.setHouse(false);
 		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
@@ -69,8 +70,9 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(true);
-		alert.setRoom(true);
+		alert.setApartmentHouseAndStudio(true);
+		alert.setHouse(true);
+		alert.setApartment(true);
 		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
@@ -102,8 +104,8 @@ public class AlertServiceTest {
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(false);
-		alert.setRoom(false);
+		alert.setBothHouseAndApartment(false);
+		alert.setHouse(false);
 		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
@@ -113,8 +115,9 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(true);
-		alert.setRoom(true);
+		alert.setApartmentHouseAndStudio(true);
+		alert.setHouse(true);
+		alert.setApartment(true);
 		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
@@ -132,14 +135,13 @@ public class AlertServiceTest {
 		oltenResidence.setZipcode(4600);
 		oltenResidence.setMoveInDate(date);
 		oltenResidence.setCreationDate(date);
-		oltenResidence.setPrizePerMonth(1200);
+		oltenResidence.setPrice(1200);
 		oltenResidence.setSquareFootage(42);
-		oltenResidence.setStudio(false);
+		oltenResidence.setProperty(HOUSE);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
 		oltenResidence.setPreferences("blah");
-		oltenResidence.setRoommates("None");
 		oltenResidence.setUser(thomyF);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");
@@ -148,9 +150,7 @@ public class AlertServiceTest {
 		oltenResidence.setBalcony(false);
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
-		oltenResidence.setCable(false);
 		oltenResidence.setGarage(false);
-		oltenResidence.setInternet(false);
 		adDao.save(oltenResidence);
 		
 		assertFalse(alertService.radiusMismatch(oltenResidence, alertList.get(0)));

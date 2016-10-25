@@ -58,9 +58,12 @@ public class AlertService {
 
 		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
-		alert.setRoom(alertForm.getRoom());
+		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
-		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
+		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
+        alert.setBothApartmenteAndStudio(alertForm.getBothApartmenteAndStudio());
+        alert.setApartmentHouseAndStudio(alertForm.getBothHouseAndStudio());
+        alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 		alert.setUser(user);
 		alertDao.save(alert);
 	}
@@ -85,7 +88,7 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
-		int adPrice = ad.getPrizePerMonth();
+		int adPrice = ad.getPrice();
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
 		// loop through all ads with matching city and price range, throw out
@@ -141,8 +144,9 @@ public class AlertService {
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
-		if (!alert.getBothRoomAndStudio()
-				&& ad.getStudio() != alert.getStudio())
+		if (!alert.getApartmentHouseAndStudio()
+				&& alert.hasProperty(ad.
+				getProperty()))
 			mismatch = true;
 		return mismatch;
 	}

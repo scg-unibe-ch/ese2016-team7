@@ -14,17 +14,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import ch.unibe.ese.team1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.AdPicture;
-import ch.unibe.ese.team1.model.Location;
-import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
@@ -56,10 +52,8 @@ public class AdService {
 	 * Handles persisting a new ad to the database.
 	 * 
 	 * @param placeAdForm
-	 *            the form to take the data from
-	 * @param a
-	 *            list of the file paths the pictures are saved under
-	 * @param the
+	 *            the form to take the data from a
+	 *            list of the file paths the pictures are saved under the
 	 *            currently logged in user
 	 */
 	@Transactional
@@ -79,7 +73,7 @@ public class AdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 
-		ad.setStudio(placeAdForm.getStudio());
+		ad.setProperty(placeAdForm.getProperty());
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -101,25 +95,14 @@ public class AdService {
 				ad.setMoveInDate(calendar.getTime());
 			}
 
-			if (placeAdForm.getMoveOutDate().length() >= 1) {
-				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(0, 2));
-				int monthMoveOut = Integer.parseInt(placeAdForm
-						.getMoveOutDate().substring(3, 5));
-				int yearMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(6, 10));
-				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
-				ad.setMoveOutDate(calendar.getTime());
-			}
 		} catch (NumberFormatException e) {
 		}
 
-		ad.setPrizePerMonth(placeAdForm.getPrize());
+		ad.setPrice(placeAdForm.getPrice());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
-		ad.setRoommates(placeAdForm.getRoommates());
 
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -128,10 +111,8 @@ public class AdService {
 		ad.setBalcony(placeAdForm.getBalcony());
 		ad.setCellar(placeAdForm.getCellar());
 		ad.setFurnished(placeAdForm.isFurnished());
-		ad.setCable(placeAdForm.getCable());
 		ad.setGarage(placeAdForm.getGarage());
-		ad.setInternet(placeAdForm.getInternet());
-		
+
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!
@@ -143,20 +124,6 @@ public class AdService {
 			pictures.add(picture);
 		}
 		ad.setPictures(pictures);
-
-		/*
-		 * Roommates are saved in the form as strings. They need to be converted
-		 * into Users and saved as a List which will be accessible through the
-		 * ad object itself.
-		 */
-		List<User> registeredUserRommates = new LinkedList<>();
-		if (placeAdForm.getRegisteredRoommateEmails() != null) {
-			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
-				User roommateUser = userService.findUserByUsername(userEmail);
-				registeredUserRommates.add(roommateUser);
-			}
-		}
-		ad.setRegisteredRoommates(registeredUserRommates);
 
 		// visits
 		List<Visit> visits = new LinkedList<>();
@@ -196,7 +163,7 @@ public class AdService {
 	/** Changes the price of an ad. */
 	@Transactional
 	public void changePrice(Ad ad,int amount) {
-		ad.setPrizePerMonth(amount);
+		ad.setPrice(amount);
 		adDao.save(ad);
 	}
 
@@ -252,15 +219,26 @@ public class AdService {
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
 
-		// we use this method if we are looking for rooms AND studios
-		if (searchForm.getBothRoomAndStudio()) {
+		// we use this method if we are looking for houses , studios AND apartments
+		if (searchForm.getApartmentHouseAndStudio()) {
 			results = adDao
-					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
+					.findByPriceLessThan(searchForm.getPrice() + 1);
 		}
-		// we use this method if we are looking EITHER for rooms OR for studios
+
+		//we use one of these if we are searching for two types
+		else if(searchForm.getBothApartmentAndHouse()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.HOUSE, searchForm.getPrice()+1);
+		}
+		else if(searchForm.getBothApartmentAndStudio()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.STUDIO,searchForm.getPrice()+1);
+		}
+		else if(searchForm.getBothHouseAndStudio()){
+			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.HOUSE,Property.STUDIO,searchForm.getPrice()+1);
+		}
+		// we use this method if we are looking EITHER for houses OR for studios OR for apartments
 		else {
-			results = adDao.findByStudioAndPrizePerMonthLessThan(
-					searchForm.getStudio(), searchForm.getPrize() + 1);
+			results = adDao.findByPropertyAndPriceLessThan(
+					searchForm.getProperty(), searchForm.getPrice() + 1);
 		}
 
 		// filter out zipcode
@@ -329,22 +307,10 @@ public class AdService {
 						.parse(searchForm.getLatestMoveInDate());
 			} catch (Exception e) {
 			}
-			try {
-				earliestOutDate = formatter.parse(searchForm
-						.getEarliestMoveOutDate());
-			} catch (Exception e) {
-			}
-			try {
-				latestOutDate = formatter.parse(searchForm
-						.getLatestMoveOutDate());
-			} catch (Exception e) {
-			}
 
 			// filtering by dates
 			locatedResults = validateDate(locatedResults, true, earliestInDate,
 					latestInDate);
-			locatedResults = validateDate(locatedResults, false,
-					earliestOutDate, latestOutDate);
 
 			// filtering for the rest
 			// smokers
@@ -407,16 +373,6 @@ public class AdService {
 				}
 			}
 
-			// cable
-			if (searchForm.getCable()) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (!ad.getCable())
-						iterator.remove();
-				}
-			}
-
 			// garage
 			if (searchForm.getGarage()) {
 				Iterator<Ad> iterator = locatedResults.iterator();
@@ -427,15 +383,6 @@ public class AdService {
 				}
 			}
 
-			// internet
-			if (searchForm.getInternet()) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (!ad.getInternet())
-						iterator.remove();
-				}
-			}
 		}
 		return locatedResults;
 	}

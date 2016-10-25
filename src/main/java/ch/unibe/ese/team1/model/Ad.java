@@ -3,18 +3,8 @@ package ch.unibe.ese.team1.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Fetch;
@@ -52,15 +42,14 @@ public class Ad {
 	@Temporal(TemporalType.DATE)
 	private Date moveInDate;
 
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = true)
-	private Date moveOutDate;
-
 	@Column(nullable = false)
-	private int prizePerMonth;
+	private int price;
 
 	@Column(nullable = false)
 	private int squareFootage;
+
+	@Column(nullable = false)
+	private float numberRooms;
 
 	@Column(nullable = false)
 	@Lob
@@ -69,13 +58,6 @@ public class Ad {
 	@Column(nullable = false)
 	@Lob
 	private String preferences;
-
-	@Column(nullable = false)
-	private String roommates;
-
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> registeredRoommates;
 
 	@Column(nullable = false)
 	private boolean smokers;
@@ -96,17 +78,11 @@ public class Ad {
 	private boolean furnished;
 
 	@Column(nullable = false)
-	private boolean cable;
-
-	@Column(nullable = false)
 	private boolean garage;
 
+    @Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private boolean internet;
-
-	// true if studio, false if room
-	@Column(nullable = false)
-	private boolean studio;
+	private Property property;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -129,12 +105,29 @@ public class Ad {
 		this.creationDate = creationDate;
 	}
 
-	public boolean getStudio() {
-		return studio;
+	public Property getProperty() {
+		return property;
 	}
 
-	public void setStudio(boolean studio) {
-		this.studio = studio;
+	public void  setProperty(String property){
+		property.toLowerCase();
+		switch (property){
+			case "house":
+				this.property=Property.HOUSE;
+				break;
+			case "apartment":
+				this.property=Property.APARTMENT;
+				break;
+			case "studio":
+				this.property=Property.STUDIO;
+				break;
+
+			}
+		}
+
+
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 
 	public boolean getSmokers() {
@@ -185,28 +178,12 @@ public class Ad {
 		this.furnished = furnished;
 	}
 
-	public boolean getCable() {
-		return cable;
-	}
-
-	public void setCable(boolean hasCable) {
-		this.cable = hasCable;
-	}
-
 	public boolean getGarage() {
 		return garage;
 	}
 
 	public void setGarage(boolean garage) {
 		this.garage = garage;
-	}
-
-	public boolean getInternet() {
-		return internet;
-	}
-
-	public void setInternet(boolean internet) {
-		this.internet = internet;
 	}
 
 	public long getId() {
@@ -233,16 +210,12 @@ public class Ad {
 		this.moveInDate = moveInDate;
 	}
 
-	public void setMoveOutDate(Date moveOutDate) {
-		this.moveOutDate = moveOutDate;
+	public int getPrice() {
+		return price;
 	}
 
-	public int getPrizePerMonth() {
-		return prizePerMonth;
-	}
-
-	public void setPrizePerMonth(int prizePerMonth) {
-		this.prizePerMonth = prizePerMonth;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getSquareFootage() {
@@ -251,6 +224,14 @@ public class Ad {
 
 	public void setSquareFootage(int squareFootage) {
 		this.squareFootage = squareFootage;
+	}
+
+	public float getNumberRooms() {
+		return numberRooms;
+	}
+
+	public void setNumberRooms(float numberRooms) {
+		this.numberRooms = numberRooms;
 	}
 
 	public String getRoomDescription() {
@@ -269,24 +250,12 @@ public class Ad {
 		this.preferences = preferences;
 	}
 
-	public String getRoommates() {
-		return roommates;
-	}
-
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
-
 	public List<AdPicture> getPictures() {
 		return pictures;
 	}
 
 	public void setPictures(List<AdPicture> pictures) {
 		this.pictures = pictures;
-	}
-
-	public Date getMoveOutDate() {
-		return moveOutDate;
 	}
 
 	public User getUser() {
@@ -322,18 +291,7 @@ public class Ad {
 	}
 
 	public Date getDate(boolean date) {
-		if (date)
-			return moveInDate;
-		else
-			return moveOutDate;
-	}
-
-	public List<User> getRegisteredRoommates() {
-		return registeredRoommates;
-	}
-
-	public void setRegisteredRoommates(List<User> registeredRoommates) {
-		this.registeredRoommates = registeredRoommates;
+        return moveInDate;
 	}
 
 	public List<Visit> getVisits() {
