@@ -189,7 +189,7 @@
             var expired = new Date('<fmt:formatDate value="${shownAd.expireDate}" pattern="yyyy-MM-dd HH:mm:ss"/>');
             var current = new Date();
             if(current > expired){
-                $('#bidInfo').html("<h2>We are sorry but this acution is over!</h2>");
+                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
             }else{
                 var msec = expired - current;
                 var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
