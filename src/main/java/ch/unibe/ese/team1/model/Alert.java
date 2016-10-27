@@ -43,18 +43,6 @@ public class Alert {
     private boolean apartment;
 
     @Column
-    private boolean bothHouseAndStudio;
-
-    @Column
-    private boolean bothHouseAndApartment;
-
-    @Column
-    private boolean bothApartmenteAndStudio;
-
-    @Column
-    private boolean apartmentHouseAndStudio;
-
-    @Column
     private boolean smokers;
 
     @Column
@@ -157,15 +145,12 @@ public class Alert {
         return apartment;
     }
 
-    public boolean getApartmentHouseAndStudio() { return apartmentHouseAndStudio; }
-    public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) { this.apartmentHouseAndStudio = apartmentHouseAndStudio; }
-    public void setBothApartmenteAndStudio(boolean bothApartmenteAndStudio) { this.bothApartmenteAndStudio = bothApartmenteAndStudio; }
-    public void setBothHouseAndApartment(boolean bothHouseAndApartment) { this.bothHouseAndApartment = bothHouseAndApartment; }
 
     public void setEarliestMoveInDate(String erliestMoveInDate) {this.earliestMoveInDate = erliestMoveInDate;}
     public String getEarliestMoveInDate() {return this.earliestMoveInDate;}
     public void setLatestMoveInDate(String latestMoveInDate) { this.latestMoveInDate = latestMoveInDate;}
     public String getLatestMoveInDate() {return this.latestMoveInDate;}
+
     public void setSmokers(boolean smokers) { this.smokers = smokers; }
     public boolean getSmokers() { return this.smokers; }
     public void setAnimals(boolean animals) { this.animals = animals; }
@@ -182,16 +167,4 @@ public class Alert {
     public boolean getGarage() { return this.garage; }
 
 
-    public boolean hasProperty(Property property) {
-        switch (property) {
-            case HOUSE:
-                return house;
-            case APARTMENT:
-                return apartment;
-            case STUDIO:
-                return studio;
-        }
-        // if nothing was matched in the switch statement, return false
-        return false;
-    }
 }

@@ -96,6 +96,8 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
+        if(ad.getExpired()) return;
+
 		int adPrice = ad.getPrice();
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
@@ -152,10 +154,12 @@ public class AlertService {
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
+		/*
 		if (!alert.getApartmentHouseAndStudio()
 				&& !alert.hasProperty(ad.
 				getProperty()))
 			mismatch = true;
+			*/
 		return mismatch;
 	}
 

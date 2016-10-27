@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.unibe.ese.team1.controller.service.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +50,9 @@ public class BidTestDataSaver{
     @Autowired
     private BidDao bidDao;
 
+    @Autowired
+    private BidService bidService;
+
     @Transactional
     public void saveTestData() throws Exception {
 
@@ -79,45 +83,25 @@ public class BidTestDataSaver{
         bid = new Bid();
         bid.setAd(ad1);
         bid.setUser(testerMuster);
-        bid.setAmount(300);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
+        bid.setAmount(130000);
+        bid.setTimestamp(dateFormat.parse("13:25 22.10.2016"));
         bidDao.save(bid);
 
 
         bid = new Bid();
         bid.setAd(ad1);
         bid.setUser(oprah);
-        bid.setAmount(360);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2015"));
+        bid.setAmount(135000);
+        bid.setTimestamp(dateFormat.parse("14:00 26.10.2016"));
         bidDao.save(bid);
 
 
         bid = new Bid();
         bid.setAd(ad1);
         bid.setUser(janeDoe);
-        bid.setAmount(650);
-        bid.setTimestamp(dateFormat.parse("14:04 27.04.2016"));
+        bid.setAmount(145000);
+        bid.setTimestamp(dateFormat.parse("14:04 27.10.2016"));
         bidDao.save(bid);
-
-
-        bid = new Bid();
-        bid.setAd(ad2);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad3);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2014"));
-        bidDao.save(bid);
-
-        bid = new Bid();
-        bid.setAd(ad4);
-        bid.setUser(testerMuster);
-        bid.setTimestamp(dateFormat.parse("14:00 26.12.2015"));
-        bidDao.save(bid);
-
 
     }
 

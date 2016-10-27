@@ -208,13 +208,17 @@
 
     <script>
         function showTimeLeft(){
-            var expired = new Date('<fmt:formatDate value="${shownAd.expireDate}" pattern="yyyy-MM-dd HH:mm:ss"/>');
+            //We need getTime() to make the countdown compatible with all browsers.
+            var expired = ${shownAd.expireDate.getTime()};
             var current = new Date();
+
             if(current > expired){
                 $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
             }else{
                 var msec = expired - current;
+
                 var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
                 msec -= dd * 1000 * 60 * 60 * 24;
                 var hh = Math.floor(msec / 1000 / 60 / 60);
                 msec -= hh * 1000 * 60 * 60;
@@ -222,7 +226,9 @@
                 msec -= mm * 1000 * 60;
                 var ss = Math.floor(msec / 1000);
                 msec -= ss * 1000;
-                $('#timeLeft').html("Time Left: "+ dd +"T " +hh+"h "+mm+"m "+ ss+"s");
+
+                $('#timeLeft').html("Time Left: "+ dd +" Days, " +hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+
             }
         }
 

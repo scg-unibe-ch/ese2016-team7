@@ -103,8 +103,7 @@ public class AdController {
 		bidService.makeBid(amount,user,ad);
 
         // triggers all alerts that match the placed ad.
-        //TODO: Make this work, it somehow triggers an error in AlertService.
-		//alertService.triggerAlerts(ad);
+		alertService.triggerAlerts(ad);
 	}
 
 

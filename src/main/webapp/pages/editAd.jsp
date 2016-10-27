@@ -116,8 +116,6 @@
 <!-- format the dates -->
 <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 	type="date" pattern="dd-MM-yyyy" />
-<fmt:formatDate value="${ad.moveOutDate}" var="formattedMoveOutDate"
-	type="date" pattern="dd-MM-yyyy" />
 	
 <pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   <a href="/ad?id=${ad.id}">Ad Description</a>   &gt;   Edit Ad</pre>
 
@@ -136,25 +134,20 @@
 		<table class="placeAdTable">
 			<tr>
 				<td><label for="field-title">Ad Title</label></td>
-				<td><label for="type-room">Type:</label></td>
+				<td><label for="type-house">Type:</label></td>
 			</tr>
 
 			<tr>
 				<td><form:input id="field-title" path="title" value="${ad.title}" /></td>
-				<td>
-					<c:choose>
-						<c:when test="${ad.studio == 'true'}">
-							<form:radiobutton id="type-room" path="studio" value="1"
-								checked="checked" />Room <form:radiobutton id="type-studio"
-								path="studio" value="0" />Studio
-						</c:when>
-						<c:otherwise>
-							<form:radiobutton id="type-room" path="studio" value="0"
-								checked="checked" />Room <form:radiobutton id="type-studio"
-								path="studio" value="1" />Studio
-						</c:otherwise>
-					</c:choose>
+				<td><form:radiobutton id="type-house" path="property" value="HOUSE"
+									  checked="checked" />House </td>
+				<td>	<form:radiobutton id="type-studio"
+										  path="property" value="STUDIO" />Studio </td>
+				<td>	<form:radiobutton id="type-apartment"
+										  path="property" value="APARTMENT" />Apartment </td>
+
 			</tr>
+
 
 			<tr>
 				<td><label for="field-street">Street</label></td>
@@ -172,17 +165,13 @@
 
 			<tr>
 				<td><label for="moveInDate">Move-in date</label></td>
-				<td><label for="moveOutDate">Move-out date (optional)</label></td>
 			</tr>
 			<tr>
 				<td>
 					<form:input type="text" id="field-moveInDate"
 						path="moveInDate" value="${formattedMoveInDate }"/>
 				</td>
-				<td>
-					<form:input type="text" id="field-moveOutDate"
-						path="moveOutDate" value="${formattedMoveOutDate }"/>
-				</td>
+
 			</tr>
 
 			<tr>
@@ -291,43 +280,7 @@
 					</c:choose>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<c:choose>
-						<c:when test="${ad.cable}">
-							<form:checkbox id="field-cable" path="cable" checked="checked" /><label>Cable TV</label>
-						</c:when>
-						<c:otherwise>
-							<form:checkbox id="field-cable" path="cable" /><label>Cable TV</label>
-						</c:otherwise>
-					</c:choose>
-				</td>
-				
-				<td>
-					<c:choose>
-						<c:when test="${ad.garage}">
-							<form:checkbox id="field-garage" path="garage"  checked="checked" /><label>Garage
-							</label>
-						</c:when>
-						<c:otherwise>
-							<form:checkbox id="field-garage" path="garage" /><label>Garage</label>
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<c:choose>
-						<c:when test="${ad.internet}">
-							<form:checkbox id="field-internet" path="internet"  checked="checked" /><label>WiFi available
-							</label>
-						</c:when>
-						<c:otherwise>
-							<form:checkbox id="field-internet" path="internet" /><label>WiFi available</label>
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
+
 
 		</table>
 		<br />
@@ -336,55 +289,6 @@
 	</fieldset>
 
 
-	<br />
-	<fieldset>
-		<legend>Change roommates</legend>
-		
-		<h3>Add new roommates</h3>
-		<br />
-		<p>If your roommates have an account, simply add them by email.</p>
-
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="roomFriends">Add by email</label></td>
-			</tr>
-
-			<tr>
-				<td id="roommateCell"><form:input type="text" id="roomFriends"
-						path="roomFriends" placeholder="email" /> 
-
-				<div id="addbutton" class="smallPlusButton">+</div></td>
-			</tr>
-			
-			<tr>
-				<td><p id="addedRoommates" path="addedRoommates">Newly added roommates: </p></td>
-			</tr>
-		</table>
-
-
-		<p>Edit the description of the roommates:</p>
-		<br />
-		<form:textarea path="roommates" rows="10" cols="100"
-			placeholder="Roommates" />
-		<form:errors path="roommates" cssClass="validationErrorText" />
-		<hr />
-		<h3>Delete existing roommates</h3>
-		<br />
-		<table class="styledTable">
-					<tr>
-						<th>Username</th>
-						<th>Delete</th>
-					</tr>
-					
-					<c:forEach var="user" items="${ad.registeredRoommates}">
-							<tr>
-								<td>${user.username}</td>
-								<td><button type="button" data-user-id="${user.id}" data-ad-id="${ad.id}" class="deleteRoommateButton">Delete</button></td>
-							</tr>
-							<tr>
-					</c:forEach>
-		</table>
-	</fieldset>
 
 	<br />
 	<fieldset>

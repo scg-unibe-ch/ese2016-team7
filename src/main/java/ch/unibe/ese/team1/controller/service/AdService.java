@@ -230,7 +230,7 @@ public class AdService {
         /* We just get all ads by price less than in the search form and then filter them later in this function.
         If we need to make this process faster we could make separate searches depending on which property is checked, and then append them.
         */
-		results = adDao.findByPriceLessThan(searchForm.getPrice()+1);
+		results = adDao.findByPriceLessThanAndExpired(searchForm.getPrice()+1,false);
 
         List<Ad> filteredResults = new ArrayList<>();
         for (Ad ad : results) {
