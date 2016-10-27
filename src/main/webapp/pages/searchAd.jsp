@@ -57,6 +57,17 @@
             $("#advancedSearch").html("Show Advanced Search");
         }
     }
+
+    function markAllPropertiesIfNoneIsMarked() {
+        var house = document.getElementById('house');
+        var apartment = document.getElementById('apartment');
+        var studio = document.getElementById('studio');
+        if(!house.checked && !apartment.checked && !studio.checked) {
+            house.checked = true;
+            apartment.checked = true;
+            studio.checked = true;
+        }
+    }
 </script>
 
 <h1>Search for an ad</h1>
@@ -130,8 +141,8 @@
             </tr>
         </table>
 
-        <button type="submit" onClick="form.action='/results';">Search</button>
-        <button type="submit" onClick="form.action='/profile/alerts';">Subscribe</button>
+        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/results';">Search</button>
+        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/profile/alerts';">Subscribe</button>
         <button type="reset">Cancel</button>
     </fieldset>
 
