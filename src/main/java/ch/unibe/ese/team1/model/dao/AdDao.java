@@ -19,8 +19,20 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 
 	public Iterable<Ad> findByPropertyAndPropertyAndPriceLessThan(Property property, Property property2, int i);
 
-
 	public Iterable<Ad> findByUser(User user);
 
 	public Iterable<Ad> findByExpireDateLessThanAndExpired(Date date, boolean expired);
+
+	public long countByExpired(boolean expired);
+
+	public long countByProperty(Property property);
+
+	public long countBySmokers(boolean smokers);
+	public long countByAnimals(boolean animals);
+	public long countByGarden(boolean garden);
+	public long countByBalcony(boolean balcony);
+	public long countByCellar(boolean cellar);
+	public long countByFurnished(boolean furnished);
+	public long countByGarage(boolean garage);
+
 }

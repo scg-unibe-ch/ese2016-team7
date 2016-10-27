@@ -70,6 +70,7 @@
 								<li><a href="/profile/enquiries">Enquiries</a></li>
 								<li><a href="/profile/schedule">Schedule</a></li>
 								<li><a href="/profile/alerts">Alerts</a></li>
+								<li><a href="/insights">Insights</a></li>
 								<li>
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>

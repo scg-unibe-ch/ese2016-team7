@@ -456,4 +456,15 @@ public class AdService {
 		}
 		return false;
 	}
+
+	public int getAdsCount() { return (int) adDao.count(); }
+	public int getCountByExpired(boolean expired) { return (int) adDao.countByExpired(expired); }
+	public int getCountByProperty(Property property) { return (int) adDao.countByProperty(property); }
+	public int getCountBySmokers(boolean smokers) { return (int) adDao.countBySmokers(smokers); }
+	public int getCountByAnimals(boolean animals) { return (int) adDao.countByAnimals(animals); }
+	public int getCountByGarden(boolean garden) { return (int) adDao.countByGarden(garden); }
+	public int getCountByBalcony(boolean balcony) { return (int) adDao.countByBalcony(balcony); }
+	public int getCountByCellar(boolean cellar) { return (int) adDao.countByCellar(cellar); }
+	public int getCountByFurnished(boolean furnished) { return (int) adDao.countByFurnished(furnished); }
+	public int getCountByGarage(boolean garage) { return (int) adDao.countByGarage(garage); }
 }

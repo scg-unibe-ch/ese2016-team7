@@ -28,4 +28,10 @@ public class UserService {
 		return userDao.findUserById(id);
 	}
 
+	/** Gets the user with the given id. */
+	@Transactional
+	public int countUsers() {
+		return (int) userDao.count();
+	}
+
 }

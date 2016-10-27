@@ -1,5 +1,8 @@
 package ch.unibe.ese.team1.controller;
 
+import ch.unibe.ese.team1.controller.service.UserService;
+import ch.unibe.ese.team1.model.Property;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,9 @@ public class IndexController {
 
 	@Autowired
 	private AdService adService;
+
+	@Autowired
+	private UserService userService;
 
 	/** Displays the home page. */
 	@RequestMapping(value = "/")
@@ -35,5 +41,47 @@ public class IndexController {
 	@RequestMapping(value = "/disclaimer")
 	public ModelAndView disclaimer() {
 		return new ModelAndView("disclaimer");
+	}
+
+	/** Displays the insights us page. */
+	@RequestMapping(value = "/insights")
+	public ModelAndView insights() {
+		ModelAndView model = new ModelAndView("insights");
+
+		// Gathering Data for stats
+		Integer usersCount = userService.countUsers();
+		Integer adsCount = adService.getAdsCount();
+		Integer expiredAdsCount = adService.getCountByExpired(true);
+		Integer activeAdsCount = adService.getCountByExpired(false);
+		Integer houseCount = adService.getCountByProperty(Property.HOUSE);
+		Integer apartmentCount = adService.getCountByProperty(Property.APARTMENT);
+		Integer studioCount = adService.getCountByProperty(Property.STUDIO);
+
+		// Even more specific data
+		Integer smokersCount = adService.getCountBySmokers(true);
+		Integer animalsCount = adService.getCountByAnimals(true);
+		Integer gardenCount = adService.getCountByGarden(true);
+		Integer balconyCount = adService.getCountByBalcony(true);
+		Integer cellarCount = adService.getCountByCellar(true);
+		Integer furnishedCount = adService.getCountByFurnished(true);
+		Integer garageCount = adService.getCountByGarage(true);
+
+
+		model.addObject("smokersCount", smokersCount);
+		model.addObject("animalsCount", animalsCount);
+		model.addObject("gardenCount", gardenCount);
+		model.addObject("balconyCount", balconyCount);
+		model.addObject("cellarCount", cellarCount);
+		model.addObject("furnishedCount", furnishedCount);
+		model.addObject("garageCount", garageCount);
+		model.addObject("houseCount", houseCount);
+		model.addObject("apartmentCount", apartmentCount);
+		model.addObject("studioCount", studioCount);
+		model.addObject("expiredAdsCount", expiredAdsCount);
+		model.addObject("activeAdsCount", activeAdsCount);
+		model.addObject("adsCount", adsCount);
+		model.addObject("usersCount", usersCount);
+
+		return model;
 	}
 }
