@@ -68,6 +68,8 @@ public class AdController {
 
 		model.addObject("visits", visitService.getVisitsByAd(ad));
 		model.addObject("bids", bidService.getBidsByAd(ad));
+		model.addObject("numBids", bidService.getNumBidsByAd(ad));
+
 
 		return model;
 	}

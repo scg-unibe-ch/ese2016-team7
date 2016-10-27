@@ -125,13 +125,14 @@
 
 
                 if (amount > currentPrice) {
+                    $("#bidErrorDiv").html("")
                     $.post("ad/makeBid", {amount: amount, id: id}, function () {
                         // alert("You bid: " + amount + " CHF");
                         $("#bidAmount").val("");
                         location.reload();
                     })
                 } else {
-                    alert("You have to bid higher than the current price.")
+                    $("#bidErrorDiv").html("You have to bid higher than the current price.")
                 }
             }
         });
@@ -181,7 +182,28 @@
                 $("#bids").css("display", "none");
                 $("#showBids").html("Show All Bids");
             }
+            showButtonOnlyIfBidsExist();
         }
+
+        function showButtonOnlyIfBidsExist() {
+            if(${numBids} == 0) {
+                $("#bids").css("display", "none");
+                $("#showBids").html("");
+                $("#showBidsDiv").html("");
+
+            }else{
+                if ($("#bids").css("display") == "none") {
+                    $("#showBids").html("Show All Bids");
+                } else {
+                    $("#showBids").html("Hide All Bids");
+                }
+            }
+
+        }
+
+        $(document).ready(function () {
+            showButtonOnlyIfBidsExist();
+        });
     </script>
 
     <script>
@@ -212,23 +234,29 @@
         <h2 id="timeLeft">Expire Date: <fmt:formatDate value="${shownAd.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h2>
 
         <h2>Current Price: ${shownAd.price} CHF </h2>
-
         <c:choose>
             <c:when test="${loggedIn}">
-                <form>
+                <c:if test="${loggedInUserEmail != shownAd.user.username }">
+
+                    <div id="bidErrorDiv" style="color: #cc0000"></div>
+                    <form>
                     <input class="bidInput" type="number" id="bidAmount" placeholder="Amount" style='width:300px'/>
                     <br>
                     <button type="button" id="makeBid" class="bidButton">Make Bid</button>
                 </form>
+                    <br>
+
+                </c:if>
             </c:when>
             <c:otherwise>
-                Login to make bids.
+                <h2><a href="/login" style="color: #FF00FF">Login to make bids.</a></h2>
             </c:otherwise>
         </c:choose>
         </div>
-        <br>
-        <a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #ff00ff">Show All
+        <div id ="showBidsDiv">
+        <a href="javascript:void(0);" id="showBids"  onclick="showAllBids();" style="color: #ff00ff">Show All
             Bids</a><br>
+        </div>
 
 
         <table id="bids" style='display:none'>
@@ -237,7 +265,8 @@
                     <td>
                         <fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
                         <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
-                            ${bid.user.username}
+                            ${bid.user.firstName}
+                             ${bid.user.lastName}
                             ${bid.amount} CHF
                     </td>
 

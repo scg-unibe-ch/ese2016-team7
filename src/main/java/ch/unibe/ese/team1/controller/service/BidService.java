@@ -35,6 +35,10 @@ public class BidService {
 
     }
 
+    public long getNumBidsByAd(Ad ad) {
+        return bidDao.countByAd(ad);
+    }
+
 
     /** Saves a new bid with the given parameters in the DB.
      */
