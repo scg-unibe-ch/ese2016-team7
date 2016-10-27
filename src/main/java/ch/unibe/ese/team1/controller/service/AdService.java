@@ -220,27 +220,40 @@ public class AdService {
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
 
-		// we use this method if we are looking for houses , studios AND apartments
-		if (searchForm.getApartmentHouseAndStudio()) {
-			results = adDao
-					.findByPriceLessThan(searchForm.getPrice() + 1);
+        //If no type is selected then just select all.
+		if(!searchForm.getHouse() && !searchForm.getApartment() && !searchForm.getStudio()) {
+			searchForm.setApartment(true);
+			searchForm.setHouse(true);
+			searchForm.setStudio(true);
 		}
 
-		//we use one of these if we are searching for two types
-		else if(searchForm.getBothApartmentAndHouse()){
-			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.HOUSE, searchForm.getPrice()+1);
-		}
-		else if(searchForm.getBothApartmentAndStudio()){
-			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.APARTMENT,Property.STUDIO,searchForm.getPrice()+1);
-		}
-		else if(searchForm.getBothHouseAndStudio()){
-			results = adDao.findByPropertyAndPropertyAndPriceLessThan(Property.HOUSE,Property.STUDIO,searchForm.getPrice()+1);
-		}
-		// we use this method if we are looking EITHER for houses OR for studios OR for apartments
-		else {
-			results = adDao.findByPropertyAndPriceLessThan(
-					searchForm.getProperty(), searchForm.getPrice() + 1);
-		}
+        /* We just get all ads by price less than in the search form and then filter them later in this function.
+        If we need to make this process faster we could make separate searches depending on which property is checked, and then append them.
+        */
+		results = adDao.findByPriceLessThan(searchForm.getPrice()+1);
+
+        List<Ad> filteredResults = new ArrayList<>();
+        for (Ad ad : results) {
+            if (searchForm.getHouse() && (ad.getProperty() == Property.HOUSE)) {
+                filteredResults.add(ad);
+                continue;
+            }
+            if (searchForm.getApartment() && (ad.getProperty() == Property.APARTMENT)) {
+                filteredResults.add(ad);
+                continue;
+            }
+            if (searchForm.getStudio() && (ad.getProperty() == Property.STUDIO)){
+                filteredResults.add(ad);
+                continue;
+            }
+        }
+
+        results = filteredResults;
+
+
+
+
+
 
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
@@ -288,13 +301,10 @@ public class AdService {
 				.filter(ad -> zipcodes.contains(ad.getZipcode()))
 				.collect(Collectors.toList());
 
-		// filter for additional criteria
-		if (searchForm.getFiltered()) {
+
 			// prepare date filtering - by far the most difficult filter
 			Date earliestInDate = null;
 			Date latestInDate = null;
-			Date earliestOutDate = null;
-			Date latestOutDate = null;
 
 			// parse move-in and move-out dates
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -384,7 +394,7 @@ public class AdService {
 				}
 			}
 
-		}
+
 		return locatedResults;
 	}
 

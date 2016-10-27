@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.unibe.ese.team1.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.Location;
@@ -62,8 +61,6 @@ public class AlertService {
 		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
 		alert.setApartment(alertForm.getApartment());
-		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
-        alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 
 		alert.setEarliestMoveInDate(alert.getEarliestMoveInDate());
 		alert.setLatestMoveInDate(alert.getLatestMoveInDate());

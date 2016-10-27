@@ -10,17 +10,9 @@ import org.hibernate.validator.constraints.NotBlank;
 /** This form is used for searching for an ad. */
 public class SearchForm {
 
-	private boolean filtered;
-
-	// studio: true, room: false
 	private boolean studio;
 	private boolean house;
 	private boolean apartment;
-
-	private boolean bothHouseAndStudio;
-	private boolean bothApartmentAndHouse;
-	private boolean bothApartmentAndStudio;
-	private boolean apartmentHouseAndStudio;
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -81,18 +73,10 @@ public class SearchForm {
 	public void setHouse(boolean house) {
 		this.house = house;
 	}
-	// //////////////////
-	// Filtered results//
-	// //////////////////
 
-	public boolean getFiltered() {
-		return filtered;
-	}
 
-	public void setFiltered(boolean filtered) {
-		this.filtered = filtered;
-	}
 
+	//Advanced Search
 	private String earliestMoveInDate;
 	private String latestMoveInDate;
 
@@ -104,13 +88,6 @@ public class SearchForm {
 	private boolean furnished;
 	private boolean garage;
 
-
-	private boolean roomHelper;
-
-	// the ugly stuff
-	private boolean studioHelper;
-	private boolean houseHelper;
-	private boolean apartmentHelper;
 
 	public boolean getSmokers() {
 		return smokers;
@@ -184,65 +161,4 @@ public class SearchForm {
 		this.latestMoveInDate = latestMoveInDate;
 	}
 
-	public boolean getStudioHelper() {
-		return studioHelper;
-	}
-
-	public void setStudioHelper(boolean helper) {
-		this.studioHelper = helper;
-	}
-
-
-	public boolean getApartmentHelper() {
-		return apartmentHelper;
-	}
-
-	public void setApartmentHelper(boolean apartmentHelper) {
-		this.apartmentHelper = apartmentHelper;
-	}
-
-	public boolean getHouseHelper() {
-		return houseHelper;
-	}
-
-	public void setHouseHelper(boolean houseHelper) {
-		this.houseHelper = houseHelper;
-	}
-	public boolean getApartmentHouseAndStudio() {
-		return apartmentHouseAndStudio;
-	}
-
-	public void setApartmentHouseAndStudio(boolean apartmentHouseAndStudio) {
-		this.apartmentHouseAndStudio = apartmentHouseAndStudio;
-	}
-
-	public boolean getBothHouseAndStudio() {
-		return bothHouseAndStudio;
-	}
-
-	public void setBothHouseAndStudio(boolean bothHouseAndStudio) {
-		this.bothHouseAndStudio = bothHouseAndStudio;
-	}
-
-	public boolean getBothApartmentAndHouse() {
-		return bothApartmentAndHouse;
-	}
-
-	public void setBothApartmentAndHouse(boolean bothApartmentAndHouse) {
-		this.bothApartmentAndHouse = bothApartmentAndHouse;
-	}
-
-	public boolean getBothApartmentAndStudio() {
-		return bothApartmentAndStudio;
-	}
-
-	public void setBothApartmentAndStudio(boolean bothApartmentAndStudio) {
-		this.bothApartmentAndStudio = bothApartmentAndStudio;
-	}
-
-	public Property getProperty() {
-		if(houseHelper) return Property.HOUSE;
-		if(apartmentHelper) return Property.APARTMENT;
-		return Property.STUDIO;
-	}
 }
