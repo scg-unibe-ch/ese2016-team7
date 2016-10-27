@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import ch.unibe.ese.team1.controller.pojos.forms.BidForm;
 import ch.unibe.ese.team1.controller.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,6 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
-		model.addObject("bidForm", new BidForm());
 
 
 		String loggedInUserEmail = (principal == null) ? "" : principal
@@ -86,7 +84,6 @@ public class AdController {
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
-		model.addObject("bidForm", new BidForm());
 
 
 		if (!bindingResult.hasErrors()) {
@@ -106,8 +103,7 @@ public class AdController {
 		bidService.makeBid(amount,user,ad);
 
         // triggers all alerts that match the placed ad.
-        //TODO: Make this work, it somehow triggers an error in AlertService.
-		//alertService.triggerAlerts(ad);
+		alertService.triggerAlerts(ad);
 	}
 
 

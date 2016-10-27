@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.unibe.ese.team1.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.Location;
@@ -62,8 +61,6 @@ public class AlertService {
 		alert.setHouse(alertForm.getHouse());
 		alert.setStudio(alertForm.getStudio());
 		alert.setApartment(alertForm.getApartment());
-		alert.setBothHouseAndApartment(alertForm.getBothApartmentAndHouse());
-        alert.setApartmentHouseAndStudio(alertForm.getApartmentHouseAndStudio());
 
 		alert.setEarliestMoveInDate(alert.getEarliestMoveInDate());
 		alert.setLatestMoveInDate(alert.getLatestMoveInDate());
@@ -99,6 +96,8 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
+        if(ad.getExpired()) return;
+
 		int adPrice = ad.getPrice();
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
@@ -155,10 +154,12 @@ public class AlertService {
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
 		boolean mismatch = false;
+		/*
 		if (!alert.getApartmentHouseAndStudio()
 				&& !alert.hasProperty(ad.
 				getProperty()))
 			mismatch = true;
+			*/
 		return mismatch;
 	}
 

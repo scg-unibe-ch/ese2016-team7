@@ -45,42 +45,7 @@
 </script>
 
 
-<script>
-    function validateType(form) {
 
-        var house = document.getElementById('house');
-        var studio = document.getElementById('studio');
-        var apartment = document.getElementById('apartment');
-
-        var bothHouseAndStudio = document.getElementById('bothHouseAndStudio');
-        var bothHouseAndApartment=document.getElementById('bothApartmentAndHouse');
-        var bothApartmentAndStudio = document.getElementById('bothApartmentAndStudio');
-        var apartmentHouseAndStudio = document.getElementById('apartmentHouseAndStudio');
-
-        var type = document.getElementById('type');
-        var filtered = document.getElementById('filtered');
-
-        if(house.checked && studio.checked && apartment.checked){
-            apartmentHouseAndStudio.checked=true;
-        }
-
-        else if (house.checked && studio.checked) {
-            bothHouseAndStudio.checked = true;
-        }
-
-        else if (house.checked && apartment.checked) {
-            bothHouseAndApartment.checked = true;
-        }
-        else if(apartment.checked && studio.checked){
-            bothApartmentAndStudio.checked=true;
-        }
-        else{
-
-        }
-
-        filtered.checked = true;
-    }
-</script>
 
 <script>
     function advancedSearch() {
@@ -90,6 +55,17 @@
         }else {
             $("#advanced").css("display", "none");
             $("#advancedSearch").html("Show Advanced Search");
+        }
+    }
+
+    function markAllPropertiesIfNoneIsMarked() {
+        var house = document.getElementById('house');
+        var apartment = document.getElementById('apartment');
+        var studio = document.getElementById('studio');
+        if(!house.checked && !apartment.checked && !studio.checked) {
+            house.checked = true;
+            apartment.checked = true;
+            studio.checked = true;
         }
     }
 </script>
@@ -103,12 +79,7 @@
         <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
         <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
 
-        <form:checkbox style="display:none" name="bothHouseAndStudio" id="bothHouseAndStudio" path="bothHouseAndStudio"/>
-        <form:checkbox style="display:none" name="bothApartmentAndHouse" id="bothApartmentAndHouse" path="bothApartmentAndHouse"/>
-        <form:checkbox style="display:none" name="bothApartmentAndStudio" id="bothApartmentAndStudio" path="bothApartmentAndStudio"/>
-        <form:checkbox style="display:none" name="apartmentHouseAndStudio" id="apartmentHouseAndStudio" path="apartmentHouseAndStudio"/>
 
-        <form:checkbox style="display:none" name="filtered" id="filtered" path="filtered"/>
         <br />
 
         <label for="city">City / zip code:</label>
@@ -170,8 +141,8 @@
             </tr>
         </table>
 
-        <button type="submit" onClick="validateType(this.form);form.action='/results';">Search</button>
-        <button type="submit" onClick="validateType(this.form);form.action='/profile/alerts';">Subscribe</button>
+        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/results';">Search</button>
+        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/profile/alerts';">Subscribe</button>
         <button type="reset">Cancel</button>
     </fieldset>
 
