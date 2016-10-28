@@ -80,7 +80,7 @@ function validateType(form)
 				<th>City</th>
 				<th>Radius</th>
 				<th>max. Price</th>
-				<th>Action</th>
+				<th>Actions</th>
 			</tr>
 			</thead>
 		<c:forEach var="alert" items="${alerts}">
@@ -113,12 +113,39 @@ function validateType(form)
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
-				<td><button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button></td>
+				<td>
+
+					<button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button>
+					<form:form method="post" modelAttribute="searchForm" action="/results" id="searchForm" autocomplete="off">
+
+						<form:checkbox name="house" id="house" path="house" value="1"/>
+						<form:checkbox name="studio" id="studio" path="studio"/>
+						<form:checkbox name="apartment" id="apartment" path="apartment"/>
+						<form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern	" tabindex="3" value="${alert.city}"/>
+						<form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" value="${alert.radius}"/>
+						<form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" value="${alert.price}"/>
+						<form:input type="text" id="field-earliestMoveInDate" path="earliestMoveInDate" value="${alert.getEarliestMoveInDate()}"/>
+						<form:input type="text" id="field-latestMoveInDate" path="latestMoveInDate"/>
+						<form:checkbox id="field-smoker" path="smokers" value="1"/>
+						<form:checkbox id="field-animals" path="animals" value="1"/>
+						<form:checkbox id="field-garden" path="garden" value="1"/>
+						<form:checkbox id="field-balcony" path="balcony" value="1"/>
+						<form:checkbox id="field-cellar" path="cellar" value="1"/>
+						<form:checkbox id="field-furnished" path="furnished" value="1"/>
+						<form:checkbox id="field-garage" path="garage" value="1"/>
+
+
+						<button type="submit" onClick="form.action='/results';">Search</button>
+
+					</form:form>
+
+				</td>
 			</tr>
 		</c:forEach>
 		</table>
 	</c:otherwise>
 </c:choose>
 </div>
+
 
 <c:import url="template/footer.jsp" />

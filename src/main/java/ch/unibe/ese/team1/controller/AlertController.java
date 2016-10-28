@@ -71,6 +71,8 @@ public class AlertController {
 		model.addObject("user", user);
 		model.addObject("alertForm", alertForm);
 		model.addObject("alerts", alerts);
+		model.addObject("searchForm", new SearchForm());
+
 		return model;
 	}
 }
