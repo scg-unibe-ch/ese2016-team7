@@ -111,7 +111,8 @@ public class AuctionService {
         //Added null check in case there is no bid. (It didn't work without any bids before)
         if(bid != null) {
             User receiver = bid.getUser();
-            messageService.sendMessage(user, receiver, "Overbid", "You have been overbid by me :)");
+            messageService.sendMessage(user, receiver, "Overbid", "You have been overbid by"+user.getFirstName()+
+                    "at "+"<a href= ../ad?id="+ad.getId()+">this ad! </a>");
         }
     }
 }
