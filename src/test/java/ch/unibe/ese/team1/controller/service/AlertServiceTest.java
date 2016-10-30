@@ -52,7 +52,7 @@ public class AlertServiceTest {
 		
 		// Create user Adolf Ogi
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
-				Gender.MALE);
+				Gender.MALE, "4040404040404040",12,12);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
@@ -94,25 +94,26 @@ public class AlertServiceTest {
 		ArrayList<Alert> alertList = new ArrayList<Alert>();
 		
 		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
-				Gender.MALE);
+				Gender.MALE, "4040404040404040",12,12);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
 		
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setStudio(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
 		alert.setPrice(1500);
 		alert.setRadius(100);
+		alert.setApartment(true);
+		alert.setHouse(false);
 		alertDao.save(alert);
 		
 		alert = new Alert();
 		alert.setUser(thomyF);
+		alert.setStudio(false);
 		alert.setHouse(true);
-		alert.setApartment(true);
-		alert.setStudio(true);
+		alert.setApartment(false);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
 		alert.setPrice(1000);
@@ -145,6 +146,7 @@ public class AlertServiceTest {
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
 		oltenResidence.setGarage(false);
+		oltenResidence.setExpireDate(new Date());
 		adDao.save(oltenResidence);
 		
 		assertFalse(alertService.radiusMismatch(oltenResidence, alertList.get(0)));
@@ -155,7 +157,7 @@ public class AlertServiceTest {
 	
 	//Lean user creating method
 	User createUser(String email, String password, String firstName,
-			String lastName, Gender gender) {
+			String lastName, Gender gender, String number, int month, int yeas) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -170,6 +172,9 @@ public class AlertServiceTest {
 		role.setUser(user);
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
+		user.setCreditCardNumber(number);
+		user.setCreditCardexpireMonth(month);
+		user.setCreditCardexpireYear(yeas);
 		return user;
 	}
 }

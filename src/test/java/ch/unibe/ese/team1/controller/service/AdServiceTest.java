@@ -76,7 +76,7 @@ public class AdServiceTest {
 		filePaths.add("/img/test/ad1_1.jpg");
 		
 		User hans = createUser("hans@kanns.ch", "password", "Hans", "Kanns",
-				Gender.MALE);
+				Gender.MALE, "4040404040404040",12,12);
 		hans.setAboutMe("Hansi Hinterseer");
 		userDao.save(hans);
 		
@@ -109,7 +109,7 @@ public class AdServiceTest {
 	}
 	
 	private User createUser(String email, String password, String firstName,
-			String lastName, Gender gender) {
+			String lastName, Gender gender, String number, int month, int year) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -124,6 +124,9 @@ public class AdServiceTest {
 		role.setUser(user);
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
+		user.setCreditCardNumber(number);
+		user.setCreditCardexpireMonth(month);
+		user.setCreditCardexpireMonth(year);
 		return user;
 	}
 	

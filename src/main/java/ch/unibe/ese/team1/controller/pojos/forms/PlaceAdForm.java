@@ -39,7 +39,6 @@ public class PlaceAdForm {
 
 	private boolean premium;
 
-    @NotNull
     private int securityCode;
 
 	private String preferences;

@@ -64,7 +64,7 @@ public class EnquiryServiceTest {
 	public void createVisits() throws Exception {		
 		//create user
 		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
-				Gender.MALE);
+				Gender.MALE, "4040404040404040",12,12);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
 		
@@ -90,6 +90,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
 		oltenResidence.setGarage(false);
+		oltenResidence.setExpireDate(new Date());
 		adDao.save(oltenResidence);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
@@ -119,11 +120,11 @@ public class EnquiryServiceTest {
 	public void enquireAndAccept() throws Exception {		
 		//create two users
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
-				Gender.MALE);
+				Gender.MALE, "4040404040404040",12,12);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
-		
-		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE);
+
+		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE,"4040404040404040",12,12);
 		blocher.setAboutMe("I own you");
 		userDao.save(blocher);
 		
@@ -149,6 +150,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setCellar(false);
 		oltenResidence.setFurnished(false);
 		oltenResidence.setGarage(false);
+		oltenResidence.setExpireDate(new Date());
 		adDao.save(oltenResidence);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
@@ -187,7 +189,7 @@ public class EnquiryServiceTest {
 	
 	//Lean user creating method
 	User createUser(String email, String password, String firstName,
-			String lastName, Gender gender) {
+			String lastName, Gender gender, String creditcardnumber, int month, int year) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -202,6 +204,9 @@ public class EnquiryServiceTest {
 		role.setUser(user);
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
+		user.setCreditCardNumber(creditcardnumber);
+		user.setCreditCardexpireMonth(month);
+		user.setCreditCardexpireYear(year);
 		return user;
 	}
 }

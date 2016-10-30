@@ -7,16 +7,11 @@ import java.util.List;
 import java.lang.Math;
 
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
+import ch.unibe.ese.team1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.Alert;
-import ch.unibe.ese.team1.model.Location;
-import ch.unibe.ese.team1.model.Message;
-import ch.unibe.ese.team1.model.MessageState;
-import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
@@ -153,13 +148,13 @@ public class AlertService {
 
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean typeMismatchWith(Ad ad, Alert alert) {
-		boolean mismatch = false;
-		/*
-		if (!alert.getApartmentHouseAndStudio()
-				&& !alert.hasProperty(ad.
-				getProperty()))
-			mismatch = true;
-			*/
+		boolean mismatch = true;
+		if(ad.getProperty() == Property.HOUSE && alert.getHouse())
+			mismatch = false;
+		if(ad.getProperty() == Property.APARTMENT && alert.getApartment())
+			mismatch = false;
+		if(ad.getProperty() == Property.STUDIO && alert.getStudio())
+			mismatch = false;
 		return mismatch;
 	}
 
