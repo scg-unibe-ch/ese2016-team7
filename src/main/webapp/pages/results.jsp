@@ -127,7 +127,7 @@ function sort_div_attribute() {
 <form:form method="post" modelAttribute="searchForm" action="/results"
 		   id="searchForm" autocomplete="off">
 
-	<div id="searchDiv">
+	<div id="resultsSearchDiv">
 		<h2>Search</h2>
 		<form:checkbox name="house" id="house" path="house"/><label>House</label>
 		<form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
