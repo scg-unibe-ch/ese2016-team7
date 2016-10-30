@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.controller.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,11 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
 import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team1.controller.pojos.forms.SignupForm;
-import ch.unibe.ese.team1.controller.service.AdService;
-import ch.unibe.ese.team1.controller.service.SignupService;
-import ch.unibe.ese.team1.controller.service.UserService;
-import ch.unibe.ese.team1.controller.service.UserUpdateService;
-import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.Visit;
@@ -47,6 +43,9 @@ public class ProfileController {
 	@Autowired
 	private AdService adService;
 
+	@Autowired
+	private CreditCardService creditCardService;
+
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
 	public ModelAndView loginPage() {
@@ -67,7 +66,7 @@ public class ProfileController {
 	public ModelAndView signupResultPage(@Valid SignupForm signupForm,
 			BindingResult bindingResult) {
 		ModelAndView model;
-		if (!bindingResult.hasErrors()) {
+		if (!bindingResult.hasErrors() && creditCardService.checkCreditCard(signupForm)) {
 			signupService.saveFrom(signupForm);
 			model = new ModelAndView("login");
 			model.addObject("confirmationMessage", "Signup complete!");

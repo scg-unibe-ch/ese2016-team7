@@ -63,6 +63,15 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ad> bookmarkedAds;
 
+	@Column(nullable = false)
+	private String CreditCardNumber;
+
+	@Column(nullable = false)
+	private int CreditCardexpireMonth;
+
+	@Column(nullable = false)
+	private int CreditCardexpireYear;
+
 	public long getId() {
 		return id;
 	}
@@ -181,5 +190,29 @@ public class User {
 			return false;
 		return true;
 	}
-	
+
+
+	public int getCreditCardexpireMonth() {
+		return CreditCardexpireMonth;
+	}
+
+	public void setCreditCardexpireMonth(int creditCardexpireMonth) {
+		CreditCardexpireMonth = creditCardexpireMonth;
+	}
+
+	public int getCreditCardexpireYear() {
+		return CreditCardexpireYear;
+	}
+
+	public void setCreditCardexpireYear(int creditCardexpireYear) {
+		CreditCardexpireYear = creditCardexpireYear;
+	}
+
+	public String getCreditCardNumber() {
+		return CreditCardNumber;
+	}
+
+	public void setCreditCardNumber(String creditCardNumber) {
+		CreditCardNumber = creditCardNumber;
+	}
 }

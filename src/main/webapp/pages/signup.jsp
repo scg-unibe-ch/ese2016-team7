@@ -64,6 +64,19 @@
 						<form:option value="MALE" label="Male" />
 					</form:select></td>
 			</tr>
+			<tr>
+				<td><label>Credit Card Number:</label></td>
+				<td><form:input path="creditCardNumber" /></td>
+			</tr>
+			<tr>
+				<td><label>Credit Card Expire Month/Year</label></td>
+				<td><form:input type="number" path="creditCardexpireMonth" /></td>
+				<td><form:input type="number" path="creditCardexpireYear" /></td>
+			</tr>
+			<tr>
+				<td><label>Credit Card Security Code</label></td>
+				<td><form:input type="number" path="securityCode" /></td>
+			</tr>
 		</table>
 		<br />
 		<button type="submit">Sign up</button>

@@ -3,10 +3,12 @@ package ch.unibe.ese.team1.controller.pojos.forms;
 import java.util.List;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import ch.unibe.ese.team1.model.Property;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Required;
 
 /** This form is used when a user wants to place a new ad. */
 public class PlaceAdForm {
@@ -34,6 +36,11 @@ public class PlaceAdForm {
 
 	@NotBlank(message = "Required")
 	private String roomDescription;
+
+	private boolean premium;
+
+    @NotNull
+    private int securityCode;
 
 	private String preferences;
 	
@@ -220,5 +227,21 @@ public class PlaceAdForm {
                 break;
 
         }
+    }
+
+    public boolean getPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
+    public int getSecurityCode() {
+        return securityCode;
+    }
+
+    public void setSecurityCode(int securityCode) {
+        this.securityCode = securityCode;
     }
 }

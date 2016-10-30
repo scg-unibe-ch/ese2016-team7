@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.controller.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,12 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.ese.team1.controller.pojos.PictureUploader;
 import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
-import ch.unibe.ese.team1.controller.service.AdService;
-import ch.unibe.ese.team1.controller.service.AlertService;
-import ch.unibe.ese.team1.controller.service.BookmarkService;
-import ch.unibe.ese.team1.controller.service.MessageService;
-import ch.unibe.ese.team1.controller.service.UserService;
-import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.PictureMeta;
 import ch.unibe.ese.team1.model.User;
@@ -83,6 +78,9 @@ public class PlaceAdController {
 
 	@Autowired
 	private AdService adService;
+
+	@Autowired
+	private CreditCardService creditCardService;
 
 	/** Shows the place ad form. */
 	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
@@ -146,6 +144,10 @@ public class PlaceAdController {
 		if (!result.hasErrors()) {
 			String username = principal.getName();
 			User user = userService.findUserByUsername(username);
+
+			if(placeAdForm.getPremium()){
+				creditCardService.newPremiumAd(user, placeAdForm.getSecurityCode());
+			}
 
 			List<String> fileNames = pictureUploader.getFileNames();
 			Ad ad = adService.saveFrom(placeAdForm, fileNames, user);

@@ -68,6 +68,7 @@ public class AdService {
 		// Set expire date to 3 days after creation
 		Date expire = new Date();
 		expire.setTime(expire.getTime() + TimeUnit.DAYS.toMillis(3));
+		ad.setExpireDate(expire);
 
 		ad.setTitle(placeAdForm.getTitle());
 

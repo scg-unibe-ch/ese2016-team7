@@ -7,6 +7,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -84,6 +85,9 @@ public class Ad {
     @Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Property property;
+
+	@Column(nullable = false)
+	private boolean premium = false;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -339,5 +343,13 @@ public class Ad {
 
 	public void setExpired(boolean expired) {
 		this.expired = expired;
+	}
+
+	public boolean getPremium() {
+		return premium;
+	}
+
+	public void setPremium(boolean premium) {
+		this.premium = premium;
 	}
 }

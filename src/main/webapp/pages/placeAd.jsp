@@ -97,10 +97,8 @@
 						placeholder="Ad Title" /></td>
 				<td><form:radiobutton id="type-house" path="property" value="HOUSE"
 						checked="checked" />House </td>
-				<td>	<form:radiobutton id="type-studio"
-										  path="property" value="STUDIO" />Studio </td>
-				<td>	<form:radiobutton id="type-apartment"
-										  path="property" value="APARTMENT" />Apartment </td>
+				<td><form:radiobutton id="type-studio" path="property" value="STUDIO" />Studio </td>
+				<td><form:radiobutton id="type-apartment" path="property" value="APARTMENT" />Apartment </td>
 			</tr>
 
 			<tr>
@@ -250,6 +248,19 @@
 
 		</table>
 		<br>
+	</fieldset>
+
+	<fieldset>
+		<legend>Premium Ad</legend>
+		<table>
+			<tr><td><form:checkbox path="premium" value="0" /></td>
+				<td>Premium Ad</td></tr>
+			<tr><td><form:input type="number" path="securityCode" /></td>
+			<td>Security Code for Credit Card</td></tr>
+			<tr><td colspan="2">Do you want to place a premium Ad? Please be informed that this is not for free
+				The charges are 5$ per Premium Ad. Your advantages are that you Ad will be shown
+				on top of the site if someone searches and your Ad is inside the parameters</td></tr>
+		</table>
 	</fieldset>
 
 
