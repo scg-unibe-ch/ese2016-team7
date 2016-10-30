@@ -549,7 +549,7 @@ footer nav ul li {
 }
 
 #resultsSearchDiv {
-	width: 30%;
+	width: 35%;
 	margin-top: 30px;
 	float: right;
 	padding: 10px;
@@ -561,7 +561,7 @@ footer nav ul li {
 }
 
 #resultsDiv {
-	width: 55%;
+	width: 60%;
 	margin-top: 10px;
 	float: left;
 }
