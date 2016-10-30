@@ -124,5 +124,78 @@ function sort_div_attribute() {
 </c:choose>
 
 
+<form:form method="post" modelAttribute="searchForm" action="/results"
+		   id="searchForm" autocomplete="off">
+
+	<div id="searchDiv">
+		<h2>Search</h2>
+		<form:checkbox name="house" id="house" path="house"/><label>House</label>
+		<form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
+		<form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
+
+		<br />
+
+		<label for="city">City / zip code:</label>
+		<form:input type="text" name="city" id="city" path="city"
+					placeholder="e.g. Bern" tabindex="3" />
+		<form:errors path="city" cssClass="validationErrorText" /><br />
+
+		<label for="radius">Within radius of (max.):</label>
+		<form:input id="radiusInput" type="number" path="radius"
+					placeholder="e.g. 5" step="5" />
+		km
+		<form:errors path="radius" cssClass="validationErrorText" />
+		<br /> <label for="prize">Price (max.):</label>
+		<form:input id="priceInput" type="number" path="price"
+					placeholder="e.g. 5" step="50" />
+		CHF
+		<form:errors path="price" cssClass="validationErrorText" /><br />
+
+		<hr class="slim">
+
+		<table style="width: 80%">
+			<tr>
+				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
+			</tr>
+			<tr>
+				<td><form:input type="text" id="field-earliestMoveInDate"
+								path="earliestMoveInDate" /></td>
+			</tr>
+			<tr>
+				<td><label for="latestMoveInDate">Latest move-in date</label></td>
+			</tr>
+			<tr>
+				<td><form:input type="text" id="field-latestMoveInDate"
+								path="latestMoveInDate" /></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Smoking inside
+					allowed</label></td>
+				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Animals
+					inside allowed</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden
+					(co-use)</label></td>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
+					or Patio</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar
+					or Attic</label></td>
+				<td><form:checkbox id="field-furnished" path="furnished"
+								   value="1" /><label>Furnished</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label>
+				</td>
+			</tr>
+		</table>
+
+
+		<button type="submit" onClick="validateType(this.form)">Search</button>
+		<button type="reset">Cancel</button>
+	</div>
+</form:form>
 
 <c:import url="template/footer.jsp" />
