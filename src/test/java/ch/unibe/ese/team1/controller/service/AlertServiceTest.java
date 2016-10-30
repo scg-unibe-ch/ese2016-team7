@@ -51,7 +51,7 @@ public class AlertServiceTest {
 		ArrayList<Alert> alertList = new ArrayList<Alert>();
 		
 		// Create user Adolf Ogi
-		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
+		User adolfOgi = createUser("humo@ogi.ch", "password", "Adolf", "Ogi",
 				Gender.MALE, "4040404040404040",12,12);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
@@ -93,7 +93,7 @@ public class AlertServiceTest {
 	public void mismatchChecks() {
 		ArrayList<Alert> alertList = new ArrayList<Alert>();
 		
-		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
+		User thomyF = createUser("thomy@k.ch", "password", "Thomy", "F",
 				Gender.MALE, "4040404040404040",12,12);
 		thomyF.setAboutMe("Supreme hustler");
 		userDao.save(thomyF);
