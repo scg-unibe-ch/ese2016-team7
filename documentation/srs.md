@@ -97,10 +97,13 @@ if he hasn't he is asked to do so. (_To be done_)
 
 Users should be able to add ads for selling rooms and studios via auctions.(_To be done_).
 
-Auctions (_To be done_)
+Auctions (_Done_)
 
 There will be no possibility for a direct buy. If a user gets overbidden, he will be messaged. (_To be done_)
-
+If a user is overbidden he is messaged and told on which ad and by how much (_Done_)
+If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_To be done_)
+If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction (_To be done_)
+When a user doesn't enter a bid high enough, he is told so by a nice looking message (_To be done_)
 
 My rooms
 
@@ -127,11 +130,12 @@ Alerts
 The user can create a new alert for either a room or a studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel. If new ad(s), which would satisfy his subscribed search criteria, are added, he gets an alert/a message (to be clarified) of the new add(s) fitting his search criteria.   
 The relevant search criteria should be the price, the time and the location of the add. The others are not that relevant and either don't need to fit or only need to be 'somewhat close' to the search criteria (_To be done_).
 Further he has a table of his active alerts, sorted by type, city, radius, max price and an option to delete the alert.  
-
+The user has a clear overview of the filter (_To be done_)
+He can easily search by just clicking a button beside the alert (_To be done_)
 
  User Profile
 
-His picture, username, name and description are displayed with the options to message and edit profile if its the users.
+His picture, username, name , credit card and description are displayed with the options to message and edit profile if its the users. (_To be done_)
 
 Edit Profile
 He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
@@ -149,13 +153,18 @@ Display search
 
 He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the price, the type of the flat (where he can choose between Room and Studio) and the area of the flat in square meters.
 A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_To be done_)
+The user has a search filter where he can adjust the filter and redo the search (_Done_)
 
 Display Ad
-The users sees the title, the details (tpye, address, avaiable from, rent, area and ad creation date), a room description, a roommate description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
+The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), a room description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
 The filter should be removed and the filter criteria added to the search criteria (_Done_).  
 The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).  
-The user sees a log of the bids, the remaining time and has the option to enter his bid (_To be done_)
+The user sees a log of the bids, the remaining time and has the option to enter his bid (_Done_)
 
+
+***Admin*** (_To be done_)
+
+If an administrator is logged in, he can see statistics (besides the normal ads) (_To be done_)
    
 
 **Non-functional requirements (external, performance, etc.)**
@@ -163,7 +172,7 @@ The user sees a log of the bids, the remaining time and has the option to enter 
 This website should work flawlessly on all browsers.
 An ad/user should be unique.  
 The website should be designed elegantly and modern. The primary color should be pink (Set primary color to pink: _Done_)
-There mustn't be more than a fixed amount of premium ads. 
-
+There mustn't be more than a fixed amount of premium ads. (_To be done_)
+The Homepage should be personalized for each user (_To be done_)
 
 
