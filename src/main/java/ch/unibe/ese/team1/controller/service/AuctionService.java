@@ -59,9 +59,9 @@ public class AuctionService {
     private void sendNoBidsMessage(Ad ad){
         User user = ad.getUser();
         String message = "We are sorry to inform you, that no one placed a bid";
-        message += "on your Ad:";
-        message += ""; //TODO add link to show ad
-        message += "To place a new ad with the same Infromation click here"; // TODO add link to reinstate the ad
+        message += "on your Ad: ";
+        message += "<a href=../ad?id="+ad.getId()+">+"+ad.getTitle()+". </a>"; //TODO add link to show ad
+        message += "To place a new ad with the same Infromation <a href= ../click here"; // TODO add link to reinstate the ad
         messageService.sendMessage(user,user,"No one has placed a Bid",message);
 
     }
@@ -79,21 +79,23 @@ public class AuctionService {
         User winner = latestBid.getUser();
 
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("Congratulation, you have won the auction on the Ad:");
-        messageBuilder.append(""); // TODO add link
-        messageBuilder.append("You will be contacted by the owner");
-        messageBuilder.append("If you have any Questions to ask here is his email:");
+        messageBuilder.append("Congratulation, you have won the auction on the Ad: ");
+        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a></br>");
+        messageBuilder.append(" You will be contacted by ");
+        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+". ");
+        messageBuilder.append("If you have any Questions to ask here is the email:");
         messageBuilder.append(owner.getEmail());
         messageService.sendMessage(owner,winner,"You have won the auction!",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
-        messageBuilder.append("The auction on the Ad:");
-        messageBuilder.append(""); // TODO add link
-        messageBuilder.append("has finished.");
+        messageBuilder.append("The auction on the Ad: ");
+        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a><");
+        messageBuilder.append("has finished.</br>");
         messageBuilder.append("The winner is:");
-        messageBuilder.append(winner.getFirstName());
-        messageBuilder.append(winner.getLastName());
-        messageBuilder.append(winner.getEmail());
+        messageBuilder.append(winner.getFirstName()+" ");
+        messageBuilder.append(winner.getLastName()+", ");
+        messageBuilder.append(winner.getEmail()+"</br>");
+        messageBuilder.append("He bid "+ad.getPrice()+"swiss franks for your property. </br>");
         messageBuilder.append("Please contact him as soon as possible");
         messageService.sendMessage(winner,owner,"Your action was successfully completed!",messageBuilder.toString());
     }
@@ -111,8 +113,10 @@ public class AuctionService {
         //Added null check in case there is no bid. (It didn't work without any bids before)
         if(bid != null) {
             User receiver = bid.getUser();
-            messageService.sendMessage(user, receiver, "Overbid", "You have been overbid by"+user.getFirstName()+
-                    "at "+"<a href= ../ad?id="+ad.getId()+">this ad! </a>");
+            messageService.sendMessage(user, receiver, "Overbid",
+                    "You have been overbid by "+user.getFirstName()+
+                    "at "+"<a href= ../ad?id="+ad.getId()+">this ad! </a></br>"+
+                    "New highest bid is "+ad.getPrice());
         }
     }
 }
