@@ -125,7 +125,7 @@ function sort_div_attribute() {
 
 
 <form:form method="post" modelAttribute="searchForm" action="/results"
-		   id="searchForm" autocomplete="off">
+		   id="filterForm" autocomplete="off">
 
 	<div id="resultsSearchDiv">
 		<h2>Search</h2>
@@ -153,18 +153,14 @@ function sort_div_attribute() {
 
 		<hr class="slim">
 
-		<table style="width: 80%">
+		<table style="width: 95%">
 			<tr>
 				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
+				<td><label for="latestMoveInDate">Latest move-in date</label></td>
 			</tr>
 			<tr>
 				<td><form:input type="text" id="field-earliestMoveInDate"
 								path="earliestMoveInDate" /></td>
-			</tr>
-			<tr>
-				<td><label for="latestMoveInDate">Latest move-in date</label></td>
-			</tr>
-			<tr>
 				<td><form:input type="text" id="field-latestMoveInDate"
 								path="latestMoveInDate" /></td>
 			</tr>
