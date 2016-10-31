@@ -40,6 +40,8 @@ public class UserUpdateService {
         else
             currentUser.setHasCreditCard(false);
         currentUser.setCreditCardExpireMonth(editProfileForm.getCreditCardExpireMonth());
+		currentUser.setCreditCardExpireYear(editProfileForm.getCreditCardExpireYear());
+		currentUser.setSecurityCode(editProfileForm.getSecurityCode());
 
 		userDao.save(currentUser);
 	}

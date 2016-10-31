@@ -103,7 +103,6 @@ public class SignupForm {
 		this.creditCardExpireYear = creditCardExpireYear;
 	}
 
-
 	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}

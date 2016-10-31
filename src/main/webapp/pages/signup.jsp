@@ -80,6 +80,7 @@
 				<td><label>Credit Card Number:</label></td>
 				<td><form:input path="creditCardNumber" id="creditCardNumber"/></td>
 			</tr>
+			<form:checkbox style="display:none" name="hasCreditCard" id="hasCreditCard" path="hasCreditCard"/>
 			<tr>
 				<td><label>Credit Card Expire Month/Year</label></td>
 				<td><form:input type="number" path="creditCardExpireMonth" /></td>
@@ -89,7 +90,6 @@
 				<td><label>Credit Card Security Code</label></td>
 				<td><form:input type="number" path="securityCode" /></td>
 			</tr>
-            <form:checkbox style="display:none" name="hasCreditCard" id="hasCreditCard" path="hasCreditCard"/>
 		</table>
 		<br />
 		<button type="submit" onclick="determineHasCreditCard()">Sign up</button>
