@@ -120,7 +120,7 @@ public class AlertServiceTest {
 		alert.setRadius(5);
 		alertDao.save(alert);
 		
-		Iterable<Alert> alerts = alertService.getAlertsByUser(userDao.findByUsername("thomy@f.ch"));
+		Iterable<Alert> alerts = alertService.getAlertsByUser(userDao.findByUsername("thomy@k.ch"));
 		for(Alert returnedAlert: alerts)
 			alertList.add(returnedAlert);
 		
