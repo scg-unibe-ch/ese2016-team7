@@ -44,6 +44,7 @@ public class AlertController {
 	@RequestMapping(value = "/profile/alerts", method = RequestMethod.POST)
 	public ModelAndView savedAlert(Principal principal,
 								   @Valid SearchForm alertForm, BindingResult result) {
+
 		if (!result.hasErrors())
 			return prepareAlertPage(principal, true, alertForm);
 		else
