@@ -47,7 +47,7 @@ public class AlertController {
 		if (!result.hasErrors())
 			return prepareAlertPage(principal, true, alertForm);
 		else
-			return new ModelAndView("alerts");
+			return new ModelAndView("searchAd");
 	}
 
 	/** Deletes the alert with the given id */
