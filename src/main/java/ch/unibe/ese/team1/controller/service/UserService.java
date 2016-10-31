@@ -57,8 +57,8 @@ public class UserService {
         userRoles.add(role);
         user.setUserRoles(userRoles);
 		user.setCreditCardNumber("404040404040");
-		user.setCreditCardexpireMonth(0);
-		user.setCreditCardexpireYear(0);
+		user.setCreditCardExpireMonth(0);
+		user.setCreditCardExpireYear(0);
         userDao.save(user);
     }
 
