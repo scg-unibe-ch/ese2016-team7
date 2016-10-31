@@ -197,6 +197,7 @@ public class AdService {
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
+		if(ads.size() == 0) return null;
 		Collections.sort(ads, new Comparator<Ad>() {
 			@Override
 			public int compare(Ad ad1, Ad ad2) {
