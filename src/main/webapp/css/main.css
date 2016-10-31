@@ -508,6 +508,16 @@ footer nav ul li {
 	font-size: 1.4em;
 }
 
+.editProfileNumberTable {
+	width: 80%;
+	margin-top: 2px;
+	font-size: 1.4em;
+}
+.editProfileNumberTable input {
+	width: 50px;
+	font-size: 0.8em;
+}
+
 .spacingTable {
 	padding: 10px;
 }
