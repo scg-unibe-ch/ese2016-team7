@@ -6,6 +6,7 @@ import ch.unibe.ese.team1.model.Bid;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.BidDao;
+import ch.unibe.ese.team1.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -30,6 +31,9 @@ public class AuctionService {
 
     @Autowired
     private BidDao bidDao;
+
+    @Autowired
+    private UserDao userDao;
 
     /**
      * Searches every 10 seconds for finished auctions
@@ -85,7 +89,7 @@ public class AuctionService {
         messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+". ");
         messageBuilder.append("If you have any Questions to ask here is the email:");
         messageBuilder.append(owner.getEmail());
-        messageService.sendMessage(owner,winner,"You have won the auction!",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"You have won the auction!",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
         messageBuilder.append("The auction on the Ad: ");
@@ -97,7 +101,7 @@ public class AuctionService {
         messageBuilder.append(winner.getEmail()+"</br>");
         messageBuilder.append("He bid "+ad.getPrice()+"swiss franks for your property. </br>");
         messageBuilder.append("Please contact him as soon as possible");
-        messageService.sendMessage(winner,owner,"Your action was successfully completed!",messageBuilder.toString());
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"Your action was successfully completed!",messageBuilder.toString());
     }
 
 
@@ -113,7 +117,7 @@ public class AuctionService {
         //Added null check in case there is no bid. (It didn't work without any bids before)
         if(bid != null) {
             User receiver = bid.getUser();
-            messageService.sendMessage(user, receiver, "Overbid",
+            messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",
                     "You have been overbid by "+user.getFirstName()+
                     "at "+"<a href= ../ad?id="+ad.getId()+">this ad! </a></br>"+
                     "New highest bid is "+ad.getPrice());
