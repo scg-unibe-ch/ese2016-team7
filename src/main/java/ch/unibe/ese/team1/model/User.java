@@ -72,6 +72,9 @@ public class User {
 	@Column(nullable = false)
 	private int CreditCardexpireYear;
 
+    @Column(nullable = false)
+    private boolean hasCreditCard;
+
 	public long getId() {
 		return id;
 	}
@@ -215,4 +218,12 @@ public class User {
 	public void setCreditCardNumber(String creditCardNumber) {
 		CreditCardNumber = creditCardNumber;
 	}
+
+    public boolean getHasCreditCard() {
+        return hasCreditCard;
+    }
+
+    public void setHasCreditCard(boolean hasCreditCard) {
+        hasCreditCard = hasCreditCard;
+    }
 }
