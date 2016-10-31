@@ -173,8 +173,8 @@ public class AlertServiceTest {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(number);
-		user.setCreditCardexpireMonth(month);
-		user.setCreditCardexpireYear(yeas);
+		user.setCreditCardExpireMonth(month);
+		user.setCreditCardExpireYear(yeas);
 		return user;
 	}
 }

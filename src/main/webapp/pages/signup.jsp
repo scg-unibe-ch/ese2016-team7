@@ -21,6 +21,18 @@
 	});
 </script>
 
+<script>
+	function determineHasCreditCard() {
+		var creditCardNumber = document.getElementById("creditCardNumber");
+        var hasCreditCard = document.getElementById("hasCreditCard");
+		if (creditCardNumber == null || creditCardNumber == "")
+			hasCreditCard.checked = false;
+        else{
+            hasCreditCard.checked = true;
+        }
+	}
+</script>
+
 <pre>
 	<a href="/">Home</a>   &gt;   Sign up</pre>
 
@@ -59,19 +71,20 @@
 
 			<tr>
 				<td class="signupDescription"><label for="field-gender">Gender:</label></td>
-				<td><form:select path="gender">
+				<td><form:select id="field-gender" path="gender">
 						<form:option value="FEMALE" label="Female" />
 						<form:option value="MALE" label="Male" />
 					</form:select></td>
 			</tr>
 			<tr>
 				<td><label>Credit Card Number:</label></td>
-				<td><form:input path="creditCardNumber" /></td>
+				<td><form:input path="creditCardNumber" id="creditCardNumber"/></td>
 			</tr>
+			<form:checkbox style="display:none" name="hasCreditCard" id="hasCreditCard" path="hasCreditCard"/>
 			<tr>
 				<td><label>Credit Card Expire Month/Year</label></td>
-				<td><form:input type="number" path="creditCardexpireMonth" /></td>
-				<td><form:input type="number" path="creditCardexpireYear" /></td>
+				<td><form:input type="number" path="creditCardExpireMonth" /></td>
+				<td><form:input type="number" path="creditCardExpireYear" /></td>
 			</tr>
 			<tr>
 				<td><label>Credit Card Security Code</label></td>
@@ -79,7 +92,7 @@
 			</tr>
 		</table>
 		<br />
-		<button type="submit">Sign up</button>
+		<button type="submit" onclick="determineHasCreditCard()">Sign up</button>
 	</fieldset>
 </form:form>
 

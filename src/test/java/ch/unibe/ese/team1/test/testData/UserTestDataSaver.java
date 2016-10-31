@@ -94,8 +94,10 @@ public class UserTestDataSaver {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(creditCardNumber);
-		user.setCreditCardexpireMonth(creditCardexpireMonth);
-		user.setCreditCardexpireYear(creditCardexpireYear);
+		user.setCreditCardExpireMonth(creditCardexpireMonth);
+		user.setCreditCardExpireYear(creditCardexpireYear);
+        if (creditCardNumber != null)
+            user.setHasCreditCard(true);
 		return user;
 	}
 
@@ -120,8 +122,10 @@ public class UserTestDataSaver {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(creditCardNumber);
-		user.setCreditCardexpireMonth(creditCardexpireMonth);
-		user.setCreditCardexpireYear(creditCardexpireYear);
+		user.setCreditCardExpireMonth(creditCardexpireMonth);
+		user.setCreditCardExpireYear(creditCardexpireYear);
+		if (creditCardNumber != null)
+			user.setHasCreditCard(true);
 		return user;
 	}
 

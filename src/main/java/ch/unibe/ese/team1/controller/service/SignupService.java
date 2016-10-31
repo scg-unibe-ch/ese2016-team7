@@ -33,8 +33,13 @@ public class SignupService {
 		user.setEnabled(true);
 		user.setGender(signupForm.getGender());
 		user.setCreditCardNumber(signupForm.getCreditCardNumber());
-		user.setCreditCardexpireMonth(signupForm.getCreditCardexpireMonth());
-		user.setCreditCardexpireYear(signupForm.getCreditCardexpireYear());
+		if (user.getCreditCardNumber() != null)
+			user.setHasCreditCard(true);
+		else
+			user.setHasCreditCard(false);
+		user.setCreditCardExpireMonth(signupForm.getCreditCardExpireMonth());
+		user.setCreditCardExpireYear(signupForm.getCreditCardExpireYear());
+        user.setSecurityCode(signupForm.getSecurityCode());
 		
 		Set<UserRole> userRoles = new HashSet<>();
 		UserRole role = new UserRole();

@@ -34,6 +34,14 @@ public class UserUpdateService {
 		currentUser.setLastName(editProfileForm.getLastName());
 		currentUser.setPassword(editProfileForm.getPassword());
 		currentUser.setAboutMe(editProfileForm.getAboutMe());
+		currentUser.setCreditCardNumber(editProfileForm.getCreditCardNumber());
+		if (editProfileForm.getCreditCardNumber() != null)
+			currentUser.setHasCreditCard(true);
+        else
+            currentUser.setHasCreditCard(false);
+        currentUser.setCreditCardExpireMonth(editProfileForm.getCreditCardExpireMonth());
+		currentUser.setCreditCardExpireYear(editProfileForm.getCreditCardExpireYear());
+		currentUser.setSecurityCode(editProfileForm.getSecurityCode());
 
 		userDao.save(currentUser);
 	}

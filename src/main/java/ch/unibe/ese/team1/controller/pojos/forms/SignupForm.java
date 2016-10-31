@@ -6,7 +6,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import ch.unibe.ese.team1.model.Gender;
-import org.hibernate.validator.constraints.NotBlank;
 
 /** This form is used when a user want to sign up for an account. */
 public class SignupForm {
@@ -36,11 +35,14 @@ public class SignupForm {
 			, message = "Please enter a valid Credit Card Number")
 	private String creditCardNumber;
 
+	@NotNull
+    private boolean hasCreditCard;
+
 	@Max(value = 12, message = "Please enter a valid Month")
-	private int creditCardexpireMonth;
+	private int creditCardExpireMonth;
 
 	@NotNull
-	private int creditCardexpireYear;
+	private int creditCardExpireYear;
 
 	@NotNull
 	private int securityCode;
@@ -85,23 +87,21 @@ public class SignupForm {
 		this.gender = gender;
 	}
 
-	public int getCreditCardexpireMonth() {
-		return creditCardexpireMonth;
+	public int getCreditCardExpireMonth() {
+		return creditCardExpireMonth;
 	}
 
-	public void setCreditCardexpireMonth(int creditCardexpireMonth) {
-		this.creditCardexpireMonth = creditCardexpireMonth;
+	public void setCreditCardExpireMonth(int creditCardExpireMonth) {
+		this.creditCardExpireMonth = creditCardExpireMonth;
 	}
 
-	public int getCreditCardexpireYear() {
-		return creditCardexpireYear;
+	public int getCreditCardExpireYear() {
+		return creditCardExpireYear;
 	}
 
-	public void setCreditCardexpireYear(int creditCardexpireYear) {
-		this.creditCardexpireYear = creditCardexpireYear;
+	public void setCreditCardExpireYear(int creditCardExpireYear) {
+		this.creditCardExpireYear = creditCardExpireYear;
 	}
-
-
 
 	public String getCreditCardNumber() {
 		return creditCardNumber;
@@ -118,4 +118,12 @@ public class SignupForm {
 	public void setSecurityCode(int securityCode) {
 		this.securityCode = securityCode;
 	}
+
+	public boolean getHasCreditCard() {
+		return hasCreditCard;
+	}
+
+    public void setHasCreditCard(boolean hasCreditCard) {
+        this.hasCreditCard = hasCreditCard;
+    }
 }

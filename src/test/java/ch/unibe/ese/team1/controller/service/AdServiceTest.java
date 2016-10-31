@@ -125,8 +125,8 @@ public class AdServiceTest {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(number);
-		user.setCreditCardexpireMonth(month);
-		user.setCreditCardexpireMonth(year);
+		user.setCreditCardExpireMonth(month);
+		user.setCreditCardExpireMonth(year);
 		return user;
 	}
 	
