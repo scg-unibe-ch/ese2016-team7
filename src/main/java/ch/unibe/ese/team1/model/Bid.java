@@ -32,7 +32,7 @@ public class Bid {
 
     @Column(nullable = false)
     private int amount;
-    
+    //Screen sharing is awesome. Steve jobs rocks.
 
     public int getAmount() {
         return amount;

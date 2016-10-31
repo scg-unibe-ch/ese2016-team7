@@ -62,6 +62,13 @@ function validateType(form)
 		if(radius.value == null || radius.value == "" || radius.value == "0")
 			radius.value = "5";
 	});
+
+</script>
+<script>
+	isChecked(check) {
+
+		return "true";
+	}
 </script>
 
 <h1>Manage alerts</h1>
@@ -113,31 +120,70 @@ function validateType(form)
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>
 				<td>${alert.price} Chf</td>
-				<td>
-
-					<button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button>
 					<form:form method="post" modelAttribute="searchForm" action="/results" id="searchForm" autocomplete="off">
 
-						<form:checkbox name="house" id="house" path="house" value="1"/>
-						<form:checkbox name="studio" id="studio" path="studio"/>
-						<form:checkbox name="apartment" id="apartment" path="apartment"/>
-						<form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern	" tabindex="3" value="${alert.city}"/>
-						<form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" value="${alert.radius}"/>
-						<form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" value="${alert.price}"/>
-						<form:input type="text" id="field-earliestMoveInDate" path="earliestMoveInDate" value="${alert.getEarliestMoveInDate()}"/>
-						<form:input type="text" id="field-latestMoveInDate" path="latestMoveInDate"/>
-						<form:checkbox id="field-smoker" path="smokers" value="1"/>
-						<form:checkbox id="field-animals" path="animals" value="1"/>
-						<form:checkbox id="field-garden" path="garden" value="1"/>
-						<form:checkbox id="field-balcony" path="balcony" value="1"/>
-						<form:checkbox id="field-cellar" path="cellar" value="1"/>
-						<form:checkbox id="field-furnished" path="furnished" value="1"/>
-						<form:checkbox id="field-garage" path="garage" value="1"/>
+						<c:choose>
+							<c:when test="${alert.house}">
+								<form:checkbox style="opacity:0;" name="house" id="house" path="house" checked="ajsndo"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.studio}">
+								<form:checkbox style="opacity:0;" name="studio" id="studio" path="studio" checked="kahsdbflhbd"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.apartment}">
+								<form:checkbox style="opacity:0;" name="apartment" id="apartment" path="apartment" checked="jsndiusdf"/>
+							</c:when>
+						</c:choose>
+						<form:input type="hidden" name="city" id="city" path="city" placeholder="e.g. Bern	" tabindex="3" value="${alert.city}"/>
+						<form:input id="radiusInput" type="hidden" path="radius" placeholder="e.g. 5" step="5" value="${alert.radius}"/>
+						<form:input id="prizeInput" type="hidden" path="price" placeholder="e.g. 5" step="50" value="${alert.price}"/>
+						<form:input type="hidden" id="field-earliestMoveInDate" path="earliestMoveInDate" value="${alert.getEarliestMoveInDate()}"/>
+						<form:input type="hidden" id="field-latestMoveInDate" path="latestMoveInDate" value="${alert.latestMoveInDate}"/>
 
+						<c:choose>
+							<c:when test="${alert.smokers}">
+								<form:checkbox style="opacity:0;" id="field-smoker" path="smokers" checked="whatever"/>
+							</c:when>
+						</c:choose>
 
+						<c:choose>
+							<c:when test="${alert.animals}">
+								<form:checkbox style="opacity:0;" id="field-animals" path="animals" checked="whatever"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.garden}">
+								<form:checkbox style="opacity:0;" id="field-garden" path="garden" checked="whatever"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.balcony}">
+								<form:checkbox style="opacity:0;" id="field-balcony" path="balcony" checked="whatever"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.cellar}">
+								<form:checkbox style="opacity:0;" id="field-cellar" path="cellar" checked="whatever"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.furnished}">
+								<form:checkbox style="opacity:0;" id="field-furnished" path="furnished" checked="whatever"/>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${alert.garage}">
+								<form:checkbox style="opacity:0;" id="field-garage" path="garage" checked="whatever"/>
+							</c:when>
+						</c:choose>
+
+						<td>
 						<button type="submit" onClick="form.action='/results';">Search</button>
-
 					</form:form>
+							<button class="deleteButton" data-id="${alert.id}" onClick="deleteAlert(this)">Delete</button>
 
 				</td>
 			</tr>
