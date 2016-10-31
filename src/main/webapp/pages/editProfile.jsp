@@ -57,8 +57,24 @@
 	</tr>
 
 	<tr>
+		<td class="spacingTable"><label for="creditCardNumber">Credit Card Number:</label><a>&emsp;&thinsp;</a>
+            <form:input id="creditCardNumber" path="creditCardNumber" value="${currentUser.creditCardNumber}" /></td>
+	</tr>
+</table>
+<table class="editProfileNumberTable">
+    <tr>
+        <td class="spacingTable"><label>Credit Card Expire Month/Year:</label>
+        <form:input type="number" id="creditCardExpireMonth" path="creditCardExpireMonth" value="${currentUser.creditCardExpireMonth}"/>
+        <form:input type="number" id="creditCardExpireYear" path="creditCardExpireYear" value="${currentUser.creditCardExpireYear}"/></td>
+    </tr>
+    <tr>
+        <td class="spacingTable"><label>Credit Card Security Code:</label>
+        <form:input type="number" id="securityCode" path="securityCode" value="${currentUser.securityCode}"/></td>
+    </tr>
+
+	<tr>
 		<td class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br>
-		<form:textarea id="about-me" path="aboutMe" rows="10" cols="100" /></td>
+		<form:textarea id="about-me" path="aboutMe" rows="10" cols="100" value="${currentUser.aboutMe}"/></td>
 	</tr>
 </table>
 
