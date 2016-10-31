@@ -47,6 +47,9 @@ public class User {
 	@Column(nullable = false)
 	private boolean enabled;
 
+    @Column(nullable = false)
+    private boolean hasCreditCard;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles;
@@ -63,14 +66,17 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ad> bookmarkedAds;
 
-	@Column(nullable = false)
-	private String CreditCardNumber;
+	@Column(nullable = true)
+	private String creditCardNumber;
 
-	@Column(nullable = false)
-	private int CreditCardexpireMonth;
+	@Column(nullable = true)
+	private int creditCardExpireMonth;
 
-	@Column(nullable = false)
-	private int CreditCardexpireYear;
+	@Column(nullable = true)
+	private int creditCardExpireYear;
+
+    @Column(nullable = true)
+    private int securityCode;
 
 	public long getId() {
 		return id;
@@ -191,28 +197,43 @@ public class User {
 		return true;
 	}
 
+    public boolean getHasCreditCard() {
+        return hasCreditCard;
+    }
 
-	public int getCreditCardexpireMonth() {
-		return CreditCardexpireMonth;
+    public void setHasCreditCard(boolean hasCreditCard) {
+        this.hasCreditCard = hasCreditCard;
+    }
+
+	public int getCreditCardExpireMonth() {
+		return creditCardExpireMonth;
 	}
 
-	public void setCreditCardexpireMonth(int creditCardexpireMonth) {
-		CreditCardexpireMonth = creditCardexpireMonth;
+	public void setCreditCardExpireMonth(int creditCardExpireMonth) {
+		this.creditCardExpireMonth = creditCardExpireMonth;
 	}
 
-	public int getCreditCardexpireYear() {
-		return CreditCardexpireYear;
+	public int getCreditCardExpireYear() {
+		return creditCardExpireYear;
 	}
 
-	public void setCreditCardexpireYear(int creditCardexpireYear) {
-		CreditCardexpireYear = creditCardexpireYear;
+	public void setCreditCardExpireYear(int creditCardExpireYear) {
+		this.creditCardExpireYear = creditCardExpireYear;
 	}
 
 	public String getCreditCardNumber() {
-		return CreditCardNumber;
+		return creditCardNumber;
 	}
 
 	public void setCreditCardNumber(String creditCardNumber) {
-		CreditCardNumber = creditCardNumber;
+		this.creditCardNumber = creditCardNumber;
 	}
+
+    public int getSecurityCode() {
+        return securityCode;
+    }
+
+    public void setSecurityCode(int securityCode) {
+        this.securityCode = securityCode;
+    }
 }

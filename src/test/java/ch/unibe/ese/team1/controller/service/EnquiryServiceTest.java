@@ -205,8 +205,8 @@ public class EnquiryServiceTest {
 		userRoles.add(role);
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(creditcardnumber);
-		user.setCreditCardexpireMonth(month);
-		user.setCreditCardexpireYear(year);
+		user.setCreditCardExpireMonth(month);
+		user.setCreditCardExpireYear(year);
 		return user;
 	}
 }
