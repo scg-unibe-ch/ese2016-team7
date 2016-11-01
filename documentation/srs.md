@@ -45,7 +45,10 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Sign up      | guest     |  Create an account.  | the user visited the home page of flatfindr and The user has no active account | button login -> "sign up" button -> user fills the form |
 | View schedule | user      | The accepted enquiries for visiting flats are shown. | User has already logged in | makes waterfall menu drop from his profile picture -> clicks on "Schedule" -> all planned visits and their details are accordingly displayed |
 | View alerts | user      |     | The user had a succesful log in | User drops waterfall menu from his profile picture -> clicks on "Alerts" -> list of alerts is displayed | 
-| Create alert | user      | Create an alert by specifying the criteria for matching new ads. If a new ad matches the search criteria, an alert will be send to the user | User is logged in | user drops the waterfall menu from his profile pic -> user clicks on the button "Alerts" -> user clicks on "Subscribe" |
+| Create alert | user      | Create an alert by specifying the criteria for matching new ads. If a new ad matches the search criteria, an alert will be send to the user | User is logged in | user drops the waterfall menu from his profile pic -> user clicks on the button "Alerts" -> user clicks on "Subscribe" 
+alernative path:
+user clicks button "search" -> search form is displayed -> users fills form according to his needs -> user clicks on subscribe
+|
 | Delete alert | user      |     | User is already logged in | User (real estate manager) drops waterfall menu from his profile picture -> clicks on "Schedule"  -> user clicks on "Visit" -> Ad opens -> user clicks "Delete" button |
 | Log in      | guest |  | User has to own an active account | user clicks the "login" button on the homepage -> login form is displayed -> user enters email and password -> user clicks login -> home page is displayed |
 | Edit profile | user      |     | user has to be logged in | user drops waterfall menu from his profile picture ->user clicks on "Public profile" -> profile info are displayed -> user click "edit" button -> user changes what he needs to change -> user clicks on "update" -> success feedback from the application |
@@ -63,6 +66,7 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Decline enquiry | manager      |  A manager declines an enquiry that a user sent to him.  | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Decline" |
 | View enquiries | manager      |     | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown
 | View visitors | manager      |   Shows when the users visit the managers flat. | The user (real estate manager) is already logged in an already created an ad | user drops waterfall menu from his profile picture -> clicks on the button "Schedule" -> a list containing all planned visits appears -> the user clicks on the button "see visitors" for a specific enquiry -> a list containing all visitors and their arrival time is displayed, each visitor has also a rating |
+| See Insights | admin user | see Insights of the page | Administrator User is logged in | user opens waterfall menu on the top right corner of the page -> selects Insights from the Menu |
 
 
 
