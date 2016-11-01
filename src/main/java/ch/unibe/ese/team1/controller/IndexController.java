@@ -47,7 +47,7 @@ public class IndexController {
 	}
 
 	/** Displays the insights us page. */
-	@RequestMapping(value = "/insights")
+	@RequestMapping(value = "/admin/insights")
 	public ModelAndView insights(Principal principal) {
 		ModelAndView model = new ModelAndView("insights");
         String username = principal.getName();

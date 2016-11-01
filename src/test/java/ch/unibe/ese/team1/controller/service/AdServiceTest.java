@@ -123,6 +123,15 @@ public class AdServiceTest {
 		role.setRole("ROLE_USER");
 		role.setUser(user);
 		userRoles.add(role);
+
+		//Set Admin Role
+		if(gender == Gender.ADMIN) {
+			role = new UserRole();
+			role.setRole("ROLE_ADMIN");
+			role.setUser(user);
+			userRoles.add(role);
+		}
+
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(number);
 		user.setCreditCardExpireMonth(month);

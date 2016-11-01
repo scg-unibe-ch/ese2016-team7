@@ -30,6 +30,11 @@ public class UserTestDataSaver {
 		system.setAboutMe("We keep you off the streets.");
 		userDao.save(system);
 
+		User administrator = createUser("Admin", "admin", "FlatFindr", "Admin",
+				"/img/test/system.jpg", Gender.ADMIN, "4040404040404040", 12,12);
+		administrator.setAboutMe("King.");
+		userDao.save(administrator);
+
 		// Main test-user for the assistants (advertiser)
 		User ese = createUser("ese@unibe.ch", "ese", "John", "Wayne",
 				"/img/test/portrait.jpg", Gender.MALE, "4040404040404040", 12,12);
@@ -120,6 +125,14 @@ public class UserTestDataSaver {
 		role.setRole("ROLE_USER");
 		role.setUser(user);
 		userRoles.add(role);
+        
+        //Set Admin Role
+        if(gender == Gender.ADMIN) {
+            role = new UserRole();
+            role.setRole("ROLE_ADMIN");
+            role.setUser(user);
+            userRoles.add(role);
+        }
 		user.setUserRoles(userRoles);
 		user.setCreditCardNumber(creditCardNumber);
 		user.setCreditCardExpireMonth(creditCardexpireMonth);
