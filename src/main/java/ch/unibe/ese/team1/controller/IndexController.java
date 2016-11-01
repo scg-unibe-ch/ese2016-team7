@@ -44,7 +44,7 @@ public class IndexController {
 	}
 
 	/** Displays the insights us page. */
-	@RequestMapping(value = "/insights")
+	@RequestMapping(value = "/admin/insights")
 	public ModelAndView insights() {
 		ModelAndView model = new ModelAndView("insights");
 

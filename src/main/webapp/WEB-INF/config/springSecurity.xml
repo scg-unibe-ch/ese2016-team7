@@ -9,13 +9,18 @@
 
 	<security:http auto-config="true" access-denied-page="/access-denied">
 		<security:intercept-url pattern="/profile/**" access="ROLE_USER" />
-		<security:form-login login-page="/login" authentication-failure-url="/login?error=true" 
+        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+
+
+        <security:form-login login-page="/login" authentication-failure-url="/login?error=true"
 			default-target-url="/" />
 		 <security:logout invalidate-session="true" logout-success-url="/" 
 			logout-url="/logout" />
 	</security:http>
 
-	<security:authentication-manager>
+
+
+    <security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="mainDataSource"
