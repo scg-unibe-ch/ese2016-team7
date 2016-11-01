@@ -83,16 +83,54 @@ public class PlaceAdController {
 	private CreditCardService creditCardService;
 
 	/** Shows the place ad form. */
-	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
-	public ModelAndView placeAd() throws IOException {
+	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET, params="id")
+	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
 		ModelAndView model = new ModelAndView("placeAd");
 
 		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
+
+		if(id!=0){
+			Ad ad  =adService.getAdById(id);
+			PlaceAdForm adForm  = new PlaceAdForm();
+			adForm.setTitle(ad.getTitle());
+			adForm.setAnimals(ad.getAnimals());
+			adForm.setBalcony(ad.getBalcony());
+			adForm.setCellar(ad.getCellar());
+			adForm.setCity(ad.getCity());
+			adForm.setFurnished(ad.getFurnished());
+			adForm.setGarage(ad.getGarage());
+			adForm.setGarden(ad.getGarden());
+			adForm.setMoveInDate(ad.getMoveInDate().toString());
+			adForm.setNumberRooms(ad.getNumberRooms());
+			adForm.setPreferences(ad.getPreferences());
+			adForm.setPrice(ad.getPrice());
+			adForm.setRoomDescription(ad.getRoomDescription());
+			adForm.setNumberRooms(ad.getNumberRooms());
+			adForm.setSquareFootage(ad.getSquareFootage());
+			adForm.setSmokers(ad.getSmokers());
+			adForm.setProperty(ad.getProperty());
+			//this.placeAdForm = adForm;
+			model.addObject("placeAdForm",adForm);
+		}
 		return model;
 	}
+
+    /** Shows the place ad form.*/
+    @RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET)
+    public ModelAndView placeAd() throws IOException {
+        ModelAndView model = new ModelAndView("placeAd");
+
+        String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
+        if (pictureUploader == null) {
+            pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
+        }
+
+        return model;
+        }
+
 
 	/**
 	 * Uploads the pictures that are attached as multipart files to the request.
