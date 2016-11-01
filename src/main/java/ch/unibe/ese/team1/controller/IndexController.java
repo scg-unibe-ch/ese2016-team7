@@ -30,7 +30,8 @@ public class IndexController {
 	@RequestMapping(value = "/")
 	public ModelAndView index() {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("newest", adService.getNewestAds(4));
+		model.addObject("newest", adService.getNewestAds(4,false));
+		model.addObject("premium", adService.getNewestAds(2,true));
 		return model;
 	}
 

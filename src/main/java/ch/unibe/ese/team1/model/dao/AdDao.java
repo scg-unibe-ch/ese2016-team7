@@ -24,6 +24,8 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 
 	public Iterable<Ad> findByUser(User user);
 
+	public Iterable<Ad> findByPremium(boolean premium);
+
 	public Iterable<Ad> findByExpireDateLessThanAndExpired(Date date, boolean expired);
 
 	public long countByExpired(boolean expired);

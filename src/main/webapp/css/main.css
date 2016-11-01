@@ -615,6 +615,59 @@ footer nav ul li {
 }
 
 
+#premiumResultsDiv{
+	width: 100%;
+	margin-top: 10px;
+	float: left;
+}
+
+#premiumResultsDiv div {
+	height: 140px;
+	padding: 10px;
+	margin-top: 20px;
+	border-style: solid;
+	border-color: #d613d6;
+	border-width: 5px;
+	border-radius: 10px;
+}
+
+#premiumResultsDiv div:first-child {
+	margin-top: 0px;
+}
+
+#premiumResultsDiv div img {
+	height: 140px;
+	float: left;
+	margin-right: 50px;
+}
+
+#premiumResultsDiv div div {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+#premiumResultsDiv .resultLeft {
+	float: left;
+	width: 75%;
+}
+
+#premiumResultsDiv .resultRight {
+	float: right;
+	width: 20%;
+	text-align: right;
+	padding-right: 5px;
+}
+
+#premiumResultsDiv p{
+	font-size: 1.5em;
+}
+
+#premiumResultsDiv h2{
+	font-size: 2em;
+}
+
+
 /* -------------------------------------------------------------------- */
 /* adDescription.jsp */
 

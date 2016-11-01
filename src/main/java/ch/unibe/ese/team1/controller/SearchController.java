@@ -2,6 +2,7 @@ package ch.unibe.ese.team1.controller;
 
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.model.Ad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,9 @@ public class SearchController {
 
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
-			model.addObject("results", adService.queryResults(searchForm));
+			Iterable<Ad> results = adService.queryResults(searchForm);
+			model.addObject("results", results);
+			model.addObject("premium", adService.filterPremiumAds(results,2));
 			return model;
 		} else {
 			// go back
