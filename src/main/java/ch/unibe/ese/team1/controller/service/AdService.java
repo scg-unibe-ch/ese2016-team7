@@ -192,8 +192,10 @@ public class AdService {
 	 * Returns the newest ads in the database. Parameter 'newest' says how many.
 	 */
 	@Transactional
-	public Iterable<Ad> getNewestAds(int newest) {
-		Iterable<Ad> allAds = adDao.findAll();
+	public Iterable<Ad> getNewestAds(int newest, boolean premium) {
+		Iterable<Ad> allAds;
+		if(!premium) allAds = adDao.findAll();
+		else allAds = adDao.findByPremium(true);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
@@ -398,6 +400,23 @@ public class AdService {
 
 
 		return locatedResults;
+	}
+
+	/**
+	 * Get Premium Ads out of this Itrable
+	 * @return the other Iterable
+	 */
+	public Iterable<Ad> filterPremiumAds(Iterable<Ad> ads, int number){
+		List<Ad> premiumAds = new ArrayList<>();
+		for(Ad ad : ads){
+			if(ad.getPremium()){
+				premiumAds.add(ad);
+				number--;
+			}
+			if(number == 0) break;
+		}
+		return premiumAds;
+
 	}
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,
