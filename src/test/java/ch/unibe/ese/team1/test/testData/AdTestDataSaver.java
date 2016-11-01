@@ -93,7 +93,7 @@ public class AdTestDataSaver {
 		adBern.setFurnished(true);
 		adBern.setGarage(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
-        adBern.setExpireDate(getTimedDate(10));
+        adBern.setExpireDate(getTimedDate(1));
         List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));

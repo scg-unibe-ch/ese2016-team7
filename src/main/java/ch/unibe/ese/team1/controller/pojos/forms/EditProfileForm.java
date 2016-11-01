@@ -3,6 +3,7 @@ package ch.unibe.ese.team1.controller.pojos.forms;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /** This form is used when a user wants to edit their profile. */
@@ -25,12 +26,15 @@ public class EditProfileForm {
 	private String creditCardNumber;
 
     @Max(value = 12, message = "Please enter a valid Month")
+    @Min(value = 0, message = "Please enter a valid Month")
     private int creditCardExpireMonth;
 
     @NotNull
+    @Min(value = 0)
     private int creditCardExpireYear;
 
     @NotNull
+	@Min(value = 0)
     private int securityCode;
 
     private boolean hasCreditCard;

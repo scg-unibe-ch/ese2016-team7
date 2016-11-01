@@ -259,7 +259,7 @@ public class User {
 
     public void addMoneyEarned(int amount) {
         if (amount >= 0)
-            moneySpent += amount;
+            setMoneyEarned(getMoneyEarned()+amount);
     }
 
 	public void addMoneySpent(int amount) {

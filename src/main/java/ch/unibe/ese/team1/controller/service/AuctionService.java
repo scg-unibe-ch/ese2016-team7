@@ -49,8 +49,8 @@ public class AuctionService {
             if(bidDao.countByAd(ad) == 0){
                 sendNoBidsMessage(ad);
             }else{
-                sendSuccessMessages(ad);
                 updateBalance(ad);
+                sendSuccessMessages(ad);
             }
         }
     }
@@ -116,7 +116,7 @@ public class AuctionService {
 
         User owner = ad.getUser();
         User winner = latestBid.getUser();
-        int amount = latestBid.getAmount();
+        int amount = ad.getPrice();
 
         owner.addMoneyEarned(amount);
         winner.addMoneySpent(amount);

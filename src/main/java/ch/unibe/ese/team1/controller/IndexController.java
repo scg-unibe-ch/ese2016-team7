@@ -89,6 +89,7 @@ public class IndexController {
         model.addObject("currentUser", user);
         model.addObject("moneyEarned", user.getMoneyEarned());
         model.addObject("moneySpent", user.getMoneySpent());
+        model.addObject("userName", user.getUsername());
 
 		return model;
 	}
