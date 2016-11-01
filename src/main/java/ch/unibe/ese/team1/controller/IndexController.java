@@ -1,8 +1,11 @@
 package ch.unibe.ese.team1.controller;
 
+import java.security.Principal;
+
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Property;
 
+import ch.unibe.ese.team1.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +48,10 @@ public class IndexController {
 
 	/** Displays the insights us page. */
 	@RequestMapping(value = "/insights")
-	public ModelAndView insights() {
+	public ModelAndView insights(Principal principal) {
 		ModelAndView model = new ModelAndView("insights");
+        String username = principal.getName();
+        User user = userService.findUserByUsername(username);
 
 		// Gathering Data for stats
 		Integer usersCount = userService.countUsers();
@@ -81,6 +86,9 @@ public class IndexController {
 		model.addObject("activeAdsCount", activeAdsCount);
 		model.addObject("adsCount", adsCount);
 		model.addObject("usersCount", usersCount);
+        model.addObject("currentUser", user);
+        model.addObject("moneyEarned", user.getMoneyEarned());
+        model.addObject("moneySpent", user.getMoneySpent());
 
 		return model;
 	}

@@ -78,6 +78,10 @@ public class User {
     @Column(nullable = true)
     private int securityCode;
 
+	private int moneySpent;
+
+	private int moneyEarned;
+
 	public long getId() {
 		return id;
 	}
@@ -235,5 +239,31 @@ public class User {
 
     public void setSecurityCode(int securityCode) {
         this.securityCode = securityCode;
+    }
+
+	public int getMoneySpent() {
+		return moneySpent;
+	}
+
+	public void setMoneySpent(int moneySpent) {
+		this.moneySpent = moneySpent;
+	}
+
+	public int getMoneyEarned() {
+		return moneyEarned;
+	}
+
+	public void setMoneyEarned(int moneyEarned) {
+		this.moneyEarned = moneyEarned;
+	}
+
+    public void addMoneyEarned(int amount) {
+        if (amount >= 0)
+            moneySpent += amount;
+    }
+
+	public void addMoneySpent(int amount) {
+        if (amount >= 0)
+            moneySpent += amount;
     }
 }

@@ -50,6 +50,7 @@ public class AuctionService {
                 sendNoBidsMessage(ad);
             }else{
                 sendSuccessMessages(ad);
+                updateBalance(ad);
             }
         }
     }
@@ -102,6 +103,23 @@ public class AuctionService {
         messageBuilder.append("He bid "+ad.getPrice()+"swiss franks for your property. </br>");
         messageBuilder.append("Please contact him as soon as possible");
         messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"Your action was successfully completed!",messageBuilder.toString());
+    }
+
+    /**
+     * Updates the balance of the owner of the ad and the winner of the auction.
+     * This has nothing to do with the credit card! This is used to update the balance
+     * of the owner and winner.
+     * @param ad Ad on which was bidden.
+     */
+    private void updateBalance(Ad ad){
+        Bid latestBid = bidDao.findTop1ByAdOrderByIdDesc(ad);
+
+        User owner = ad.getUser();
+        User winner = latestBid.getUser();
+        int amount = latestBid.getAmount();
+
+        owner.addMoneyEarned(amount);
+        winner.addMoneySpent(amount);
     }
 
 
