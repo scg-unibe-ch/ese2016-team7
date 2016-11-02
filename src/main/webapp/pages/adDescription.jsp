@@ -122,18 +122,25 @@
                 var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
                 var currentPrice = ${shownAd.price};
+                var hasCreditCard = ${currentUser.hasCreditCard};
 
 
-                if (amount > currentPrice) {
-                    $("#bidErrorDiv").html("")
-                    $.post("ad/makeBid", {amount: amount, id: id}, function () {
-                        // alert("You bid: " + amount + " CHF");
-                        $("#bidAmount").val("");
-                        location.reload();
-                    })
-                } else {
-                    $("#bidErrorDiv").html("You have to bid higher than the current price.")
+                if (!hasCreditCard) {
+                    $("#bidErrorDiv").html("You need a credit card to do any bids.")
                 }
+                else {
+                    if (amount > currentPrice) {
+                        $("#bidErrorDiv").html("")
+                        $.post("ad/makeBid", {amount: amount, id: id}, function () {
+                            // alert("You bid: " + amount + " CHF");
+                            $("#bidAmount").val("");
+                            location.reload();
+                        })
+                    } else {
+                        $("#bidErrorDiv").html("You have to bid higher than the current price.")
+                    }
+                }
+
             }
         });
     });
