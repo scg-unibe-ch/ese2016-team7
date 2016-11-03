@@ -122,7 +122,7 @@
                 var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
                 var currentPrice = ${shownAd.price};
-                var hasCreditCard = ${currentUser.hasCreditCard};
+                var hasCreditCard = true;
 
 
                 if (!hasCreditCard) {

@@ -63,8 +63,6 @@ public class AdController {
 		String loggedInUserEmail = (principal == null) ? "" : principal
 				.getName();
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
-		User user = userService.findUserByUsername(principal.getName());
-		model.addObject("currentUser", user);
 
 		model.addObject("visits", visitService.getVisitsByAd(ad));
 		model.addObject("bids", bidService.getBidsByAd(ad));
