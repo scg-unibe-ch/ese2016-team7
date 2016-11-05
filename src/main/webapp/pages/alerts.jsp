@@ -8,6 +8,8 @@
 
 <pre><a href="/">Home</a>   &gt;   Alerts</pre>
 
+<div class="container-fluid">
+
 <script>
 function deleteAlert(button) {
 	var id = $(button).attr("data-id");
@@ -192,6 +194,7 @@ function validateType(form)
 	</c:otherwise>
 </c:choose>
 </div>
+	</div>
 
 
 <c:import url="template/footer.jsp" />

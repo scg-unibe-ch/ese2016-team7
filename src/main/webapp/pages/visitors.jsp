@@ -6,6 +6,8 @@
 
 <c:import url="template/header.jsp" />
 
+<div class="container-fluid">
+
 <script>
 function star(starnr, rating) {
     if(starnr <= rating)
@@ -75,5 +77,6 @@ function rate(id, rating) {
 	</c:otherwise>
 </c:choose>
 </div>
+	</div>
 
 <c:import url="template/footer.jsp" />

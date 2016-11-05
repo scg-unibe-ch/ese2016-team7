@@ -7,6 +7,8 @@
 
 <c:import url="template/header.jsp" />
 
+<div class="container-fluid">
+
 <h1>Insights</h1>
 <hr />
 
@@ -98,7 +100,7 @@
     </tr>
 </table>
 
-
+</div>
 
 
 <c:import url="template/footer.jsp" /><br />

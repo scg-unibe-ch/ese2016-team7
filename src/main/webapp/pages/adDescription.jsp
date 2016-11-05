@@ -17,6 +17,8 @@
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
 
+<div class="container-fluid">
+
 <script>
     var shownAdvertisementID = "${shownAd.id}";
     var shownAdvertisement = "${shownAd}";
@@ -566,6 +568,7 @@
         <button type="button" id="confirmationDialogCancel">Cancel</button>
     </form>
 </div>
+    </div>
 
 
 <c:import url="template/footer.jsp"/>

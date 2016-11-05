@@ -9,6 +9,8 @@
 <pre>
 <a href="/">Home</a>   &gt;   Enquiries</pre>
 
+<div class="container-fluid">
+
 <!-- format the dates -->
 <fmt:formatDate value="${enquiries[0].dateSent}" var="formattedDateSent"
 	type="date" pattern="HH:mm, dd.MM.yyyy" />
@@ -124,5 +126,6 @@
 		</c:forEach>
 	</table>
 </div>
+	</div>
 
 <c:import url="template/footer.jsp" />

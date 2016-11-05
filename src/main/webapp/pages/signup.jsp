@@ -6,6 +6,8 @@
 
 <c:import url="template/header.jsp" />
 
+
+
 <script>
 	// Validate the email field
 	$(document).ready(function() {
@@ -35,6 +37,8 @@
 
 <pre>
 	<a href="/">Home</a>   &gt;   Sign up</pre>
+<div class="container-fluid">
+
 
 <h1>Sign up</h1>
 <form:form id="signupForm" method="post" modelAttribute="signupForm"
@@ -95,5 +99,6 @@
 		<button type="submit" onclick="determineHasCreditCard()">Sign up</button>
 	</fieldset>
 </form:form>
+	</div>
 
 <c:import url="template/footer.jsp" />

@@ -10,9 +10,10 @@
 <security:authorize var="loggedIn" url="/profile" />
 
 <c:import url="template/header.jsp" />
-
 <pre>
 	<a href="/">Home</a>   &gt;   Login</pre>
+
+<div class="container-fluid">
 
 <h1>Login</h1>
 
@@ -54,5 +55,6 @@
 		
 	</c:otherwise>
 </c:choose>
+	</div>
 
 <c:import url="template/footer.jsp" />

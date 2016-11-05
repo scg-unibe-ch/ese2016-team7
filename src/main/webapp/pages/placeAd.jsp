@@ -77,6 +77,9 @@
 <pre>
 	<a href="/">Home</a>   &gt;   Place ad</pre>
 
+<div class="container-fluid">
+
+
 <h1>Place an ad</h1>
 <hr />
 
@@ -272,5 +275,6 @@
 	</div>
 
 </form:form>
+	</div>
 
 <c:import url="template/footer.jsp" />

@@ -55,6 +55,8 @@
 
 <pre>
 	<a href="/">Home</a>   &gt;   Profile</pre>
+<div class="container-fluid">
+
 
 <div id="userDiv">
 	<c:choose>
@@ -103,4 +105,5 @@
 		<button type="button" id="messageCancel">Cancel</button>
 	</form>
 </div>
+	</div>
 <c:import url="template/footer.jsp" />

@@ -6,7 +6,10 @@
 
 <c:import url="template/header.jsp"/>
 
+
 <pre><a href="/">Home</a>   &gt;   Search</pre>
+
+<div class="container-fluid">
 
 <script>
     $(document).ready(function () {
@@ -147,6 +150,7 @@
     </fieldset>
 
 </form:form>
+    </div>
 
 
 <c:import url="template/footer.jsp"/>

@@ -8,6 +8,8 @@
 <c:import url="template/header.jsp" />
 <pre><a href="/">Home</a>   &gt;   Messages</pre>
 
+<div class="container-fluid">
+
 <!-- format the dates -->
 <fmt:formatDate value="${messages[0].dateSent}" var="formattedDateSent"
 	type="date" pattern="HH:mm, dd.MM.yyyy" />
@@ -63,6 +65,7 @@
 		<p>${messages[0].text }</p>
 	</div>
 </div>
+	</div>
 
 <c:import url="getMessageForm.jsp" />
 

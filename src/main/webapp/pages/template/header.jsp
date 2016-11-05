@@ -8,8 +8,17 @@
 
 <!DOCTYPE html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" media="screen"
+		  href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		  href="/css/main.css">
+
+
 	<link rel="stylesheet" type="text/css"
 		  media="only screen and (max-device-width: 480px)"
 		  href="/css/smartphone.css" />
@@ -40,14 +49,17 @@
 <security:authorize var="isAdmin" url="/admin" />
 
 
+
+
 <!-- check if user has a profile picture -->
 <header>
-	<div class="left">
-		<a href="/"><img src="/img/logo.png"></a>
-	</div>
-	<div class="right">
-		<nav>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><img src="/img/logo.png"></a>
+		</div>
 			<ul>
+				<div class="right">
+					<nav>
 				<c:choose>
 					<c:when test="${loggedIn}">
 						<script>
@@ -70,11 +82,11 @@
 								<li><a href="/profile/enquiries">Enquiries</a></li>
 								<li><a href="/profile/schedule">Schedule</a></li>
 								<li><a href="/profile/alerts">Alerts</a></li>
-						<c:choose>
-							<c:when test="${isAdmin}">
-								<li><a href="/admin/insights">Insights</a></li>
-								</c:when>
-						</c:choose>
+								<c:choose>
+									<c:when test="${isAdmin}">
+										<li><a href="/admin/insights">Insights</a></li>
+									</c:when>
+								</c:choose>
 								<li>
 									<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
@@ -86,14 +98,15 @@
 					</c:otherwise>
 				</c:choose>
 				<li><a href="<c:url value='/searchAd' />">Search</a></li>
+					</nav>
+				</div>
 			</ul>
-		</nav>
-	</div>
 </header>
 
 <body>
+
+
 <!-- will be closed in footer-->
-<div id="content">
 
 <c:if test="${not empty confirmationMessage }">
 	<div class="confirmation-message">

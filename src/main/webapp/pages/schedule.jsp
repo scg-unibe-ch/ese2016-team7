@@ -9,6 +9,8 @@
 <pre>
 <a href="/">Home</a>   &gt;   Schedule</pre>
 
+<div class="container-fluid">
+
 <h2>Your presentations</h2>
 
 <div id="presentationsDiv">			
@@ -90,5 +92,6 @@
 	</c:otherwise>
 </c:choose>
 </div>
+	</div>
 
 <c:import url="template/footer.jsp" />

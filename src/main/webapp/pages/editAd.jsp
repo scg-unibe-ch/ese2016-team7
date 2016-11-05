@@ -15,6 +15,8 @@
 
 <script src="/js/editAd.js"></script>
 
+<div class="container-fluid">
+
 
 <script>
 	$(document).ready(function() {		
@@ -397,6 +399,7 @@
 	</div>
 
 </form:form>
+	</div>
 
 
 <c:import url="template/footer.jsp" />

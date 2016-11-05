@@ -8,6 +8,7 @@
 
 <c:import url="template/header.jsp"/>
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
+<div class="container-fluid">
 
 
 <script>
@@ -293,5 +294,6 @@
 
     </div>
 </form:form>
+    </div>
 
 <c:import url="template/footer.jsp"/>

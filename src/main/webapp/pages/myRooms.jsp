@@ -7,6 +7,7 @@
 
 <c:import url="template/header.jsp" />
 
+
 <script>
 	$(document).ready(function() {
 	});
@@ -15,6 +16,8 @@
 
 
 <pre><a href="/">Home</a>   &gt;   My Rooms</pre>
+
+<div class="container-fluid">
 
 <c:choose>
 	<c:when test="${empty ownAdvertisements}">
@@ -100,6 +103,7 @@
 		</div>		
 	</c:otherwise>
 </c:choose>
+	</div>
 
 
 <c:import url="template/footer.jsp" />

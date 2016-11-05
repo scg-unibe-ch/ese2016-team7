@@ -6,6 +6,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:import url="template/header.jsp" />
+<div class="container-fluid">
 
 <script>
 	$(document).ready(function() {
@@ -83,6 +84,7 @@
 </div>
 
 </form:form>
+	</div>
 
 
 <c:import url="template/footer.jsp" />

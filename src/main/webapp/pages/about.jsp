@@ -14,7 +14,9 @@
 <body>
 
 <pre>About us</pre>
+<div class="container-fluid">
 
 <img id="about" src="/img/about.jpg">
+	</div>
 
 <c:import url="template/footer.jsp" /><br />

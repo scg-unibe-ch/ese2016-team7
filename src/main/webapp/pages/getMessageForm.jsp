@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<div class="container-fluid">
 
 
 <div id="msgDiv">
@@ -26,3 +27,4 @@
 	<br/>
 </form:form>
 </div>
+	</div>

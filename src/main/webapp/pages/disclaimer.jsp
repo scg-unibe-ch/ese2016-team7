@@ -12,6 +12,8 @@
 <title>The FlatFoundrs</title>
 </head>
 <body>
+<div class="container-fluid">
+
 
 <pre>Disclaimer</pre>
 	<div class="impressum">
@@ -74,3 +76,4 @@
 	</div>
 	<c:import url="template/footer.jsp" />
 	<br />
+	</div>
