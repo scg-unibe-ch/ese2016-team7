@@ -7,6 +7,21 @@
 
 <c:import url="template/header.jsp"/>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#city").autocomplete({
+            minLength: 2
+        });
+        $("#city").autocomplete({
+            source: <c:import url="getzipcodes.jsp" />
+        });
+        $("#city").autocomplete("option", {
+            enabled: true,
+            autoFocus: true
+        });
+    })
+</script>
+
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
 <div class="container">
