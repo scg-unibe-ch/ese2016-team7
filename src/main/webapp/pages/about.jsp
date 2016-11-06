@@ -16,7 +16,12 @@
 
 <div class="container">
 	<div class="thumbnail">
-		<img src="/img/about.jpg" class="img-responsive">
+		<img style="width: 100%" src="/img/about.jpg" class="img-responsive">
+		<div class="caption">
+			<p>
+				Hello we are cool
+			</p>
+		</div>
 	</div>
 </div>
 
