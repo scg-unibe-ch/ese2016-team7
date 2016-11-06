@@ -22,6 +22,23 @@
     })
 </script>
 
+<script type="text/javascript">
+    function equalHeight(group) {
+        var smallest = 1000000;
+        group.each(function() {
+            var thisHeight = $(this).height();
+            if(thisHeight < smallest) {
+                smallest = thisHeight;
+            }
+        });
+        group.each(function() { $(this).height(smallest); });
+    }
+
+    $(document).ready(function() {
+        equalHeight($(".thumbnail img"));
+    });
+</script>
+
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
 <div class="container">
@@ -105,9 +122,6 @@
                                 <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
                                 <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
                             </c:choose></i></p>
-                        <p>
-
-                        </p>
                         <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                                         type="date" pattern="dd.MM.yyyy"/>
 

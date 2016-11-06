@@ -1,109 +1,103 @@
 <%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+         contentType="text/html;charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<c:import url="template/header.jsp" />
+<c:import url="template/header.jsp"/>
 
 
-<script>
-	$(document).ready(function() {
-	});
+<script type="text/javascript">
+    function equalHeight(group) {
+        var smallest = 1000000;
+        group.each(function() {
+            var thisHeight = $(this).height();
+            if(thisHeight < smallest) {
+                smallest = thisHeight;
+            }
+        });
+        group.each(function() { $(this).height(smallest); });
+    }
 
+    $(document).ready(function() {
+        equalHeight($(".thumbnail img"));
+    });
 </script>
 
 
-<!--<pre><a href="/">Home</a>   &gt;   My Rooms</pre>-->
+<!--<pre><a href="/">Home</a> &gt; My Rooms</pre>-->
 
 <div class="container">
-
-<c:choose>
-	<c:when test="${empty ownAdvertisements}">
-		<h1>My Advertisements</h1>
-		<hr />
-		<p>You have not advertised anything yet.</p>
-		<br /><br />
-	</c:when>
-	<c:otherwise>
-	
-		<div id="resultsDiv" class="resultsDiv">
-		<h1>My Advertisements</h1>
-		<hr />			
-			<c:forEach var="ad" items="${ownAdvertisements}">
-				<div class="resultAd" data-price="${ad.price}"
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i><c:choose>
-								<c:when test="${ad.property == 'HOUSE'}">House</c:when>
-								<c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
-								<c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
-							</c:choose></i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.price }</h2>
-						<br /> <br />
-						<p>Move-in date: ${ad.moveInDate }</p>
-					</div>
-				</div>
-			</c:forEach>
-			<br /> <br />
-		</div>		
-	</c:otherwise>
-</c:choose>
+    <c:choose>
+        <c:when test="${empty ownAdvertisements}">
+            <div class="page-header"><h2>My Advertisements</h2></div>
+            <p>You have not advertised anything yet.</p>
+            <br/><br/>
+        </c:when>
+        <c:otherwise>
+            <div class="page-header"><h2>My Advertisements</h2></div>
+            <div class="row">
+                <c:forEach var="ad" items="${ownAdvertisements}">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <p>Move-in-date: ${ad.moveInDate}</p>
+                                <h4>CHF ${ad.price }</h4>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+                <br/> <br/>
+            </div>
+        </c:otherwise>
+    </c:choose>
 
 
-<c:choose>
-	<c:when test="${empty bookmarkedAdvertisements}">
-		<h1>My Bookmarks</h1>
-		<hr />
-		<p>You have not bookmarked anything yet.</p><br /><br />
-	</c:when>
-	<c:otherwise>
-		
-		<div id="resultsDiv" class="resultsDiv">
-		<h1>My Bookmarks</h1>
-		<hr />			
-			<c:forEach var="ad" items="${bookmarkedAdvertisements}">
-				<div class="resultAd" data-price="${ad.price}"
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i><c:choose>
-								<c:when test="${ad.property == 'HOUSE'}">House</c:when>
-								<c:when test ="${ad.property == 'APARTMENT'}">Apartment</c:when>
-								<c:when test ="${ad.property == 'STUDIO'}">Studio</c:when>
-							</c:choose></i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.price }</h2>
-						<br /> <br />
-						<p>Move-in date: ${ad.moveInDate }</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>		
-	</c:otherwise>
-</c:choose>
-	</div>
+    <c:choose>
+        <c:when test="${empty ownAdvertisements}">
+            <div class="page-header"><h2>My Bookmarks</h2></div>
+            <p>You have not bookmarked anything yet.</p>
+            <br/><br/>
+        </c:when>
+        <c:otherwise>
+            <div class="page-header"><h2>My Bookmarks</h2></div>
+            <div class="row">
+                <c:forEach var="ad" items="${bookmarkedAdvertisements}">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <p>Move-in-date: ${ad.moveInDate}</p>
+                                <h4>CHF ${ad.price }</h4>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+                <br/> <br/>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</div>
 
 
-<c:import url="template/footer.jsp" />
+<c:import url="template/footer.jsp"/>
