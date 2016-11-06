@@ -12,14 +12,13 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Welcome to Flatfindr</h1>
-        <p>Start searching in your Neighborhood</p>
+        <p>The worlds greatest platform to buy and sell real estate. Our auction system ensures that you get the best
+            deals. Buy your dream house today and start living your life.</p>
         <form class="form-inline" method="post" action="/quicksearch">
-            <input type="text" id="city" name="city" class="form-control" placeholder="Search for your location"/>
-            <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
-        <p>The worlds greatest platform to buy and sell real estate. Our auction system ensures that you get the best deals. Buy your dream house today and start living your life.</p>
-        <form class="form-inline">
-            <input type="text" class="form-control input-lg" placeholder="Enter Area (e.g. Bern)"/>
-            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+            <input type="text" id="city" name="city" class="form-control input-lg"
+                   placeholder="Enter Area (e.g. Bern)"/>
+            <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span>
+            </button>
         </form>
     </div>
     <!--
@@ -81,16 +80,16 @@
             <div class="col-md-3">
                 <div class="thumbnail">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
-                    <img src="${ad.pictures[0].filePath}" alt="">
-                        </a>
+                        <img src="${ad.pictures[0].filePath}" alt="">
+                    </a>
                     <div class="caption">
                         <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
                         <p>${ad.street}, ${ad.zipcode} ${ad.city}
-                            <br /><i><c:choose>
-                            <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-                            <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-                            <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-                        </c:choose></i></p>
+                            <br/><i><c:choose>
+                                <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                            </c:choose></i></p>
                         <p>
 
                         </p>
