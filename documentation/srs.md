@@ -57,11 +57,12 @@ user clicks button "search" -> search form is displayed -> users fills form acco
 | Sort search results | user      |     | User is on a page the shows search results | user choses criteria -> users clicks on button "Sort" -> results are accordingly displayed |
 | View ad | user      |     | user is on a page that already shows a specific ad | user clicks the button "Visit profile" on the section about the user that published the ad -> application shows advertiser's infos |
 | Bid | user      |     | user is already logged in and is already viewing an Ad| user enters his bid -> user clicks on the "Make Bid" button |
+| Instant Buy | user      |     | user is already logged in and is already viewing an Ad| user clicks the "instant buy" button -> user clicks on the "confirm" button |
 | Send message | user      |     | user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Messages" -> user's messages are displayed -> user clicks on the button "New" -> user specifies the receiver, message object and text -> user clicks on the button "send" |
 | Send enquiry | user      |     | user is already logged in | user clicks on one Ad -> possible viiting times are displayed -> user clicks on "Send enquiry to advertiser" |
 | View ad location | user      |     | The user is already viewing an Ad | user clicks on the Adress on the Ad ->  the browser direcly opens GoogleMaps pointing the exact location of the object described on the Ad |
-| Create ad | manager      |  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit"
-| Create premium ad |manager| Only possible if the manager has added a credit card and the maximal amount of premium ads isn't reached | The manager is already logged in| user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object  -> users specifies his preferences -> user inserts pics and visiting times -> users clicks on the button "Submit" |
+| Create ad | manager      |  | The user is already logged in | user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object -> user inserts pics and visiting times -> users clicks on the button "Submit"
+| Create premium ad |manager| Only possible if the manager has added a credit card and the maximal amount of premium ads isn't reached | The manager is already logged in| user drops waterfall menu from his profile picture -> user clicks on the button "Place an ad" -> The form to place an Ad is displayed -> User fills the form accordingly to his object  -> user inserts pics and visiting times -> users clicks on the button "Submit" |
 | Accept enquiry | manager      | A manager accepts an enquiry that a user sent to him.| the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Accept" |
 | Decline enquiry | manager      |  A manager declines an enquiry that a user sent to him.  | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown -> the advertiser clicks on the button "Decline" |
 | View enquiries | manager      |     | the user (advertiser) is already logged in | the advertiser drops the waterfall menu from his profile pic -> clicks on the button "Enquiries" -> enquiries' list is shown
@@ -73,11 +74,10 @@ user clicks button "search" -> search form is displayed -> users fills form acco
 **Actor characteristics**
 The intended users of the product are people who want to buy houses, apartments and studios and people who want to sell their houses, apartments and studios to find a person willing to buy it.
 
-We expect the buyers the object advertised to be primarly real-estate companies, individials over 30 or married couples. The first two would then rent the Object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of expierence trading in the swiss market and therefore they their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus the need of a simple, minimalistc and intuitive interface. 
+We expect the buyers the object advertised to be primarly real-estate companies, individials over 30 or married couples. The first two would then rent the Object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of expierence trading in the swiss market and therefore they their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus they need of a simple, minimalistc and intuitive interface. 
 
 We expect the sellers to be faimilies of deceased people or individuals within any range of age, background or employment, so basically people who want to get rid of the Object or earn some money for whatever reason. 
 
-On average buyers should be wealthier than sellers. 
 
 <h2>3. Specific requirements</h2>
 **Functional requirements**
@@ -86,27 +86,29 @@ On average buyers should be wealthier than sellers.
 
 Placing an ad
 
-A User must specify the general infos of the flat ad:
+A Manager must specify the general infos of the flat ad:
 He must add a title, the address (containing a Street and a City).
-Further he has to add the date of the move-in. (no move-out date: _To be done_)
+Further he has to add the date of the move-in. (no move-out date: _done_)
 He adds the price, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
-For the flat he must add a description of the property, including the amount of objects (_To be done_) and can tick the following options:
+For the flat he must add a description of the property, including the amount of rooms (_done_) and can tick the following options:
 Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage
-Also optional is a field for the preferences
 He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
-The user can add visiting times by choosing them in a calendar and setting the time.
+The manager can add visiting times by choosing them in a calendar and setting the time.
 An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, 
 if he hasn't he is asked to do so. (_To be done_)
 
-Users should be able to add ads for selling houses, apartments and studios via auctions.(_To be done_).
+
+Manager should be able to add ads for selling houses, apartments and studios via auctions.(_done_).
+If he wants so he can make an instant buy option for a fixed price (_To be done_)
 
 Auctions (_Done_)
 
-There will be no possibility for a direct buy. If a user gets overbidden, he will be messaged. (_To be done_)
+There will be no possibility for a direct buy. If a user gets overbidden, he will be messaged. (_done_)
 If a user is overbidden he is messaged and told on which ad and by how much (_Done_)
-If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_To be done_)
-If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction (_To be done_)
-When a user doesn't enter a bid high enough, he is told so by a nice looking message (_To be done_)
+If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_done_)
+If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction with (optional) adjusted parameters.(_done_)
+When a user doesn't enter a bid high enough, he is told so by a nice looking message (_done_)
+There may be an instant buy option (_To be done_)
 
 Messages
 In the messages he can choose between the following three options:
@@ -130,7 +132,7 @@ The user can create a new alert for either a house, apartment or studio (can be 
 The relevant search criteria should be the price, the time and the location of the add. The others are not that relevant and either don't need to fit or only need to be 'somewhat close' to the search criteria (_To be done_).
 Further he has a table of his active alerts, sorted by type, city, radius, max price and an option to delete the alert.  
 The user has a clear overview of the filter (_To be done_)
-He can easily search by just clicking a button beside the alert (_To be done_)
+He can easily search by just clicking a button beside the alert (_done_)
 
  User Profile
 
@@ -138,7 +140,7 @@ His picture, username, name , credit card and description are displayed with the
 
 Edit Profile
 He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
-The user can add a credit card to his profile. (_To be done_)
+The user can add a credit card to his profile. (_done_)
 
 ***Home***
 
@@ -153,12 +155,14 @@ Display search
 He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the price, the type of the flat (where he can choose between house, apartment or studio) and the area of the flat in square meters.
 A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_To be done_)
 The user has a search filter where he can adjust the filter and redo the search (_Done_)
+In the ad preview the user sees also the number of rooms and the square meters of the property.
 
 Display Ad
-The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), an object description, filters and preferences. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
+The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), an object description, and filters. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
 The filter should be removed and the filter criteria added to the search criteria (_Done_).  
 The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).  
 The user sees a log of the bids, the remaining time and has the option to enter his bid (_Done_)
+The time left should be prominent and clear to see (_To be done_)
 
 
 ***Admin*** (_Done_)
