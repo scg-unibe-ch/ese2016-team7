@@ -75,7 +75,6 @@ $(document).ready(function() {
 	
 	$("#receiverEmail").focusout(function() {
 		var text = $("#receiverEmail").val();
-		
 		$.post("/profile/messages/validateEmail", {email:text}, function(data) {
 			if (data != text) {
 				alert(data);

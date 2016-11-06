@@ -7,20 +7,30 @@
 
 <c:import url="template/header.jsp"/>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#city").autocomplete({
+            minLength: 2
+        });
+        $("#city").autocomplete({
+            source: <c:import url="getzipcodes.jsp" />
+        });
+        $("#city").autocomplete("option", {
+            enabled: true,
+            autoFocus: true
+        });
+    })
+</script>
+
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
 <div class="container">
     <div class="jumbotron">
         <h1>Welcome to Flatfindr</h1>
-        <p>Start searching</p>
-        <form class="form-inline">
-            <input type="text" class="form-control" placeholder="Search for anything"/>
-            <select name="category" class="form-control">
-                <option>categories</option>
-                <option>2</option>
-                <option>3</option>
-            </select>
-            <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span</button>
+        <p>Start searching in your Neighborhood</p>
+        <form class="form-inline" method="post" action="/quicksearch">
+            <input type="text" id="city" name="city" class="form-control" placeholder="Search for your location"/>
+            <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
         </form>
     </div>
     <!--

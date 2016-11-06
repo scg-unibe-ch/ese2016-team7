@@ -6,8 +6,6 @@
 
 <c:import url="template/header.jsp" />
 
-<div class="container-fluid">
-
 <script>
 function star(starnr, rating) {
     if(starnr <= rating)
@@ -41,6 +39,8 @@ function rate(id, rating) {
 	});
 }
 </script>
+
+<div class="container">
 
 <h2>Visitors for your property</h2>
 

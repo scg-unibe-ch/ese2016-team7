@@ -79,7 +79,7 @@
                     <button id="newMsg" type="button">Message</button>
                     <c:choose>
                         <c:when test="${principalID eq user.id}">
-                            <a class="button" href="/profile/editProfile">Edit Profile</a>
+                            <a class="button btn" href="/profile/editProfile">Edit Profile</a>
                         </c:when>
                         <c:otherwise></c:otherwise>
                     </c:choose>

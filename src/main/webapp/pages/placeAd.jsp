@@ -96,8 +96,7 @@
 				</tr>
 
 			<tr>
-				<td><form:input id="field-title" path="title"
-						placeholder="Ad Title" /></td>
+				<td><form:input id="field-title" path="title" placeholder="Ad Title" /></td>
 				<td><form:radiobutton id="type-house" path="property" value="HOUSE"
 						checked="checked" />House </td>
 				<td><form:radiobutton id="type-studio" path="property" value="STUDIO" />Studio </td>
@@ -110,8 +109,7 @@
 			</tr>
 
 			<tr>
-				<td><form:input id="field-street" path="street"
-						placeholder="Street" /></td>
+				<td><form:input id="field-street" path="street" placeholder="Street" /></td>
 				<td><form:input id="field-city" path="city" placeholder="City" />
 					<form:errors path="city" cssClass="validationErrorText" /></td>
 			</tr>

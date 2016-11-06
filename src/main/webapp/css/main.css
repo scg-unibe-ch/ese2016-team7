@@ -1,6 +1,6 @@
 /* Basic resets to equalize inconsistencies across browsers */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, b, i, fieldset,
-form, label, legend, caption, article, header, footer, menu, nav,
+form, label, legend, caption, article, header, footer, menu,
 section, ol, ul, li {
 	margin: 0;
 	padding: 0;
@@ -1139,4 +1139,13 @@ footer nav ul li {
 
 .thumbnail {
 	padding: 0;
+}
+
+.navTitle{
+	font-family: Impact;
+	font-size: 1.8em;
+}
+
+nav{
+	font-size: 1.3em;
 }

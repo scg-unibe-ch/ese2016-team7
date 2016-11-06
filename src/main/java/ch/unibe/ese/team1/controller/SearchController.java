@@ -3,17 +3,23 @@ package ch.unibe.ese.team1.controller;
 import javax.validation.Valid;
 
 import ch.unibe.ese.team1.model.Ad;
+import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.UserService;
+
+import java.beans.PropertyEditor;
+import java.util.List;
+import java.util.Map;
 
 /** Handles all requests concerning the search for ads. */
 @Controller
@@ -38,14 +44,26 @@ public class SearchController {
 		return model;
 	}
 
+	/** Processes Quick Search */
+	@RequestMapping(value = "/quicksearch", method = RequestMethod.POST)
+	public ModelAndView quicksearch(@RequestParam("city") String city){
+		searchForm.setCity(city);
+		searchForm.setRadius(0);
+		searchForm.setPrice(0);
+		searchForm.setStudio(true);
+		searchForm.setHouse(true);
+		searchForm.setApartment(true);
+		Errors errors = new BeanPropertyBindingResult(searchForm, "searchForm");
+		return results(searchForm,(BindingResult) errors);
+	}
+
 	/**
 	 * Gets the results when filtering the ads in the database by the parameters
 	 * in the search form.
 	 */
 	@RequestMapping(value = "/results", method = RequestMethod.POST)
-	public ModelAndView results(@Valid SearchForm searchForm,
-			BindingResult result) {
-
+	public ModelAndView results(@Valid SearchForm searchForm, BindingResult result)
+	{
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
 			Iterable<Ad> results = adService.queryResults(searchForm);
