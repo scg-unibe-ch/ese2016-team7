@@ -7,21 +7,6 @@
 
 <c:import url="template/header.jsp"/>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#city").autocomplete({
-            minLength: 2
-        });
-        $("#city").autocomplete({
-            source: <c:import url="getzipcodes.jsp" />
-        });
-        $("#city").autocomplete("option", {
-            enabled: true,
-            autoFocus: true
-        });
-    })
-</script>
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
 <div class="container">
@@ -31,6 +16,10 @@
         <form class="form-inline" method="post" action="/quicksearch">
             <input type="text" id="city" name="city" class="form-control" placeholder="Search for your location"/>
             <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+        <p>The worlds greatest platform to buy and sell real estate. Our auction system ensures that you get the best deals. Buy your dream house today and start living your life.</p>
+        <form class="form-inline">
+            <input type="text" class="form-control input-lg" placeholder="Enter Area (e.g. Bern)"/>
+            <button type="submit" class="btn btn-primary btn-lg">Search</button>
         </form>
     </div>
     <!--
