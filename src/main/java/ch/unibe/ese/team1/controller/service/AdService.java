@@ -104,7 +104,6 @@ public class AdService {
         ad.setNumberRooms(placeAdForm.getNumberRooms());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
-		ad.setPreferences(placeAdForm.getPreferences());
 
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());

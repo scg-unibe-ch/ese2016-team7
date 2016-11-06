@@ -136,7 +136,6 @@ public class AlertServiceTest {
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
-		oltenResidence.setPreferences("blah");
 		oltenResidence.setUser(thomyF);
 		oltenResidence.setTitle("Olten Residence");
 		oltenResidence.setStreet("Florastr. 100");

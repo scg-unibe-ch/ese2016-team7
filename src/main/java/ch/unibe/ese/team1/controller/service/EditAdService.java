@@ -86,7 +86,6 @@ public class EditAdService {
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
-		ad.setPreferences(placeAdForm.getPreferences());
 
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -175,7 +174,6 @@ public class EditAdService {
 		PlaceAdForm adForm = new PlaceAdForm();
 
 		adForm.setRoomDescription(ad.getRoomDescription());
-		adForm.setPreferences(ad.getPreferences());
 
 		return adForm;
 	}

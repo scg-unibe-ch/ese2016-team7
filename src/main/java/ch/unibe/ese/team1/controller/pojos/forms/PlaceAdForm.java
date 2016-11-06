@@ -41,8 +41,6 @@ public class PlaceAdForm {
 
     private int securityCode;
 
-	private String preferences;
-	
 	// optional for input
 	private String roomFriends;
 	
@@ -81,14 +79,6 @@ public class PlaceAdForm {
 
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
-	}
-
-	public String getPreferences() {
-		return preferences;
-	}
-
-	public void setPreferences(String preferences) {
-		this.preferences = preferences;
 	}
 
 	public int getSquareFootage() {

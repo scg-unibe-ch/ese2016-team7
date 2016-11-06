@@ -105,7 +105,6 @@ public class PlaceAdController {
 			adForm.setGarden(ad.getGarden());
 			adForm.setMoveInDate(ad.getMoveInDate().toString());
 			adForm.setNumberRooms(ad.getNumberRooms());
-			adForm.setPreferences(ad.getPreferences());
 			adForm.setPrice(ad.getPrice());
 			adForm.setRoomDescription(ad.getRoomDescription());
 			adForm.setNumberRooms(ad.getNumberRooms());

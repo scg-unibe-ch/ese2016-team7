@@ -293,10 +293,6 @@
 
 
             <br/>
-            <fieldset>
-                <legend>Change preferences</legend>
-                <form:textarea path="preferences" rows="5" cols="100" value="${ad.preferences}" cssClass="form-control" />
-            </fieldset>
 
 
             <fieldset>
