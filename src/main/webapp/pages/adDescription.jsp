@@ -203,7 +203,7 @@
             }else{
                 if ($("#bids").css("display") == "none") {
                     $("#showBids").html("Show All Bids");
-                } else {
+                    } else {
                     $("#showBids").html("Hide All Bids");
                 }
             }
@@ -235,18 +235,23 @@
                 msec -= mm * 1000 * 60;
                 var ss = Math.floor(msec / 1000);
                 msec -= ss * 1000;
-                if(mm>0){
-                    if(hh>0){
-                        if(dd>0){
-                            $('#timeLeft').html("Time Left: "+ dd +" Days, " +hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
-                        }
+                if(dd>0) {
+                    $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+                }
+                else {
+                    if(hh>0) {
                         $('#timeLeft').html("Time Left: "+ hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
                     }
-                    $('#timeLeft').html("Time Left: "+ +mm+" Minutes, "+ ss+" Seconds");
+                    else {
+                        if(mm>0) {
+                            $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
+                        }
+                        else {
+                            $('#timeLeft').html("Time Left: "+ ss+" Seconds");
+                        }
+                    }
                 }
-                else{
-                    $('#timeLeft').html("Time Left: "+ ss+" Seconds");
-                }
+                
 
             }
         }

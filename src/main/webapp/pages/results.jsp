@@ -64,8 +64,51 @@
     }
 </script>
 
+    <script>/*
+        function showTimeLeft(){
+            //We need getTime() to make the countdown compatible with all browsers.
+            var expired = ${ad.expireDate.getTime()};
+            console.log("bi da");
+            var current = new Date();
+            $('#timeLeft').html("Something went wrong");
 
-<h1>Search results:</h1>
+            if(current > expired){
+                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+                $('#timeLeft').html("Something went wrong");
+            }else{
+                var msec = expired - current;
+                $('#timeLeft').html("Something went wrong but has time");
+
+                var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+                msec -= dd * 1000 * 60 * 60 * 24;
+                var hh = Math.floor(msec / 1000 / 60 / 60);
+                msec -= hh * 1000 * 60 * 60;
+                var mm = Math.floor(msec / 1000 / 60);
+                msec -= mm * 1000 * 60;
+                var ss = Math.floor(msec / 1000);
+                msec -= ss * 1000;
+                if(mm>0){
+                    if(hh>0){
+                        if(dd>0){
+                            $('#timeLeft').html("Time Left: "+ dd +" Days, " +hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                        }
+                        $('#timeLeft').html("Time Left: "+ hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                    }
+                    $('#timeLeft').html("Time Left: "+ +mm+" Minutes, "+ ss+" Seconds");
+                }
+                else{
+                    $('#timeLeft').html("Time Left: "+ ss+" Seconds");
+                }
+
+            }
+        }
+
+        var timer = setInterval(showTimeLeft, 1000);*/
+    </script>
+
+
+    <h1>Search results:</h1>
 
 <hr/>
 
@@ -112,8 +155,43 @@
                                 </p>
                             </div>
                             <div class="resultRight">
+                                <h2 id='timeLeft'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h2>
+                                <script>
+                                    var expired = ${ad.expireDate.getTime()};
+                                    var current = new Date();
+
+                                    if(current > expired){
+                                        $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+                                    }else{
+                                        var msec = expired - current;
+
+                                        var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+                                        msec -= dd * 1000 * 60 * 60 * 24;
+                                        var hh = Math.floor(msec / 1000 / 60 / 60);
+                                        msec -= hh * 1000 * 60 * 60;
+                                        var mm = Math.floor(msec / 1000 / 60);
+                                        msec -= mm * 1000 * 60;
+                                        var ss = Math.floor(msec / 1000);
+                                        msec -= ss * 1000;
+                                        if(mm>0 || hh>0 || dd>0){
+                                            if(hh>0 || dd >0){
+                                                if(dd>0){
+                                                    $('#timeLeft').html("Time Left: "+ dd +" Days, " +hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                                                }
+                                                $('#timeLeft').html("Time Left: "+ hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                                            }
+                                            $('#timeLeft').html("Time Left: "+ +mm+" Minutes, "+ ss+" Seconds");
+                                        }
+                                        else{
+                                            $('#timeLeft').html("Time Left: "+ ss+" Seconds");
+                                        }
+
+                                    }
+                                </script>
+                                <br/>
                                 <h2>CHF ${ad.price }</h2>
-                                <br/> <br/>
+                                <br/>
 
                                 <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                                                 type="date" pattern="dd.MM.yyyy"/>
@@ -146,8 +224,45 @@
                         </p>
                     </div>
                     <div class="resultRight">
+
+                        <h2 id='timeLeft'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h2>
+                        <script>
+                            var expired = ${ad.expireDate.getTime()};
+                            var current = new Date();
+
+                            if(current > expired){
+                                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+                            }else{
+                                var msec = expired - current;
+
+                                var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+                                msec -= dd * 1000 * 60 * 60 * 24;
+                                var hh = Math.floor(msec / 1000 / 60 / 60);
+                                msec -= hh * 1000 * 60 * 60;
+                                var mm = Math.floor(msec / 1000 / 60);
+                                msec -= mm * 1000 * 60;
+                                var ss = Math.floor(msec / 1000);
+                                msec -= ss * 1000;
+                                if(dd<=0){
+                                    if(hh<=0){
+                                        if(mm<=0){
+                                             $('#timeLeft').html("Time Left: "+ ss+" Seconds");
+                                        }
+                                        $('#timeLeft').html("Time Left: "+ mm+" Minutes");
+                                    }
+                                    $('#timeLeft').html("Time Left: "+ hh+"Hours");
+                                }
+                                else{
+                                    $('#timeLeft').html("Time Left: "+ dd+"days");
+                                }
+
+                            }
+                        </script>
+                        <br/>
+
                         <h2>CHF ${ad.price }</h2>
-                        <br/> <br/>
+                        <br/>
 
                         <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                                         type="date" pattern="dd.MM.yyyy"/>
@@ -295,5 +410,46 @@
     </div>
 </form:form>
     </div>
+
+<script>
+    /*
+    function showTimeLeft(time){
+        //We need getTime() to make the countdown compatible with all browsers.
+        var expired = time;
+        var current = new Date();
+
+        if(current > expired){
+            $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+        }else{
+            var msec = expired - current;
+
+            var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+            msec -= dd * 1000 * 60 * 60 * 24;
+            var hh = Math.floor(msec / 1000 / 60 / 60);
+            msec -= hh * 1000 * 60 * 60;
+            var mm = Math.floor(msec / 1000 / 60);
+            msec -= mm * 1000 * 60;
+            var ss = Math.floor(msec / 1000);
+            msec -= ss * 1000;
+            if(mm>0 || hh>0 || dd>0){
+                if(hh>0 || dd >0){
+                    if(dd>0){
+                        $('#timeLeft').html("Time Left: "+ dd +" Days, " +hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                    }
+                    $('#timeLeft').html("Time Left: "+ hh+" Hours, "+mm+" Minutes, "+ ss+" Seconds");
+                }
+                $('#timeLeft').html("Time Left: "+ +mm+" Minutes, "+ ss+" Seconds");
+            }
+            else{
+                $('#timeLeft').html("Time Left: "+ ss+" Seconds");
+            }
+
+        }
+    }
+
+    var timer = setInterval(showTimeLeft, 1000);*/
+</script>
+
 
 <c:import url="template/footer.jsp"/>
