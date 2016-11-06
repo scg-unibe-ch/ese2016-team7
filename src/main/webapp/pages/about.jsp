@@ -13,10 +13,11 @@
 </head>
 <body>
 
-<pre>About us</pre>
-<div class="container-fluid">
 
-<img id="about" src="/img/about.jpg">
+<div class="container">
+	<div class="thumbnail">
+		<img src="/img/about.jpg" class="img-responsive">
 	</div>
+</div>
 
-<c:import url="template/footer.jsp" /><br />
+<c:import url="template/footer.jsp" />

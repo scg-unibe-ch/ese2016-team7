@@ -6,10 +6,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:import url="template/header.jsp" />
-<pre>
-<a href="/">Home</a>   &gt;   Schedule</pre>
+<!--<pre>
+<a href="/">Home</a>   &gt;   Schedule</pre>-->
 
-<div class="container-fluid">
+<div class="container">
 
 <h2>Your presentations</h2>
 

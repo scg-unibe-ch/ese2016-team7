@@ -15,9 +15,9 @@
 </script>
 
 
-<pre><a href="/">Home</a>   &gt;   My Rooms</pre>
+<!--<pre><a href="/">Home</a>   &gt;   My Rooms</pre>-->
 
-<div class="container-fluid">
+<div class="container">
 
 <c:choose>
 	<c:when test="${empty ownAdvertisements}">

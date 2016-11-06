@@ -44,6 +44,7 @@ public class SignupForm {
 	@NotNull
 	private int creditCardExpireYear;
 
+	@Pattern(regexp = "[0-9]+", message = "Please enter a valid securtiy code")
 	@NotNull
 	private int securityCode;
 

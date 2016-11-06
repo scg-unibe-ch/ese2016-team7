@@ -19,9 +19,9 @@
 		  href="/css/main.css">
 
 
-	<link rel="stylesheet" type="text/css"
+	<!--<link rel="stylesheet" type="text/css"
 		  media="only screen and (max-device-width: 480px)"
-		  href="/css/smartphone.css" />
+		  href="/css/smartphone.css" />-->
 
 	<Title>FlatFindr</Title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -48,18 +48,38 @@
 <security:authorize var="loggedIn" url="/profile" />
 <security:authorize var="isAdmin" url="/admin" />
 
-
-
-
-<!-- check if user has a profile picture -->
-<header>
-	<div class="container-fluid">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/"><img src="/img/logo.png"></a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">FlatFindr</a>
 		</div>
-			<ul>
-				<div class="right">
-					<nav>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<!--<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li class="dropdown-header">Nav header</li>
+						<li><a href="#">Separated link</a></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul>
+				</li>-->
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value='/searchAd' />">Search</a></li>
 				<c:choose>
 					<c:when test="${loggedIn}">
 						<script>
@@ -68,14 +88,16 @@
 
 						<!-- include user details -->
 						<%@include file='/pages/getUserPicture.jsp' %>
-						<li id="profile_picture"><a href="#">
-							<%
-								out.print("<img src='" + filePath + "' />");
-								out.print("<p class='text'>" + realUser.getFirstName() + "<br />"
-										+ realUser.getLastName() + "</p>");
-							%>
-						</a>
-							<ul>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<img height="20" class="logo" src="<% out.print(filePath); %>" />
+								<% out.print(realUser.getFirstName() + " " + realUser.getLastName()); %>
+								<span class="caret"></span>
+
+
+
+							</a>
+							<ul class="dropdown-menu">
 								<li><a href="/profile/placeAd">Place an ad</a></li>
 								<li><a href="/profile/myRooms">My rooms</a></li>
 								<li><a id="messageLink" href="/profile/messages"></a></li>
@@ -97,11 +119,24 @@
 						<li><a href="/login">Login</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="<c:url value='/searchAd' />">Search</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+<!-- check if user has a profile picture
+<header>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><img src="/img/logo.png"></a>
+		</div>
+			<ul>
+				<div class="right">
+					<nav>
+
 					</nav>
 				</div>
 			</ul>
-</header>
+</header>-->
 
 <body>
 

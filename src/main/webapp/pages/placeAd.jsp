@@ -74,10 +74,10 @@
 	});
 </script>
 
-<pre>
-	<a href="/">Home</a>   &gt;   Place ad</pre>
+<!--<pre>
+	<a href="/">Home</a>   &gt;   Place ad</pre>-->
 
-<div class="container-fluid">
+<div class="container">
 
 
 <h1>Place an ad</h1>

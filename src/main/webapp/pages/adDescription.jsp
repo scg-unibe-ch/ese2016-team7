@@ -12,12 +12,10 @@
 
 <c:import url="template/header.jsp"/>
 
-<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>
+<!--<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>-->
 
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
-
-<div class="container-fluid">
 
 <script>
     var shownAdvertisementID = "${shownAd.id}";
@@ -156,6 +154,7 @@
 <fmt:formatDate value="${shownAd.creationDate}" var="formattedCreationDate"
                 type="date" pattern="dd.MM.yyyy"/>
 
+<div class="container">
 
 <h1 id="shownAdTitle">${shownAd.title}
     <c:choose>

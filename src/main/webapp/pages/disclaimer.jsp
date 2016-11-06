@@ -12,7 +12,7 @@
 <title>The FlatFoundrs</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
 
 
 <pre>Disclaimer</pre>
