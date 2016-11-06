@@ -48,8 +48,8 @@ public class SearchController {
 	@RequestMapping(value = "/quicksearch", method = RequestMethod.POST)
 	public ModelAndView quicksearch(@RequestParam("city") String city){
 		searchForm.setCity(city);
-		searchForm.setRadius(5);
-		searchForm.setPrice(10000);
+		searchForm.setRadius(500);
+		searchForm.setPrice(20000);
 		searchForm.setStudio(true);
 		searchForm.setHouse(true);
 		searchForm.setApartment(true);
