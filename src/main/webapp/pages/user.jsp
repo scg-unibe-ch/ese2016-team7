@@ -55,7 +55,7 @@
 
 <!--<pre>
 <a href="/">Home</a> &gt; Profile</pre>-->
-<div class="container">
+<div class="container" id = "content">
     <div id="userDiv">
         <c:choose>
             <c:when test="${user.picture.filePath != null}">

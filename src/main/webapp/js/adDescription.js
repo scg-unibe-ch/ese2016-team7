@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	
+
 	var buttons = $("#visitList table tr button");
-	
+
 	//Makes the enquiry-button inactive after the user applied to a visit
 	$(buttons).click(function() {
 		var buttonText = $(this).attr("class");

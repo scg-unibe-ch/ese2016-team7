@@ -75,7 +75,8 @@
         attachBookmarkedClickHandler();
         showTimeLeft();
 
-        $.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function (data) {
+
+    $.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function (data) {
             if (data == 3) {
                 $('#bookmarkButton').replaceWith($('<a class="right" id="bookmarkedButton">' + "Bookmarked" + '</a>'));
                 attachBookmarkedClickHandler();
@@ -155,7 +156,7 @@
                 type="date" pattern="dd.MM.yyyy"/>
 
 
-<div class="container">
+<div id = "content" class="container"> <!-- this id needs to be here for the javascript to work -->
     <br>
 
     <div class="row">
@@ -430,8 +431,9 @@
         <div class="row">
 
 
-            <div class="col-md-6">
+            <div class="col-md-6" id = "visitList"> <!-- id = "visitList" is needed for the javascript -->
                 <div class="table-responsive">
+
 
             <h2>Visiting times</h2>
             <table class="table table-striped">
@@ -465,6 +467,7 @@
             </table>
             </div>
         </div>
+            </div>
 
 
     <div class="col-md-6">
@@ -607,32 +610,36 @@
     </tr>
 </table>
 
-<div id="msgDiv">
-    <form class="msgForm">
-        <h2>Contact the advertiser</h2>
-        <br>
-        <br>
-        <label>Subject: <span>*</span></label>
-        <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
-        <br><br>
-        <label>Message: </label>
-        <textarea id="msgTextarea" placeholder="Message"></textarea>
-        <br/>
-        <button type="button" id="messageSend">Send</button>
-        <button type="button" id="messageCancel">Cancel</button>
-    </form>
-</div>
+    </div>
 
-<div id="confirmationDialog">
-    <form>
-        <p>Send enquiry to advertiser?</p>
-        <button type="button" id="confirmationDialogSend">Send</button>
-        <button type="button" id="confirmationDialogCancel">Cancel</button>
-    </form>
-</div>
+        <div id="msgDiv">
+            <form class="msgForm">
+                <h2>Contact the advertiser</h2>
+                <br>
+                <br>
+                <label>Subject: <span>*</span></label>
+                <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
+                <br><br>
+                <label>Message: </label>
+                <textarea id="msgTextarea" placeholder="Message"></textarea>
+                <br/>
+                <button type="button" id="messageSend">Send</button>
+                <button type="button" id="messageCancel">Cancel</button>
+            </form>
+        </div>
+
+        <div id="confirmationDialog">
+            <form>
+                <p>Send enquiry to advertiser?</p>
+                <button type="button" id="confirmationDialogSend">Send</button>
+                <button type="button" id="confirmationDialogCancel">Cancel</button>
+            </form>
+        </div>
     </div>
-    </div>
-    </div>
+
+
+
+
 
 
 <c:import url="template/footer.jsp"/>

@@ -50,7 +50,7 @@ public class SearchController {
 		searchForm.setHouse(true);
 		searchForm.setApartment(true);
 		Errors errors = new BeanPropertyBindingResult(searchForm, "searchForm");
-		return results(searchForm,(BindingResult) errors);
+        return results(searchForm, (BindingResult) errors);
 	}
 
 	/**
