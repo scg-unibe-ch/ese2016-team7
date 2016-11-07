@@ -21,6 +21,12 @@
             enabled: true,
             autoFocus: true
         });
+
+        $("img").each(function () {
+           if($(this).attr('src') == ""){
+               $(this).attr('src',"/img/ad_placeholder.png");
+           }
+        });
     })
 </script>
 
@@ -71,7 +77,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail thumbnailPremium">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
-                                <img src="${ad.pictures[0].filePath}" alt="/img/ad_placeholder.png">
+                                <img src="${ad.pictures[0].filePath}" alt="">
                             </a>
                             <div class="caption">
                                 <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
@@ -103,7 +109,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
-                                <img src="${ad.pictures[0].filePath}" alt="/img/ad_placeholder.png">
+                                <img src="${ad.pictures[0].filePath}" alt="">
                             </a>
                             <div class="caption">
                                 <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
