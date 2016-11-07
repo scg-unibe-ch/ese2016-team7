@@ -142,7 +142,7 @@
                                 </c:when>
                             </c:choose>
                             <form:input type="hidden" name="city" id="city" path="city" placeholder="e.g. Bern	"
-                                        tabindex="3" value="${alert.city}"/>
+                                        tabindex="3" value="${alert.zipcode} - ${alert.city}"/>
                             <form:input id="radiusInput" type="hidden" path="radius" placeholder="e.g. 5" step="5"
                                         value="${alert.radius}"/>
                             <form:input id="prizeInput" type="hidden" path="price" placeholder="e.g. 5" step="50"
