@@ -120,6 +120,8 @@ public class AuctionService {
 
         owner.addMoneyEarned(amount);
         winner.addMoneySpent(amount);
+        userDao.save(owner);
+        userDao.save(winner);
     }
 
 

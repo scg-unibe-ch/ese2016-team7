@@ -94,4 +94,17 @@ public class IndexController {
 
 		return model;
 	}
+
+	/** Displays the balance us page. */
+	@RequestMapping(value = "/profile/balance")
+	public ModelAndView balance(Principal principal) {
+		ModelAndView model = new ModelAndView("balance");
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+
+		model.addObject("moneyEarned", user.getMoneyEarned());
+		model.addObject("moneySpent", user.getMoneySpent());
+
+		return model;
+	}
 }

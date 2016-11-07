@@ -264,6 +264,6 @@ public class User {
 
 	public void addMoneySpent(int amount) {
         if (amount >= 0)
-            moneySpent += amount;
+			setMoneySpent(getMoneySpent()+amount);
     }
 }
