@@ -8,10 +8,13 @@
 <c:import url="template/header.jsp"/>
 
 <div class="container">
+    <div class = "row">
     <h1>Insights</h1>
     <hr/>
+        <div class = "col-md-4">
 
-    <table class="styledTable" id="alerts">
+            <div class="table-responsive">
+                <table class="table table-striped">
 
         <tr>
             <th>Stats</th>
@@ -38,8 +41,14 @@
             <td>${moneySpent}</td>
         </tr>
     </table>
+            </div>
+            </div>
+        <div class = "col-md-4">
 
-    <table class="styledTable" id="alerts">
+
+            <div class="table-responsive">
+
+                <table class="table table-striped">
 
         <tr>
             <th>Typology</th>
@@ -58,8 +67,14 @@
             <td>${studioCount}</td>
         </tr>
     </table>
+                </div>
+            </div>
 
-    <table class="styledTable" id="alerts">
+
+        <div class = "col-md-4">
+
+            <div class="table-responsive">
+                <table class="table table-striped">
 
         <tr>
             <th>Frequency Features Offered</th>
@@ -94,7 +109,10 @@
             <td>${garageCount}</td>
         </tr>
     </table>
+            </div>
+            </div>
 
+</div>
 </div>
 
 
