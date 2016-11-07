@@ -20,16 +20,18 @@
 </script>
 
 
-<div class="container">
+<div class="container" id = "content">
+    <div class="row">
     <h1>Messages</h1>
     <hr/>
-    <div id="folders">
+    <div id="folders" class="col-md-4">
         <h2 id="inbox">Inbox</h2>
         <h2 id="newMessage">New</h2>
         <h2 id="sent">Sent</h2>
     </div>
-    <div id="messageList">
-        <table class="styledTable">
+    <div id="messageList" class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-striped">
             <tr>
                 <th id="subjectColumn">Subject</th>
                 <th>Sender</th>
@@ -65,26 +67,17 @@
             <p>${messages[0].text }</p>
         </div>
     </div>
+
 </div>
 
-<div id="content">
-    <div id="msgDiv">
-        <form class="msgForm">
-            <h2>Contact someone</h2>
-            <label>Recepient: <span>*</span></label>
-            <input class="msgInput" type="text" id="receiverEmail" placeholder="Recipient"/>
-            <br><br>
-            <label>Subject: <span>*</span></label>
-            <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
-            <br><br>
-            <label>Message: </label>
-            <textarea id="msgTextarea" placeholder="Message"></textarea>
-            <br/>
-            <button type="button" id="messageSend">Send</button>
-            <button type="button" id="messageCancel">Cancel</button>
-        </form>
-    </div>
+
+
 </div>
+
+</div>
+
+
 
 <c:import url="getMessageForm.jsp"/>
+
 <c:import url="template/footer.jsp"/>
