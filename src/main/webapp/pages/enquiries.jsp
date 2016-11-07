@@ -84,10 +84,13 @@
 
 <div class="container">
 
+    <div class = "row">
     <h1>Enquiries</h1>
     <hr/>
-    <div id="enquiryList">
-        <table class="styledTable">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped">
             <tr>
                 <th>Sender</th>
                 <th>Ad</th>
@@ -126,6 +129,8 @@
                 </tr>
             </c:forEach>
         </table>
+    </div>
+        </div>
     </div>
 </div>
 
