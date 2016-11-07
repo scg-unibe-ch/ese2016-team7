@@ -154,31 +154,41 @@
 <fmt:formatDate value="${shownAd.creationDate}" var="formattedCreationDate"
                 type="date" pattern="dd.MM.yyyy"/>
 
-<div class="container">
 
-<h1 id="shownAdTitle">${shownAd.title}
-    <c:choose>
+<div class="container">
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+<h1>${shownAd.title}</h1>
+        </div>
+
+
+            <div class="col-md-6">
+
+        <c:choose>
         <c:when test="${loggedIn}">
-            <a class="right" id="bookmarkButton">Bookmark Ad</a>
+            <h1><a id="bookmarkButton">Bookmark Ad</a></h1>
         </c:when>
     </c:choose>
-</h1>
+                <c:choose>
+                    <c:when test="${loggedIn}">
+                        <c:if test="${loggedInUserEmail == shownAd.user.username }">
+                            <a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
+                                <button type="button">Edit Ad</button>
+                            </a>
+                        </c:if>
+                    </c:when>
+                </c:choose>
+                </div>
 
+
+        </div>
 
 <hr/>
 
-<section>
-    <c:choose>
-        <c:when test="${loggedIn}">
-            <c:if test="${loggedInUserEmail == shownAd.user.username }">
-                <a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
-                    <button type="button">Edit Ad</button>
-                </a>
-            </c:if>
-        </c:when>
-    </c:choose>
-    <br>
-    <br>
+
+
 
 
         <script>
@@ -262,6 +272,10 @@
             var timer = setInterval(showTimeLeft, 1000);
         </script>
 
+        <div class="row">
+
+
+            <div class="col-md-6">
         <div id="bidList" class="adDescDiv">
             <div id="bidInfo">
                 <h2 id="timeLeft">Expire Date: <fmt:formatDate value="${shownAd.expireDate}"
@@ -312,86 +326,115 @@
     <div class="clearBoth"></div>
     <br>
 
-
-    <table id="adDescTable" class="adDescDiv">
-        <tr>
-            <td><h2>Type</h2></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.property == 'HOUSE'}">House</c:when>
-                    <c:when test="${shownAd.property == 'APARTMENT'}">Apartment</c:when>
-                    <c:when test="${shownAd.property == 'STUDIO'}">Studio</c:when>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h2>Address</h2></td>
-            <td>
-                <a class="link"
-                   href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
-                    ${shownAd.zipcode} ${shownAd.city}</a>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h2>Available from</h2></td>
-            <td>${formattedMoveInDate}</td>
-        </tr>
-
-        <tr>
-            <td><h2>Price</h2></td>
-            <td>${shownAd.price}&#32;CHF</td>
-        </tr>
-
-        <tr>
-            <td><h2>Number of Rooms</h2></td>
-            <td>${shownAd.numberRooms}&#32;</td>
-        </tr>
-
-        <tr>
-            <td><h2>Square Meters</h2></td>
-            <td>${shownAd.squareFootage}&#32;m²</td>
-        </tr>
-
-        <tr>
-            <td><h2>Ad created on</h2></td>
-            <td>${formattedCreationDate}</td>
-        </tr>
-    </table>
-</section>
-
-<div id="image-slider">
-    <div id="left-arrow">
-        <img src="/img/left-arrow.png"/>
-    </div>
-    <div id="images">
-        <c:forEach items="${shownAd.pictures}" var="picture">
-            <img src="${picture.filePath}"/>
-        </c:forEach>
-    </div>
-    <div id="right-arrow">
-        <img src="/img/right-arrow.png"/>
-    </div>
 </div>
 
-<hr class="clearBoth"/>
+            <div class="col-md-6">
+                <div class="adDescDiv">
+                    <h2>Description</h2>
+                    <p>${shownAd.roomDescription}</p>
+                </div>
 
-<section>
-    <div id="descriptionTexts">
-        <div class="adDescDiv">
-            <h2>Room Description</h2>
-            <p>${shownAd.roomDescription}</p>
+                </div>
+            </div>
+
+    <br>
+
+    <div class="row">
+
+
+    <div class="col-md-6">
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <td><h3>Type</h3></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${shownAd.property == 'HOUSE'}">House</c:when>
+                        <c:when test="${shownAd.property == 'APARTMENT'}">Apartment</c:when>
+                        <c:when test="${shownAd.property == 'STUDIO'}">Studio</c:when>
+                    </c:choose>
+                </td>
+            </tr>
+
+            <tr>
+                <td><h3>Address</h3></td>
+                <td>
+                    <a class="link"
+                       href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
+                        ${shownAd.zipcode} ${shownAd.city}</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td><h3>Available from</h3></td>
+                <td>${formattedMoveInDate}</td>
+            </tr>
+
+            <tr>
+                <td><h3>Price</h3></td>
+                <td>${shownAd.price}&#32;CHF</td>
+            </tr>
+
+            <tr>
+                <td><h3>Number of Rooms</h3></td>
+                <td>${shownAd.numberRooms}&#32;</td>
+            </tr>
+
+            <tr>
+                <td><h3>Square Meters</h3></td>
+                <td>${shownAd.squareFootage}&#32;m²</td>
+            </tr>
+
+            <tr>
+                <td><h3>Ad created on</h3></td>
+                <td>${formattedCreationDate}</td>
+            </tr>
+        </table>
+    </div>
         </div>
+
+        <div class="col-md-6">
+            <div id="image-slider">
+                <!--
+                <div id="left-arrow">
+                    <img src="/img/left-arrow.png"/>
+                </div>
+                -->
+                <div id="images">
+                    <c:forEach items="${shownAd.pictures}" var="picture">
+                        <img src="${picture.filePath}"/>
+                    </c:forEach>
+                </div>
+                <!--
+                <div id="right-arrow">
+                    <img src="/img/right-arrow.png"/>
+                </div>
+                -->
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <hr class="clearBoth"/>
+
+
         <br/>
 
 
 
         <br/>
 
-        <div id="visitList" class="adDescDiv">
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="table-responsive">
+
             <h2>Visiting times</h2>
-            <table>
+            <table class="table table-striped">
                 <c:forEach items="${visits }" var="visit">
                     <tr>
                         <td>
@@ -420,12 +463,15 @@
                     </tr>
                 </c:forEach>
             </table>
+            </div>
         </div>
 
 
-    </div>
+    <div class="col-md-6">
 
-    <table id="checkBoxTable" class="adDescDiv">
+    <div class="table-responsive">
+
+    <table id="checkBoxTable" class="table table-striped">
         <tr>
             <td><h2>Smoking inside allowed</h2></td>
             <td>
@@ -497,12 +543,21 @@
         </tr>
 
     </table>
-</section>
+        </div>
+    </div>
+
+    </div>
+
+
 
 <div class="clearBoth"></div>
 <br>
 
-<table id="advertiserTable" class="adDescDiv">
+    <div class="row">
+        <div class="col-md-6">
+
+
+<table id="advertiserTable" class="table table-stripped">
     <tr>
         <td><h2>Advertiser</h2><br/></td>
     </tr>
@@ -575,6 +630,8 @@
         <button type="button" id="confirmationDialogCancel">Cancel</button>
     </form>
 </div>
+    </div>
+    </div>
     </div>
 
 

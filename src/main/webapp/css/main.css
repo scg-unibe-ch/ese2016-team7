@@ -9,6 +9,7 @@ section, ol, ul, li {
 }
 
 
+
 /* -------------------------------------------------------------------- */
 /* Global element styling & global classes */
 p {
@@ -22,6 +23,11 @@ h1 {
 
 h2 {
 	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+h3 {
+	font-size: 1.2em;
 	margin-bottom: 10px;
 }
 
@@ -83,7 +89,7 @@ body {
 }
 
 /* These two guarantee that we can write stuff on the same line,
-but not in one String (i.e. in the header) */
+but not in one String (i.e. in the header)
 .left {
 	display: inline-block;
 	float: left;
@@ -96,6 +102,7 @@ but not in one String (i.e. in the header) */
 	float: right;
 	padding-right: 8px;
 }
+*/
 
 .styledTable {
 	background-color: #4980C0;
@@ -709,7 +716,7 @@ footer nav ul li {
 }
 
 #checkBoxTable {
-	width: 27%;
+	width: 100%;
 }
 
 #checkBoxTable h2 {
@@ -785,14 +792,14 @@ footer nav ul li {
 #left-arrow {
 	height: 100%;
 	width: 40px;
-	margin-right: 10px;
+	margin-right: 0px;
 	float: left;
 }
 
 #right-arrow {
 	height: 100%;
 	width: 40px;
-	margin-left: 10px;
+	margin-left: 0px;
 	float: left;
 }
 
