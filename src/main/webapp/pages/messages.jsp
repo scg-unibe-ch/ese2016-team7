@@ -36,7 +36,7 @@
                 <th>Recipient</th>
                 <th>Date sent</th>
             </tr>
-            <c:forEach items="${messages }" var="message">
+            <c:forEach items="${messages}" var="message">
                 <fmt:formatDate value="${message.dateSent}"
                                 var="singleFormattedDateSent" type="date"
                                 pattern="HH:mm, dd.MM.yyyy"/>
