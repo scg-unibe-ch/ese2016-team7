@@ -112,27 +112,32 @@
             </div>
             </div>
 
-    <table class="styledTable" id="alerts">
-        <tr>
-            <th>Provisions</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>${provisionsMade}</td>
-            <td>CHF</td>
-        </tr>
-    </table>
+        <div class = "col-md-4">
 
-        <table class="styledTable" id="alerts">
-            <tr>
-                <th>Premium Ad Money</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>${premiumAdMoney}</td>
-                <td>CHF</td>
-            </tr>
-        </table>
+            <div class="table-responsive">
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>Provisions</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>${provisionsMade}</td>
+                        <td>CHF</td>
+                    </tr>
+
+                    <tr>
+                        <th>Premium Ad Money</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>${premiumAdMoney}</td>
+                        <td>CHF</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
 
 </div>
 </div>
