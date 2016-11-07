@@ -6,6 +6,7 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Property;
 
 import ch.unibe.ese.team1.model.User;
+import ch.unibe.ese.team1.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class IndexController {
 
 	@Autowired
 	private AdService adService;
+
+	@Autowired
+	private UserDao userDao;
 
 	@Autowired
 	private UserService userService;
@@ -71,6 +75,7 @@ public class IndexController {
 		Integer cellarCount = adService.getCountByCellar(true);
 		Integer furnishedCount = adService.getCountByFurnished(true);
 		Integer garageCount = adService.getCountByGarage(true);
+		Integer moneySpent = getTotalMoneySpent();
 
 
 		model.addObject("smokersCount", smokersCount);
@@ -88,11 +93,20 @@ public class IndexController {
 		model.addObject("adsCount", adsCount);
 		model.addObject("usersCount", usersCount);
         model.addObject("currentUser", user);
-        model.addObject("moneyEarned", user.getMoneyEarned());
-        model.addObject("moneySpent", user.getMoneySpent());
+        model.addObject("moneySpent", moneySpent);
         model.addObject("userName", user.getUsername());
 
 		return model;
+	}
+
+	private Integer getTotalMoneySpent() {
+		Iterable<User> users =userDao.findAll();
+		int totalMoneySpent = 0;
+
+		for (User user: users){
+			totalMoneySpent+=user.getMoneySpent();
+		}
+		return totalMoneySpent;
 	}
 
 	/** Displays the balance us page. */
