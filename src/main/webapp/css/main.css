@@ -737,7 +737,7 @@ footer nav ul li {
 }
 
 #advertiserTable {
-	width: 55%;;
+	width: 100%;;
 }
 
 #advertiserTable img {
@@ -760,9 +760,9 @@ footer nav ul li {
 }
 
 #image-slider {
-	height: 350px;
+	height: 100%;
 	float: right;
-	width: 600px;
+	width: 100%;
 	margin-bottom: 30px;
 }
 

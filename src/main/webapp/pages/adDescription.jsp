@@ -299,12 +299,12 @@
                         </c:if>
                     </c:when>
                     <c:otherwise>
-                        <h2><a href="/login" style="color: #FF00FF">Login to make bids.</a></h2>
+                        <h2><a href="/login" style="color: #0000ff">Login to make bids.</a></h2>
                     </c:otherwise>
                 </c:choose>
             </div>
             <div id="showBidsDiv">
-                <a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #ff00ff">Show All
+                <a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #0000ff">Show All
                     Bids</a><br>
             </div>
 
@@ -385,11 +385,6 @@
                 <td><h3>Square Meters</h3></td>
                 <td>${shownAd.squareFootage}&#32;m²</td>
             </tr>
-
-            <tr>
-                <td><h3>Ad created on</h3></td>
-                <td>${formattedCreationDate}</td>
-            </tr>
         </table>
     </div>
         </div>
@@ -430,8 +425,8 @@
 
         <div class="row">
 
-
-            <div class="col-md-6" id = "visitList"> <!-- id = "visitList" is needed for the javascript -->
+            <div class="col-md-6">
+                <div id = "visitList"> <!-- id = "visitList" is needed for the javascript -->
                 <div class="table-responsive">
 
 
@@ -466,8 +461,61 @@
                 </c:forEach>
             </table>
             </div>
-        </div>
+                </div>
+
+
+                <div class="table-responsive">
+
+                <table id="advertiserTable" class="table table-stripped">
+
+                    <tr>
+                        <td><c:choose>
+                            <c:when test="${shownAd.user.picture.filePath != null}">
+                                <img src="${shownAd.user.picture.filePath}">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="/img/avatar.png">
+                            </c:otherwise>
+                        </c:choose></td>
+
+                        <td>${shownAd.user.username}</td>
+
+                        <td id="advertiserEmail">
+                            <c:choose>
+                            <c:when test="${loggedIn}">
+                            <a href="/user?id=${shownAd.user.id}">
+                                <button type="button">Visit profile</button>
+                            </a>
+                            </c:when>
+                            <c:otherwise>
+                            <a href="/login">
+                                <button class="thinInactiveButton" type="button">Login to visit profile</button>
+                            </a>
+                            </c:otherwise>
+                            </c:choose>
+
+                        <td>
+                            <form>
+                                <c:choose>
+                                    <c:when test="${loggedIn}">
+                                        <c:if test="${loggedInUserEmail != shownAd.user.username }">
+                                            <button id="newMsg" type="button">Contact Advertiser</button>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/login">
+                                            <button class="thinInactiveButton" type="button">Login to contact advertiser</button>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                    </div>
+
             </div>
+
 
 
     <div class="col-md-6">
@@ -476,7 +524,7 @@
 
     <table id="checkBoxTable" class="table table-striped">
         <tr>
-            <td><h2>Smoking inside allowed</h2></td>
+            <td><h3>Smoking inside allowed</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
@@ -486,7 +534,7 @@
         </tr>
 
         <tr>
-            <td><h2>Animals allowed</h2></td>
+            <td><h3>Animals allowed</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
@@ -496,7 +544,7 @@
         </tr>
 
         <tr>
-            <td><h2>Furnished Room</h2></td>
+            <td><h3>Furnished Room</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
@@ -506,7 +554,7 @@
         </tr>
 
         <tr>
-            <td><h2>Garage</h2></td>
+            <td><h3>Garage</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
@@ -516,7 +564,7 @@
         </tr>
 
         <tr>
-            <td><h2>Cellar</h2></td>
+            <td><h3>Cellar</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
@@ -526,7 +574,7 @@
         </tr>
 
         <tr>
-            <td><h2>Balcony</h2></td>
+            <td><h3>Balcony</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
@@ -536,7 +584,7 @@
         </tr>
 
         <tr>
-            <td><h2>Garden</h2></td>
+            <td><h3>Garden</h3></td>
             <td>
                 <c:choose>
                     <c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
@@ -553,64 +601,11 @@
 
 
 
-<div class="clearBoth"></div>
-<br>
-
-    <div class="row">
-        <div class="col-md-6">
 
 
-<table id="advertiserTable" class="table table-stripped">
-    <tr>
-        <td><h2>Advertiser</h2><br/></td>
-    </tr>
 
-    <tr>
-        <td><c:choose>
-            <c:when test="${shownAd.user.picture.filePath != null}">
-                <img src="${shownAd.user.picture.filePath}">
-            </c:when>
-            <c:otherwise>
-                <img src="/img/avatar.png">
-            </c:otherwise>
-        </c:choose></td>
 
-        <td>${shownAd.user.username}</td>
 
-        <td id="advertiserEmail">
-            <c:choose>
-            <c:when test="${loggedIn}">
-            <a href="/user?id=${shownAd.user.id}">
-                <button type="button">Visit profile</button>
-            </a>
-            </c:when>
-            <c:otherwise>
-            <a href="/login">
-                <button class="thinInactiveButton" type="button">Login to visit profile</button>
-            </a>
-            </c:otherwise>
-            </c:choose>
-
-        <td>
-            <form>
-                <c:choose>
-                    <c:when test="${loggedIn}">
-                        <c:if test="${loggedInUserEmail != shownAd.user.username }">
-                            <button id="newMsg" type="button">Contact Advertiser</button>
-                        </c:if>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="/login">
-                            <button class="thinInactiveButton" type="button">Login to contact advertiser</button>
-                        </a>
-                    </c:otherwise>
-                </c:choose>
-            </form>
-        </td>
-    </tr>
-</table>
-
-    </div>
 
         <div id="msgDiv">
             <form class="msgForm">
