@@ -46,6 +46,12 @@
                 </ul>
                 <br/>
 
+                <h2>Admin test user</h2>
+                <ul class="test-users">
+                    <li>Email: <i>system</i>, password: <i>1234</i></li>
+                </ul>
+                <br/>
+
                 <h2>Roommates for AdBern</h2>
                 <ul class="test-users">
                     <li>Email: <i>hans@unibe.ch</i>, password: <i>password</i></li>

@@ -3,7 +3,6 @@ package ch.unibe.ese.team1.controller;
 import javax.validation.Valid;
 
 import ch.unibe.ese.team1.model.Ad;
-import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.*;
@@ -17,9 +16,6 @@ import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.UserService;
 
-import java.beans.PropertyEditor;
-import java.util.List;
-import java.util.Map;
 
 /** Handles all requests concerning the search for ads. */
 @Controller

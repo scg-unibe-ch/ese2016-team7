@@ -90,7 +90,7 @@
 						<%@include file='/pages/getUserPicture.jsp' %>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<img height="20" class="logo" src="<% out.print(filePath); %>" />
+								<img height="25" class="logo" src="<% out.print(filePath); %>" />
 								<% out.print(realUser.getFirstName() + " " + realUser.getLastName()); %>
 								<span class="caret"></span>
 

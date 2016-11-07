@@ -4,7 +4,6 @@
 
 
 <footer>
-
     <nav>
 		<ul>
 			<li><a class="link" href="/about">About us</a></li>
@@ -22,3 +21,4 @@
 <script src="/js/bootstrap.min.js"></script>
 
 </body> <!-- was opened in header-->
+</html>
