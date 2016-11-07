@@ -112,6 +112,17 @@
             </div>
             </div>
 
+    <table class="styledTable" id="alerts">
+        <tr>
+            <th>Provisions</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>${provisionsMade}</td>
+            <td>CHF</td>
+        </tr>
+    </table>
+
 </div>
 </div>
 
