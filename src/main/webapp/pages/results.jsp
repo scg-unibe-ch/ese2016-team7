@@ -154,7 +154,7 @@
                                     </p>
                                 </div>
                                 <div class="resultRight">
-                                    <h2 id='timeLeft'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
+                                    <h2 id='timeLeft${ad.id}p'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
                                                                                    pattern="dd.MM.yyyy HH:mm:ss"/></h2>
                                     <script>
                                         var expired = ${ad.expireDate.getTime()};
@@ -174,17 +174,17 @@
                                             msec -= mm * 1000 * 60;
                                             var ss = Math.floor(msec / 1000);
                                             msec -= ss * 1000;
-                                            if (mm > 0 || hh > 0 || dd > 0) {
-                                                if (hh > 0 || dd > 0) {
-                                                    if (dd > 0) {
-                                                        $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
-                                                    }
-                                                    $('#timeLeft').html("Time Left: " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
-                                                }
-                                                $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
+                                            if(dd>0){
+                                                $('#timeLeft${ad.id}p').html("Time Left: " + dd + "days");
                                             }
-                                            else {
-                                                $('#timeLeft').html("Time Left: " + ss + " Seconds");
+                                            else if(hh>0){
+                                                $('#timeLeft${ad.id}p').html("Time Left: " + hh + "Hours");
+                                            }
+                                            else if(mm>0){
+                                                $('#timeLeft${ad.id}p').html("Time Left: " + mm + " Minutes");
+                                            }
+                                            else{
+                                                $('#timeLeft${ad.id}p').html("Time Left: " + ss + "seconds");
                                             }
 
                                         }
@@ -225,7 +225,7 @@
                         </div>
                         <div class="resultRight">
 
-                            <h2 id='timeLeft'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
+                            <h2 id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
                                                                            pattern="dd.MM.yyyy HH:mm:ss"/></h2>
                             <script>
                                 var expired = ${ad.expireDate.getTime()};
@@ -245,19 +245,18 @@
                                     msec -= mm * 1000 * 60;
                                     var ss = Math.floor(msec / 1000);
                                     msec -= ss * 1000;
-                                    if (dd <= 0) {
-                                        if (hh <= 0) {
-                                            if (mm <= 0) {
-                                                $('#timeLeft').html("Time Left: " + ss + " Seconds");
-                                            }
-                                            $('#timeLeft').html("Time Left: " + mm + " Minutes");
-                                        }
-                                        $('#timeLeft').html("Time Left: " + hh + "Hours");
+                                    if(dd>0){
+                                        $('#timeLeft${ad.id}').html("Time Left: " + dd + "days");
                                     }
-                                    else {
-                                        $('#timeLeft').html("Time Left: " + dd + "days");
+                                    else if(hh>0){
+                                        $('#timeLeft${ad.id}').html("Time Left: " + hh + "Hours");
                                     }
-
+                                    else if(mm>0){
+                                        $('#timeLeft${ad.id}').html("Time Left: " + mm + " Minutes");
+                                    }
+                                    else{
+                                        $('#timeLeft${ad.id}').html("Time Left: " + ss + "seconds");
+                                    }
                                 }
                             </script>
                             <br/>
