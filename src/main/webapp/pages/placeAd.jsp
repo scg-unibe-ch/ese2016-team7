@@ -123,7 +123,7 @@
 			</tr>
 
 			<tr>
-				<td><label for="field-Prize">Price</label></td>
+				<td><label for="field-Prize">Auction price</label></td>
 				<td><label for="field-SquareFootage">Square Meters</label></td>
 				<td><label for="field-NumberRooms">Number of Rooms</label></td>
 			</tr>
@@ -137,6 +137,12 @@
 				<td><form:input id="field-NumberRooms" type="number"
 								path="numberRooms" placeholder="price" step="0.5" /> <form:errors
 						path="numberRooms" cssClass="validationErrorText" /></td>
+			</tr>
+			<tr>
+				<td><label for="field-InstantBuyPrice">Instant Buy Price</label></td>
+			</tr>
+			<tr>
+				<td><form:input id="field-InstantBuyPrice" type="number" path="instantBuyPrice" step="50"/></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -157,7 +163,7 @@
 				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden
 						(co-use)</label></td>
 				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
-						or Patio</label></td>
+					or Patio</label></td>
 			</tr>
 			<tr>
 				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar
