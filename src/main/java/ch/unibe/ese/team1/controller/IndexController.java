@@ -94,6 +94,7 @@ public class IndexController {
 		Integer garageCount = adService.getCountByGarage(true);
         Integer provisionsMade = system.getMoneyEarned();
 		Integer moneySpent = getTotalMoneySpent();
+		Long premiumAdMoney = system.getPremiumAdMoney();
 
 
 		model.addObject("smokersCount", smokersCount);
@@ -114,6 +115,7 @@ public class IndexController {
         model.addObject("moneySpent", moneySpent);
         model.addObject("userName", user.getUsername());
         model.addObject("provisionsMade",provisionsMade);
+		model.addObject("premiumAdMoney",premiumAdMoney);
 
 		return model;
 	}

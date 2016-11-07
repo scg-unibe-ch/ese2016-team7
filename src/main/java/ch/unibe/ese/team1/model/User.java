@@ -50,6 +50,8 @@ public class User {
     @Column(nullable = false)
     private boolean hasCreditCard;
 
+	private long premiumAdMoney;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles;
@@ -266,4 +268,14 @@ public class User {
         if (amount >= 0)
 			setMoneySpent(getMoneySpent()+amount);
     }
+
+    public void addPremiumAdMoney(int amount){
+		this.premiumAdMoney+=amount;
+	}
+
+	public long getPremiumAdMoney(){
+		return this.premiumAdMoney;
+	}
+
+
 }

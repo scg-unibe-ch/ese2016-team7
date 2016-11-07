@@ -123,6 +123,17 @@
         </tr>
     </table>
 
+        <table class="styledTable" id="alerts">
+            <tr>
+                <th>Premium Ad Money</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>${premiumAdMoney}</td>
+                <td>CHF</td>
+            </tr>
+        </table>
+
 </div>
 </div>
 
