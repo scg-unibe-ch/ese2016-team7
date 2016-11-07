@@ -41,18 +41,18 @@ function rate(id, rating) {
 </script>
 
 <div class="container">
-
+<div class="row">
 <h2>Visitors for your property</h2>
 
 <p>Information about the property: <a href="/ad?id=${ad.id }">${ad.street }, ${ad.zipcode } ${ad.city }</a></p>
 
-<div id="visitorsDiv">			
 <c:choose>
 	<c:when test="${empty visitors}">
 		<p>This property doesn't have any scheduled visitors at the moment.
 	</c:when>
 	<c:otherwise>
-		<table class="styledTable" id="visitors">
+	<div class="table-responsive">
+		<table id="checkBoxTable" class="table table-striped">
 			<thead>
 			<tr>
 				<th>Name</th>
@@ -76,6 +76,7 @@ function rate(id, rating) {
 		</table>
 	</c:otherwise>
 </c:choose>
+	</div>
 </div>
 	</div>
 

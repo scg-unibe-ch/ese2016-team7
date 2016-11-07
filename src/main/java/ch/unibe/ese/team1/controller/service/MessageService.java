@@ -43,10 +43,13 @@ public class MessageService {
 				return message2.getDateSent().compareTo(message1.getDateSent());
 			}
 		});
-		messages.get(0).setState(MessageState.READ);
-		messageDao.save(messages.get(0));
+		if(messages.size() > 0) {
+			messages.get(0).setState(MessageState.READ);
+			messageDao.save(messages.get(0));
+		}
 		return messages;
 	}
+
 
 	/** Gets all messages in the sent folder for the given user. */
 	@Transactional
