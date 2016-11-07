@@ -1131,8 +1131,8 @@ footer nav ul li {
 
 
 .caption {
-	height: 130px;
-	overflow: hidden;
+	height: 170px;
+	/*overflow: hidden;*/
 	font-size: 14px;
 }
 
@@ -1143,6 +1143,10 @@ footer nav ul li {
 
 .thumbnail {
 	padding: 0;
+}
+
+.thumbnailPremium{
+	background: #ffecec;
 }
 
 .navTitle{

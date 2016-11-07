@@ -1,8 +1,11 @@
 package ch.unibe.ese.team1.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import ch.unibe.ese.team1.controller.service.UserService;
+import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Property;
 
 import ch.unibe.ese.team1.model.User;
@@ -32,10 +35,23 @@ public class IndexController {
 
 	/** Displays the home page. */
 	@RequestMapping(value = "/")
-	public ModelAndView index() {
+	public ModelAndView index(Principal principal) {
 		ModelAndView model = new ModelAndView("index");
-		model.addObject("newest", adService.getNewestAds(4,false));
+		model.addObject("newest", adService.getNewestAds(2,false));
 		model.addObject("premium", adService.getNewestAds(2,true));
+
+		String name;
+		Iterable<Ad> bookmarks;
+
+		try{
+			name = principal.getName();
+			User user = userService.findUserByUsername(name);
+			bookmarks = user.getBookmarkedAds();
+		}catch (Exception e){
+			bookmarks = new ArrayList<Ad>();
+		}
+
+		model.addObject("bookmarks", bookmarks);
 		return model;
 	}
 

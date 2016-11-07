@@ -4,8 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:import url="template/header.jsp"/>
+<security:authorize var="loggedIn" url="/profile" />
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -25,16 +27,18 @@
 <script type="text/javascript">
     function equalHeight(group) {
         var smallest = 1000000;
-        group.each(function() {
+        group.each(function () {
             var thisHeight = $(this).height();
-            if(thisHeight < smallest) {
+            if (thisHeight < smallest) {
                 smallest = thisHeight;
             }
         });
-        group.each(function() { $(this).height(smallest); });
+        group.each(function () {
+            $(this).height(smallest);
+        });
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         equalHeight($(".thumbnail img"));
     });
 </script>
@@ -47,119 +51,112 @@
         <p>The worlds greatest platform to buy and sell real estate. Our auction system ensures that you get the best
             deals. Buy your dream house today and start living your life.</p>
         <form class="form-inline" method="post" action="/quicksearch">
-            <input pattern="^[0-9]{4} - [-\w\s\u00C0-\u00FF]*" type="text" id="city" name="city" class="form-control input-lg"
+            <input pattern="^[0-9]{4} - [-\w\s\u00C0-\u00FF]*" type="text" id="city" name="city"
+                   class="form-control input-lg"
                    placeholder="Enter Area (e.g. Bern)"/>
             <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span>
             </button>
         </form>
     </div>
-    <!--
-<div class="row">
-<h2>Heading</h2>
-<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 
-<c:choose>
-    <c:when test="${empty newest}">
-        <h2>No ads placed yet</h2>
-    </c:when>
-    <c:otherwise>
-        <c:choose>
-            <c:when test="${empty premium}">
-                <h2>No premium Ads found</h2>
-            </c:when>
-            <c:otherwise>
-                <div id="premiumResultsDiv" class="resultsDiv">
-                <h2>Premium ads:</h2>
-                <c:forEach var="ad" items="${premium}">
-                    <div class="resultAd">
-                    <div class="resultLeft">
-                    <a href="<c:url value='/ad?id=${ad.id}'/>"><img
-                    src="${ad.pictures[0].filePath}"/></a>
-                    <h2>
-                    <a class="link" href="<c:url value='/ad?id=${ad.id}'/>">${ad.title}</a>
-                    </h2>
-                    <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-                    <br/>
-                    <p>
-                    <i><c:choose>
-                    <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-                    <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-                    <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-                </c:choose></i>
-                    </p>
-                    </div>
-                    <div class="resultRight">
-                    <h2>CHF ${ad.price }</h2>
-                    <br/> <br/>
-
-                    <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                    type="date" pattern="dd.MM.yyyy"/>
-
-                    <p>Move-in date: ${formattedMoveInDate }</p>
-                    </div>
-                    </div>
-                </c:forEach>
-                </div>
-
-            </c:otherwise>
-        </c:choose>
-        -->
 
     <div class="page-header"><h2>Newest Ads</h2></div>
-    <div class="row">
-        <c:forEach var="ad" items="${newest}">
-            <div class="col-md-3">
-                <div class="thumbnail">
-                    <a href="<c:url value='/ad?id=${ad.id}' />">
-                        <img src="${ad.pictures[0].filePath}" alt="">
-                    </a>
-                    <div class="caption">
-                        <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
-                        <p>${ad.street}, ${ad.zipcode} ${ad.city}
-                            <br/><i><c:choose>
-                                <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-                                <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-                                <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-                            </c:choose></i></p>
-                        <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                        type="date" pattern="dd.MM.yyyy"/>
+    <c:choose>
+        <c:when test="${empty newest && empty premium}">
+            <h2>No ads placed yet</h2>
+        </c:when>
+        <c:otherwise>
+            <div class="row">
+                <c:forEach var="ad" items="${premium}">
+                    <div class="col-md-3">
+                        <div class="thumbnail thumbnailPremium">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="/img/ad_placeholder.png">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                                                type="date" pattern="dd.MM.yyyy"/>
 
-                        <p>Available from: ${formattedMoveInDate }</p>
-                        <h4>CHF ${ad.price }</h4>
+                                <p>Available from: ${formattedMoveInDate }</p>
+                                <h4>CHF ${ad.price }</h4>
+                                <br/>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <strong>Premium</strong>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
+                <c:forEach var="ad" items="${newest}">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="/img/ad_placeholder.png">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                                                type="date" pattern="dd.MM.yyyy"/>
+
+                                <p>Available from: ${formattedMoveInDate }</p>
+                                <h4>CHF ${ad.price }</h4>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
-
-            <!--
-            <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="<c:url value='/ad?id=${ad.id}'/>">
-            <img width="250" src="${ad.pictures[0].filePath}" class="img-responsive img-rounded"/>
-            </a>
-            <h2>
-            <a class="link" href="<c:url value='/ad?id=${ad.id}'/>">${ad.title}</a>
-            </h2>
-            <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-            <p>
-            <i><c:choose>
-            <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-            <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-            <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-        </c:choose></i>
-            </p>
-
-            <h2>CHF ${ad.price }</h2>
-
-            <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                            type="date" pattern="dd.MM.yyyy"/>
-
-            <p>Move-in date: ${formattedMoveInDate }</p>
-            </div>-->
-        </c:forEach>
-    </div>
-    </c:otherwise>
+        </c:otherwise>
     </c:choose>
-</div>
+
+    <c:choose>
+        <c:when test="${loggedIn && !empty bookmarks}">
+            <div class="page-header"><h2>My Bookmarks</h2></div>
+            <div class="row">
+                <c:forEach var="ad" items="${bookmarks}">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="/img/ad_placeholder.png">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                                                type="date" pattern="dd.MM.yyyy"/>
+
+                                <p>Available from: ${formattedMoveInDate }</p>
+                                <h4>CHF ${ad.price }</h4>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:when>
+    </c:choose>
 </div>
 
 
