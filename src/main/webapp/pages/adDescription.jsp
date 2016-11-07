@@ -332,7 +332,7 @@
             <div class="col-md-6">
                 <div class="adDescDiv">
                     <h2>Description</h2>
-                    <p>${shownAd.roomDescription}</p>
+                    ${shownAd.roomDescription}
                 </div>
 
                 </div>

@@ -71,6 +71,7 @@
 </script>
 
 <div class="container">
+    <div class = "row">
     <h1>Manage alerts</h1>
     <hr/>
 
@@ -80,7 +81,9 @@
                 <p>You currently aren't subscribed to any alerts.
             </c:when>
             <c:otherwise>
-                <table class="styledTable" id="alerts">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Type</th>
@@ -211,6 +214,7 @@
         </c:choose>
     </div>
 </div>
+    </div>
 
 
 <c:import url="template/footer.jsp"/>
