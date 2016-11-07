@@ -75,6 +75,7 @@ public class AdTestDataSaver {
 		adBern.setCreationDate(creationDate1);
 		adBern.setPrice(145000);
 		adBern.setSquareFootage(600);
+		adBern.setNumberRooms(3.5f);
 		adBern.setProperty(HOUSE);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
@@ -112,6 +113,7 @@ public class AdTestDataSaver {
 		adBern2.setCreationDate(creationDate2);
 		adBern2.setPrice(2000);
 		adBern2.setSquareFootage(60);
+        adBern2.setNumberRooms(2f);
 		adBern2.setProperty(STUDIO);
 		adBern2.setSmokers(false);
 		adBern2.setAnimals(true);
@@ -150,6 +152,7 @@ public class AdTestDataSaver {
 		adBasel.setCreationDate(creationDate3);
 		adBasel.setPrice(0);
 		adBasel.setSquareFootage(10);
+        adBasel.setNumberRooms(1f);
 		adBasel.setProperty(APARTMENT);
 		adBasel.setSmokers(true);
 		adBasel.setAnimals(false);
@@ -185,6 +188,7 @@ public class AdTestDataSaver {
 		adOlten.setCreationDate(creationDate4);
 		adOlten.setPrice(0);
 		adOlten.setSquareFootage(220);
+        adOlten.setNumberRooms(5);
 		adOlten.setProperty(HOUSE);
 		adOlten.setSmokers(true);
 		adOlten.setAnimals(false);
@@ -218,6 +222,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCreationDate(creationDate5);
 		adNeuchâtel.setPrice(0);
 		adNeuchâtel.setSquareFootage(40);
+        adNeuchâtel.setNumberRooms(2.5f);
 		adNeuchâtel.setProperty(STUDIO);
 		adNeuchâtel.setSmokers(true);
 		adNeuchâtel.setAnimals(false);
@@ -250,6 +255,7 @@ public class AdTestDataSaver {
 		adBiel.setCreationDate(creationDate6);
 		adBiel.setPrice(29000);
 		adBiel.setSquareFootage(10);
+        adBiel.setNumberRooms(3.5f);
 		adBiel.setProperty(STUDIO);
 		adBiel.setSmokers(true);
 		adBiel.setAnimals(false);
@@ -286,6 +292,7 @@ public class AdTestDataSaver {
 		adZurich.setCreationDate(creationDate7);
 		adZurich.setPrice(9000);
 		adZurich.setSquareFootage(32);
+        adZurich.setNumberRooms(1.5f);
 		adZurich.setProperty(APARTMENT);
 		adZurich.setSmokers(false);
 		adZurich.setAnimals(false);
@@ -325,6 +332,7 @@ public class AdTestDataSaver {
 		adLuzern.setCreationDate(creationDate2);
 		adLuzern.setPrice(7000);
 		adLuzern.setSquareFootage(60);
+        adLuzern.setNumberRooms(2);
 		adLuzern.setProperty(STUDIO);
 		adLuzern.setSmokers(false);
 		adLuzern.setAnimals(false);
@@ -362,6 +370,7 @@ public class AdTestDataSaver {
 		adAarau.setCreationDate(creationDate8);
 		adAarau.setPrice(8000);
 		adAarau.setSquareFootage(26);
+        adAarau.setNumberRooms(3);
 		adAarau.setProperty(STUDIO);
 		adAarau.setSmokers(true);
 		adAarau.setAnimals(false);
@@ -401,6 +410,7 @@ public class AdTestDataSaver {
 		adDavos.setCreationDate(creationDate4);
 		adDavos.setPrice(11000);
 		adDavos.setSquareFootage(74);
+        adDavos.setNumberRooms(5);
 		adDavos.setProperty(HOUSE);
 		adDavos.setSmokers(true);
 		adDavos.setAnimals(false);
@@ -435,6 +445,7 @@ public class AdTestDataSaver {
 		adLausanne.setCreationDate(creationDate5);
 		adLausanne.setPrice(3600);
 		adLausanne.setSquareFootage(8);
+        adLausanne.setNumberRooms(1.5f);
 		adLausanne.setProperty(APARTMENT);
 		adLausanne.setSmokers(true);
 		adLausanne.setAnimals(false);
@@ -467,6 +478,7 @@ public class AdTestDataSaver {
 		adLocarno.setCreationDate(creationDate6);
 		adLocarno.setPrice(9600);
 		adLocarno.setSquareFootage(42);
+        adLocarno.setNumberRooms(2.5f);
 		adLocarno.setProperty(HOUSE);
 		adLocarno.setSmokers(true);
 		adLocarno.setAnimals(false);

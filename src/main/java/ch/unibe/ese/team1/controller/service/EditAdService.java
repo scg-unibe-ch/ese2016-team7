@@ -85,6 +85,8 @@ public class EditAdService {
 		ad.setPrice(placeAdForm.getPrice());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
 
+		ad.setNumberRooms(placeAdForm.getNumberRooms());
+
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 
 		// ad description values

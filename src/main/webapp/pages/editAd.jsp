@@ -178,6 +178,7 @@
                     <tr>
                         <td><label for="field-Prize">Prize per month</label></td>
                         <td><label for="field-SquareFootage">Square Meters</label></td>
+                        <td><label for="field-NumberRooms">Number of Rooms</label></td>
                     </tr>
                     <tr>
                         <td>
@@ -186,11 +187,18 @@
                             <form:errors path="price" cssClass="validationErrorText"/>
                         </td>
                         <td>
-                            <form:input id="field-SquareFootage" type="number"
-                                        path="squareFootage" placeholder="Prize per month" step="5"
-                                        value="${ad.squareFootage }"
+                        <form:input id="field-SquareFootage" type="number"
+                                    path="squareFootage" placeholder="Prize per month" step="5"
+                                    value="${ad.squareFootage }"
+                                    cssClass="form-control"/>
+                        <form:errors path="squareFootage" cssClass="validationErrorText"/>
+                    </td>
+                        <td>
+                            <form:input id="field-NumberRooms" type="number"
+                                        path="numberRooms" placeholder="Prize per month" step="0.5"
+                                        value="${ad.numberRooms}"
                                         cssClass="form-control"/>
-                            <form:errors path="squareFootage" cssClass="validationErrorText"/>
+                            <form:errors path="numberRooms" cssClass="validationErrorText"/>
                         </td>
                     </tr>
                 </table>
@@ -279,6 +287,20 @@
                                 <c:otherwise>
                                     <form:checkbox id="field-furnished" path="furnished" cssClass="checkbox"/>
                                     <label>Furnished</label>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:choose>
+                                <c:when test="${ad.garage}">
+                                <form:checkbox id="field-garage" path="garage" checked="checked" cssClass="checkbox"/>
+                                <label>Garage</label>
+                                </c:when>
+                                <c:otherwise>
+                                    <form:checkbox id="field-garage" path="garage" cssClass="checkbox"/>
+                                    <label>Garage</label>
                                 </c:otherwise>
                             </c:choose>
                         </td>
