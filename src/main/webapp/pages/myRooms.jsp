@@ -21,6 +21,11 @@
     }
 
     $(document).ready(function() {
+        $("img").each(function () {
+            if($(this).attr('src') == ""){
+                $(this).attr('src',"/img/ad_placeholder.png");
+            }
+        });
         equalHeight($(".thumbnail img"));
     });
 </script>

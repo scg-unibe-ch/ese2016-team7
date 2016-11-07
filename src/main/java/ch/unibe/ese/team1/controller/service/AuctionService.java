@@ -35,6 +35,8 @@ public class AuctionService {
     @Autowired
     private UserDao userDao;
 
+    private static double provision=0.05;
+
     /**
      * Searches every 10 seconds for finished auctions
      * and sends messages to the corresponding users
@@ -120,8 +122,11 @@ public class AuctionService {
 
         owner.addMoneyEarned(amount);
         winner.addMoneySpent(amount);
+        User system = userDao.findByUsername("system");
+        system.addMoneyEarned((int) (amount*provision));
         userDao.save(owner);
         userDao.save(winner);
+        userDao.save(system);
     }
 
 

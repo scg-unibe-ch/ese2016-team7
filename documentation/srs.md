@@ -168,6 +168,9 @@ The time left should be prominent and clear to see (_To be done_)
 ***Admin*** (_Done_)
 
 If an administrator is logged in, he can see statistics (besides the normal ads) (_Done_)
+The administrator should see how many users are subscribed, ads active, ads expired, ads in total, money spent on Flatfindr,
+how many properties of each type are advertised, what options are chosen for the properties. (_Done_)
+He sees how much money Flatfindr has earned with provisions and premium ads. (_Done_)
    
 
 **Non-functional requirements (external, performance, etc.)**

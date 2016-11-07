@@ -73,6 +73,7 @@ public class IndexController {
 		ModelAndView model = new ModelAndView("insights");
         String username = principal.getName();
         User user = userService.findUserByUsername(username);
+        User system = userDao.findByUsername("system");
 
 		// Gathering Data for stats
 		Integer usersCount = userService.countUsers();
@@ -91,7 +92,9 @@ public class IndexController {
 		Integer cellarCount = adService.getCountByCellar(true);
 		Integer furnishedCount = adService.getCountByFurnished(true);
 		Integer garageCount = adService.getCountByGarage(true);
+        Integer provisionsMade = system.getMoneyEarned();
 		Integer moneySpent = getTotalMoneySpent();
+		Long premiumAdMoney = system.getPremiumAdMoney();
 
 
 		model.addObject("smokersCount", smokersCount);
@@ -111,6 +114,8 @@ public class IndexController {
         model.addObject("currentUser", user);
         model.addObject("moneySpent", moneySpent);
         model.addObject("userName", user.getUsername());
+        model.addObject("provisionsMade",provisionsMade);
+		model.addObject("premiumAdMoney",premiumAdMoney);
 
 		return model;
 	}
