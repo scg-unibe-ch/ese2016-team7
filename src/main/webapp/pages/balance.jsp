@@ -11,20 +11,24 @@
     <h1>Balance</h1>
     <hr/>
 
-    <table class="table table-bordered" id="alerts">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered" id="stat-valueTable">
 
-        <tr>
-            <th>Stats</th>
-            <th>Value</th>
-        <tr>
-            <td>Money Earned</td>
-            <td>${moneyEarned}</td>
-        </tr>
-        <tr>
-            <td>Money Spent</td>
-            <td>${moneySpent}</td>
-        </tr>
-    </table>
+                <tr>
+                    <th>Stats</th>
+                    <th>Value</th>
+                <tr>
+                    <td>Money Earned</td>
+                    <td>${moneyEarned}</td>
+                </tr>
+                    <tr>
+                        <td>Money Spent</td>
+                        <td>${moneySpent}</td>
+                    </tr>
+            </table>
+        </div>
+    </div>
 
 </div>
 
