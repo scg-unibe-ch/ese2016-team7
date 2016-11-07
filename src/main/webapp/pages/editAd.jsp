@@ -201,6 +201,34 @@
                             <form:errors path="numberRooms" cssClass="validationErrorText"/>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="4">
+                            <script type="text/javascript">
+                                function showHideInstantBuy() {
+                                    $(".instbtn").each(function () {
+                                        if ($(this).css("display") == "none") {
+                                            $(this).css("display", "");
+                                            $("#instbtn").html("Remove Instant Buy Price");
+                                        }else{
+                                            $(this).css("display", "none");
+                                            $("#instbtn").html("Add Instant Buy Price");
+                                            $("#field-InstantBuyPrice").val(0);
+                                        }
+                                    });
+                                }
+                            </script>
+                            <br/>
+                            <button type="button" id="instbtn" class="btn" onclick="showHideInstantBuy()">
+                                <c:choose><c:when test="${ad.instantBuyPrice > 0}">Remove Instant Buy Price</c:when><c:otherwise>Add Instant Buy Price</c:otherwise></c:choose>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="instbtn" style="display: <c:choose><c:when test="${ad.instantBuyPrice == 0}">none</c:when></c:choose>">
+                        <td><label for="field-InstantBuyPrice">Instant Buy Price</label></td>
+                    </tr >
+                    <tr class="instbtn" style="display: <c:choose><c:when test="${ad.instantBuyPrice == 0}">none</c:when></c:choose>">
+                        <td><form:input id="field-InstantBuyPrice" type="number" path="instantBuyPrice" step="50" value="${ad.instantBuyPrice}"/></td>
+                    </tr>
                 </table>
             </fieldset>
 

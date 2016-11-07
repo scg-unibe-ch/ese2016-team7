@@ -47,7 +47,15 @@
                                         <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
                                     </c:choose></i></p>
                                 <p>Move-in-date: ${ad.moveInDate}</p>
-                                <h4>CHF ${ad.price }</h4>
+                                <h4><strong>CHF ${ad.price }</strong></h4>
+                                <c:choose>
+                                    <c:when test="${ad.instantBuyPrice > 0}">
+                                        <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3>No-Instant-Buy</h3>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -82,7 +90,15 @@
                                         <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
                                     </c:choose></i></p>
                                 <p>Move-in-date: ${ad.moveInDate}</p>
-                                <h4>CHF ${ad.price }</h4>
+                                <h4><strong>CHF ${ad.price }</strong></h4>
+                                <c:choose>
+                                    <c:when test="${ad.instantBuyPrice > 0}">
+                                        <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3>No-Instant-Buy</h3>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

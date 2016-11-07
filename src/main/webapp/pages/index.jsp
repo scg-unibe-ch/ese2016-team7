@@ -76,7 +76,15 @@
                                                 type="date" pattern="dd.MM.yyyy"/>
 
                                 <p>Available from: ${formattedMoveInDate }</p>
-                                <h4>CHF ${ad.price }</h4>
+                                <h4><strong>CHF ${ad.price }</strong></h4>
+                                <c:choose>
+                                    <c:when test="${ad.instantBuyPrice > 0}">
+                                        <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3>No-Instant-Buy</h3>
+                                    </c:otherwise>
+                                </c:choose>
                                 <br/>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -108,7 +116,15 @@
                                                 type="date" pattern="dd.MM.yyyy"/>
 
                                 <p>Available from: ${formattedMoveInDate }</p>
-                                <h4>CHF ${ad.price }</h4>
+                                <h4><strong>CHF ${ad.price }</strong></h4>
+                                <c:choose>
+                                    <c:when test="${ad.instantBuyPrice > 0}">
+                                        <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3>No-Instant-Buy</h3>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -139,7 +155,15 @@
                                                 type="date" pattern="dd.MM.yyyy"/>
 
                                 <p>Available from: ${formattedMoveInDate }</p>
-                                <h4>CHF ${ad.price }</h4>
+                                <h4><strong>CHF ${ad.price }</strong></h4>
+                                <c:choose>
+                                    <c:when test="${ad.instantBuyPrice > 0}">
+                                        <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3>No-Instant-Buy</h3>
+                                    </c:otherwise>
+                                </c:choose>
                                 <br/>
                             </div>
                         </div>
