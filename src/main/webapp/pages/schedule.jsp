@@ -11,16 +11,17 @@
 
 <div class="container">
 
+	<div class = "row">
 <h2>Your presentations</h2>
 
-<div id="presentationsDiv">			
+	<div class="table-responsive">
 <c:choose>
 	<c:when test="${empty presentations}">
 		<p>You currently haven't scheduled any presentations.
 	</c:when>
 	<c:otherwise>
-		<table class="styledTable" id="visits">
-			<thead>
+		<table class="table table-striped">
+		<thead>
 			<tr>
 				<th>Address</th>
 				<th>Date</th>
@@ -61,7 +62,8 @@
 		<p>You currently haven't scheduled any visits.
 	</c:when>
 	<c:otherwise>
-		<table class="styledTable" id="visits">
+	<div class="table-responsive">
+		<table class="table table-striped">
 			<thead>
 			<tr>
 				<th>Address</th>
@@ -93,5 +95,7 @@
 </c:choose>
 </div>
 	</div>
+</div>
+</div>
 
 <c:import url="template/footer.jsp" />
