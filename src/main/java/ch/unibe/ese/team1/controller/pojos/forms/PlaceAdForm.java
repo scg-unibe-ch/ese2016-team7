@@ -57,6 +57,8 @@ public class PlaceAdForm {
 	
 	private List<String> visits;
 
+	private long instantBuyPrice;
+
 	public String getCity() {
 		return city;
 	}
@@ -233,4 +235,12 @@ public class PlaceAdForm {
     public void setSecurityCode(int securityCode) {
         this.securityCode = securityCode;
     }
+
+	public long getInstantBuyPrice() {
+		return instantBuyPrice;
+	}
+
+	public void setInstantBuyPrice(long instantBuyPrice) {
+		this.instantBuyPrice = instantBuyPrice;
+	}
 }

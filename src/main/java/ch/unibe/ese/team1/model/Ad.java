@@ -98,6 +98,9 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean expired = false;
 
+	@Column
+	private long instantBuyPrice;
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -339,5 +342,13 @@ public class Ad {
 
 	public void setPremium(boolean premium) {
 		this.premium = premium;
+	}
+
+	public long getInstantBuyPrice() {
+		return instantBuyPrice;
+	}
+
+	public void setInstantBuyPrice(long instantBuyPrice) {
+		this.instantBuyPrice = instantBuyPrice;
 	}
 }

@@ -9,17 +9,6 @@
 
 
 <script type="text/javascript">
-    function equalHeight(group) {
-        var smallest = 1000000;
-        group.each(function() {
-            var thisHeight = $(this).height();
-            if(thisHeight < smallest) {
-                smallest = thisHeight;
-            }
-        });
-        group.each(function() { $(this).height(smallest); });
-    }
-
     $(document).ready(function() {
         $("img").each(function () {
             if($(this).attr('src') == ""){
@@ -47,7 +36,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
-                                <img src="${ad.pictures[0].filePath}" alt="">
+                                <img style="height: 196px;" src="${ad.pictures[0].filePath}" alt="">
                             </a>
                             <div class="caption">
                                 <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
@@ -82,7 +71,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
-                                <img src="${ad.pictures[0].filePath}" alt="">
+                                <img style="height: 196px;" src="${ad.pictures[0].filePath}" alt="">
                             </a>
                             <div class="caption">
                                 <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
