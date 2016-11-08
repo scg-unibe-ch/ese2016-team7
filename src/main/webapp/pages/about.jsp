@@ -16,7 +16,7 @@
 
 <div class="container">
 	<div class="thumbnail">
-		<img style="width: 100%" src="/img/about.jpg" class="img-responsive">
+		<img style="width: 100%; height: auto;" src="/img/about.jpg" class="img-responsive">
 		<div class="caption">
 			<p>
 				Hello we are cool

@@ -27,6 +27,11 @@
                 attname = 'data-price';
             else if (sortmode == "moveIn_asc" || sortmode == "moveIn_desc")
                 attname = 'data-moveIn';
+            else if (sortmode == "timeLeft_asc" || sortmode == "timeLeft_desc")
+                attname = 'data-expire';
+            // TODO Test if this works inst_desc will show ads with no-instant-price first ... change that
+            else if (sortmode == "inst_asc" || sortmode == "inst_desc")
+                attname = 'data-inst';
             else
                 attname = 'data-age';
 
@@ -52,7 +57,8 @@
             });
 
             //invert sorted array for certain sort options
-            if (sortmode == "price_desc" || sortmode == "moveIn_asc" || sortmode == "dateAge_asc")
+            if (sortmode == "price_desc" || sortmode == "moveIn_asc"
+                    || sortmode == "dateAge_asc" || sortmode == "timeLeft_desc")
                 divsbucket.reverse();
 
 
@@ -61,6 +67,16 @@
                 $("#resultsDiv").append($(divsbucket[a][1]));
         }
     }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("img").each(function () {
+            if ($(this).attr('src') == "") {
+                $(this).attr('src', "/img/ad_placeholder.png");
+            }
+        })
+    });
 </script>
 
 <div class="container">
@@ -78,6 +94,10 @@
                 <option value="moveIn_asc">Move-in date (latest to earliest)</option>
                 <option value="dateAge_asc">Date created (youngest to oldest)</option>
                 <option value="dateAge_desc">Date created (oldest to youngest)</option>
+                <option value="timeLeft_asc">Time Left (ascending)</option>
+                <option value="timeLeft_desc">Time Left (descending)</option>
+                <option value="inst_asc">Instant Buy Price (ascending)</option>
+                <option value="inst_desc">Instant Buy Price (descending)</option>
             </select>
 
             <button onClick="sort_div_attribute()">Sort</button>
@@ -98,7 +118,7 @@
             <div class="col-md-4">
                 <div class="thumbnail thumbnailPremium">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
-                        <img src="${ad.pictures[0].filePath}" alt="">
+                        <img src="${ad.pictures[0].filePath}" alt="" class="img-responsive">
                     </a>
                     <div class="caption">
                         <h2>
@@ -185,10 +205,10 @@
     <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
             <div class="col-md-4 resultAd" data-price="${ad.price}"
-                 data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-                <div class="thumbnail">
+                 data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-expire="${ad.expireDate}" data-inst="${ad.instantBuyPrice}">
+                <div class="thumbnail <c:choose><c:when test="${ad.premium}">thumbnailPremium</c:when></c:choose>">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
-                        <img src="${ad.pictures[0].filePath}" alt="">
+                        <img src="${ad.pictures[0].filePath}" alt="" class="img-responsive">
                     </a>
                     <div class="caption">
                         <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
@@ -326,6 +346,7 @@
                 apartment.checked = true;
                 studio.checked = true;
             }
+            if ($("#field-instantBuyPrice").val() == "") $("#field-instantBuyPrice").val(0);
         }
     </script>
 
@@ -391,6 +412,18 @@
                     <hr class="slim">
 
                     <table id="advanced" style="width: 80%;">
+                        <tr>
+                            <td><label for="instantBuyPrice">Instant-Buy-Price lower than</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form:input type="text" id="field-instantBuyPrice" path="instantBuyPrice"/>
+                                <form:errors path="instantBuyPrice" cssClass="validationErrorText"/>
+                                <script type="text/javascript">
+                                    if ($("#field-instantBuyPrice").val() == 0) $("#field-instantBuyPrice").val("");
+                                </script>
+                            </td>
+                        </tr>
                         <tr>
                             <td><label for="earliestMoveInDate">Earliest move-in date</label></td>
                         </tr>

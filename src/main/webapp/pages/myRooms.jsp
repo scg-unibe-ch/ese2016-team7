@@ -15,7 +15,6 @@
                 $(this).attr('src',"/img/ad_placeholder.png");
             }
         });
-        equalHeight($(".thumbnail img"));
     });
 </script>
 
@@ -34,7 +33,7 @@
             <div class="row">
                 <c:forEach var="ad" items="${ownAdvertisements}">
                     <div class="col-md-3">
-                        <div class="thumbnail">
+                        <div class="thumbnail <c:choose><c:when test="${ad.premium}">thumbnailPremium</c:when></c:choose>">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
                                 <img style="height: 196px;" src="${ad.pictures[0].filePath}" alt="">
                             </a>
@@ -55,6 +54,19 @@
                                     <c:otherwise>
                                         <h3>No-Instant-Buy</h3>
                                     </c:otherwise>
+                                </c:choose>
+                                <br />
+                                <c:choose>
+                                    <c:when test="${ad.premium}">
+                                        <p>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <strong>Premium</strong>
+                                        </p>
+                                    </c:when>
                                 </c:choose>
                             </div>
                         </div>
@@ -77,7 +89,7 @@
             <div class="row">
                 <c:forEach var="ad" items="${bookmarkedAdvertisements}">
                     <div class="col-md-3">
-                        <div class="thumbnail">
+                        <div class="thumbnail <c:choose><c:when test="${ad.premium}">thumbnailPremium</c:when></c:choose>">
                             <a href="<c:url value='/ad?id=${ad.id}' />">
                                 <img style="height: 196px;" src="${ad.pictures[0].filePath}" alt="">
                             </a>
@@ -98,6 +110,19 @@
                                     <c:otherwise>
                                         <h3>No-Instant-Buy</h3>
                                     </c:otherwise>
+                                </c:choose>
+                                <br />
+                                <c:choose>
+                                    <c:when test="${ad.premium}">
+                                        <p>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <strong>Premium</strong>
+                                        </p>
+                                    </c:when>
                                 </c:choose>
                             </div>
                         </div>

@@ -88,6 +88,8 @@ public class SearchForm {
 	private boolean furnished;
 	private boolean garage;
 
+	private long instantBuyPrice;
+
 
 	public boolean getSmokers() {
 		return smokers;
@@ -161,4 +163,11 @@ public class SearchForm {
 		this.latestMoveInDate = latestMoveInDate;
 	}
 
+	public long getInstantBuyPrice() {
+		return instantBuyPrice;
+	}
+
+	public void setInstantBuyPrice(long instantBuyPrice) {
+		this.instantBuyPrice = instantBuyPrice;
+	}
 }

@@ -67,6 +67,7 @@
             apartment.checked = true;
             studio.checked = true;
         }
+        if($("#field-instantBuyPrice").val() == "") $("#field-instantBuyPrice").val(0);
     }
 </script>
 
@@ -129,11 +130,22 @@
             <hr class="slim">
             <table id="advanced" style="width: 80%; display: none;" class="advanced">
                 <tr>
+                    <td><label for="instantBuyPrice">Instant-Buy-Price lower than</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <form:input type="text" id="field-instantBuyPrice" path="instantBuyPrice"/>
+                        <form:errors path="instantBuyPrice" cssClass="validationErrorText"/>
+                        <script type="text/javascript">
+                            if($("#field-instantBuyPrice").val() == 0) $("#field-instantBuyPrice").val("");
+                        </script>
+                    </td>
+                </tr>
+                <tr>
                     <td><label for="earliestMoveInDate" class="searchText">Earliest move-in date</label></td>
                 </tr>
                 <tr>
-                    <td><form:input type="text" id="field-earliestMoveInDate"
-                                    path="earliestMoveInDate"/></td>
+                    <td><form:input type="text" id="field-earliestMoveInDate" path="earliestMoveInDate"/></td>
                 </tr>
 
                 <tr>
