@@ -159,7 +159,7 @@ public class AdTestDataSaver {
 		adBasel.setAnimals(false);
 		adBasel.setRoomDescription(studioDescription3);
 		adBasel.setUser(bernerBaer);
-		adBasel.setTitle("Nice, bright studio in the center of Basel");
+		adBasel.setTitle("Bright studio Basel");
 		adBasel.setStreet("Bruderholzstrasse 32");
 		adBasel.setCity("Basel");
 		adBasel.setGarden(false);

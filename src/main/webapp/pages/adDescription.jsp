@@ -419,11 +419,11 @@
                         <img src="${picture.filePath}"/>
                     </c:forEach>
                 </div>
-                <!--
+
                 <div id="right-arrow">
                     <img src="/img/right-arrow.png"/>
                 </div>
-                -->
+
             </div>
         </div>
 
