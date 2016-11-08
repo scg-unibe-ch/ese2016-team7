@@ -208,7 +208,7 @@ public class AdService {
 			}
 		});
 		List<Ad> fourNewest = new ArrayList<Ad>();
-		for (int i = 0; i < newest; i++)
+		for (int i = 0; i < ads.size() && i < newest; i++)
 			fourNewest.add(ads.get(i));
 		return fourNewest;
 	}
