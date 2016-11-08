@@ -124,7 +124,7 @@
             <br/>
             <br/>
         </div>
-            <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #ff00ff" class="searchText">Show Advanced Search</a>
+            <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #0000ff" class="searchText">Show Advanced Search</a>
             <br />
             <hr class="slim">
             <table id="advanced" style="width: 80%; display: none;" class="advanced">
