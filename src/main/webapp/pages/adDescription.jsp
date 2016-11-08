@@ -286,7 +286,7 @@
 
                                 <div id="bidErrorDiv" style="color: #cc0000"></div>
                                 <form>
-                                    <input class="bidInput" type="number" id="bidAmount" placeholder="Amount"
+                                    <input class="bidInput" type="number" id="bidAmount" placeholder="Amount" value="${shownAd.price + 1}"
                                            style='width:300px'/>
                                     <br>
                                     <button type="button" id="makeBid" class="bidButton">Make Bid</button>
