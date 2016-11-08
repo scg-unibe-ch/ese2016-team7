@@ -131,7 +131,7 @@
                 }
                 else {
                     if (amount > currentPrice) {
-                        $("#bidErrorDiv").html("")
+                        $("#bidErrorDiv").html("");
                         $.post("ad/makeBid", {amount: amount, id: id}, function () {
                             // alert("You bid: " + amount + " CHF");
                             $("#bidAmount").val("");

@@ -63,6 +63,16 @@
     }
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("img").each(function () {
+            if($(this).attr('src') == ""){
+                $(this).attr('src',"/img/ad_placeholder.png");
+            }
+        })
+    });
+</script>
+
 <div class="container">
 
     <h1>Search results:</h1>
@@ -98,7 +108,7 @@
             <div class="col-md-4">
                 <div class="thumbnail thumbnailPremium">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
-                        <img src="${ad.pictures[0].filePath}" alt="">
+                        <img src="${ad.pictures[0].filePath}" alt="" class="img-responsive">
                     </a>
                     <div class="caption">
                         <h2>
@@ -186,9 +196,9 @@
         <c:forEach var="ad" items="${results}">
             <div class="col-md-4 resultAd" data-price="${ad.price}"
                  data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-                <div class="thumbnail">
+                <div class="thumbnail <c:choose><c:when test="${ad.premium}">thumbnailPremium</c:when></c:choose>">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
-                        <img src="${ad.pictures[0].filePath}" alt="">
+                        <img src="${ad.pictures[0].filePath}" alt="" class="img-responsive">
                     </a>
                     <div class="caption">
                         <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>

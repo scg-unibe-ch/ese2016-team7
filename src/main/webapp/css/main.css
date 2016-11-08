@@ -1189,7 +1189,7 @@ nav{
 .thumbnail img{
 	height: 300px;
 	overflow: hidden;
-	width: 100%;
+	width: auto;
 
 }
 
