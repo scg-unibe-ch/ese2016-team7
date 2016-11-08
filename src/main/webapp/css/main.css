@@ -132,6 +132,7 @@ input[type="number"] {
 
 label {
 	margin-right: 10px;
+	margin-bottom: 2px;
 }
 
 button {
@@ -557,7 +558,7 @@ footer nav ul li {
 }
 
 #resultsSearchDiv {
-	width: 35%;
+	width: 100%;
 	margin-top: 30px;
 	float: right;
 	padding: 10px;
@@ -1159,7 +1160,10 @@ nav{
 }
 
 .thumbnail img{
-	width: auto;
+	height: 300px;
+	overflow: hidden;
+	width: 100%;
+
 }
 
 

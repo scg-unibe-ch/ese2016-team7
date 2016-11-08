@@ -110,7 +110,7 @@
     <h1>Search results:</h1>
 
     <hr/>
-
+    <div class="row">
     <div>
         <select id="modus">
             <option value="">Sort by:</option>
@@ -132,31 +132,44 @@
             <c:choose>
                 <c:when test="${empty premium}">
                     <h2>No premium Ads found</h2>
+    </div>
                 </c:when>
                 <c:otherwise>
-                    <div id="premiumResultsDiv" class="resultsDiv">
+                    <div class="row">
                         <c:forEach var="ad" items="${premium}">
-                            <div class="resultAd">
-                                <div class="resultLeft">
-                                    <a href="<c:url value='/ad?id=${ad.id}' />"><img
-                                            src="${ad.pictures[0].filePath}"/></a>
+                            <div class="col-md-4">
+                                    <div class="thumbnail thumbnailPremium">
+                                        <a href="<c:url value='/ad?id=${ad.id}' />">
+                                            <img src="${ad.pictures[0].filePath}" alt="">
+                                        </a>
+                                        <div class="caption">
                                     <h2>
-                                        <a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
+                                        <a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
                                     </h2>
-                                    <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
+                                    <p>${ad.street}, ${ad.zipcode} ${ad.city}
                                     <br/>
-                                    <p>
                                         <i><c:choose>
                                             <c:when test="${ad.property == 'HOUSE'}">House</c:when>
                                             <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
                                             <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-                                        </c:choose></i>
-                                    </p>
+                                        </c:choose></i></p>
+                                            <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                                                            type="date" pattern="dd.MM.yyyy"/>
+                                            <p>Available from: ${formattedMoveInDate }</p>
+                                            <h3>CHF ${ad.price }</h3>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <strong>Premium</strong>
+                                            </p>
                                 </div>
-                                <div class="resultRight">
-                                    <h2 id='timeLeft${ad.id}p'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
-                                                                                   pattern="dd.MM.yyyy HH:mm:ss"/></h2>
-                                    <script>
+                                    </div>
+                            </div>
+
+                                    <script>/*
                                         var expired = ${ad.expireDate.getTime()};
                                         var current = new Date();
 
@@ -187,93 +200,43 @@
                                                 $('#timeLeft${ad.id}p').html("Time Left: " + ss + "seconds");
                                             }
 
-                                        }
+                                        }*/
                                     </script>
-                                    <br/>
-                                    <h2>CHF ${ad.price }</h2>
-                                    <br/>
-
-                                    <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                                    type="date" pattern="dd.MM.yyyy"/>
-
-                                    <p>Move-in date: ${formattedMoveInDate }</p>
-                                </div>
                             </div>
+
                         </c:forEach>
-                    </div>
                 </c:otherwise>
             </c:choose>
-            <div id="resultsDiv" class="resultsDiv">
-                <c:forEach var="ad" items="${results}">
-                    <div class="resultAd" data-price="${ad.price}"
-                         data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
-                        <div class="resultLeft">
-                            <a href="<c:url value='/ad?id=${ad.id}' />"><img
-                                    src="${ad.pictures[0].filePath}"/></a>
-                            <h2>
-                                <a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-                            </h2>
-                            <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-                            <br/>
-                            <p>
-                                <i><c:choose>
-                                    <c:when test="${ad.property == 'HOUSE'}">House</c:when>
-                                    <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
-                                    <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
-                                </c:choose></i>
-                            </p>
+            <div class="row">
+            <c:forEach var="ad" items="${results}">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="<c:url value='/ad?id=${ad.id}' />">
+                                <img src="${ad.pictures[0].filePath}" alt="">
+                            </a>
+                            <div class="caption">
+                                <h4><a href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a></h4>
+                                <p>${ad.street}, ${ad.zipcode} ${ad.city}
+                                    <br/><i><c:choose>
+                                        <c:when test="${ad.property == 'HOUSE'}">House</c:when>
+                                        <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
+                                        <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
+                                    </c:choose></i></p>
+                                <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                                                type="date" pattern="dd.MM.yyyy"/>
+
+                                <p>Available from: ${formattedMoveInDate }</p>
+                                <h4>CHF ${ad.price }</h4>
+
+                            </div>
+                            </div>
                         </div>
-                        <div class="resultRight">
-
-                            <h2 id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
-                                                                           pattern="dd.MM.yyyy HH:mm:ss"/></h2>
-                            <script>
-                                var expired = ${ad.expireDate.getTime()};
-                                var current = new Date();
-
-                                if (current > expired) {
-                                    $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
-                                } else {
-                                    var msec = expired - current;
-
-                                    var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
-
-                                    msec -= dd * 1000 * 60 * 60 * 24;
-                                    var hh = Math.floor(msec / 1000 / 60 / 60);
-                                    msec -= hh * 1000 * 60 * 60;
-                                    var mm = Math.floor(msec / 1000 / 60);
-                                    msec -= mm * 1000 * 60;
-                                    var ss = Math.floor(msec / 1000);
-                                    msec -= ss * 1000;
-                                    if(dd>0){
-                                        $('#timeLeft${ad.id}').html("Time Left: " + dd + "days");
-                                    }
-                                    else if(hh>0){
-                                        $('#timeLeft${ad.id}').html("Time Left: " + hh + "Hours");
-                                    }
-                                    else if(mm>0){
-                                        $('#timeLeft${ad.id}').html("Time Left: " + mm + " Minutes");
-                                    }
-                                    else{
-                                        $('#timeLeft${ad.id}').html("Time Left: " + ss + "seconds");
-                                    }
-                                }
-                            </script>
-                            <br/>
-
-                            <h2>CHF ${ad.price }</h2>
-                            <br/>
-
-                            <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                            type="date" pattern="dd.MM.yyyy"/>
-
-                            <p>Move-in date: ${formattedMoveInDate }</p>
-                        </div>
-                    </div>
                 </c:forEach>
-            </div>
+
         </c:otherwise>
     </c:choose>
+                    </div>
+
 
     <script>
         $(document).ready(function () {
@@ -329,7 +292,7 @@
 
     <form:form method="post" modelAttribute="searchForm" action="/results"
                id="filterForm" autocomplete="off">
-
+        <div class="row">
         <div id="resultsSearchDiv">
             <h2>Search</h2>
             <form:form method="post" modelAttribute="searchForm" action="/results"
@@ -407,7 +370,7 @@
                 <button type="reset">Cancel</button>
 
             </form:form>
-
+        </div>
         </div>
     </form:form>
 </div>
