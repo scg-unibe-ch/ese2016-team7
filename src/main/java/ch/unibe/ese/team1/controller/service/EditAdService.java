@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.unibe.ese.team1.model.dao.VisitDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +35,14 @@ public class EditAdService {
 	@Autowired
 	private AdPictureDao adPictureDao;
 
+    @Autowired
+    private VisitDao visitDao;
+
 	@Autowired
 	private UserService userService;
+
+    @Autowired
+    private VisitService visitService;
 
 	/**
 	 * Handles persisting an edited ad to the database.
@@ -84,8 +91,6 @@ public class EditAdService {
 
 		ad.setPrice(placeAdForm.getPrice());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
-
-		ad.setNumberRooms(placeAdForm.getNumberRooms());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 
@@ -170,6 +175,25 @@ public class EditAdService {
 		ad.setPictures(pictures);
 		adDao.save(ad);
 	}
+
+    /**
+     * Removes the visit with the given id from the list of visits in the ad
+     * with the given id.
+     */
+    @Transactional
+    public void deleteVisitFromAd(long adId, long visitId) {
+        Ad ad = adService.getAdById(adId);
+        Iterable<Visit> visits = visitDao.findByAd(ad);
+        Visit visit = visitDao.findOne(visitId);
+        for (Visit vis:visits) {
+            if (visit.getId()==vis.getId()) {
+                vis.setAd(null);
+                visitDao.save(vis);
+            }
+        }
+        ad.setVisits(new ArrayList<>());
+        adDao.save(ad);
+    }
 
 	/**
 	 * Fills a Form with the data of an ad.

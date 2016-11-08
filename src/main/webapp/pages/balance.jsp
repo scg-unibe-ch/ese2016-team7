@@ -22,10 +22,10 @@
                     <td>Money Earned</td>
                     <td>${moneyEarned}</td>
                 </tr>
-                    <tr>
-                        <td>Money Spent</td>
-                        <td>${moneySpent}</td>
-                    </tr>
+                <tr>
+                    <td>Money Spent</td>
+                    <td>${moneySpent}</td>
+                </tr>
             </table>
         </div>
     </div>

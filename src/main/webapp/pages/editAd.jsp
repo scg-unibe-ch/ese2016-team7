@@ -176,7 +176,7 @@
                     </tr>
 
                     <tr>
-                        <td><label for="field-Prize">Prize per month</label></td>
+                        <td><label for="field-Prize">Price</label></td>
                         <td><label for="field-SquareFootage">Square Meters</label></td>
                         <td><label for="field-NumberRooms">Number of Rooms</label></td>
                     </tr>
@@ -344,10 +344,10 @@
 
             <br/>
 
-
             <fieldset>
-                <legend>Add visiting times</legend>
+                <legend>Edit visiting times</legend>
 
+                <h3>Add visiting times</h3>
                 <table>
                     <tr>
                         <td>
@@ -398,7 +398,23 @@
                         </td>
                     </tr>
                 </table>
-                <br>
+                <hr/>
+
+                <h3>Delete visiting times</h3>
+                <div>
+                    <c:forEach items="${visits}" var="visit">
+                        <div class="visit">
+                            <div>
+                                <fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy"/>
+                                &nbsp; from
+                                <fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm "/>
+                                until
+                                <fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm"/>
+                            </div>
+                            <button type="button" data-visit-ad-id="${ad.id }" data-visit-id="${visit.id }">Delete</button>
+                        </div>
+                    </c:forEach>
+                </div>
             </fieldset>
 
             <br/>

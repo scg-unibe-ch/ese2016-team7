@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
+import ch.unibe.ese.team1.controller.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,10 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.unibe.ese.team1.controller.pojos.PictureUploader;
 import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
-import ch.unibe.ese.team1.controller.service.AdService;
-import ch.unibe.ese.team1.controller.service.AlertService;
-import ch.unibe.ese.team1.controller.service.EditAdService;
-import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.PictureMeta;
 import ch.unibe.ese.team1.model.User;
@@ -56,11 +53,14 @@ public class EditAdController {
 	@Autowired
 	private AlertService alertService;
 
+    @Autowired
+    private VisitService visitService;
+
 	private PictureUploader pictureUploader;
 
 	private ObjectMapper objectMapper;
 
-	/**
+    /**
 	 * Serves the page that allows the user to edit the ad with the given id.
 	 */
 	@RequestMapping(value = "/profile/editAd", method = RequestMethod.GET)
@@ -68,6 +68,7 @@ public class EditAdController {
 		ModelAndView model = new ModelAndView("editAd");
 		Ad ad = adService.getAdById(id);
 		model.addObject("ad", ad);
+        model.addObject("visits", visitService.getVisitsByAd(ad));
 
 		PlaceAdForm form = editAdService.fillForm(ad);
 
@@ -126,7 +127,20 @@ public class EditAdController {
 		editAdService.deletePictureFromAd(adId, pictureId);
 	}
 
-	/**
+    /**
+     * Deletes the ad visit with the given id from the list of visits from
+     * the ad, but not from the server.
+     */
+    @RequestMapping(value = "/profile/editAd/deleteVisitFromAd", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    void deleteVisitFromAd(@RequestParam long adId,
+                           @RequestParam long visitId) {
+        editAdService.deleteVisitFromAd(adId, visitId);
+    }
+
+
+    /**
 	 * Gets the descriptions for the pictures that were uploaded with the
 	 * current picture uploader.
 	 *
