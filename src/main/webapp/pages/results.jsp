@@ -114,9 +114,23 @@
                         <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                                         type="date" pattern="dd.MM.yyyy"/>
                         <p>Available from: ${formattedMoveInDate }</p>
-                        <p><h3 style="float: left">CHF ${ad.price }</h3> <h3 style="float: right" id='timeLeft${ad.id}p'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
-                                                                                                                                                      pattern="dd.MM.yyyy HH:mm:ss"/></h3><br/>
-                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>CHF ${ad.price }</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+                            </div>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="${ad.instantBuyPrice > 0}">
+                                <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>No-Instant-Buy</h3>
+                            </c:otherwise>
+                        </c:choose>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
@@ -189,9 +203,24 @@
                                         type="date" pattern="dd.MM.yyyy"/>
 
                         <p>Available from: ${formattedMoveInDate }</p>
-                        <p><h3 >CHF ${ad.price }</h3> <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}"
-                                                                                                                                  pattern="dd.MM.yyyy HH:mm:ss"/></h3><br/>
-                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>CHF ${ad.price }</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+                            </div>
+                        </div>
+
+                        <c:choose>
+                            <c:when test="${ad.instantBuyPrice > 0}">
+                                <h3>Instant-Buy: CHF ${ad.instantBuyPrice}</h3>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>No-Instant-Buy</h3>
+                            </c:otherwise>
+                        </c:choose>
                         <script>
                             var expired = ${ad.expireDate.getTime()};
                             var current = new Date();
