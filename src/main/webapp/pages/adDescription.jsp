@@ -297,7 +297,6 @@
                                         <script type="text/javascript">
                                             $(document).ready(function () {
                                                 $("#instantBuy").click(function () {
-                                                    alert("Hello");
                                                     $.post("/instantBuy", {id: "${shownAd.id}"})
                                                             .done(function () {
                                                                 location.reload();
@@ -307,7 +306,7 @@
                                         </script>
                                         <br/>
                                         <p>
-                                            <button type="button" id="instantBuy" class="btn bidButton">Buy</button>
+                                            <button type="button" id="instantBuy" class="btn bidButton">Instant Buy</button>
                                             for CHF ${shownAd.instantBuyPrice}
                                         </p>
                                     </c:when>

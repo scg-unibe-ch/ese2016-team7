@@ -26,15 +26,6 @@ public class AuctionController {
     private UserService userService;
 
     @Autowired
-    private BookmarkService bookmarkService;
-
-    @Autowired
-    private MessageService messageService;
-
-    @Autowired
-    private VisitService visitService;
-
-    @Autowired
     private BidService bidService;
 
     @Autowired
@@ -61,7 +52,8 @@ public class AuctionController {
      * Sends messages to the guy who bought the estate
      */
     @RequestMapping(value = "/instantBuy", method = RequestMethod.POST)
-    public @ResponseBody void instantBuy(@RequestParam("id") long id){
-        auctionService.instantBuy(id);
+    public @ResponseBody void instantBuy(@RequestParam("id") long id, Principal principal){
+        User user = userService.findUserByUsername(principal.getName());
+        auctionService.instantBuy(id, user);
     }
 }

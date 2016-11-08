@@ -66,10 +66,46 @@ public class AuctionService {
      * @param id of ad
      */
     @Transactional
-    public void instantBuy(long id){
+    public void instantBuy(long id, User winner){
+        // Mark as expired
         Ad ad = adService.getAdById(id);
         ad.setExpired(true);
         adDao.save(ad);
+
+        // Send messages
+        User owner = ad.getUser();
+
+        StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("Congratulation, you have successfully bought: ");
+        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a></br>");
+        messageBuilder.append(" You will be contacted by ");
+        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+". ");
+        messageBuilder.append("If you have any Questions to ask here is the email:");
+        messageBuilder.append(owner.getEmail());
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"You have won the auction!",messageBuilder.toString());
+
+        messageBuilder = new StringBuilder();
+        messageBuilder.append("The auction on the Ad: ");
+        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a><");
+        messageBuilder.append("has finished.</br>");
+        messageBuilder.append(winner.getFirstName()+" ");
+        messageBuilder.append(winner.getLastName()+", ");
+        messageBuilder.append(winner.getEmail()+"</br>");
+        messageBuilder.append("Has bought the ad for");
+        messageBuilder.append(ad.getInstantBuyPrice()+" swiss franks for your property. </br>");
+        messageBuilder.append("Please contact him as soon as possible");
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"Your action was successfully completed!",messageBuilder.toString());
+
+        // update balance
+        long amount = ad.getInstantBuyPrice();
+
+        owner.addMoneyEarned((int) amount);
+        winner.addMoneySpent((int) amount);
+        User system = userDao.findByUsername("system");
+        system.addMoneyEarned((int) (amount*provision));
+        userDao.save(owner);
+        userDao.save(winner);
+        userDao.save(system);
     }
 
     /**
@@ -153,8 +189,6 @@ public class AuctionService {
     public void sendOverbiddenMessage(Ad ad, User user){
         Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
 
-        //TODO: This should notify ALL users that where overbidden, not just the most recent one.
-        //Added null check in case there is no bid. (It didn't work without any bids before)
         if(bid != null) {
             User receiver = bid.getUser();
             messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",
