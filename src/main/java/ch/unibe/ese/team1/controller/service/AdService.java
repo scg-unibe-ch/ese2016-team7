@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controller.service;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -404,21 +405,44 @@ public class AdService {
 	}
 
 	/**
-	 * Get Premium Ads out of this Itrable
+	 * Sort Itrable so that Premium Ads are at the front
 	 * @return the other Iterable
 	 */
-	public Iterable<Ad> filterPremiumAds(Iterable<Ad> ads, int number){
+	public ArrayList<List<Ad>> filterPremiumAds(Iterable<Ad> ads, int number){
+        // Filter
 		List<Ad> premiumAds = new ArrayList<>();
+        List<Ad> nonPremiumAds = new ArrayList<>();
 		for(Ad ad : ads){
 			if(ad.getPremium()){
 				premiumAds.add(ad);
-				number--;
-			}
-			if(number == 0) break;
+			}else{
+                nonPremiumAds.add(ad);
+            }
 		}
-		return premiumAds;
+        // Filter number
+		List<Ad> numberedPremiumAds = new ArrayList<>();
+        List<Ad> otherAds = new ArrayList<>();
+        for(int i = 0; i < number && i < premiumAds.size(); i++){
+            numberedPremiumAds.add(premiumAds.get(i));
+            premiumAds.remove(i);
+        }
+        for(Ad ad : premiumAds){
+            otherAds.add(ad);
+        }
+        for(Ad ad : nonPremiumAds){
+            otherAds.add(ad);
+        }
 
+		// Pack into ArrayList
+        ArrayList<List<Ad>> list = new ArrayList<>();
+        list.add(numberedPremiumAds);
+        list.add(otherAds);
+
+        return list;
 	}
+
+
+
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,
 			Date earliestDate, Date latestDate) {

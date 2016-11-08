@@ -68,7 +68,7 @@
     <h1>Search results:</h1>
 
     <hr/>
-    <div >
+    <div>
         <div>
             <select id="modus">
                 <option value="">Sort by:</option>
@@ -119,7 +119,8 @@
                                 <h3>CHF ${ad.price }</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+                                <h3 style="float: right" id='timeLeft${ad.id}p'>Expire Date: <fmt:formatDate
+                                        value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
                             </div>
                         </div>
 
@@ -138,8 +139,6 @@
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <strong>Premium</strong>
-                        </p>
-                        <p>
                         </p>
                     </div>
                 </div>
@@ -163,16 +162,16 @@
                     msec -= mm * 1000 * 60;
                     var ss = Math.floor(msec / 1000);
                     msec -= ss * 1000;
-                    if(dd>0){
+                    if (dd > 0) {
                         $('#timeLeft${ad.id}p').html("Time Left: " + dd + "days");
                     }
-                    else if(hh>0){
+                    else if (hh > 0) {
                         $('#timeLeft${ad.id}p').html("Time Left: " + hh + "Hours");
                     }
-                    else if(mm>0){
+                    else if (mm > 0) {
                         $('#timeLeft${ad.id}p').html("Time Left: " + mm + " Minutes");
                     }
-                    else{
+                    else {
                         $('#timeLeft${ad.id}p').html("Time Left: " + ss + "seconds");
                     }
 
@@ -209,7 +208,8 @@
                                 <h3>CHF ${ad.price }</h3>
                             </div>
                             <div class="col-md-6">
-                                <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
+                                <h3 style="float: right" id='timeLeft${ad.id}'>Expire Date: <fmt:formatDate
+                                        value="${ad.expireDate}" pattern="dd.MM.yyyy HH:mm:ss"/></h3>
                             </div>
                         </div>
 
@@ -220,6 +220,19 @@
                             <c:otherwise>
                                 <h3>No-Instant-Buy</h3>
                             </c:otherwise>
+                        </c:choose>
+
+                        <c:choose>
+                            <c:when test="${ad.premium}">
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <strong>Premium</strong>
+                                </p>
+                            </c:when>
                         </c:choose>
                         <script>
                             var expired = ${ad.expireDate.getTime()};
@@ -239,16 +252,16 @@
                                 msec -= mm * 1000 * 60;
                                 var ss = Math.floor(msec / 1000);
                                 msec -= ss * 1000;
-                                if(dd>0){
+                                if (dd > 0) {
                                     $('#timeLeft${ad.id}').html("Time Left: " + dd + "days");
                                 }
-                                else if(hh>0){
+                                else if (hh > 0) {
                                     $('#timeLeft${ad.id}').html("Time Left: " + hh + "Hours");
                                 }
-                                else if(mm>0){
+                                else if (mm > 0) {
                                     $('#timeLeft${ad.id}').html("Time Left: " + mm + " Minutes");
                                 }
-                                else{
+                                else {
                                     $('#timeLeft${ad.id}').html("Time Left: " + ss + "seconds");
                                 }
 
@@ -330,28 +343,32 @@
                     <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
 
 
-
-
-                    <div class ="row">
+                    <div class="row">
                         <div class="form-group">
                             <div class="col-lg-3">
 
-                                <label for="city"><div class="searchText">City / zip code:</div></label>
+                                <label for="city">
+                                    <div class="searchText">City / zip code:</div>
+                                </label>
 
                             </div>
                             <div class="col-lg-4">
-                                <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern" tabindex="3" cssClass="searchText"/>
+                                <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern"
+                                            tabindex="3" cssClass="searchText"/>
                                 <form:errors path="city" cssClass="validationErrorText"/><br/>
                             </div>
                         </div>
                     </div>
-                    <div class ="row">
+                    <div class="row">
                         <div class="form-group">
                             <div class="col-sm-3">
-                                <label for="radius"><div class="searchText"> Within radius of (max.):</div></label>
+                                <label for="radius">
+                                    <div class="searchText"> Within radius of (max.):</div>
+                                </label>
                             </div>
                             <div class="col-lg-4">
-                                <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" cssClass="searchText"/> km
+                                <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5"
+                                            cssClass="searchText"/> km
                                 <form:errors path="radius" cssClass="validationErrorText"/>
                             </div>
                         </div>
@@ -359,10 +376,13 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-lg-3">
-                                <label for="price"><div class="searchText"> Price (max.):</div></label>
+                                <label for="price">
+                                    <div class="searchText"> Price (max.):</div>
+                                </label>
                             </div>
                             <div class="col-lg-4">
-                                <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" cssClass="searchText"/> CHF
+                                <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50"
+                                            cssClass="searchText"/> CHF
                                 <form:errors path="price" cssClass="validationErrorText"/><br/>
                             </div>
                         </div>

@@ -16,6 +16,9 @@ import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /** Handles all requests concerning the search for ads. */
 @Controller
@@ -56,6 +59,9 @@ public class SearchController {
 	/**
 	 * Gets the results when filtering the ads in the database by the parameters
 	 * in the search form.
+	 * Filters 3 Premium ads which will appear on top of the results page an which are static
+	 * the rest of the Premium ads found will be displayed normally with all other
+	 * search results
 	 */
 	@RequestMapping(value = "/results", method = RequestMethod.POST)
 	public ModelAndView results(@Valid SearchForm searchForm, BindingResult result)
@@ -63,8 +69,9 @@ public class SearchController {
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
 			Iterable<Ad> results = adService.queryResults(searchForm);
-			model.addObject("results", results);
-			model.addObject("premium", adService.filterPremiumAds(results,2));
+			ArrayList<List<Ad>> filtered = adService.filterPremiumAds(results , 3);
+			model.addObject("results", filtered.get(1));
+			model.addObject("premium", filtered.get(0));
 			return model;
 		} else {
 			// go back
