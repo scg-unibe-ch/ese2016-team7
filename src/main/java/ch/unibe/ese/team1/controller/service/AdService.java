@@ -195,8 +195,8 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> getNewestAds(int newest, boolean premium) {
 		Iterable<Ad> allAds;
-		if(!premium) allAds = adDao.findByPremium(false);
-		else allAds = adDao.findByPremium(true);
+		if(!premium) allAds = adDao.findByPremiumAndExpired(false,false);
+		else allAds = adDao.findByPremiumAndExpired(true,false);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
