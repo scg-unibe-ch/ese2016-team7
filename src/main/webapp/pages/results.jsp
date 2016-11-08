@@ -334,6 +334,7 @@
         <div class="row">
         <div id="resultsSearchDiv">
             <h2>Search</h2>
+
             <form:form method="post" modelAttribute="searchForm" action="/results"
                        id="searchForm" autocomplete="off">
                 <form:checkbox name="house" id="house" path="house"/><label>House</label>
@@ -341,24 +342,43 @@
                 <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
 
 
-                <br/>
 
-                <label for="city">City / zip code:</label>
-                <form:input type="text" name="city" id="city" path="city"
-                            placeholder="e.g. Bern" tabindex="3"/>
-                <form:errors path="city" cssClass="validationErrorText"/><br/>
 
-                <label for="radius">Within radius of (max.):</label>
-                <form:input id="radiusInput" type="number" path="radius"
-                            placeholder="e.g. 5" step="5"/>
-                km
-                <form:errors path="radius" cssClass="validationErrorText"/>
-                <br/> <label for="price">Price (max.):</label>
-                <form:input id="prizeInput" type="number" path="price"
-                            placeholder="e.g. 5" step="50"/>
-                CHF
-                <form:errors path="price" cssClass="validationErrorText"/><br/>
+                <div class ="row">
+                    <div class="form-group">
+                        <div class="col-lg-3">
 
+                            <label for="city"><div class="searchText">City / zip code:</div></label>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern" tabindex="3" cssClass="searchText"/>
+                            <form:errors path="city" cssClass="validationErrorText"/><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class ="row">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label for="radius"><div class="searchText"> Within radius of (max.):</div></label>
+                        </div>
+                        <div class="col-lg-4">
+                            <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" cssClass="searchText"/> km
+                            <form:errors path="radius" cssClass="validationErrorText"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            <label for="price"><div class="searchText"> Price (max.):</div></label>
+                        </div>
+                        <div class="col-lg-4">
+                            <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" cssClass="searchText"/> CHF
+                            <form:errors path="price" cssClass="validationErrorText"/><br/>
+                        </div>
+                    </div>
+                </div>
                 <br/>
                 <hr class="slim">
 
