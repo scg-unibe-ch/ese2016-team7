@@ -76,25 +76,29 @@ public class AuctionService {
         User owner = ad.getUser();
 
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("Congratulation, you have successfully bought: ");
-        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a></br>");
-        messageBuilder.append(" You will be contacted by ");
-        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+". ");
-        messageBuilder.append("If you have any Questions to ask here is the email:");
-        messageBuilder.append(owner.getEmail());
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"You have won the auction!",messageBuilder.toString());
+        messageBuilder.append("Dear "+winner.getFirstName()+",</br></br>");
+        messageBuilder.append("Thank you for buying the " + ad.getPropertyString());
+        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
+        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
+        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+        messageBuilder.append("Your Flatfindr team");
+
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
-        messageBuilder.append("The auction on the Ad: ");
-        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a><");
-        messageBuilder.append("has finished.</br>");
-        messageBuilder.append(winner.getFirstName()+" ");
-        messageBuilder.append(winner.getLastName()+", ");
-        messageBuilder.append(winner.getEmail()+"</br>");
-        messageBuilder.append("Has bought the ad for");
-        messageBuilder.append(ad.getInstantBuyPrice()+" swiss franks for your property. </br>");
-        messageBuilder.append("Please contact him as soon as possible");
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"Your action was successfully completed!",messageBuilder.toString());
+        messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
+        messageBuilder.append("You just sold the " + ad.getPropertyString());
+        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>");
+        messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getInstantBuyPrice() + " CHF.</br>");
+        messageBuilder.append("Please contact him as soon as possible.</br>");
+        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+        messageBuilder.append("Your Flatfindr team");
+
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"You sold a " + ad.getPropertyString(),messageBuilder.toString());
 
         // update balance
         long amount = ad.getInstantBuyPrice();
@@ -116,11 +120,16 @@ public class AuctionService {
      */
     private void sendNoBidsMessage(Ad ad){
         User user = ad.getUser();
-        String message = "We are sorry to inform you, that no one placed a bid";
-        message += "on your Ad: ";
-        message += "<a href=../ad?id="+ad.getId()+">+"+ad.getTitle()+". </a>";
-        message += "To place a new ad with the same Infromation <a href= ../profile/placeAd?id="+ad.getId()+">click here</a>"; // TODO add link to reinstate the ad
-        messageService.sendMessage(user,user,"No one has placed a Bid",message);
+        StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("Dear "+user.getFirstName()+",</br></br>");
+        messageBuilder.append("We are sorry to inform you that your auction expired and no one placed a bid on your " + ad.getPropertyString());
+        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
+        messageBuilder.append("To place a new ad with the same information <a href= ../profile/placeAd?id="+ad.getId()+" style=\"color: #0000ff\">click here</a>.</br></br>"); // TODO add link to reinstate the ad
+        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+        messageBuilder.append("Your Flatfindr team");
+        messageService.sendMessage(user,user,"Auction Expired",messageBuilder.toString());
 
     }
 
@@ -137,25 +146,27 @@ public class AuctionService {
         User winner = latestBid.getUser();
 
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("Congratulation, you have won the auction on the Ad: ");
-        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a></br>");
-        messageBuilder.append(" You will be contacted by ");
-        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+". ");
-        messageBuilder.append("If you have any Questions to ask here is the email:");
-        messageBuilder.append(owner.getEmail());
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"You have won the auction!",messageBuilder.toString());
+        messageBuilder.append("Dear "+winner.getFirstName()+",</br></br>");
+        messageBuilder.append("Congratulations! You won the auction on the " + ad.getPropertyString());
+        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
+        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
+        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+        messageBuilder.append("Your Flatfindr team");
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"Purchase confirmation",messageBuilder.toString());
 
         messageBuilder = new StringBuilder();
-        messageBuilder.append("The auction on the Ad: ");
-        messageBuilder.append("<a href= ../ad?id="+ad.getId()+">"+ad.getTitle()+"</a><");
-        messageBuilder.append("has finished.</br>");
-        messageBuilder.append("The winner is:");
-        messageBuilder.append(winner.getFirstName()+" ");
-        messageBuilder.append(winner.getLastName()+", ");
-        messageBuilder.append(winner.getEmail()+"</br>");
-        messageBuilder.append("He bid "+ad.getPrice()+" swiss franks for your property. </br>");
-        messageBuilder.append("Please contact him as soon as possible");
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"Your action was successfully completed!",messageBuilder.toString());
+        messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
+        messageBuilder.append("You just sold the " + ad.getPropertyString());
+        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>");
+        messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getPrice() + " CHF.</br>");
+        messageBuilder.append("Please contact him/her as soon as possible.</br>");
+        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+        messageBuilder.append("Your Flatfindr team");
+        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"You sold a " + ad.getPropertyString(),messageBuilder.toString());
     }
 
     /**
@@ -193,8 +204,8 @@ public class AuctionService {
             User receiver = bid.getUser();
             messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",
                     "You have been overbid by "+user.getFirstName()+
-                    "at "+"<a href= ../ad?id="+ad.getId()+">this ad! </a></br>"+
-                    "New highest bid is "+ad.getPrice());
+                    " on the " + ad.getPropertyString() + " " + "<a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle() +"</a>.</br>"+
+                    "The new highest bid is "+ad.getPrice());
         }
     }
 }

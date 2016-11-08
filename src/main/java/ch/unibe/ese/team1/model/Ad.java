@@ -113,6 +113,19 @@ public class Ad {
 		return property;
 	}
 
+	public String getPropertyString() {
+		switch (property){
+			case HOUSE:
+				return "House";
+			case APARTMENT:
+				return "Apartment";
+			case STUDIO:
+				return "Studio";
+            default:
+                return "Real Estate";
+		}
+	}
+
 	public void  setProperty(String property){
 		property.toLowerCase();
 		switch (property){
