@@ -45,11 +45,6 @@ public class AdController {
 	@Autowired
 	private BidService bidService;
 
-    @Autowired
-    private AlertService alertService;
-
-    @Autowired
-    private AuctionService auctionService;
 
 	/** Gets the ad description page for the ad with the given id. */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
@@ -93,18 +88,7 @@ public class AdController {
 	}
 
 
-	@RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
-	public @ResponseBody void makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
-										  Principal principal) {
-		System.out.println("hi");
-		User user = userService.findUserByUsername(principal.getName());
-		Ad ad = adService.getAdById(id);
-        auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before
-		bidService.makeBid(amount,user,ad);
 
-        // triggers all alerts that match the placed ad.
-		alertService.triggerAlerts(ad);
-	}
 
 
 

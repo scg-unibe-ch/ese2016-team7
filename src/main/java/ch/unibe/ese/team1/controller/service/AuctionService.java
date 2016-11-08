@@ -27,6 +27,9 @@ public class AuctionService {
     private MessageService messageService;
 
     @Autowired
+    private AdService adService;
+
+    @Autowired
     private AdDao adDao;
 
     @Autowired
@@ -55,6 +58,18 @@ public class AuctionService {
                 sendSuccessMessages(ad);
             }
         }
+    }
+
+    /**
+     * Sets expired to true
+     * Sends message to winner
+     * @param id of ad
+     */
+    @Transactional
+    public void instantBuy(long id){
+        Ad ad = adService.getAdById(id);
+        ad.setExpired(true);
+        adDao.save(ad);
     }
 
     /**

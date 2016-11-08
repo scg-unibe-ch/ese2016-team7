@@ -12,7 +12,7 @@
 
 <c:import url="template/header.jsp"/>
 
-<!--<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   Ad Description</pre>-->
+<!--<pre><a href="/">Home</a> &gt; <a href="/profile/myRooms">My Rooms</a> &gt; Ad Description</pre>-->
 
 <script src="/js/image_slider.js"></script>
 <script src="/js/adDescription.js"></script>
@@ -76,7 +76,7 @@
         showTimeLeft();
 
 
-    $.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function (data) {
+        $.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function (data) {
             if (data == 3) {
                 $('#bookmarkButton').replaceWith($('<a class="right" id="bookmarkedButton">' + "Bookmarked" + '</a>'));
                 attachBookmarkedClickHandler();
@@ -156,237 +156,256 @@
                 type="date" pattern="dd.MM.yyyy"/>
 
 
-<div id = "content" class="container"> <!-- this id needs to be here for the javascript to work -->
+<div id="content" class="container"> <!-- this id needs to be here for the javascript to work -->
     <br>
 
     <div class="row">
         <div class="col-md-6">
-<h1>${shownAd.title}</h1>
+            <h1>${shownAd.title}</h1>
         </div>
 
 
-            <div class="col-md-6">
+        <div class="col-md-6">
 
-        <c:choose>
-        <c:when test="${loggedIn}">
-            <h1><a id="bookmarkButton">Bookmark Ad</a></h1>
-        </c:when>
-    </c:choose>
-                <c:choose>
-                    <c:when test="${loggedIn}">
-                        <c:if test="${loggedInUserEmail == shownAd.user.username }">
-                            <a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
-                                <button type="button">Edit Ad</button>
-                            </a>
-                        </c:if>
-                    </c:when>
-                </c:choose>
-                </div>
-
-
+            <c:choose>
+                <c:when test="${loggedIn}">
+                    <h1><a id="bookmarkButton">Bookmark Ad</a></h1>
+                </c:when>
+            </c:choose>
+            <c:choose>
+                <c:when test="${loggedIn}">
+                    <c:if test="${loggedInUserEmail == shownAd.user.username }">
+                        <a href="<c:url value='/profile/editAd?id=${shownAd.id}' />">
+                            <button type="button">Edit Ad</button>
+                        </a>
+                    </c:if>
+                </c:when>
+            </c:choose>
         </div>
 
-<hr/>
+
+    </div>
+
+    <hr/>
 
 
+    <script>
+        function showAllBids() {
+            if ($("#bids").css("display") == "none") {
+                $("#bids").css("display", "");
+                $("#showBids").html("Hide All Bids");
+            } else {
+                $("#bids").css("display", "none");
+                $("#showBids").html("Show All Bids");
+            }
+            showButtonOnlyIfBidsExist();
+        }
 
+        function showButtonOnlyIfBidsExist() {
+            if (${numBids} == 0
+        )
+            {
+                $("#bids").css("display", "none");
+                $("#showBids").html("");
+                $("#showBidsDiv").html("");
 
-
-        <script>
-            function showAllBids() {
+            }
+        else
+            {
                 if ($("#bids").css("display") == "none") {
-                    $("#bids").css("display", "");
-                    $("#showBids").html("Hide All Bids");
-                } else {
-                    $("#bids").css("display", "none");
                     $("#showBids").html("Show All Bids");
-                }
-                showButtonOnlyIfBidsExist();
-            }
-
-            function showButtonOnlyIfBidsExist() {
-                if (${numBids} == 0
-            )
-                {
-                    $("#bids").css("display", "none");
-                    $("#showBids").html("");
-                    $("#showBidsDiv").html("");
-
-                }
-            else
-                {
-                    if ($("#bids").css("display") == "none") {
-                        $("#showBids").html("Show All Bids");
-                    } else {
-                        $("#showBids").html("Hide All Bids");
-                    }
-                }
-
-            }
-
-            $(document).ready(function () {
-                showButtonOnlyIfBidsExist();
-            });
-        </script>
-
-        <script>
-            function showTimeLeft() {
-                //We need getTime() to make the countdown compatible with all browsers.
-                var expired = ${shownAd.expireDate.getTime()};
-                var current = new Date();
-
-                if (current > expired) {
-                    $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
                 } else {
-                    var msec = expired - current;
+                    $("#showBids").html("Hide All Bids");
+                }
+            }
 
-                    var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+        }
 
-                    msec -= dd * 1000 * 60 * 60 * 24;
-                    var hh = Math.floor(msec / 1000 / 60 / 60);
-                    msec -= hh * 1000 * 60 * 60;
-                    var mm = Math.floor(msec / 1000 / 60);
-                    msec -= mm * 1000 * 60;
-                    var ss = Math.floor(msec / 1000);
-                    msec -= ss * 1000;
-                    if (dd > 0) {
-                        $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+        $(document).ready(function () {
+            showButtonOnlyIfBidsExist();
+        });
+    </script>
+
+    <script>
+        function showTimeLeft() {
+            //We need getTime() to make the countdown compatible with all browsers.
+            var expired = ${shownAd.expireDate.getTime()};
+            var current = new Date();
+
+            if (current > expired || ${shownAd.expired}) {
+                $('#bidInfo').html("<h2>We are sorry but this auction is over!</h2>");
+            } else {
+                var msec = expired - current;
+
+                var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+
+                msec -= dd * 1000 * 60 * 60 * 24;
+                var hh = Math.floor(msec / 1000 / 60 / 60);
+                msec -= hh * 1000 * 60 * 60;
+                var mm = Math.floor(msec / 1000 / 60);
+                msec -= mm * 1000 * 60;
+                var ss = Math.floor(msec / 1000);
+                msec -= ss * 1000;
+                if (dd > 0) {
+                    $('#timeLeft').html("Time Left: " + dd + " Days, " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+                }
+                else {
+                    if (hh > 0) {
+                        $('#timeLeft').html("Time Left: " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
                     }
                     else {
-                        if (hh > 0) {
-                            $('#timeLeft').html("Time Left: " + hh + " Hours, " + mm + " Minutes, " + ss + " Seconds");
+                        if (mm > 0) {
+                            $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
                         }
                         else {
-                            if (mm > 0) {
-                                $('#timeLeft').html("Time Left: " + +mm + " Minutes, " + ss + " Seconds");
-                            }
-                            else {
-                                $('#timeLeft').html("Time Left: " + ss + " Seconds");
-                            }
+                            $('#timeLeft').html("Time Left: " + ss + " Seconds");
                         }
                     }
-
-
                 }
+
+
             }
+        }
 
-            var timer = setInterval(showTimeLeft, 1000);
-        </script>
+        var timer = setInterval(showTimeLeft, 1000);
+    </script>
 
-        <div class="row">
+    <div class="row">
 
 
-            <div class="col-md-6">
-        <div id="bidList" class="adDescDiv">
-            <div id="bidInfo">
-                <h2 id="timeLeft">Expire Date: <fmt:formatDate value="${shownAd.expireDate}"
-                                                               pattern="dd.MM.yyyy HH:mm:ss"/></h2>
+        <div class="col-md-6">
+            <div id="bidList" class="adDescDiv">
+                <div id="bidInfo">
+                    <h2 id="timeLeft">Expire Date: <fmt:formatDate value="${shownAd.expireDate}"
+                                                                   pattern="dd.MM.yyyy HH:mm:ss"/></h2>
 
-        <h2>Current Price: ${shownAd.price} CHF </h2>
-        <c:choose>
-            <c:when test="${loggedIn}">
-                <c:if test="${loggedInUserEmail != shownAd.user.username }">
+                    <h2>Current Price: ${shownAd.price} CHF </h2>
+                    <c:choose>
+                        <c:when test="${loggedIn}">
+                            <c:if test="${loggedInUserEmail != shownAd.user.username }">
 
-                            <div id="bidErrorDiv" style="color: #cc0000"></div>
-                            <form>
-                                <input class="bidInput" type="number" id="bidAmount" placeholder="Amount"
-                                       style='width:300px'/>
-                                <br>
-                                <button type="button" id="makeBid" class="bidButton">Make Bid</button>
-                            </form>
-                            <br>
+                                <div id="bidErrorDiv" style="color: #cc0000"></div>
+                                <form>
+                                    <input class="bidInput" type="number" id="bidAmount" placeholder="Amount"
+                                           style='width:300px'/>
+                                    <br>
+                                    <button type="button" id="makeBid" class="bidButton">Make Bid</button>
+                                </form>
 
-                        </c:if>
-                    </c:when>
-                    <c:otherwise>
-                        <h2><a href="/login" style="color: #0000ff">Login to make bids.</a></h2>
-                    </c:otherwise>
-                </c:choose>
+                                <c:choose>
+                                    <c:when test="${shownAd.instantBuyPrice > 0}">
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $("#instantBuy").click(function () {
+                                                    alert("Hello");
+                                                    $.post("/instantBuy", {id: "${shownAd.id}"})
+                                                            .done(function () {
+                                                                location.reload();
+                                                            });
+                                                });
+                                            })
+                                        </script>
+                                        <br/>
+                                        <p>
+                                            <button type="button" id="instantBuy" class="btn bidButton">Buy</button>
+                                            for CHF ${shownAd.instantBuyPrice}
+                                        </p>
+                                    </c:when>
+                                </c:choose>
+
+                                <br/>
+
+                            </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            <h2><a href="/login" style="color: #0000ff">Login to make bids.</a></h2>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div id="showBidsDiv">
+                    <a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #0000ff">Show All
+                        Bids</a><br>
+                </div>
+
+
+                <table id="bids" style='display:none'>
+                    <c:forEach items="${bids }" var="bid">
+                        <tr>
+                            <td>
+                                <fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
+                                <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
+                                    ${bid.user.firstName}
+                                    ${bid.user.lastName}
+                                    ${bid.amount} CHF
+                            </td>
+
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
-            <div id="showBidsDiv">
-                <a href="javascript:void(0);" id="showBids" onclick="showAllBids();" style="color: #0000ff">Show All
-                    Bids</a><br>
+            <div class="clearBoth"></div>
+            <br>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="adDescDiv">
+                <h2>Description</h2>
+                ${shownAd.roomDescription}
             </div>
 
-
-        <table id="bids" style='display:none'>
-            <c:forEach items="${bids }" var="bid">
-                <tr>
-                    <td>
-                        <fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
-                        <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
-                            ${bid.user.firstName}
-                             ${bid.user.lastName}
-                            ${bid.amount} CHF
-                    </td>
-
-                </tr>
-            </c:forEach>
-        </table>
+        </div>
     </div>
-    <div class="clearBoth"></div>
-    <br>
-
-</div>
-
-            <div class="col-md-6">
-                <div class="adDescDiv">
-                    <h2>Description</h2>
-                    ${shownAd.roomDescription}
-                </div>
-
-                </div>
-            </div>
 
     <br>
 
     <div class="row">
 
 
-    <div class="col-md-6">
-        <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <td><h3>Type</h3></td>
-                <td>
-                    <c:choose>
-                        <c:when test="${shownAd.property == 'HOUSE'}">House</c:when>
-                        <c:when test="${shownAd.property == 'APARTMENT'}">Apartment</c:when>
-                        <c:when test="${shownAd.property == 'STUDIO'}">Studio</c:when>
-                    </c:choose>
-                </td>
-            </tr>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <td><h3>Type</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.property == 'HOUSE'}">House</c:when>
+                                <c:when test="${shownAd.property == 'APARTMENT'}">Apartment</c:when>
+                                <c:when test="${shownAd.property == 'STUDIO'}">Studio</c:when>
+                            </c:choose>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td><h3>Address</h3></td>
-                <td>
-                    <a class="link"
-                       href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
-                        ${shownAd.zipcode} ${shownAd.city}</a>
-                </td>
-            </tr>
+                    <tr>
+                        <td><h3>Address</h3></td>
+                        <td>
+                            <a class="link"
+                               href="http://maps.google.com/?q=${shownAd.street}, ${shownAd.zipcode}, ${shownAd.city}">${shownAd.street},
+                                ${shownAd.zipcode} ${shownAd.city}</a>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td><h3>Available from</h3></td>
-                <td>${formattedMoveInDate}</td>
-            </tr>
+                    <tr>
+                        <td><h3>Available from</h3></td>
+                        <td>${formattedMoveInDate}</td>
+                    </tr>
 
-            <tr>
-                <td><h3>Price</h3></td>
-                <td>${shownAd.price}&#32;CHF</td>
-            </tr>
+                    <tr>
+                        <td><h3>Price</h3></td>
+                        <td>${shownAd.price}&#32;CHF</td>
+                    </tr>
 
-            <tr>
-                <td><h3>Number of Rooms</h3></td>
-                <td>${shownAd.numberRooms}&#32;</td>
-            </tr>
+                    <tr>
+                        <td><h3>Number of Rooms</h3></td>
+                        <td>${shownAd.numberRooms}&#32;</td>
+                    </tr>
 
-            <tr>
-                <td><h3>Square Meters</h3></td>
-                <td>${shownAd.squareFootage}&#32;m²</td>
-            </tr>
-        </table>
-    </div>
+                    <tr>
+                        <td><h3>Square Meters</h3></td>
+                        <td>${shownAd.squareFootage}&#32;m²</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="col-md-6">
@@ -410,61 +429,59 @@
         </div>
 
 
-
     </div>
 
 
     <hr class="clearBoth"/>
 
 
-        <br/>
+    <br/>
 
 
+    <br/>
 
-        <br/>
+    <div class="row">
 
-        <div class="row">
-
-            <div class="col-md-6">
-                <div id = "visitList"> <!-- id = "visitList" is needed for the javascript -->
+        <div class="col-md-6">
+            <div id="visitList"> <!-- id = "visitList" is needed for the javascript -->
                 <div class="table-responsive">
 
 
-            <h2>Visiting times</h2>
-            <table class="table table-striped">
-                <c:forEach items="${visits }" var="visit">
-                    <tr>
-                        <td>
-                            <fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy "/>
-                            &nbsp; from
-                            <fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm "/>
-                            until
-                            <fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm"/>
-                        </td>
-                        <td><c:choose>
-                            <c:when test="${loggedIn}">
-                                <c:if test="${loggedInUserEmail != shownAd.user.username}">
-                                    <button class="thinButton" type="button" data-id="${visit.id}">Send
-                                        enquiry to advertiser
-                                    </button>
-                                </c:if>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="/login">
-                                    <button class="thinInactiveButton" type="button"
-                                            data-id="${visit.id}">Login to send enquiries
-                                    </button>
-                                </a>
-                            </c:otherwise>
-                        </c:choose></td>
-                    </tr>
-                </c:forEach>
-            </table>
-            </div>
+                    <h2>Visiting times</h2>
+                    <table class="table table-striped">
+                        <c:forEach items="${visits }" var="visit">
+                            <tr>
+                                <td>
+                                    <fmt:formatDate value="${visit.startTimestamp}" pattern="dd-MM-yyyy "/>
+                                    &nbsp; from
+                                    <fmt:formatDate value="${visit.startTimestamp}" pattern=" HH:mm "/>
+                                    until
+                                    <fmt:formatDate value="${visit.endTimestamp}" pattern=" HH:mm"/>
+                                </td>
+                                <td><c:choose>
+                                    <c:when test="${loggedIn}">
+                                        <c:if test="${loggedInUserEmail != shownAd.user.username}">
+                                            <button class="thinButton" type="button" data-id="${visit.id}">Send
+                                                enquiry to advertiser
+                                            </button>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/login">
+                                            <button class="thinInactiveButton" type="button"
+                                                    data-id="${visit.id}">Login to send enquiries
+                                            </button>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
+            </div>
 
 
-                <div class="table-responsive">
+            <div class="table-responsive">
 
                 <table id="advertiserTable" class="table table-stripped">
 
@@ -504,7 +521,9 @@
                                     </c:when>
                                     <c:otherwise>
                                         <a href="/login">
-                                            <button class="thinInactiveButton" type="button">Login to contact advertiser</button>
+                                            <button class="thinInactiveButton" type="button">Login to contact
+                                                advertiser
+                                            </button>
                                         </a>
                                     </c:otherwise>
                                 </c:choose>
@@ -512,129 +531,117 @@
                         </td>
                     </tr>
                 </table>
-                    </div>
-
             </div>
 
-
-
-    <div class="col-md-6">
-
-    <div class="table-responsive">
-
-    <table id="checkBoxTable" class="table table-striped">
-        <tr>
-            <td><h3>Smoking inside allowed</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Animals allowed</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Furnished Room</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Garage</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Cellar</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Balcony</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-        <tr>
-            <td><h3>Garden</h3></td>
-            <td>
-                <c:choose>
-                    <c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
-                    <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
-                </c:choose>
-            </td>
-        </tr>
-
-    </table>
-        </div>
-    </div>
-
-    </div>
-
-
-
-
-
-
-
-
-
-        <div id="msgDiv">
-            <form class="msgForm">
-                <h2>Contact the advertiser</h2>
-                <br>
-                <br>
-                <label>Subject: <span>*</span></label>
-                <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
-                <br><br>
-                <label>Message: </label>
-                <textarea id="msgTextarea" placeholder="Message"></textarea>
-                <br/>
-                <button type="button" id="messageSend">Send</button>
-                <button type="button" id="messageCancel">Cancel</button>
-            </form>
         </div>
 
-        <div id="confirmationDialog">
-            <form>
-                <p>Send enquiry to advertiser?</p>
-                <button type="button" id="confirmationDialogSend">Send</button>
-                <button type="button" id="confirmationDialogCancel">Cancel</button>
-            </form>
+
+        <div class="col-md-6">
+
+            <div class="table-responsive">
+
+                <table id="checkBoxTable" class="table table-striped">
+                    <tr>
+                        <td><h3>Smoking inside allowed</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.smokers}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Animals allowed</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.animals}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Furnished Room</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Garage</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.garage}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Cellar</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.cellar}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Balcony</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.balcony}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Garden</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
         </div>
+
     </div>
 
 
+    <div id="msgDiv">
+        <form class="msgForm">
+            <h2>Contact the advertiser</h2>
+            <br>
+            <br>
+            <label>Subject: <span>*</span></label>
+            <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
+            <br><br>
+            <label>Message: </label>
+            <textarea id="msgTextarea" placeholder="Message"></textarea>
+            <br/>
+            <button type="button" id="messageSend">Send</button>
+            <button type="button" id="messageCancel">Cancel</button>
+        </form>
+    </div>
 
-
+    <div id="confirmationDialog">
+        <form>
+            <p>Send enquiry to advertiser?</p>
+            <button type="button" id="confirmationDialogSend">Send</button>
+            <button type="button" id="confirmationDialogCancel">Cancel</button>
+        </form>
+    </div>
+</div>
 
 
 <c:import url="template/footer.jsp"/>

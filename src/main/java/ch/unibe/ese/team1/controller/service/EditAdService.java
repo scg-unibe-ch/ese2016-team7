@@ -98,6 +98,8 @@ public class EditAdService {
 		ad.setFurnished(placeAdForm.isFurnished());
 		ad.setGarage(placeAdForm.getGarage());
 
+		ad.setInstantBuyPrice(placeAdForm.getInstantBuyPrice());
+
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!

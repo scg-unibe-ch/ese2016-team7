@@ -175,4 +175,4 @@
 </div>
 
 
-<c:import url="template/footer.jsp"/><br/>
+<c:import url="template/footer.jsp"/>
