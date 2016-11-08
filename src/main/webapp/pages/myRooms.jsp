@@ -15,7 +15,6 @@
                 $(this).attr('src',"/img/ad_placeholder.png");
             }
         });
-        equalHeight($(".thumbnail img"));
     });
 </script>
 
