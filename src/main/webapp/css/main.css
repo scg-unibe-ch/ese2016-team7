@@ -10,6 +10,8 @@ section, ol, ul, li {
 
 
 
+
+
 /* -------------------------------------------------------------------- */
 /* Global element styling & global classes */
 p {
@@ -18,7 +20,8 @@ p {
 
 h1 {
 	margin-bottom: 10px;
-	font-size: 2em;
+	margin-top: 10px;
+	font-size: 2.2em;
 }
 
 h2 {
@@ -126,6 +129,14 @@ input, select, textarea {
 	padding-left: 2px;
 }
 
+
+
+
+.inputCheckbox{
+	height: 15px;
+	width: 15px;
+}
+
 input[type="number"] {
 	width: 70px;
 }
@@ -133,6 +144,10 @@ input[type="number"] {
 label {
 	margin-right: 10px;
 	margin-bottom: 2px;
+}
+
+.searchText {
+	font-size: 1.25em;
 }
 
 button {
@@ -788,6 +803,18 @@ footer nav ul li {
 #images img:first-child {
 	margin-top: 0px;
 	display: block;
+}
+
+.advanced{
+
+}
+
+.advanced label{
+	font-size: 1.1em;
+}
+
+.advanced tr {
+	padding-bottom: 100px;
 }
 
 #left-arrow {

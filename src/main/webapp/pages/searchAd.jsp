@@ -76,36 +76,66 @@
     <hr/>
     <form:form method="post" modelAttribute="searchForm" action="/results"
                id="searchForm" autocomplete="off">
+        <div class="check-box">
         <fieldset>
-            <form:checkbox name="house" id="house" path="house"/><label>House</label>
-            <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
-            <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
+            <div class="row">
+            <form:checkbox name="house" id="house" path="house" cssClass="inputCheckbox"/><label class="searchText"> House</label>
+            <form:checkbox name="studio" id="studio" path="studio" cssClass="inputCheckbox"/><label class="searchText"> Studio</label>
+            <form:checkbox name="apartment" id="apartment" path="apartment" cssClass="inputCheckbox"/><label class="searchText"> Apartment</label>
+            </div>
+        </div>
 
+                <div class ="row">
+                    <div class="form-group">
+                        <div class="col-lg-3">
 
-            <br/>
+            <label for="city"><div class="searchText">City / zip code:</div></label>
 
-            <label for="city">City / zip code:</label>
-            <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern" tabindex="3"/>
+                        </div>
+                        <div class="col-lg-4">
+            <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern" tabindex="3" cssClass="searchText"/>
             <form:errors path="city" cssClass="validationErrorText"/><br/>
-
-            <label for="radius">Within radius of (max.):</label>
-            <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5"/> km
+                        </div>
+            </div>
+                    </div>
+        <br/>
+        <div class ="row">
+             <div class="form-group">
+                 <div class="col-sm-3">
+            <label for="radius"><div class="searchText"> Within radius of (max.):</div></label>
+                 </div>
+                 <div class="col-lg-4">
+            <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" cssClass="searchText"/> km
             <form:errors path="radius" cssClass="validationErrorText"/>
-            <br/>
-            <label for="price">Price (max.):</label>
-            <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50"/> CHF
+                 </div>
+             </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-3">
+            <label for="price"><div class="searchText"> Price (max.):</div></label>
+                </div>
+                <div class="col-lg-4">
+            <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" cssClass="searchText"/> CHF
             <form:errors path="price" cssClass="validationErrorText"/><br/>
-            <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #ff00ff">Show Advanced Search</a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+        </div>
+            <a href="javascript:void(0);" id="advancedSearch" onclick="advancedSearch();" style="color: #ff00ff" class="searchText">Show Advanced Search</a>
             <br />
             <hr class="slim">
-            <table id="advanced" style="width: 80%; display: none;">
+            <table id="advanced" style="width: 80%; display: none;" class="advanced">
                 <tr>
-                    <td><label for="earliestMoveInDate">Earliest move-in date</label></td>
+                    <td><label for="earliestMoveInDate" class="searchText">Earliest move-in date</label></td>
                 </tr>
                 <tr>
                     <td><form:input type="text" id="field-earliestMoveInDate"
                                     path="earliestMoveInDate"/></td>
                 </tr>
+
                 <tr>
                     <td><label for="latestMoveInDate">Latest move-in date</label></td>
                 </tr>
