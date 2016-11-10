@@ -39,13 +39,14 @@ public class SignupForm {
     private boolean hasCreditCard;
 
 	@Max(value = 12, message = "Please enter a valid Month")
+	@NotNull
 	private int creditCardExpireMonth;
 
 	@NotNull
 	private int creditCardExpireYear;
 
-	@Pattern(regexp = "[0-9]+", message = "Please enter a valid securtiy code")
-	@NotNull
+	//@Pattern(regexp = "[0-9]+", message = "Please enter a valid securtiy code")
+	@NotNull(message = "Please enter a valid securtiy code")
 	private int securityCode;
 
 	public String getEmail() {
