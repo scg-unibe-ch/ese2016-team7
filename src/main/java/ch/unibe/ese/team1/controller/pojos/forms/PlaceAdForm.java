@@ -26,10 +26,12 @@ public class PlaceAdForm {
 	private String moveInDate;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int price;
+    @NotNull(message = "Has to be a valid number.")
+	private Integer price;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int squareFootage;
+    @NotNull(message = "Has to be a valid number.")
+    private Integer squareFootage;
 
     @Min(value = 1, message = "Has to be equal to 1 or more")
     private float numberRooms;
@@ -39,7 +41,8 @@ public class PlaceAdForm {
 
 	private boolean premium;
 
-    private int securityCode;
+    @NotNull(message = "Has to be a valid number.")
+    private Integer securityCode;
 
 	// optional for input
 	private String roomFriends;
@@ -57,7 +60,9 @@ public class PlaceAdForm {
 	
 	private List<String> visits;
 
-	private long instantBuyPrice;
+    @NotNull(message = "Has to be a valid number.")
+    @Min(value = 1, message = "Has to be equal to 1 or more")
+    private Integer instantBuyPrice;
 
 	public String getCity() {
 		return city;
@@ -67,11 +72,11 @@ public class PlaceAdForm {
 		this.city = city;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -83,11 +88,11 @@ public class PlaceAdForm {
 		this.roomDescription = roomDescription;
 	}
 
-	public int getSquareFootage() {
+	public Integer getSquareFootage() {
 		return squareFootage;
 	}
 
-	public void setSquareFootage(int squareFootage) {
+	public void setSquareFootage(Integer squareFootage) {
 		this.squareFootage = squareFootage;
 	}
 
@@ -178,14 +183,6 @@ public class PlaceAdForm {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-
-	public String getRoomFriends() {
-		return roomFriends;
-	}
-
-	public void setRoomFriends(String roomFriends) {
-		this.roomFriends = roomFriends;
-	}
 	
 	public Property getProperty() {
 		return property;
@@ -228,19 +225,19 @@ public class PlaceAdForm {
         this.premium = premium;
     }
 
-    public int getSecurityCode() {
+    public Integer getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(int securityCode) {
+    public void setSecurityCode(Integer securityCode) {
         this.securityCode = securityCode;
     }
 
-	public long getInstantBuyPrice() {
+	public Integer getInstantBuyPrice() {
 		return instantBuyPrice;
 	}
 
-	public void setInstantBuyPrice(long instantBuyPrice) {
+	public void setInstantBuyPrice(Integer instantBuyPrice) {
 		this.instantBuyPrice = instantBuyPrice;
 	}
 }

@@ -114,6 +114,8 @@
 
             });
         });
+
+
     </script>
 
 <!-- format the dates -->
@@ -128,7 +130,7 @@
     <form:form method="post" modelAttribute="placeAdForm"
                action="/profile/editAd" id="placeAdForm" autocomplete="off"
                enctype="multipart/form-data">
-        <input type="hidden" name="adId" value="${ad.id }"/>
+        <input type="hidden" name="adId" value="${ad.id}"/>
         <fieldset>
             <legend>Change General info</legend>
             <table class="placeAdTable">
@@ -165,14 +167,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="field-Prize">Price</label></td>
+                    <td><label for="field-Prize">Starting Price</label></td>
                     <td><label for="field-SquareFootage">Square Meters</label></td>
                     <td><label for="field-NumberRooms">Number of Rooms</label></td>
                 </tr>
                 <tr>
                     <td>
                         <form:input id="field-Prize" type="number" path="price"
-                                    placeholder="Prize per month" step="50" value="${ad.price }" cssClass="form-control"/>
+                                     step="50" value="${ad.price}" cssClass="form-control"/>
                         <form:errors path="price" cssClass="validationErrorText"/>
                     </td>
                     <td><form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Prize per month" step="5" value="${ad.squareFootage }" cssClass="form-control"/><form:errors path="squareFootage" cssClass="validationErrorText"/></td>
@@ -422,7 +424,7 @@
          </fieldset>
 
         <div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default" >Submit</button>
             <a href="<c:url value='/ad?id=${ad.id}' />">
                 <button type="button" class="btn btn-default">Cancel</button>
             </a>
