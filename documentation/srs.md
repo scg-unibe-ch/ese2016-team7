@@ -2,17 +2,17 @@
 
 <h2>1. Introduction</h2>
 **Purpose**
-The purpose of this SRS is to describe the FlatFindr online platform and specify the reuqirements of the project. This document serves as a kind of contract between the customer and the developers and acts as a common ground for the stakeholders, where either one of them can check whether their understanding and vision of the product to be built is the same as the one of the other party.
+The purpose of this SRS is to describe the FlatFindr online platform and specify the requirements of the project. This document serves as a kind of contract between the customer and the developers and acts as a common ground for the stakeholders, where either one of them can check whether their understanding and vision of the product to be built is the same as the one of the other party.
 To fulfill its purpose, the SRS is always to be kept up-to-date by the developer team.
 
 **Stakeholders**
 The customer defines the requirements.
-The users uses the product.
+The users use the product.
 The developer team “ESE 2016 Team 7” collect the requirements and build the product.
 
 **Scope**
 The software product produced for the customer is an online platform named FlatFindr.
-FlatFindr allows users to advertise houses, apartments and studios to be bought. On the other hand, users can also find houses, apartments and studios advertised by other users and contact the advertising user when they are interested in buying the house, studio or apartment. FlatFindr includes other functionalities, which support the basic purpose of the system to sell or buy houses, apartments and studios, which are described in the requirements section.
+FlatFindr allows users to advertise houses, apartments and studios to be bought per auction. On the other hand, users can also find houses, apartments and studios advertised by other users and contact the advertising user when they are interested in buying the house, studio or apartment. FlatFindr includes other functionalities, which support the basic purpose of the system to sell or buy houses, apartments and studios, which are described in the requirements section.
 
 **Definitions**
 SRS: Software Requirements Specification, i.e. this document.
@@ -20,7 +20,7 @@ Product: The FlatFindr platform.
 
 **System Overview**
 The SRS contains descriptions of the product in general terms and from user perspective in chapter 2. It is described what the system has to be able to do for the user, how the user can interact with the system. The customer can read this to determine whether all the interactions he wants to be possible between the user and the system are appropriately included in this document.
-A list of the requirements, functional and non-functional alike, can be found in chapter 3. There the functionalities the system needs in order to fulfill the descripitons in chapter 2 are written down. Developers can read this to determine how to best design the system and what they have to implement.
+A list of the requirements, functional and non-functional alike, can be found in chapter 3. There the functionalities the system needs in order to fulfill the descriptions in chapter 2 are written down. Developers can read this to determine how to best design the system and what they have to implement.
 
 **References**
 System_as_is.md: Found on Github on ese2016-team7 under documentation.
@@ -53,7 +53,8 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Edit profile | user      |     | user has to be logged in | user drops waterfall menu from his profile picture ->user clicks on "Public profile" -> profile info are displayed -> user click "edit" button -> user changes what he needs to change -> user clicks on "update" -> success feedback from the application |
 | Logout | user      |     | user has to be logged in | user drops waterfall menu from profile pic -> user clicks the button "Logout" -> user gets logged out and home page is displayed |
 | Search ads | user      |     | user (which doesn't necessarily have to own an account) is on the home page | user clicks button "search" -> search form is displayed -> users fills form according to his needs -> user clicks on "search" -> the application shows a list of apartments that fullfil the user's needs |
-| Sort search results | user      |     | User is on a page the shows search results | user choses criteria -> users clicks on button "Sort" -> results are accordingly displayed |
+| Sort search results | user      |     | User is on the page that shows search results | user chooses criteria -> users clicks on button "Sort" -> results are accordingly displayed |
+| Refine search | user      | Refine search parameters and search anew. | User is on the search results page | User clicks button "show search" -> search form for these results is displayed -> user adjusts search parameters in the search form -> user clicks on "search" -> search results for the refined search are displayed |
 | View ad | user      |     | user is on a page that already shows a specific ad | user clicks the button "Visit profile" on the section about the user that published the ad -> application shows advertiser's infos |
 | Bid | user      |     | user is already logged in and is already viewing an Ad| user enters his bid -> user clicks on the "Make Bid" button |
 | Instant Buy | user      |     | user is already logged in and is already viewing an Ad| user clicks the "instant buy" button -> user clicks on the "confirm" button |
@@ -73,9 +74,9 @@ Use cases with no explanation are seen to be self explanatory and a description 
 **Actor characteristics**
 The intended users of the product are people who want to buy houses, apartments and studios and people who want to sell their houses, apartments and studios to a person willing to buy it.
 
-We expect the buyers to be primarily real-estate companies, individuals over 30 or married couples. The first two would then rent the Object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of expierence trading in the swiss market and therefore they their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus they need of a simple, minimalistc and intuitive interface. 
+We expect the buyers to be primarily real-estate companies, individuals over 30 or married couples. The first two would then rent the object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of experience trading in the Swiss market and therefore their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus they need of a simple, minimalistic and intuitive interface. 
 
-We expect the sellers to be families of deceased people or individuals within any range of age, background or employment, so basically people who want to get rid of the Object or earn some money for whatever reason. 
+We expect the sellers to be families of deceased people or individuals within any range of age, background or employment, so basically people who want to get rid of the object or earn some money for whatever reason. 
 
 
 <h2>3. Specific requirements</h2>
@@ -85,25 +86,27 @@ We expect the sellers to be families of deceased people or individuals within an
 
 <h5>Placing an ad</h5>
 - A Manager must specify the general infos of the flat ad. He must add a title, the address (containing a Street and a City).
-- Further he has to add the date of the move-in. (no move-out date: _done_)
+- Further he has to add the date of the move-in. (no move-out date: _Done_)
 - He adds the price, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
-- For the flat he must add a description of the property, including the amount of rooms (_done_) and can tick the following options: Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage
+- For the flat he must add a description of the property, including the amount of rooms (_Done_) and can tick the following options: Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage.
 - He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
 - The manager can add visiting times by choosing them in a calendar and setting the time.
 - An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, if he hasn't he is asked to do so. (_To be done_)
-- Manager should be able to add ads for selling houses, apartments and studios via auctions.(_done_).
-- If he wants so he can make an instant buy option for a fixed price (_To be done_)
+- Manager should be able to add ads for selling houses, apartments and studios via auctions.(_Done_).
+- If he wants so he can make an instant buy option for a fixed price (_Done_)
 
-<h5>Auctions</h5> (_Done_)
-- There will be no possibility for a direct buy. If a user gets overbid, he will be messaged. (_done_)
+<h5>Auctions</h5> (_To be done_)
+- If a user gets overbid, he will be messaged. (_Done_)
 - If a user is overbid he is messaged and told on which ad and by how much (_Done_)
-- If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_done_)
-- If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction with (optional) adjusted parameters.(_done_)
+- If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_Done_)
+- If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction with (optional) adjusted parameters.(_Done_)
 - When a user doesn't enter a bid high enough, he is told so by a nice looking message (_done_)
 - There is an instant buy option (_Done_)
+- If a user instant buys an ad, the highest bidder will be informed of that by a message appropriately. (_To be done_)
+- If a user instant buys an ad, the manager is messaged and told who bought the property and for how much, including a link to the ad. (_To be done_)
 
 <h5>Messages</h5>
-- In the messages he can choose between the following three options:
+- In the messages the user can choose between the following three options:
 - Inbox: In a table, messages received are shown in a table, ordered by subject, sender, recipient and date sent. If a message is unread, its blue, otherwise white. If clicked on it,  the message is shown below.
 - New: a window pops up in which the user must enter the mail address of the recipient (title “To:”), the subject of the message (title: “Subject”) and (optional) a message (title: “message”) if he wants to send a message. He then has a Send and a Cancel button
 - Sent: the mails sent by the user, displayed the same way as in the inbox
@@ -119,14 +122,14 @@ We expect the sellers to be families of deceased people or individuals within an
 - The user can create a new alert for either a house, apartment or studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel. If new ad(s), which would satisfy his subscribed search criteria, are added, he gets an alert/a message (to be clarified) of the new add(s) fitting his search criteria.   
 - The relevant search criteria should be the price, the time and the location of the add. The others are not that relevant and either don't need to fit or only need to be 'somewhat close' to the search criteria (_To be done_).
 - Further he has a table of his active alerts, sorted by type, city, radius, max price and an option to delete the alert.  
-- He can easily search by just clicking a button beside the alert (_done_)
+- He can easily search by just clicking a button beside the alert (_Done_)
 
 <h5>User Profile</h5>
 - His picture, username, name, credit card and description are displayed with the options to message and edit profile if its the users. (_To be done_)
 
 <h5>Edit Profile</h5>
 - He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
-- The user can add a credit card to his profile. (_done_)
+- The user can add a credit card to his profile. (_Done_)
 
 <h4>Home</h4>
 - The user sees the newest ads. An ad contains the picture, title, price, type, address and move-in-date. He has the profile options and the search.
