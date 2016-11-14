@@ -13,11 +13,10 @@ The developer team “ESE 2016 Team 7” collect the requirements and build the 
 **Scope**
 The software product produced for the customer is an online platform named FlatFindr.
 FlatFindr allows users to advertise houses, apartments and studios to be bought. On the other hand, users can also find houses, apartments and studios advertised by other users and contact the advertising user when they are interested in buying the house, studio or apartment. FlatFindr includes other functionalities, which support the basic purpose of the system to sell or buy houses, apartments and studios, which are described in the requirements section.
-FlatFindr does not, however, run online. It can only be run locally.
 
 **Definitions**
 SRS: Software Requirements Specification, i.e. this document.
-Product: The FlatFindr online platform.
+Product: The FlatFindr platform.
 
 **System Overview**
 The SRS contains descriptions of the product in general terms and from user perspective in chapter 2. It is described what the system has to be able to do for the user, how the user can interact with the system. The customer can read this to determine whether all the interactions he wants to be possible between the user and the system are appropriately included in this document.
@@ -29,7 +28,10 @@ System_as_is.md: Found on Github on ese2016-team7 under documentation.
 <h2>2. Overall description</h2>
 **Product Perspective**
 The FlatFindr platform is a self-contained, independent product.
-It can be compared to other online platforms which allow the user to search for houses, apartments and studios to buy or advertise houses, apartments and studios to be bidden for, like the platform the SUB mantains. However, FlatFindr has some unique features that no other comparable platform we know of has, like the enquiry system.
+It can be compared to other online platforms which allow the user to buy and sell real estate.
+FlatFindr is based on auctions. You can buy a house by bidding on it. When the Auction ends the highest bidder wins.
+There is also an instant buy price if you want to bypass the auction system and buy it right away.
+FlatFindr also has some other unique features, like the enquiry system.
 
 **Use cases**
 
@@ -72,20 +74,19 @@ user clicks button "search" -> search form is displayed -> users fills form acco
 
 
 **Actor characteristics**
-The intended users of the product are people who want to buy houses, apartments and studios and people who want to sell their houses, apartments and studios to find a person willing to buy it.
+The intended users of the product are people who want to buy houses, apartments and studios and people who want to sell their houses, apartments and studios to a person willing to buy it.
 
-We expect the buyers the object advertised to be primarly real-estate companies, individials over 30 or married couples. The first two would then rent the Object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of expierence trading in the swiss market and therefore they their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus they need of a simple, minimalistc and intuitive interface. 
+We expect the buyers to be primarily real-estate companies, individuals over 30 or married couples. The first two would then rent the Object in order to sustain a lucrative business. As they want to buy an apartment, house or studio in Switzerland, we assume they have a reasonable amount of money at their disposal and they've gathered a significant amount of expierence trading in the swiss market and therefore they their expertise of browsing the net should already be advanced. Married couples instead could be very inexperienced, thus they need of a simple, minimalistc and intuitive interface. 
 
-We expect the sellers to be faimilies of deceased people or individuals within any range of age, background or employment, so basically people who want to get rid of the Object or earn some money for whatever reason. 
+We expect the sellers to be families of deceased people or individuals within any range of age, background or employment, so basically people who want to get rid of the Object or earn some money for whatever reason. 
 
 
 <h2>3. Specific requirements</h2>
-**Functional requirements**
+<h3>Functional requirements</h3>
 
-***User***
+<h4>User</h4>
 
-Placing an ad
-
+<h5>Placing an ad</h5>
 A Manager must specify the general infos of the flat ad:
 He must add a title, the address (containing a Street and a City).
 Further he has to add the date of the move-in. (no move-out date: _done_)
@@ -101,7 +102,7 @@ if he hasn't he is asked to do so. (_To be done_)
 Manager should be able to add ads for selling houses, apartments and studios via auctions.(_done_).
 If he wants so he can make an instant buy option for a fixed price (_To be done_)
 
-Auctions (_Done_)
+<h5>Auctions</h5> (_Done_)
 
 There will be no possibility for a direct buy. If a user gets overbidden, he will be messaged. (_done_)
 If a user is overbidden he is messaged and told on which ad and by how much (_Done_)
@@ -110,73 +111,64 @@ If an auction ends unsuccessfully, the manager is messaged with the possibility 
 When a user doesn't enter a bid high enough, he is told so by a nice looking message (_done_)
 There may be an instant buy option (_To be done_)
 
-Messages
+<h5>Messages</h5>
 In the messages he can choose between the following three options:
 Inbox: In a table, messages received are shown in a table, ordered by subject, sender, recipient and date sent. If a message is unread, its blue, otherwise white. If clicked on it,  the message is shown below.
 New: a window pops up in which the user must enter the mail address of the recipient (title “To:”), the subject of the message (title: “Subject”) and (optional) a message (title: “message”) if he wants to send a message. He then has a Send and a Cancel button
 Sent: the mails sent by the user, displayed the same way as in the inbox
 
-Enquiries
-
+<h5>Enquiries</h5>
 The Enquiries are displayed in a table, sorted by sender, ad, date of the visit, date sent, and an Action. The user can either accept or decline an enquiry and if done so it is displayed.
 
-Schedule
-
+<h5>Schedule</h5>
 The schedule contains of two lists: The users presentations and the users visits.
-
 In both, he sees the address, date, time of the visit/presentation and can enter the ad of the flat visited/presented and if he's the presenter he can enter a list of the users who visit the property, sorted by name, username, profile which he can enter and the rating of the visiting user.
 
-Alerts
-
+<h5>Alerts</h5>
 The user can create a new alert for either a house, apartment or studio (can be ticked) by entering a City/zip code,a radius and a max price. Then he can subscribe or cancel. If new ad(s), which would satisfy his subscribed search criteria, are added, he gets an alert/a message (to be clarified) of the new add(s) fitting his search criteria.   
 The relevant search criteria should be the price, the time and the location of the add. The others are not that relevant and either don't need to fit or only need to be 'somewhat close' to the search criteria (_To be done_).
 Further he has a table of his active alerts, sorted by type, city, radius, max price and an option to delete the alert.  
 The user has a clear overview of the filter (_To be done_)
 He can easily search by just clicking a button beside the alert (_done_)
 
- User Profile
+<h5>User Profile</h5>
+His picture, username, name, credit card and description are displayed with the options to message and edit profile if its the users. (_To be done_)
 
-His picture, username, name , credit card and description are displayed with the options to message and edit profile if its the users. (_To be done_)
-
-Edit Profile
+<h5>Edit Profile</h5>
 He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
 The user can add a credit card to his profile. (_done_)
 
-***Home***
+<h4>Home</h4>
 
 The user sees the newest ads. An ad contains the picture, title, price, type, address and move-in-date. He has the profile options and the search.
 
-***Search***
-
+<h4>Search</h4>
 He can tick the type and must enter a city code, radius and a price and can then search or cancel.
 
-Display search
-
+<h4>Display search</h4>
 He sees the result and can sort them by the sort options and has a box in which he can filter by a title, the address (containing a Street and a City),the date of the move-in and (optional) can add a move-out-date, the price, the type of the flat (where he can choose between house, apartment or studio) and the area of the flat in square meters.
 A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_To be done_)
 The user has a search filter where he can adjust the filter and redo the search (_Done_)
 In the ad preview the user sees also the number of rooms and the square meters of the property.
 
-Display Ad
-The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), an object description, and filters. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.   
-The filter should be removed and the filter criteria added to the search criteria (_Done_).  
-The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).  
+<h4>Display Ad</h4>
+The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), an object description, and filters. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.
+The filter should be removed and the filter criteria added to the search criteria (_Done_).
+The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).
 The user sees a log of the bids, the remaining time and has the option to enter his bid (_Done_)
 The time left should be prominent and clear to see (_To be done_)
 
 
-***Admin*** (_Done_)
-
+<h4>Admin</h4>(_Done_)
 If an administrator is logged in, he can see statistics (besides the normal ads) (_Done_)
 The administrator should see how many users are subscribed, ads active, ads expired, ads in total, money spent on Flatfindr,
 how many properties of each type are advertised, what options are chosen for the properties. (_Done_)
 He sees how much money Flatfindr has earned with provisions and premium ads. (_Done_)
    
 
-**Non-functional requirements (external, performance, etc.)**
-
+<h3>Non-functional requirements (external, performance, etc.)</h3>
 This website should work flawlessly on all browsers.
-An ad/user should be unique.  
+An ad/user should be unique.
 The website should be designed elegantly and modern. The primary color should be pink (Set primary color to pink: _Done_)
 There mustn't be more than a fixed amount of premium ads. (_To be done_)
 The Homepage should be personalized for each user (_To be done_)
