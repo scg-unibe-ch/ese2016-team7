@@ -350,11 +350,25 @@
         }
     </script>
 
+    <script>
+        function showSearch() {
+            if ($("#resultsSearchDiv").css("display") == "none") {
+                $("#resultsSearchDiv").css("display", "");
+                $("#showSearch").html("Hide Search");
+            } else {
+                $("#resultsSearchDiv").css("display", "none");
+                $("#showSearch").html("Show Search");
+            }
+        }
+    </script>
+
 
     <form:form method="post" modelAttribute="searchForm" action="/results"
                id="filterForm" autocomplete="off">
         <div class="row">
-            <div id="resultsSearchDiv">
+            <a href="javascript:void(0);" id="showSearch" onclick="showSearch();" style="color: #0000ff" class="searchText">Show Search</a>
+            <br />
+            <div id="resultsSearchDiv" style="display: none">
                 <h2>Search</h2>
 
                 <form:form method="post" modelAttribute="searchForm" action="/results"
