@@ -85,23 +85,155 @@
 
     <hr/>
     <div>
-        <div>
-            <select id="modus">
-                <option value="">Sort by:</option>
-                <option value="price_asc">Price (ascending)</option>
-                <option value="price_desc">Price (descending)</option>
-                <option value="moveIn_desc">Move-in date (earliest to latest)</option>
-                <option value="moveIn_asc">Move-in date (latest to earliest)</option>
-                <option value="dateAge_asc">Date created (youngest to oldest)</option>
-                <option value="dateAge_desc">Date created (oldest to youngest)</option>
-                <option value="timeLeft_asc">Time Left (ascending)</option>
-                <option value="timeLeft_desc">Time Left (descending)</option>
-                <option value="inst_asc">Instant Buy Price (ascending)</option>
-                <option value="inst_desc">Instant Buy Price (descending)</option>
-            </select>
+        <div class="row">
+        <div class="col-md-4">
+            <div class="sorter">
+                <select id="modus">
+                    <option value="">Sort by:</option>
+                    <option value="price_asc">Price (ascending)</option>
+                    <option value="price_desc">Price (descending)</option>
+                    <option value="moveIn_desc">Move-in date (earliest to latest)</option>
+                    <option value="moveIn_asc">Move-in date (latest to earliest)</option>
+                    <option value="dateAge_asc">Date created (youngest to oldest)</option>
+                    <option value="dateAge_desc">Date created (oldest to youngest)</option>
+                    <option value="timeLeft_asc">Time Left (ascending)</option>
+                    <option value="timeLeft_desc">Time Left (descending)</option>
+                    <option value="inst_asc">Instant Buy Price (ascending)</option>
+                    <option value="inst_desc">Instant Buy Price (descending)</option>
+                </select>
 
-            <button onClick="sort_div_attribute()">Sort</button>
+                <button onClick="sort_div_attribute()">Sort</button>
+            </div>
         </div>
+        <div class="col-md-8">
+            <button id="showSearch" onclick="showSearch()">Show Search</button>
+        </div>
+        </div>
+        <div class="row">
+        <form:form method="post" modelAttribute="searchForm" action="/results"
+                   id="filterForm" autocomplete="off">
+            <div>
+                <div id="resultsSearchDiv" style="display: none">
+                    <h2>Search</h2>
+
+                    <form:form method="post" modelAttribute="searchForm" action="/results"
+                               id="searchForm" autocomplete="off">
+                        <form:checkbox name="house" id="house" path="house"/><label>House</label>
+                        <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
+                        <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
+
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+
+                                    <label for="city">
+                                        <div class="searchText">City / zip code:</div>
+                                    </label>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern"
+                                                tabindex="3" cssClass="searchText"/>
+                                    <form:errors path="city" cssClass="validationErrorText"/><br/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label for="radius">
+                                        <div class="searchText"> Within radius of (max.):</div>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5"
+                                                cssClass="searchText"/> km
+                                    <form:errors path="radius" cssClass="validationErrorText"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label for="price">
+                                        <div class="searchText"> Price (max.):</div>
+                                    </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50"
+                                                cssClass="searchText"/> CHF
+                                    <form:errors path="price" cssClass="validationErrorText"/><br/>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <hr class="slim">
+
+                        <table id="advanced" style="width: 80%;">
+                            <tr>
+                                <td><label for="instantBuyPrice">Instant-Buy-Price lower than</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form:input type="text" id="field-instantBuyPrice" path="instantBuyPrice"/>
+                                    <form:errors path="instantBuyPrice" cssClass="validationErrorText"/>
+                                    <script type="text/javascript">
+                                        if ($("#field-instantBuyPrice").val() == 0) $("#field-instantBuyPrice").val("");
+                                    </script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="earliestMoveInDate">Earliest move-in date</label></td>
+                            </tr>
+                            <tr>
+                                <td><form:input type="text" id="field-earliestMoveInDate"
+                                                path="earliestMoveInDate"/></td>
+                            </tr>
+                            <tr>
+                                <td><label for="latestMoveInDate">Latest move-in date</label></td>
+                            </tr>
+                            <tr>
+                                <td><form:input type="text" id="field-latestMoveInDate"
+                                                path="latestMoveInDate"/></td>
+                            </tr>
+                            <tr>
+                                <td><form:checkbox id="field-smoker" path="smokers" value="1"/><label>Smoking inside
+                                    allowed</label></td>
+                                <td><form:checkbox id="field-animals" path="animals" value="1"/><label>Animals
+                                    inside allowed</label></td>
+                            </tr>
+                            <tr>
+                                <td><form:checkbox id="field-garden" path="garden" value="1"/><label>Garden
+                                    (co-use)</label></td>
+                                <td><form:checkbox id="field-balcony" path="balcony" value="1"/><label>Balcony
+                                    or Patio</label></td>
+                            </tr>
+                            <tr>
+                                <td><form:checkbox id="field-cellar" path="cellar" value="1"/><label>Cellar
+                                    or Attic</label></td>
+                                <td><form:checkbox id="field-furnished" path="furnished"
+                                                   value="1"/><label>Furnished</label></td>
+                            </tr>
+                            <tr>
+                                <td><form:checkbox id="field-garage" path="garage" value="1"/><label>Garage</label>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/results';">Search
+                        </button>
+                        <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/profile/alerts';">
+                            Subscribe
+                        </button>
+                        <button type="reset">Cancel</button>
+
+                    </form:form>
+                </div>
+            </div>
+        </div>
+        <div class="paddingTop">
+        </form:form>
         <c:choose>
         <c:when test="${empty results}">
         <p>No results found!
@@ -110,6 +242,7 @@
             <c:choose>
             <c:when test="${empty premium}">
         <h2>No premium Ads found</h2>
+        </div>
     </div>
     </c:when>
     <c:otherwise>
@@ -363,130 +496,7 @@
     </script>
 
 
-    <form:form method="post" modelAttribute="searchForm" action="/results"
-               id="filterForm" autocomplete="off">
-        <div class="row">
-            <a href="javascript:void(0);" id="showSearch" onclick="showSearch();" style="color: #0000ff" class="searchText">Show Search</a>
-            <br />
-            <div id="resultsSearchDiv" style="display: none">
-                <h2>Search</h2>
 
-                <form:form method="post" modelAttribute="searchForm" action="/results"
-                           id="searchForm" autocomplete="off">
-                    <form:checkbox name="house" id="house" path="house"/><label>House</label>
-                    <form:checkbox name="studio" id="studio" path="studio"/><label>Studio</label>
-                    <form:checkbox name="apartment" id="apartment" path="apartment"/><label>Apartment</label>
-
-
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-lg-3">
-
-                                <label for="city">
-                                    <div class="searchText">City / zip code:</div>
-                                </label>
-
-                            </div>
-                            <div class="col-lg-4">
-                                <form:input type="text" name="city" id="city" path="city" placeholder="e.g. Bern"
-                                            tabindex="3" cssClass="searchText"/>
-                                <form:errors path="city" cssClass="validationErrorText"/><br/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label for="radius">
-                                    <div class="searchText"> Within radius of (max.):</div>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5"
-                                            cssClass="searchText"/> km
-                                <form:errors path="radius" cssClass="validationErrorText"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-lg-3">
-                                <label for="price">
-                                    <div class="searchText"> Price (max.):</div>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50"
-                                            cssClass="searchText"/> CHF
-                                <form:errors path="price" cssClass="validationErrorText"/><br/>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <hr class="slim">
-
-                    <table id="advanced" style="width: 80%;">
-                        <tr>
-                            <td><label for="instantBuyPrice">Instant-Buy-Price lower than</label></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form:input type="text" id="field-instantBuyPrice" path="instantBuyPrice"/>
-                                <form:errors path="instantBuyPrice" cssClass="validationErrorText"/>
-                                <script type="text/javascript">
-                                    if ($("#field-instantBuyPrice").val() == 0) $("#field-instantBuyPrice").val("");
-                                </script>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="earliestMoveInDate">Earliest move-in date</label></td>
-                        </tr>
-                        <tr>
-                            <td><form:input type="text" id="field-earliestMoveInDate"
-                                            path="earliestMoveInDate"/></td>
-                        </tr>
-                        <tr>
-                            <td><label for="latestMoveInDate">Latest move-in date</label></td>
-                        </tr>
-                        <tr>
-                            <td><form:input type="text" id="field-latestMoveInDate"
-                                            path="latestMoveInDate"/></td>
-                        </tr>
-                        <tr>
-                            <td><form:checkbox id="field-smoker" path="smokers" value="1"/><label>Smoking inside
-                                allowed</label></td>
-                            <td><form:checkbox id="field-animals" path="animals" value="1"/><label>Animals
-                                inside allowed</label></td>
-                        </tr>
-                        <tr>
-                            <td><form:checkbox id="field-garden" path="garden" value="1"/><label>Garden
-                                (co-use)</label></td>
-                            <td><form:checkbox id="field-balcony" path="balcony" value="1"/><label>Balcony
-                                or Patio</label></td>
-                        </tr>
-                        <tr>
-                            <td><form:checkbox id="field-cellar" path="cellar" value="1"/><label>Cellar
-                                or Attic</label></td>
-                            <td><form:checkbox id="field-furnished" path="furnished"
-                                               value="1"/><label>Furnished</label></td>
-                        </tr>
-                        <tr>
-                            <td><form:checkbox id="field-garage" path="garage" value="1"/><label>Garage</label>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/results';">Search
-                    </button>
-                    <button type="submit" onClick=";markAllPropertiesIfNoneIsMarked();form.action='/profile/alerts';">
-                        Subscribe
-                    </button>
-                    <button type="reset">Cancel</button>
-
-                </form:form>
-            </div>
-        </div>
-    </form:form>
 </div>
 
 
