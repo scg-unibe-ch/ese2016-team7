@@ -183,7 +183,13 @@ public class PlaceAdController {
 			User user = userService.findUserByUsername(username);
 
 			if(placeAdForm.getPremium()){
-				creditCardService.newPremiumAd(user, placeAdForm.getSecurityCode());
+				creditCardService.newPremiumAd(user);
+			}
+
+			//TODO: pictureUploader can be null here, if we use back button on browser. fix this. (Maybe browser dependant)
+			String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
+			if (pictureUploader == null) {
+				pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 			}
 
 			List<String> fileNames = pictureUploader.getFileNames();
@@ -196,6 +202,7 @@ public class PlaceAdController {
 			this.placeAdForm = null;
 			// reset the picture uploader
 			this.pictureUploader = null;
+
 
 			model = new ModelAndView("redirect:/ad?id=" + ad.getId());
 			redirectAttributes.addFlashAttribute("confirmationMessage",

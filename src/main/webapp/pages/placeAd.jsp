@@ -96,7 +96,9 @@
                 </tr>
 
                 <tr>
-                    <td><form:input id="field-title" path="title" placeholder="Ad Title"/></td>
+                    <td><form:input id="field-title" path="title" placeholder="Ad Title"/>
+                        <form:errors path="title" cssClass="validationErrorText"/>
+                    </td>
                     <td><form:radiobutton id="type-house" path="property" value="HOUSE"
                                           checked="checked"/>House
                     </td>
@@ -110,7 +112,8 @@
                 </tr>
 
                 <tr>
-                    <td><form:input id="field-street" path="street" placeholder="Street"/></td>
+                    <td><form:input id="field-street" path="street" placeholder="Street"/>
+                        <form:errors path="street" cssClass="validationErrorText"/></td>
                     <td><form:input id="field-city" path="city" placeholder="City"/>
                         <form:errors path="city" cssClass="validationErrorText"/></td>
                 </tr>
@@ -120,7 +123,10 @@
                 </tr>
                 <tr>
                     <td><form:input type="text" id="field-moveInDate"
-                                    path="moveInDate"/></td>
+                                    path="moveInDate"/> <form:errors
+                            path="moveInDate" cssClass="validationErrorText"/></td>
+
+
                 </tr>
 
                 <tr>
@@ -150,20 +156,26 @@
                                     }else{
                                         $(this).css("display", "none");
                                         $("#instbtn").html("Add Instant Buy Price");
-                                        $("#field-InstantBuyPrice").val(0);
+                                       // $("#field-InstantBuyPrice").val(0);
                                     }
                                 });
                             }
                         </script>
                         <br/>
-                        <button type="button" id="instbtn" class="btn" onclick="showHideInstantBuy()">Add Instant Buy Price</button>
+
+                         <button type="button" id="instbtn" class="btn" onclick="showHideInstantBuy()">Add Instant Buy Price</button>
+                        <form:errors
+                                path="instantBuyPrice" cssClass="validationErrorText"/>
                     </td>
                 </tr>
+
                 <tr class="instbtn" style="display: none">
                     <td><label for="field-InstantBuyPrice">Instant Buy Price</label></td>
                 </tr >
+
                 <tr class="instbtn" style="display: none">
-                    <td><form:input id="field-InstantBuyPrice" type="number" path="instantBuyPrice" step="50"/></td>
+                    <td>
+                        <form:input id="field-InstantBuyPrice" type="number" value="0" path="instantBuyPrice"/></td>
                 </tr>
             </table>
         </fieldset>
@@ -277,10 +289,6 @@
                 <tr>
                     <td><form:checkbox path="premium" value="0"/></td>
                     <td>Premium Ad</td>
-                </tr>
-                <tr>
-                    <td><form:input type="number" path="securityCode"/></td>
-                    <td>Security Code for Credit Card</td>
                 </tr>
                 <tr>
                     <td colspan="2">Do you want to place a premium Ad? Please be informed that this is not for free

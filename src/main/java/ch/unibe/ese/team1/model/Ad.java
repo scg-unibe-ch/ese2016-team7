@@ -98,6 +98,8 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean expired = false;
 
+
+	//When instantBuyPrice is 0 or less there is no instant buy option
 	@Column
 	private long instantBuyPrice;
 

@@ -23,7 +23,8 @@ public class PlaceAdForm {
 	private String city;
 	
 	@NotBlank(message = "Required")
-	private String moveInDate;
+    @Pattern(regexp = "^[0-9]{2}-[0-9]{2}-[0-9]{4}", message = "Please enter a valid date.")
+    private String moveInDate;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
     @NotNull(message = "Has to be a valid number.")
@@ -40,9 +41,6 @@ public class PlaceAdForm {
 	private String roomDescription;
 
 	private boolean premium;
-
-    @NotNull(message = "Has to be a valid number.")
-    private Integer securityCode;
 
 	// optional for input
 	private String roomFriends;
@@ -61,7 +59,6 @@ public class PlaceAdForm {
 	private List<String> visits;
 
     @NotNull(message = "Has to be a valid number.")
-    @Min(value = 1, message = "Has to be equal to 1 or more")
     private Integer instantBuyPrice;
 
 	public String getCity() {
@@ -225,13 +222,6 @@ public class PlaceAdForm {
         this.premium = premium;
     }
 
-    public Integer getSecurityCode() {
-        return securityCode;
-    }
-
-    public void setSecurityCode(Integer securityCode) {
-        this.securityCode = securityCode;
-    }
 
 	public Integer getInstantBuyPrice() {
 		return instantBuyPrice;

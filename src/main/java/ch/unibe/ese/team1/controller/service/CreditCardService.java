@@ -13,8 +13,8 @@ public class CreditCardService {
     private UserDao userDao;
 
 
-    public boolean newPremiumAd(User user, int securtiyCode){
-        if(!checkCreditCard(user, securtiyCode)) return false;
+    public boolean newPremiumAd(User user){
+        if(!checkCreditCard(user)) return false;
         // Do transaction
         // return true if transaction was successful
         // return false otherwise
@@ -25,13 +25,12 @@ public class CreditCardService {
     }
 
     public boolean checkCreditCard(SignupForm signupForm){
-        // Check with Security Code
         // Whether Card is valid or not
         // return true if successful
         return true;
     }
 
-    public boolean checkCreditCard(User user, int securityCode){
+    public boolean checkCreditCard(User user){
         // Check if card is valid
         return true;
     }
