@@ -23,7 +23,7 @@ public class PlaceAdForm {
 	private String city;
 	
 	@NotBlank(message = "Required")
-    @Pattern(regexp = "^[0-9]{2}-[0-9]{2}-[0-9]{4}", message = "Please enter a valid date.")
+    @Pattern(regexp = "^[0-9]{2}-[0-9]{2}-[0-9]{4}$", message = "Please enter a valid date.")
     private String moveInDate;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")

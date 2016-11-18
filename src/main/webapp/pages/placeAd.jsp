@@ -79,17 +79,21 @@
 
 <div class="container">
 
-
+<row>
     <h1>Place an ad</h1>
     <hr/>
+
+
+
 
     <form:form method="post" modelAttribute="placeAdForm"
                action="/profile/placeAd" id="placeAdForm" autocomplete="off"
                enctype="multipart/form-data">
 
-        <fieldset>
+    <div class="table-responsive">
+    <fieldset>
             <legend>General info</legend>
-            <table class="placeAdTable">
+                <table class="table table-striped">
                 <tr>
                     <td><label for="field-title">Ad Title</label></td>
                     <td><label for="type-house">Type:</label></td>
@@ -298,6 +302,7 @@
                 </tr>
             </table>
         </fieldset>
+        </div>
 
 
         <br/>
@@ -307,6 +312,7 @@
                 <button type="button">Cancel</button>
             </a>
         </div>
+    </row>
 
     </form:form>
 </div>
