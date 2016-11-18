@@ -125,15 +125,19 @@
 <!--<pre><a href="/">Home</a>   &gt;   <a href="/profile/myRooms">My Rooms</a>   &gt;   <a href="/ad?id=${ad.id}">Ad Description</a>   &gt;   Edit Ad</pre>-->
 
 <div class="container">
+
+    <row>
     <h1>Edit Ad</h1>
     <hr/>
     <form:form method="post" modelAttribute="placeAdForm"
                action="/profile/editAd" id="placeAdForm" autocomplete="off"
                enctype="multipart/form-data">
         <input type="hidden" name="adId" value="${ad.id}"/>
-        <fieldset>
+    <div class="table-responsive">
+
+    <fieldset>
             <legend>Change General info</legend>
-            <table class="placeAdTable">
+                    <table class="table table-striped">
                 <tr>
                     <td><label for="field-title">Ad Title</label></td>
                     <td colspan="3"><label for="type-house">Type:</label></td>
@@ -431,6 +435,9 @@
         </div>
     </form:form>
 </div>
+        </div>
+
+    </row>
 
 
 
