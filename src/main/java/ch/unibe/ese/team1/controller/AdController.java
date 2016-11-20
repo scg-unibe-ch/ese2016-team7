@@ -54,11 +54,9 @@ public class AdController {
 		model.addObject("shownAd", ad);
 		model.addObject("messageForm", new MessageForm());
 
+		String loggedInUserEmail = (principal == null) ? "" : principal.getName();
 
-		String loggedInUserEmail = (principal == null) ? "" : principal
-				.getName();
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
-
 		model.addObject("visits", visitService.getVisitsByAd(ad));
 		model.addObject("bids", bidService.getBidsByAd(ad));
 		model.addObject("numBids", bidService.getNumBidsByAd(ad));
