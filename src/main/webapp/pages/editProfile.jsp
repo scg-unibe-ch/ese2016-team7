@@ -22,7 +22,7 @@
         <hr/>
 
         <!-- check if user is logged in -->
-        <security:authorize var="loggedIn" url="/profile"/>
+        <sec:authorize var="loggedIn" url="/profile"/>
 
 
         <c:choose>

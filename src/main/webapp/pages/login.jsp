@@ -7,7 +7,7 @@
            uri="http://www.springframework.org/security/tags" %>
 
 <!-- check if user is logged in -->
-<security:authorize var="loggedIn" url="/profile"/>
+<sec:authorize var="loggedIn" url="/profile"/>
 
 <c:import url="template/header.jsp"/>
 <!--<pre>
@@ -29,9 +29,9 @@
                 <form class="form-inline" id="form" method="post" action="/j_spring_security_check">
                     <div class="form-group">
                         <label for="field-email">Email:</label>
-                        <input name="j_username" id="field-email" class="form-control"/>
+                        <input name="username" id="field-email" class="form-control"/>
                         <label for="field-password">Password:</label>
-                        <input name="j_password" id="field-password" class="form-control" type="password"/>
+                        <input name="password" id="field-password" class="form-control" type="password"/>
                         <button type="submit">Login</button>
                     </div>
                 </form>

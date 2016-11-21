@@ -7,7 +7,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:import url="template/header.jsp"/>
-<security:authorize var="loggedIn" url="/profile" />
+<sec:authorize var="loggedIn" url="/profile" />
 
 <script type="text/javascript">
     $(document).ready(function () {

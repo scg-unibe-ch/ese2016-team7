@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="security"
+<%@ taglib prefix="sec"
 		   uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
@@ -45,8 +45,8 @@
 </head>
 
 <!-- check if user is logged in -->
-<security:authorize var="loggedIn" url="/profile" />
-<security:authorize var="isAdmin" url="/admin" />
+<sec:authorize var="loggedIn" url="/profile" />
+<sec:authorize var="isAdmin" url="/admin" />
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
