@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.security.Principal;
+import javax.management.remote.JMXPrincipal;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -27,8 +25,6 @@ public class IndexControllerTest {
 
     @Autowired
     WebApplicationContext wac;
-    @Autowired
-    MockHttpServletRequest request;
 
     private MockMvc mockMvc;
 
@@ -58,8 +54,16 @@ public class IndexControllerTest {
                 .andExpect(view().name("disclaimer"));
     }
 
+    /**
+     * TODO: have to figure out how to pass in a Principal instance
+     * (Therefore fails)
+     * @throws Exception
+     */
     @Test
     public void getProfileBalance() throws Exception {
+
+        JMXPrincipal principal = new JMXPrincipal("ese@unibe.ch");
+
         this.mockMvc.perform(get("/profile/balance"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("balance"));

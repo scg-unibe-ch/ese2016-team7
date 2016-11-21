@@ -1,20 +1,19 @@
 package ch.unibe.ese.team1.controllerTest;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-        import org.junit.Before;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.mock.web.MockHttpServletRequest;
-        import org.springframework.test.context.ContextConfiguration;
-        import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-        import org.springframework.test.context.web.WebAppConfiguration;
-        import org.springframework.test.web.servlet.MockMvc;
-        import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-        import org.springframework.web.context.WebApplicationContext;
-
-        import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -36,10 +35,14 @@ public class AuctionControllerTest {
     }
 
     @Test
-    public void getAuction() throws Exception {
-        this.mockMvc.perform(get("/auction").param("id", "1"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("shownAuction", "messageForm", "loggedInUserEmail", "visits"))
-                .andExpect(view().name("auctionDescription"));
+    public void makeBid() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void instantBuy() throws Exception {
+        this.mockMvc.perform(post("/instantBuy").param("id", "1"))
+                .andExpect(status().isOk());
     }
 }
