@@ -31,6 +31,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<mvc:interceptors>
+		<bean class="ch.unibe.ese.team1.logger.LogInterceptor" />
+	</mvc:interceptors>
+
 
 	<!-- resources -->
 	<mvc:resources mapping="/assets/**"
