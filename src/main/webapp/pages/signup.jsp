@@ -42,7 +42,6 @@
         <form:form id="signupForm" method="post" modelAttribute="signupForm"
                    action="signup">
 
-
             <label for="field-firstName">First Name:</label>
             <form:input path="firstName" id="field-firstName" cssClass="form-control"/>
             <form:errors path="firstName" cssClass="validationErrorText"/>
@@ -92,6 +91,7 @@
             <form:errors path="securityCode" cssClass="validationErrorText"/>
             <br/>
             <button type="submit" onclick="determineHasCreditCard()">Sign up</button>
+
         </form:form>
     </div>
 </div>
