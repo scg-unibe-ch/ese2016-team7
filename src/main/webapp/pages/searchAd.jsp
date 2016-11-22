@@ -11,12 +11,28 @@
 
 
 <script>
+    var valid = false;
+    var injected = false;
+
     $(document).ready(function () {
         $("#city").autocomplete({
             minLength: 2
         });
         $("#city").autocomplete({
-            source: <c:import url="getzipcodes.jsp" />
+            source: <c:import url="getzipcodes.jsp" />,
+            select: function (e) {
+                valid = true;
+            },
+            response: function (event, ui) {
+                valid = false;
+                $.each(ui.content, function (key,value) {
+                    for(k in value){
+                        if(value[k] == $("#city").val()){
+                            valid = true;
+                        }
+                    }
+                });
+            }
         });
         $("#city").autocomplete("option", {
             enabled: true,
@@ -44,6 +60,13 @@
         if (radius.value == null || radius.value == "" || radius.value == "0")
             radius.value = "5";
     });
+    function isValid() {
+        if(!valid && !injected){
+            $("#city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
+            injected = true;
+        }
+        return valid
+    }
 </script>
 
 
@@ -76,7 +99,7 @@
     <h1>Search for an ad</h1>
     <hr/>
     <form:form method="post" modelAttribute="searchForm" action="/results"
-               id="searchForm" autocomplete="off">
+               id="searchForm" autocomplete="off" onsubmit="return isValid();">
         <div class="check-box">
         <fieldset>
             <div class="row">
