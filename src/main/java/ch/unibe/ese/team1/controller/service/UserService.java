@@ -3,6 +3,14 @@ package ch.unibe.ese.team1.controller.service;
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +48,12 @@ public class UserService {
 		return (int) userDao.count();
 	}
 
-	@PostConstruct
+	@Autowired
+    @Qualifier("authenticationManager")
+    private AuthenticationManager authenticationManager;
+
+
+    @PostConstruct
     public void makeFlatFindrUser(){
         User user = new User();
         user.setUsername("FlatFindr");
@@ -61,5 +74,13 @@ public class UserService {
 		user.setCreditCardExpireYear(0);
         userDao.save(user);
     }
+
+	@Transactional
+	public void login(String email) {
+		User user = userDao.findByUsername(email);
+		Authentication request = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+		Authentication result = authenticationManager.authenticate(request);
+		SecurityContextHolder.getContext().setAuthentication(result);
+	}
 
 }

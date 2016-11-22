@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import javax.validation.Valid;
 
 import ch.unibe.ese.team1.controller.service.*;
+import ch.unibe.ese.team1.model.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +32,12 @@ import ch.unibe.ese.team1.model.Visit;
  * Handles all requests concerning user accounts and profiles.
  */
 @Controller
+@EnableScheduling
 public class ProfileController {
+
+	@Autowired
+	@Qualifier("authenticationManager")
+	protected AuthenticationManager authenticationManager;
 
 	@Autowired
 	private SignupService signupService;
@@ -61,6 +72,32 @@ public class ProfileController {
 		return model;
 	}
 
+
+	@RequestMapping(value = "/googleSignup", method = RequestMethod.POST)
+	public @ResponseBody void makeBid(@RequestParam("name") String name, @RequestParam("email") String email,
+				 Principal principal) {
+
+		boolean existsAlready = signupService.doesUserWithUsernameExist(email);
+		if(!existsAlready) {
+			SignupForm signupForm = new SignupForm();
+			signupForm.setFirstName(name);
+			signupForm.setLastName("");
+			signupForm.setEmail(email);
+			signupForm.setPassword("google");
+			signupForm.setGender(Gender.MALE);
+			signupForm.setSecurityCode(111);
+			signupForm.setCreditCardNumber("1111111111111111");
+			signupForm.setCreditCardExpireMonth(10);
+			signupForm.setCreditCardExpireYear(2018);
+			signupForm.setHasCreditCard(true);
+			signupService.saveFrom(signupForm);
+		}
+			userService.login(email);
+
+	}
+
+
+
 	/** Validates the signup form and on success persists the new user. */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signupResultPage(@Valid SignupForm signupForm,
@@ -75,6 +112,7 @@ public class ProfileController {
 			model.addObject("signupForm", signupForm);
 		}
 		return model;
+
 	}
 
 	/** Checks and returns whether a user with the given email already exists. */

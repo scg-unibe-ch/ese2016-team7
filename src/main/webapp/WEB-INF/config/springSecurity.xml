@@ -24,7 +24,7 @@
 
 
 
-    <security:authentication-manager>
+    <security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="mainDataSource"
