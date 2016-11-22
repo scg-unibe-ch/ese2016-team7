@@ -3,6 +3,7 @@ package ch.unibe.ese.team1.controller.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import ch.unibe.ese.team1.model.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,7 @@ public class SignupService {
 		
 		userDao.save(user);
 	}
+
 	
 	/**
 	 * Returns whether a user with the given username already exists.

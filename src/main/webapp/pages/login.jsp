@@ -6,12 +6,18 @@
 <%@ taglib prefix="security"
            uri="http://www.springframework.org/security/tags" %>
 
+
+
 <!-- check if user is logged in -->
 <sec:authorize var="loggedIn" url="/profile"/>
 
 <c:import url="template/header.jsp"/>
 <!--<pre>
 <a href="/">Home</a> &gt; Login</pre>-->
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="586882195932-m1navf449n5otkiklfkitfl6j3aov0t1.apps.googleusercontent.com">
+
 
 <div class="container">
     <div class="well">
@@ -26,6 +32,7 @@
                         and password.</p>
                     <br/>
                 </c:if>
+
                 <form class="form-inline" id="form" method="post" action="/j_spring_security_check">
                     <div class="form-group">
                         <label for="field-email">Email:</label>
@@ -33,6 +40,14 @@
                         <label for="field-password">Password:</label>
                         <input name="password" id="field-password" class="form-control" type="password"/>
                         <button type="submit">Login</button>
+                    </div>
+                    <br/>
+                    <br/>
+
+
+                    Login with Google:
+                    <div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </div>
                 </form>
                 <br/>
@@ -65,5 +80,27 @@
         </c:choose>
     </div>
 </div>
+
+
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var name = profile.getName();
+        var email = profile.getEmail();
+
+        $.post("/googleSignup", {name: name, email: email}, function () {
+            // alert("You bid: " + amount + " CHF");
+            //location.reload();
+            window.location = "/";
+
+        });
+        //$.post(/j_spring_security_check)
+        //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        // console.log('Name: ' + profile.getName());
+        //console.log('Image URL: ' + profile.getImageUrl());
+        // console.log('Email: ' + profile.getEmail());
+    }
+</script>
+
 
 <c:import url="template/footer.jsp"/>

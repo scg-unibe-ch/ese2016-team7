@@ -48,6 +48,7 @@
 <sec:authorize var="loggedIn" url="/profile" />
 <sec:authorize var="isAdmin" url="/admin" />
 
+
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
