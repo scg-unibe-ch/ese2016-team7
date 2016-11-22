@@ -133,7 +133,6 @@
 
 
 <!-- will be closed in footer-->
-
 <c:if test="${not empty confirmationMessage }">
 	<div class="confirmation-message">
 		<img src="/img/check-mark.png" />

@@ -1,6 +1,8 @@
 package ch.unibe.ese.team1.controller;
 
+import java.math.BigInteger;
 import java.security.Principal;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -72,7 +75,6 @@ public class ProfileController {
 		return model;
 	}
 
-
 	@RequestMapping(value = "/googleSignup", method = RequestMethod.POST)
 	public @ResponseBody void makeBid(@RequestParam("name") String name, @RequestParam("email") String email,
 				 Principal principal) {
@@ -83,7 +85,13 @@ public class ProfileController {
 			signupForm.setFirstName(name);
 			signupForm.setLastName("");
 			signupForm.setEmail(email);
-			signupForm.setPassword("google");
+
+			//Set a unhackable password
+			final SecureRandom rand = new SecureRandom();
+			String randomPassword = new BigInteger(130, rand).toString(32);
+			signupForm.setPassword(randomPassword);
+
+			//TODO: I shouldn't have to set the credit card information
 			signupForm.setGender(Gender.MALE);
 			signupForm.setSecurityCode(111);
 			signupForm.setCreditCardNumber("1111111111111111");
