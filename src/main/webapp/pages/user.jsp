@@ -66,13 +66,18 @@
             </c:otherwise>
         </c:choose>
         <p>
-        <h2>Username</h2>${user.email}<p>
-        <h2>Name</h2>${user.firstName}
-        ${user.lastName}
+            <h2>Username</h2>
+            ${user.email}
+        <p>
+            <h2>Name</h2>
+            ${user.firstName} ${user.lastName}
         <p>
         <hr class="slim">
-        <h2>About me</h2>${user.aboutMe}
+
+        <h2>About me</h2>
+        ${user.aboutMe}
         <hr class="slim">
+
         <form>
             <c:choose>
                 <c:when test="${principalID != null}">
@@ -83,7 +88,6 @@
                         </c:when>
                         <c:otherwise></c:otherwise>
                     </c:choose>
-
                 </c:when>
                 <c:otherwise>
                     <p>Please log in to contact this person.</p>
@@ -91,17 +95,24 @@
             </c:choose>
         </form>
     </div>
+
     <div id="msgDiv">
         <form class="msgForm">
             <h2>Message this user</h2>
-            <br> <br> <label>Subject: <span>*</span></label> <input
+            <br><br>
+
+            <label>Subject: <span>*</span></label> <input
                 class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
-            <br> <br> <label>Message: </label>
+            <br><br>
+
+            <label>Message: </label>
             <textarea id="msgTextarea" placeholder="Message"></textarea>
             <br/>
+
             <button type="button" id="messageSend">Send</button>
             <button type="button" id="messageCancel">Cancel</button>
         </form>
     </div>
 </div>
+
 <c:import url="template/footer.jsp"/>
