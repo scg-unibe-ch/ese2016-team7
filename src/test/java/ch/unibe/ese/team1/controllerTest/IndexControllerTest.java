@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controllerTest;
 
+import ch.unibe.ese.team1.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +9,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import javax.servlet.Filter;
 
 import javax.management.remote.JMXPrincipal;
 
@@ -25,6 +28,8 @@ public class IndexControllerTest {
 
     @Autowired
     WebApplicationContext wac;
+    @Autowired
+    private Filter springSecurityFilterChain;
 
     private MockMvc mockMvc;
 
@@ -62,11 +67,17 @@ public class IndexControllerTest {
     @Test
     public void getProfileBalance() throws Exception {
 
+        User user = new User();
+        user.setEmail("ese@unibe.ch");
         JMXPrincipal principal = new JMXPrincipal("ese@unibe.ch");
 
-        this.mockMvc.perform(get("/profile/balance"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("balance"));
+
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(wac)
+                .defaultRequest(get("/profile/balance"))
+                .addFilters(springSecurityFilterChain)
+                .build();
+
     }
 
 }
