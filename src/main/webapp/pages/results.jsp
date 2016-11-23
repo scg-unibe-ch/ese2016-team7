@@ -90,7 +90,8 @@
 <center><div id="map"></div></center>
 <script>
     function initMap() {
-        var uluru = {lat: -20.363, lng: 140.044};
+
+        var uluru = {lat: 46.9480, lng: 7.4474};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: uluru
@@ -99,31 +100,34 @@
             position: uluru,
             map: map
         });
-        var geocoder = new google.maps.Geocoder();
-
-        document.getElementById('submit').addEventListener('click', function() {
-            geocodeAddress(geocoder, map);
-        });
     }
 
-    function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('Zurich').value;
-        geocoder.geocode({'Zurich': address}, function(results, status) {
+
+
+    function genoc(city, zipcode){
+
+        var term = city + zipcode;
+
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({address : term}, function (results, status) {
             if (status === 'OK') {
-                resultsMap.setCenter(results[0].geometry.location);
+                map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
-                    map: resultsMap,
+                    map: map,
                     position: results[0].geometry.location
                 });
             } else {
+
                 alert('Geocode was not successful for the following reason: ' + status);
             }
         });
+
     }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6U6EuiTE7PWfkp9AZlfCMqYNIPj1OPY&callback=initMap">
 </script>
+
 
 <div class="container">
 
@@ -383,6 +387,10 @@
     </c:choose>
     <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
+            <script>
+                genoc( ${ad.zipcode}, ${ad.city});
+            </script>
+
             <div class="col-md-4 resultAd" data-price="${ad.price}"
                  data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-expire="${ad.expireDate}" data-inst="${ad.instantBuyPrice}">
                 <div class="thumbnail <c:choose><c:when test="${ad.premium}">thumbnailPremium</c:when></c:choose>">
