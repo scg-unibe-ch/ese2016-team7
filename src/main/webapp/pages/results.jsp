@@ -91,13 +91,16 @@
 <script>
 
     var map;
+    var bounds;
+    var counter;
 
     function initMap() {
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
-        });
+        map = new google.maps.Map(document.getElementById('map'), {});
+        bounds = new google.maps.LatLngBounds();
+        counter = 0;
     }
+
 
     function geocodeAndMark(term){
 
@@ -106,24 +109,29 @@
             if (status === 'OK') {
                 var marker = new google.maps.Marker({
                     map: map,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
                 });
+
+
             } else {
 
                 alert('Geocode was not successful for the following reason: ' + status);
             }
 
-            map.setCenter(results[0].geometry.location);
+            counter++;
+            var location = results[0].geometry.location;
 
 
-            /*
-            var pt = new google.maps.LatLng(results[0].geometry.location);
-            var bounds = map.getBounds();
-            bounds.extend(pt);
-
-            map.setBounds(bounds);
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds); */
+            // If result is one then center there otherwise use bounds
+            if(counter == 1) {
+                map.setCenter(location);
+                map.setZoom(13);
+                bounds.extend(location);
+            }
+            else {
+                bounds.extend(location);
+                map.fitBounds(bounds);
+            }
         });
 
     }
@@ -303,7 +311,7 @@
         <div class="row">
         <c:forEach var="ad" items="${premium}">
             <script>
-                geocodeAndMark("${ad.city}" + " ${ad.zipcode}");
+                geocodeAndMark("${ad.city}" + " ${ad.zipcode}" + " ${ad.street}");
             </script>
             <div class="col-md-4">
                 <div class="thumbnail thumbnailPremium">
@@ -395,7 +403,7 @@
     <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
             <script>
-                geocodeAndMark("${ad.city}" + " ${ad.zipcode}");
+                geocodeAndMark("${ad.city}" + " ${ad.zipcode}" + " ${ad.street}");
             </script>
 
             <div class="col-md-4 resultAd" data-price="${ad.price}"
