@@ -71,4 +71,10 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
         logger.warn("Failure: Controller " + controller + " couldn't handle request " + requestMapping + ": "
         + reason);
     }
+
+    public static void exceptionLog(String request, String location, String Exception, Exception e, String message){
+        logger.warn("Request: " + request + "; Location: " + location + "; " + Exception + " thrown " + message);
+        logger.warn(e.getStackTrace());
+    }
+
 }

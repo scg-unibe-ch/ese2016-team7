@@ -20,6 +20,8 @@ import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * This controller handles all requests concerning displaying ads,
  * bookmarking and bidding on them.
@@ -49,6 +51,7 @@ public class AdController {
 	/** Gets the ad description page for the ad with the given id. */
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public ModelAndView ad(@RequestParam("id") long id, Principal principal) {
+		receivedRequest("AdController", "/ad");
 		ModelAndView model = new ModelAndView("adDescription");
 		Ad ad = adService.getAdById(id);
 		model.addObject("shownAd", ad);
@@ -61,7 +64,7 @@ public class AdController {
 		model.addObject("bids", bidService.getBidsByAd(ad));
 		model.addObject("numBids", bidService.getNumBidsByAd(ad));
 
-
+		handledRequestSuccessfully("AdController", "/ad");
 		return model;
 	}
 
@@ -72,6 +75,7 @@ public class AdController {
 	@RequestMapping(value = "/ad", method = RequestMethod.POST)
 	public ModelAndView messageSent(@RequestParam("id") long id,
 			@Valid MessageForm messageForm, BindingResult bindingResult) {
+		receivedRequest("AdController", "/ad");
 
 		ModelAndView model = new ModelAndView("adDescription");
 		Ad ad = adService.getAdById(id);
@@ -82,6 +86,7 @@ public class AdController {
 		if (!bindingResult.hasErrors()) {
 			messageService.saveFrom(messageForm);
 		}
+        handledRequestSuccessfully("AdController", "/ad");
 		return model;
 	}
 
@@ -98,7 +103,7 @@ public class AdController {
 	 * 
 	 * @return 0 and 1 for errors; 3 to update the button to bookmarked 3 and 2
 	 *         for bookmarking or undo bookmarking respectively 4 for removing
-	 *         button completly (because its the users ad)
+	 *         button completely (because its the users ad)
 	 */
 	@RequestMapping(value = "/bookmark", method = RequestMethod.POST)
 	@Transactional
@@ -106,33 +111,40 @@ public class AdController {
 	public int isBookmarked(@RequestParam("id") long id,
 			@RequestParam("screening") boolean screening,
 			@RequestParam("bookmarked") boolean bookmarked, Principal principal) {
+		receivedRequest("AdController", "/bookmark");
 		// should never happen since no bookmark button when not logged in
 		if (principal == null) {
+            handlingRequestFailed("AdController", "/bookmark", "Principal is null; user not logged in; invalid action.");
 			return 0;
 		}
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
 		if (user == null) {
 			// that should not happen...
+            handlingRequestFailed("AdController", "/bookmark", "Principal is null; user not logged in; invalid action.");
 			return 1;
 		}
 		List<Ad> bookmarkedAdsIterable = user.getBookmarkedAds();
 		if (screening) {
 			for (Ad ownAdIterable : adService.getAdsByUser(user)) {
 				if (ownAdIterable.getId() == id) {
+                    handledRequestSuccessfully("AdController", "/bookmark");
 					return 4;
 				}
 			}
 			for (Ad adIterable : bookmarkedAdsIterable) {
 				if (adIterable.getId() == id) {
+                    handledRequestSuccessfully("AdController", "/bookmark");
 					return 3;
 				}
 			}
+            handledRequestSuccessfully("AdController", "/bookmark");
 			return 2;
 		}
 
 		Ad ad = adService.getAdById(id);
 
+        handledRequestSuccessfully("AdController", "/bookmark");
 		return bookmarkService.getBookmarkStatus(ad, bookmarked, user);
 	}
 
@@ -142,6 +154,7 @@ public class AdController {
 	 */
 	@RequestMapping(value = "/profile/myRooms", method = RequestMethod.GET)
 	public ModelAndView myRooms(Principal principal) {
+		receivedRequest("AdController", "/profile/myRooms");
 		ModelAndView model;
 		User user;
 		if (principal != null) {
@@ -158,6 +171,7 @@ public class AdController {
 			model = new ModelAndView("home");
 		}
 
+        handledRequestSuccessfully("AdController", "/profile/myRooms");
 		return model;
 	}
 

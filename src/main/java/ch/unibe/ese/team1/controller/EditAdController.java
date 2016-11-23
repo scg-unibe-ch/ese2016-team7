@@ -30,6 +30,8 @@ import ch.unibe.ese.team1.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * This controller handles all requests concerning editing ads.
  */
@@ -65,6 +67,7 @@ public class EditAdController {
 	 */
 	@RequestMapping(value = "/profile/editAd", method = RequestMethod.GET)
 	public ModelAndView editAdPage(@RequestParam long id, Principal principal) {
+		receivedRequest("EditAdController", "/profile/editAd");
 		ModelAndView model = new ModelAndView("editAd");
 		Ad ad = adService.getAdById(id);
 		model.addObject("ad", ad);
@@ -79,6 +82,7 @@ public class EditAdController {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
 
+        handledRequestSuccessfully("EditAdController", "/profile/editAd");
 		return model;
 	}
 
@@ -89,6 +93,7 @@ public class EditAdController {
 	public ModelAndView editAdPageWithForm(@Valid PlaceAdForm placeAdForm,
 										   BindingResult result, Principal principal,
 										   RedirectAttributes redirectAttributes, @RequestParam long adId) {
+        receivedRequest("EditAdController", "/profile/editAd");
 		ModelAndView model = new ModelAndView("placeAd");
 		if (!result.hasErrors()) {
 			String username = principal.getName();
@@ -112,6 +117,7 @@ public class EditAdController {
 					"Ad edited successfully. You can take a look at it below.");
 		}
 
+        handledRequestSuccessfully("EditAdController", "/profile/editAd");
 		return model;
 	}
 
@@ -124,7 +130,9 @@ public class EditAdController {
 	@ResponseBody
 	void deletePictureFromAd(@RequestParam long adId,
 							 @RequestParam long pictureId) {
+        receivedRequest("EditAdController", "/profile/editAd/deletePictureFromAd");
 		editAdService.deletePictureFromAd(adId, pictureId);
+        handledRequestSuccessfully("EditAdController", "/profile/editAd/deletePictureFromAd");
 	}
 
     /**
@@ -136,7 +144,9 @@ public class EditAdController {
     @ResponseBody
     void deleteVisitFromAd(@RequestParam long adId,
                            @RequestParam long visitId) {
+        receivedRequest("EditAdController", "/profile/editAd/deleteVisitFromAd");
         editAdService.deleteVisitFromAd(adId, visitId);
+        handledRequestSuccessfully("EditAdController", "/profile/editAd/deleteVisitFromAd");
     }
 
 
@@ -151,9 +161,11 @@ public class EditAdController {
 	public
 	@ResponseBody
 	List<PictureMeta> getUploadedPictures() {
+        receivedRequest("EditAdController", "/profile/editAd/getUploadedPictures");
 		if (pictureUploader == null) {
 			return null;
 		}
+        handledRequestSuccessfully("EditAdController", "/profile/editAd/getUploadedPictures");
 		return pictureUploader.getUploadedPictureMetas();
 	}
 
@@ -169,6 +181,7 @@ public class EditAdController {
 	@ResponseBody
 	String uploadPictures(
 			MultipartHttpServletRequest request) {
+        receivedRequest("EditAdController", "/profile/editAd/uploadPictures");
 		List<MultipartFile> pictures = new LinkedList<>();
 		Iterator<String> iter = request.getFileNames();
 
@@ -185,9 +198,12 @@ public class EditAdController {
 			jsonResponse += objectMapper
 					.writeValueAsString(uploadedPicturesMeta);
 		} catch (JsonProcessingException e) {
+            exceptionLog("/profile/editAd/uploadPictures", "EditAdController, uploadPictures()",
+                    "JsonProcessingException", e, "");
 			e.printStackTrace();
 		}
 		jsonResponse += "}";
+        handledRequestSuccessfully("EditAdController", "/profile/editAd/uploadPictures");
 		return jsonResponse;
 	}
 
@@ -199,10 +215,12 @@ public class EditAdController {
 	public
 	@ResponseBody
 	void deleteUploadedPicture(@RequestParam String url) {
+        receivedRequest("EditAdController", "/profile/editAd/deletePicture");
 		if (pictureUploader != null) {
 			String realPath = servletContext.getRealPath(url);
 			pictureUploader.deletePicture(url, realPath);
 		}
+        handledRequestSuccessfully("EditAdController", "/profile/editAd/deletePicture");
 	}
 
 }

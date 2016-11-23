@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * This controller is responsible for
  * Bids and the instant-buy option for auctions
@@ -35,6 +37,7 @@ public class AuctionController {
     public @ResponseBody
     void makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
                  Principal principal) {
+        receivedRequest("AuctionController", "/ad/makeBid");
         User user = userService.findUserByUsername(principal.getName());
         Ad ad = adService.getAdById(id);
         auctionService.sendOverbiddenMessage(ad,user); // do this first to get the latest bid and user before
@@ -42,6 +45,7 @@ public class AuctionController {
 
         // triggers all alerts that match the placed ad.
         alertService.triggerAlerts(ad);
+        handledRequestSuccessfully("AuctionController", "/ad/makeBid");
     }
 
     /**
@@ -50,7 +54,9 @@ public class AuctionController {
      */
     @RequestMapping(value = "/instantBuy", method = RequestMethod.POST)
     public @ResponseBody void instantBuy(@RequestParam("id") long id, Principal principal){
+        receivedRequest("AuctionController", "/instantBuy");
         User user = userService.findUserByUsername(principal.getName());
         auctionService.instantBuy(id, user);
+        handledRequestSuccessfully("AuctionController", "/instantBuy");
     }
 }

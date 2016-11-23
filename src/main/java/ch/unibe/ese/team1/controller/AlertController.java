@@ -19,6 +19,8 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.User;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * This controller handles all requests concerning creating and deleting alerts.
  */
@@ -34,27 +36,36 @@ public class AlertController {
 	/** Serves the page that allows the user to view their alerts. */
 	@RequestMapping(value = "/profile/alerts", method = RequestMethod.GET)
 	public ModelAndView alerts(Principal principal) {
+		receivedRequest("AlertController", "/profile/alerts");
+        handledRequestSuccessfully("AlertController", "/profile/alerts");
 		return prepareAlertPage(principal, false, new SearchForm());
 	}
 
 	/**
-	 * Serves the page that allow the user to view their alerts afert validating
+	 * Serves the page that allow the user to view their alerts after validating
 	 * and persisting the new alert through the alert form.
 	 */
 	@RequestMapping(value = "/profile/alerts", method = RequestMethod.POST)
 	public ModelAndView savedAlert(Principal principal,
 								   @Valid SearchForm alertForm, BindingResult result) {
+        receivedRequest("AlertController", "/profile/alerts");
 
-		if (!result.hasErrors())
-			return prepareAlertPage(principal, true, alertForm);
-		else
-			return new ModelAndView("searchAd");
+		if (!result.hasErrors()) {
+            handledRequestSuccessfully("AlertController", "/profile/alerts");
+            return prepareAlertPage(principal, true, alertForm);
+        }
+		else {
+            handlingRequestFailed("AlertController", "/profile/alerts", "BindingResult error");
+            return new ModelAndView("searchAd");
+        }
 	}
 
 	/** Deletes the alert with the given id */
 	@RequestMapping(value = "/profile/alerts/deleteAlert", method = RequestMethod.GET)
 	public @ResponseBody void deleteAlert(@RequestParam("id") long id) {
+        receivedRequest("AlertController", "/profile/alerts/deleteAlert");
 		alertService.deleteAlert(id);
+        handledRequestSuccessfully("AlertController", "/profile/alerts");
 	}
 
 	/**

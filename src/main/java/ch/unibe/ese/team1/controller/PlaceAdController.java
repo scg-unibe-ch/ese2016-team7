@@ -120,7 +120,7 @@ public class PlaceAdController {
 			//this.placeAdForm = adForm;
 			model.addObject("placeAdForm",adForm);
 		}
-		handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
+		handledRequestSuccessfully("PlaceAdController", "/profile/placeAd");
 		return model;
 	}
 
@@ -134,7 +134,7 @@ public class PlaceAdController {
         if (pictureUploader == null) {
             pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
         }
-        handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
+        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd");
         return model;
     }
 
@@ -170,13 +170,12 @@ public class PlaceAdController {
 			jsonResponse += objectMapper
 					.writeValueAsString(uploadedPicturesMeta);
 		} catch (JsonProcessingException e) {
-			logger.warn("Request: Upload pictues; Location: PlaceAdController, uploadPictures(); JsonProcessingException" +
-					" thrown.");
-			logger.warn(""+e.getStackTrace());
+			exceptionLog("/profile/placeAd/uploadPictures", "PlaceAdController, uploadPictures()",
+                    "JsonProcessingException", e, "");
 			e.printStackTrace();
 		}
 		jsonResponse += "}";
-        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/uploadPictures");
+        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/uploadPictures");
 		return jsonResponse;
 	}
 
@@ -221,10 +220,10 @@ public class PlaceAdController {
 			model = new ModelAndView("redirect:/ad?id=" + ad.getId());
 			redirectAttributes.addFlashAttribute("confirmationMessage",
 					"Ad placed successfully. You can take a look at it below.");
-            handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
+            handledRequestSuccessfully("PlaceAdController", "/profile/placeAd");
 		} else {
 			model = new ModelAndView("placeAd");
-            handlingRequestFailed("PlaceAd", "/profile/placeAd", "BindingResult error");
+            handlingRequestFailed("PlaceAdController", "/profile/placeAd", "BindingResult error");
 		}
 		return model;
 	}
@@ -242,7 +241,7 @@ public class PlaceAdController {
 		if (pictureUploader == null) {
 			return null;
 		}
-        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/getUploadedPictures");
+        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/getUploadedPictures");
 		return pictureUploader.getUploadedPictureMetas();
 	}
 
@@ -257,7 +256,7 @@ public class PlaceAdController {
 			String realPath = servletContext.getRealPath(url);
 			pictureUploader.deletePicture(url, realPath);
 		}
-        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/deletePicture");
+        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/deletePicture");
 	}
 
 	/**
@@ -274,7 +273,7 @@ public class PlaceAdController {
 
 		Boolean isAdded = adService.checkIfAlreadyAdded(email, alreadyIn);
 
-        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/validateEmail");
+        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/validateEmail");
 		if (user == null) {
 			return "This user does not exist, did your roommate register?";
 		}

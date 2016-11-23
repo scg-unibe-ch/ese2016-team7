@@ -19,6 +19,8 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 
 /** Handles all requests concerning the search for ads. */
 @Controller
@@ -39,13 +41,16 @@ public class SearchController {
 	/** Shows the search ad page. */
 	@RequestMapping(value = "/searchAd", method = RequestMethod.GET)
 	public ModelAndView searchAd() {
+		receivedRequest("SearchController", "/searchAd");
 		ModelAndView model = new ModelAndView("searchAd");
+		handledRequestSuccessfully("SearchController", "/searchAd");
 		return model;
 	}
 
 	/** Processes Quick Search */
 	@RequestMapping(value = "/quicksearch", method = RequestMethod.POST)
 	public ModelAndView quicksearch(@RequestParam("city") String city){
+		receivedRequest("SearchController", "/quicksearch");
 		searchForm.setCity(city);
 		searchForm.setRadius(500);
 		searchForm.setPrice(20000);
@@ -53,6 +58,7 @@ public class SearchController {
 		searchForm.setHouse(true);
 		searchForm.setApartment(true);
 		Errors errors = new BeanPropertyBindingResult(searchForm, "searchForm");
+		handledRequestSuccessfully("SearchController", "/quicksearch");
         return results(searchForm, (BindingResult) errors);
 	}
 
@@ -64,16 +70,18 @@ public class SearchController {
 	 * search results
 	 */
 	@RequestMapping(value = "/results", method = RequestMethod.POST)
-	public ModelAndView results(@Valid SearchForm searchForm, BindingResult result)
-	{
+	public ModelAndView results(@Valid SearchForm searchForm, BindingResult result) {
+		receivedRequest("SearchController", "/results");
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
 			Iterable<Ad> results = adService.queryResults(searchForm);
 			ArrayList<List<Ad>> filtered = adService.filterPremiumAds(results , 3);
 			model.addObject("results", filtered.get(1));
 			model.addObject("premium", filtered.get(0));
+			handledRequestSuccessfully("SearchController", "/results");
 			return model;
 		} else {
+			handlingRequestFailed("SearchController", "/results", "BindingResult error");
 			// go back
 			return searchAd();
 		}

@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * For Admin Pages
  */
@@ -30,6 +32,7 @@ public class AdminController {
     /** Displays the insights us page. */
     @RequestMapping(value = "/admin/insights")
     public ModelAndView insights(Principal principal) {
+        receivedRequest("AdminController", "/admin/insights");
         ModelAndView model = new ModelAndView("insights");
         String username = principal.getName();
         User user = userService.findUserByUsername(username);
@@ -77,6 +80,7 @@ public class AdminController {
         model.addObject("provisionsMade",provisionsMade);
         model.addObject("premiumAdMoney",premiumAdMoney);
 
+        handledRequestSuccessfully("AdminController", "/admin/insights");
         return model;
     }
 

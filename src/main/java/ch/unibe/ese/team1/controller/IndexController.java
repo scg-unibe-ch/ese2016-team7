@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team1.controller.service.AdService;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * This controller handles request concerning the home page and several other
  * simple pages.
@@ -37,6 +39,7 @@ public class IndexController {
 	/** Displays the home page. */
 	@RequestMapping(value = "/")
 	public ModelAndView index(Principal principal) {
+		receivedRequest("IndexController", "/");
 		ModelAndView model = new ModelAndView("index");
 		model.addObject("newest", adService.getNewestAds(2,false));
 		model.addObject("premium", adService.getNewestAds(2,true));
@@ -53,18 +56,23 @@ public class IndexController {
 		}
 
 		model.addObject("bookmarks", bookmarks);
+		handledRequestSuccessfully("IndexController", "/");
 		return model;
 	}
 
 	/** Displays the about us page. */
 	@RequestMapping(value = "/about")
 	public ModelAndView about() {
+		receivedRequest("IndexController", "/about");
+		handledRequestSuccessfully("IndexController", "/about");
 		return new ModelAndView("about");
 	}
 
 	/** Displays the disclaimer page. */
 	@RequestMapping(value = "/disclaimer")
 	public ModelAndView disclaimer() {
+		receivedRequest("IndexController", "/disclaimer");
+		handledRequestSuccessfully("IndexController", "/disclaimer");
 		return new ModelAndView("disclaimer");
 	}
 
@@ -72,6 +80,8 @@ public class IndexController {
 	/** Displays the balance us page. */
 	@RequestMapping(value = "/profile/balance")
 	public ModelAndView balance(Principal principal) {
+		receivedRequest("IndexController", "/profile/balance");
+		handledRequestSuccessfully("IndexController", "/about");
 		ModelAndView model = new ModelAndView("balance");
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
@@ -79,6 +89,7 @@ public class IndexController {
 		model.addObject("moneyEarned", user.getMoneyEarned());
 		model.addObject("moneySpent", user.getMoneySpent());
 
+		handledRequestSuccessfully("IndexController", "/profile/balance");
 		return model;
 	}
 }

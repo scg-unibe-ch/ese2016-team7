@@ -31,6 +31,8 @@ import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.Visit;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
+
 /**
  * Handles all requests concerning user accounts and profiles.
  */
@@ -63,15 +65,19 @@ public class ProfileController {
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
 	public ModelAndView loginPage() {
+		receivedRequest("ProfileController", "/login");
 		ModelAndView model = new ModelAndView("login");
+        handledRequestSuccessfully("ProfileController", "/login");
 		return model;
 	}
 
 	/** Returns the signup page. */
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView signupPage() {
+        receivedRequest("ProfileController", "/signup");
 		ModelAndView model = new ModelAndView("signup");
 		model.addObject("signupForm", new SignupForm());
+        handledRequestSuccessfully("ProfileController", "/signup");
 		return model;
 	}
 
@@ -79,6 +85,7 @@ public class ProfileController {
 	public @ResponseBody void makeBid(@RequestParam("name") String name, @RequestParam("email") String email,
 				 Principal principal) {
 
+        receivedRequest("ProfileController", "/googleSignup");
 		boolean existsAlready = signupService.doesUserWithUsernameExist(email);
 		if(!existsAlready) {
 			SignupForm signupForm = new SignupForm();
@@ -101,7 +108,7 @@ public class ProfileController {
 			signupService.saveFrom(signupForm);
 		}
 			userService.login(email);
-
+        handledRequestSuccessfully("ProfileController", "/googleSignup");
 	}
 
 
@@ -110,14 +117,17 @@ public class ProfileController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signupResultPage(@Valid SignupForm signupForm,
 			BindingResult bindingResult) {
+        receivedRequest("ProfileController", "/signup");
 		ModelAndView model;
 		if (!bindingResult.hasErrors() && creditCardService.checkCreditCard(signupForm)) {
 			signupService.saveFrom(signupForm);
 			model = new ModelAndView("login");
 			model.addObject("confirmationMessage", "Signup complete!");
+            handledRequestSuccessfully("ProfileController", "/signup");
 		} else {
 			model = new ModelAndView("signup");
 			model.addObject("signupForm", signupForm);
+            handlingRequestFailed("ProfileController", "/signup", "BindingResult error or invalid creditCard");
 		}
 		return model;
 
@@ -126,17 +136,21 @@ public class ProfileController {
 	/** Checks and returns whether a user with the given email already exists. */
 	@RequestMapping(value = "/signup/doesEmailExist", method = RequestMethod.POST)
 	public @ResponseBody boolean doesEmailExist(@RequestParam String email) {
+        receivedRequest("ProfileController", "/doesEmailExist");
+        handledRequestSuccessfully("ProfileController", "/doesEmailExist");
 		return signupService.doesUserWithUsernameExist(email);
 	}
 
 	/** Shows the edit profile page. */
 	@RequestMapping(value = "/profile/editProfile", method = RequestMethod.GET)
 	public ModelAndView editProfilePage(Principal principal) {
+        receivedRequest("ProfileController", "/profile/editProfile");
 		ModelAndView model = new ModelAndView("editProfile");
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
 		model.addObject("editProfileForm", new EditProfileForm());
 		model.addObject("currentUser", user);
+        handledRequestSuccessfully("ProfileController", "/profile/editProfile");
 		return model;
 	}
 
@@ -145,6 +159,7 @@ public class ProfileController {
 	public ModelAndView editProfileResultPage(
 			@Valid EditProfileForm editProfileForm,
 			BindingResult bindingResult, Principal principal) {
+        receivedRequest("ProfileController", "/profile/editProfile");
 		ModelAndView model;
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
@@ -153,11 +168,13 @@ public class ProfileController {
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message", "Your Profile has been updated!");
 			model.addObject("currentUser", user);
+            handledRequestSuccessfully("ProfileController", "/profile/editProfile");
 			return model;
 		} else {
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message",
 					"Something went wrong, please contact the WebAdmin if the problem persists!");
+            handlingRequestFailed("ProfileController", "/profile/editProfile", "BindingResult error");
 			return model;
 		}
 	}
@@ -165,6 +182,7 @@ public class ProfileController {
 	/** Displays the public profile of the user with the given id. */
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ModelAndView user(@RequestParam("id") long id, Principal principal) {
+        receivedRequest("ProfileController", "/user");
 		ModelAndView model = new ModelAndView("user");
 		User user = userService.findUserById(id);
 		if (principal != null) {
@@ -175,12 +193,14 @@ public class ProfileController {
 		}
 		model.addObject("user", user);
 		model.addObject("messageForm", new MessageForm());
+        handledRequestSuccessfully("ProfileController", "/user");
 		return model;
 	}
 
 	/** Displays the schedule page of the currently logged in user. */
 	@RequestMapping(value = "/profile/schedule", method = RequestMethod.GET)
 	public ModelAndView schedule(Principal principal) {
+        receivedRequest("ProfileController", "/profile/schedule");
 		ModelAndView model = new ModelAndView("schedule");
 		User user = userService.findUserByUsername(principal.getName());
 
@@ -197,16 +217,19 @@ public class ProfileController {
 				usersPresentations.addAll((ArrayList<Visit>) visitService
 						.getVisitsByAd(ad));
 			} catch (Exception e) {
+                exceptionLog("/profile/schedule", "ProfileController", "Exception", e, "Visits couldn't be added to ad");
 			}
 		}
 
 		model.addObject("presentations", usersPresentations);
+        handledRequestSuccessfully("ProfileController", "/profile/editProfile");
 		return model;
 	}
 
 	/** Returns the visitors page for the visit with the given id. */
 	@RequestMapping(value = "/profile/visitors", method = RequestMethod.GET)
 	public ModelAndView visitors(@RequestParam("visit") long id) {
+        receivedRequest("ProfileController", "/profile/visitors");
 		ModelAndView model = new ModelAndView("visitors");
 		Visit visit = visitService.getVisitById(id);
 		Iterable<User> visitors = visit.getSearchers();
@@ -215,6 +238,7 @@ public class ProfileController {
 
 		Ad ad = visit.getAd();
 		model.addObject("ad", ad);
+        handledRequestSuccessfully("ProfileController", "/profile/visitors");
 		return model;
 	}
 }
