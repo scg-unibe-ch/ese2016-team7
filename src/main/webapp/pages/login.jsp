@@ -19,6 +19,7 @@
 <meta name="google-signin-client_id" content="586882195932-m1navf449n5otkiklfkitfl6j3aov0t1.apps.googleusercontent.com">
 
 
+
 <div class="container">
     <div class="well">
         <h1>Login</h1>
@@ -94,11 +95,14 @@
             window.location = "/";
 
         });
-        //$.post(/j_spring_security_check)
-        //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        // console.log('Name: ' + profile.getName());
-        //console.log('Image URL: ' + profile.getImageUrl());
-        // console.log('Email: ' + profile.getEmail());
+        signOut();
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
     }
 </script>
 
