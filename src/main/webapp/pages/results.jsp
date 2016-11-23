@@ -89,29 +89,21 @@
 
 <center><div id="map"></div></center>
 <script>
+
+    var map;
+
     function initMap() {
 
-        var uluru = {lat: 46.9480, lng: 7.4474};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
         });
     }
 
-
-
-    function genoc(city, zipcode){
-
-        var term = city + zipcode;
+    function geocodeAndMark(term){
 
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({address : term}, function (results, status) {
+        geocoder.geocode({address : term }, function (results, status) {
             if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
@@ -120,6 +112,18 @@
 
                 alert('Geocode was not successful for the following reason: ' + status);
             }
+
+            map.setCenter(results[0].geometry.location);
+
+
+            /*
+            var pt = new google.maps.LatLng(results[0].geometry.location);
+            var bounds = map.getBounds();
+            bounds.extend(pt);
+
+            map.setBounds(bounds);
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds); */
         });
 
     }
@@ -298,6 +302,9 @@
     <c:otherwise>
         <div class="row">
         <c:forEach var="ad" items="${premium}">
+            <script>
+                geocodeAndMark("${ad.city}" + " ${ad.zipcode}");
+            </script>
             <div class="col-md-4">
                 <div class="thumbnail thumbnailPremium">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
@@ -388,7 +395,7 @@
     <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
             <script>
-                genoc( ${ad.zipcode}, ${ad.city});
+                geocodeAndMark("${ad.city}" + " ${ad.zipcode}");
             </script>
 
             <div class="col-md-4 resultAd" data-price="${ad.price}"
