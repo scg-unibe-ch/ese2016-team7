@@ -58,4 +58,17 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
         logger.info(logEntry);
     }
+
+    public static void receivedRequest(String controller, String requestMapping){
+        logger.info("Controller " + controller + " received request " + requestMapping + " successfully");
+    }
+
+    public static void handledRequestSuccessfully(String controller, String requestMapping){
+        logger.info("Controller " + controller + " handled request " + requestMapping + " successfully");
+    }
+
+    public static void handlingRequestFailed(String controller, String requestMapping, String reason){
+        logger.warn("Failure: Controller " + controller + " couldn't handle request " + requestMapping + ": "
+        + reason);
+    }
 }

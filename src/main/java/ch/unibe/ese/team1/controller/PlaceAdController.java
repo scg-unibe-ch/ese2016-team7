@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import ch.unibe.ese.team1.controller.service.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,8 @@ import ch.unibe.ese.team1.model.User;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import static ch.unibe.ese.team1.logger.LogInterceptor.*;
 
 /**
  * This controller handles all requests concerning placing ads.
@@ -82,9 +85,12 @@ public class PlaceAdController {
 	@Autowired
 	private CreditCardService creditCardService;
 
+	private static final Logger logger = Logger.getLogger("logger");
+
 	/** Shows the place ad form. */
 	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET, params="id")
 	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
+        receivedRequest("PlaceAdController", "/profile/placeAd");
 		ModelAndView model = new ModelAndView("placeAd");
 
 		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
@@ -114,21 +120,23 @@ public class PlaceAdController {
 			//this.placeAdForm = adForm;
 			model.addObject("placeAdForm",adForm);
 		}
+		handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
 		return model;
 	}
 
     /** Shows the place ad form.*/
     @RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET)
     public ModelAndView placeAd() throws IOException {
+        receivedRequest("PlaceAdController", "/profile/placeAd");
         ModelAndView model = new ModelAndView("placeAd");
 
         String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
         if (pictureUploader == null) {
             pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
         }
-
+        handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
         return model;
-        }
+    }
 
 
 	/**
@@ -141,6 +149,7 @@ public class PlaceAdController {
 	@RequestMapping(value = "/profile/placeAd/uploadPictures", method = RequestMethod.POST)
 	public @ResponseBody String uploadPictures(
 			MultipartHttpServletRequest request) {
+        receivedRequest("PlaceAdController", "/profile/placeAd/uploadPictures");
 		List<MultipartFile> pictures = new LinkedList<>();
 		Iterator<String> iter = request.getFileNames();
 
@@ -161,9 +170,13 @@ public class PlaceAdController {
 			jsonResponse += objectMapper
 					.writeValueAsString(uploadedPicturesMeta);
 		} catch (JsonProcessingException e) {
+			logger.warn("Request: Upload pictues; Location: PlaceAdController, uploadPictures(); JsonProcessingException" +
+					" thrown.");
+			logger.warn(""+e.getStackTrace());
 			e.printStackTrace();
 		}
 		jsonResponse += "}";
+        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/uploadPictures");
 		return jsonResponse;
 	}
 
@@ -177,6 +190,7 @@ public class PlaceAdController {
 	public ModelAndView create(@Valid PlaceAdForm placeAdForm,
 			BindingResult result, RedirectAttributes redirectAttributes,
 			Principal principal) {
+        receivedRequest("PlaceAdController", "/profile/placeAd");
 		ModelAndView model = new ModelAndView("placeAd");
 		if (!result.hasErrors()) {
 			String username = principal.getName();
@@ -207,8 +221,10 @@ public class PlaceAdController {
 			model = new ModelAndView("redirect:/ad?id=" + ad.getId());
 			redirectAttributes.addFlashAttribute("confirmationMessage",
 					"Ad placed successfully. You can take a look at it below.");
+            handledRequestSuccessfully("PlaceAd", "/profile/placeAd");
 		} else {
 			model = new ModelAndView("placeAd");
+            handlingRequestFailed("PlaceAd", "/profile/placeAd", "BindingResult error");
 		}
 		return model;
 	}
@@ -222,9 +238,11 @@ public class PlaceAdController {
 	 */
 	@RequestMapping(value = "/profile/placeAd/getUploadedPictures", method = RequestMethod.POST)
 	public @ResponseBody List<PictureMeta> getUploadedPictures() {
+        receivedRequest("PlaceAdController", "/profile/placeAd/getUploadedPictures");
 		if (pictureUploader == null) {
 			return null;
 		}
+        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/getUploadedPictures");
 		return pictureUploader.getUploadedPictureMetas();
 	}
 
@@ -234,10 +252,12 @@ public class PlaceAdController {
 	 */
 	@RequestMapping(value = "/profile/placeAd/deletePicture", method = RequestMethod.POST)
 	public @ResponseBody void deleteUploadedPicture(@RequestParam String url) {
+        receivedRequest("PlaceAdController", "/profile/placeAd/deletePicture");
 		if (pictureUploader != null) {
 			String realPath = servletContext.getRealPath(url);
 			pictureUploader.deletePicture(url, realPath);
 		}
+        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/deletePicture");
 	}
 
 	/**
@@ -249,10 +269,12 @@ public class PlaceAdController {
 	@ResponseBody
 	public String validateEmail(@RequestParam String email,
 			@RequestParam String alreadyIn) {
+        receivedRequest("PlaceAdController", "/profile/placeAd/validateEmail");
 		User user = userService.findUserByUsername(email);
 
 		Boolean isAdded = adService.checkIfAlreadyAdded(email, alreadyIn);
 
+        handledRequestSuccessfully("PlaceAd", "/profile/placeAd/validateEmail");
 		if (user == null) {
 			return "This user does not exist, did your roommate register?";
 		}

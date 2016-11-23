@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import ch.unibe.ese.team1.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,8 @@ public class AdService {
 
     @Autowired
     private GeoDataService geoDataService;
+
+    private static final Logger logger = Logger.getLogger("logger");
 
     /**
      * Handles persisting a new ad to the database.
@@ -99,6 +103,8 @@ public class AdService {
             }
 
         } catch (NumberFormatException e) {
+            logger.warn("Request: Place ad; Location: AdService, saveFrom(); NumberFormatException thrown: " +
+                    "MoveInDate contains non-numerical characters.", e);
         }
 
         ad.setPrice(placeAdForm.getPrice());
@@ -148,6 +154,8 @@ public class AdService {
                     endDate = dateFormat.parse(endTime);
                 } catch (ParseException ex) {
                     ex.printStackTrace();
+                    logger.warn("Request: Place ad; Location: AdService, saveFrom(); ParseException thrown:" +
+                            " visitString could not be parsed to a date.", ex);
                 }
 
                 visit.setStartTimestamp(startDate);
@@ -317,11 +325,15 @@ public class AdService {
             earliestInDate = formatter.parse(searchForm
                     .getEarliestMoveInDate());
         } catch (Exception e) {
+            logger.warn("Request: Place ad; Location: AdService, queryResults(); Exception thrown: " +
+                    "move-in date could not be formatted.", e);
         }
         try {
             latestInDate = formatter
                     .parse(searchForm.getLatestMoveInDate());
         } catch (Exception e) {
+            logger.warn("Request: Place ad; Location: AdService, queryResults(); Exception thrown: " +
+                    "move-out date could not be formatted.", e);
         }
 
         // filtering by dates
