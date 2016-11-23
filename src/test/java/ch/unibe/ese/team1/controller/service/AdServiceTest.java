@@ -70,6 +70,7 @@ public class AdServiceTest {
 		placeAdForm.setCellar(true);
 		placeAdForm.setFurnished(false);
 		placeAdForm.setGarage(true);
+		placeAdForm.setInstantBuyPrice(0);
 		
 		ArrayList<String> filePaths = new ArrayList<>();
 		filePaths.add("/img/test/ad1_1.jpg");
