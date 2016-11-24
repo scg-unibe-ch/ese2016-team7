@@ -22,6 +22,8 @@ import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AdPictureDao;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.exceptionLog;
+
 /** Provides services for editing ads in the database. */
 @Service
 public class EditAdService {
@@ -87,6 +89,8 @@ public class EditAdService {
 				ad.setMoveInDate(calendar.getTime());
 			}
 		} catch (NumberFormatException e) {
+			exceptionLog("Edit Ad", "EditAdService, saveFrom()", "NumberFormatException", e, "Move-in date contains"
+            + " non-numerical characters");
 		}
 
 		ad.setPrice(placeAdForm.getPrice());
@@ -140,6 +144,8 @@ public class EditAdService {
 					endDate = dateFormat.parse(endTime);
 				} catch (ParseException ex) {
 					ex.printStackTrace();
+                    exceptionLog("Place Ad", "AdService, saveFrom()", "ParseException", ex, "VisitString could not be " +
+                            "parsed");
 				}
 
 				visit.setStartTimestamp(startDate);

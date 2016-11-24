@@ -29,6 +29,8 @@ import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.exceptionLog;
+
 /**
  * Handles all persistence operations concerning ad placement and retrieval.
  */
@@ -103,8 +105,8 @@ public class AdService {
             }
 
         } catch (NumberFormatException e) {
-            logger.warn("Request: Place ad; Location: AdService, saveFrom(); NumberFormatException thrown: " +
-                    "MoveInDate contains non-numerical characters.", e);
+            exceptionLog("Place ad", "Adservice, saveFrom()", "NumberFormatException", e, "MoveInDate contains " +
+                    "non-numerical characters");
         }
 
         ad.setPrice(placeAdForm.getPrice());
@@ -154,8 +156,8 @@ public class AdService {
                     endDate = dateFormat.parse(endTime);
                 } catch (ParseException ex) {
                     ex.printStackTrace();
-                    logger.warn("Request: Place ad; Location: AdService, saveFrom(); ParseException thrown:" +
-                            " visitString could not be parsed to a date.", ex);
+                    exceptionLog("Place Ad", "AdService, saveFrom()", "ParseException", ex, "VisitString could not be " +
+                            "parsed");
                 }
 
                 visit.setStartTimestamp(startDate);
@@ -325,15 +327,15 @@ public class AdService {
             earliestInDate = formatter.parse(searchForm
                     .getEarliestMoveInDate());
         } catch (Exception e) {
-            logger.warn("Request: Place ad; Location: AdService, queryResults(); Exception thrown: " +
-                    "move-in date could not be formatted.", e);
+            exceptionLog("Get search results", "AdService, queryResults()", "Exception", e, "Move-in date could not " +
+                    "be formatted");
         }
         try {
             latestInDate = formatter
                     .parse(searchForm.getLatestMoveInDate());
         } catch (Exception e) {
-            logger.warn("Request: Place ad; Location: AdService, queryResults(); Exception thrown: " +
-                    "move-out date could not be formatted.", e);
+            exceptionLog("Get search results", "AdService, queryResults()", "Exception", e, "Move-out date could not " +
+                    "be formatted");
         }
 
         // filtering by dates
@@ -428,7 +430,7 @@ public class AdService {
     }
 
     /**
-     * Sort Itrable so that Premium Ads are at the front
+     * Sort Iterable so that Premium Ads are at the front
      *
      * @return the other Iterable
      */

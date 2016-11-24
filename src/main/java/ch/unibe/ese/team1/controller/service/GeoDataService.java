@@ -14,6 +14,8 @@ import ch.unibe.ese.team1.model.Location;
 
 import com.jolbox.bonecp.BoneCPDataSource;
 
+import static ch.unibe.ese.team1.logger.LogInterceptor.exceptionLog;
+
 /**
  * Provides read access to the geo db. Performs the reading operations manually,
  * no ORM is involved.
@@ -75,6 +77,8 @@ public class GeoDataService {
 		} catch (SQLException ex) {
 			System.out.println("Could not read locations from database.");
 			ex.printStackTrace();
+			exceptionLog("Execute query", "GeoDataService, executeQuery()", "SQLException", ex, "Could not read " +
+					"locations from database");
 		} finally {
 			try {
 				if (statement != null) {

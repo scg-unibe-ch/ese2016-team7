@@ -273,13 +273,15 @@ public class PlaceAdController {
 
 		Boolean isAdded = adService.checkIfAlreadyAdded(email, alreadyIn);
 
-        handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/validateEmail");
 		if (user == null) {
+			handlingRequestFailed("PlaceAdController", "/profile/placeAd/validateEmail", "User does not exist");
 			return "This user does not exist, did your roommate register?";
 		}
 		if (isAdded) {
+			handlingRequestFailed("PlaceAdController", "/profile/placeAd/validateEmail", "User already added");
 			return "You already added this person.";
 		} else {
+			handledRequestSuccessfully("PlaceAdController", "/profile/placeAd/validateEmail");
 			return user.getEmail();
 		}
 	}
