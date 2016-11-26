@@ -11,8 +11,7 @@
 
 
 
-<input class="myButton" type='button' id='showMap' value='Show Map' align = 'right'>
-<input class="myButton" type='button' id='showList' value='Show List' align = 'right'>
+<input class="myButton" type='button' id='showMapList' value='Show List' align = 'right'>
 
 <style>
     .myButton {
@@ -232,25 +231,11 @@
 
     }
 
-
-    // Display Map or results
     jQuery(document).ready(function(){
-        jQuery('#showMap').on('click', function(event) {
+        jQuery('#showMapList').on('click', function(event) {
             jQuery('#map').toggle('show');
-            jQuery('#showMap').toggle('show');
-            jQuery('#showList').toggle('show');
             jQuery('#resultList').toggle('show');
-        });
-    });
-
-    jQuery(document).ready(function(){
-        jQuery('#showList').on('click', function(event) {
-            jQuery('#showList').toggle('show');
-            jQuery('#map').toggle('show');
-            jQuery('#showMap').toggle('show');
-            jQuery('#resultList').toggle('show');
-
-
+            $("#showMapList").attr('value', 'Show Map');
         });
     });
 </script>
