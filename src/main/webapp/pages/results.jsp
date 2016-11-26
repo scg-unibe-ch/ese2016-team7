@@ -7,6 +7,62 @@
 
 
 <c:import url="template/header.jsp"/>
+
+
+
+
+<input class="myButton" type='button' id='showMap' value='Show Map' align = 'right'>
+<input class="myButton" type='button' id='showList' value='Show List' align = 'right'>
+
+<style>
+    .myButton {
+        -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+        box-shadow:inset 0px 1px 0px 0px #ffffff;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+        background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+        background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+        background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+        background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+        background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+        background-color:#ffffff;
+        -moz-border-radius:6px;
+        -webkit-border-radius:6px;
+        border-radius:6px;
+        border:1px solid #dcdcdc;
+        display:inline-block;
+        cursor:pointer;
+        color:#666666;
+        font-family:Arial;
+        font-size:15px;
+        font-weight:bold;
+        padding:6px 24px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #ffffff;
+        position:relative;
+        transition: .5s ease;
+        top: 50%;
+        left: 90%;
+    }
+    .myButton:hover {
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+        background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+        background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+        background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+        background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+        background-color:#f6f6f6;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+
+</style>
+
+
 <!--<pre><a href="/">Home</a> &gt; <a href="/searchAd/">Search</a> &gt; Results</pre>-->
 
 <script>
@@ -82,7 +138,7 @@
 
 <style>
     #map {
-        height: 400px;
+        height: 550px;
         width: 100%;
     }
 </style>
@@ -99,24 +155,64 @@
         map = new google.maps.Map(document.getElementById('map'), {});
         bounds = new google.maps.LatLngBounds();
         counter = 0;
+
+        // hide result list
+        jQuery('#resultList').toggle('show');
+        jQuery('#showMap').toggle('show');
     }
 
 
-    function geocodeAndMark(term){
+    function geocodeAndMark(address, picture, title, id, property, moveInDate, price){
+
+        // format property
+        if(property == 'APARTMENT') {
+            property = 'Apartment';
+        }
+        else if(property == 'HOUSE') {
+            property = 'House';
+        }
+        else if(property == 'STUDIO') {
+            property = 'Studio';
+        }
 
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({address : term }, function (results, status) {
-            if (status === 'OK') {
+        geocoder.geocode({address : address }, function (results, status) {
+
+
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location,
+                    url: "/ad?id=" + id,
                 });
 
+            var contentString = '<div>'+
+                    '<img src=' + picture + ' width="35%" height="35%" align="left"/>' +
+                    '<h2 ><b>'+ title  +'</b></h2>'+
+                    '<p >'+ address +'</p>'+
+                    '<p >'+ property +'</p>'+
+                    '<p > Available from:  '+ moveInDate +'</p>'+
+                    '<p > Price:  <b>'+ price +'</b></p>'+
+                    '</div>';
 
-            } else {
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth : 500,
+                maxHeight : 500
+            });
 
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
+            marker.addListener('mouseover', function() {
+                infowindow.open(map, marker);
+            });
+
+            marker.addListener('mouseout', function() {
+                infowindow.close();
+            });
+
+            marker.addListener('click', function() {
+                window.location.href = this.url;
+            });
+
+
 
             counter++;
             var location = results[0].geometry.location;
@@ -135,13 +231,35 @@
         });
 
     }
+
+
+    // Display Map or results
+    jQuery(document).ready(function(){
+        jQuery('#showMap').on('click', function(event) {
+            jQuery('#map').toggle('show');
+            jQuery('#showMap').toggle('show');
+            jQuery('#showList').toggle('show');
+            jQuery('#resultList').toggle('show');
+        });
+    });
+
+    jQuery(document).ready(function(){
+        jQuery('#showList').on('click', function(event) {
+            jQuery('#showList').toggle('show');
+            jQuery('#map').toggle('show');
+            jQuery('#showMap').toggle('show');
+            jQuery('#resultList').toggle('show');
+
+
+        });
+    });
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6U6EuiTE7PWfkp9AZlfCMqYNIPj1OPY&callback=initMap">
 </script>
 
 
-<div class="container">
+<div class="container" id="resultList">
 
     <h1>Search results:</h1>
 
@@ -310,8 +428,16 @@
     <c:otherwise>
         <div class="row">
         <c:forEach var="ad" items="${premium}">
+            <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                            type="date" pattern="dd.MM.yyyy"/>
             <script>
-                geocodeAndMark("${ad.city}" + " ${ad.zipcode}" + " ${ad.street}");
+                geocodeAndMark("${ad.zipcode} " + "${ad.city}" + " ${ad.street}",
+                        "${ad.pictures[0].filePath}",
+                        "${ad.title}",
+                        "${ad.id}",
+                        "${ad.property}",
+                        "${formattedMoveInDate}",
+                        "${ad.price}");
             </script>
             <div class="col-md-4">
                 <div class="thumbnail thumbnailPremium">
@@ -329,8 +455,6 @@
                                 <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
                                 <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
                             </c:choose></i></p>
-                        <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                        type="date" pattern="dd.MM.yyyy"/>
                         <p>Available from: ${formattedMoveInDate }</p>
                         <div class="row">
                             <div class="col-md-6">
@@ -402,8 +526,17 @@
     </c:choose>
     <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
+            <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
+                            type="date" pattern="dd.MM.yyyy"/>
             <script>
-                geocodeAndMark("${ad.city}" + " ${ad.zipcode}" + " ${ad.street}");
+
+                geocodeAndMark("${ad.zipcode} " + "${ad.city}" + " ${ad.street}",
+                        "${ad.pictures[0].filePath}",
+                        "${ad.title}",
+                        "${ad.id}",
+                        "${ad.property}",
+                        "${formattedMoveInDate}",
+                        "${ad.price}");
             </script>
 
             <div class="col-md-4 resultAd" data-price="${ad.price}"
@@ -420,8 +553,6 @@
                                 <c:when test="${ad.property == 'APARTMENT'}">Apartment</c:when>
                                 <c:when test="${ad.property == 'STUDIO'}">Studio</c:when>
                             </c:choose></i></p>
-                        <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-                                        type="date" pattern="dd.MM.yyyy"/>
 
                         <p>Available from: ${formattedMoveInDate }</p>
 
