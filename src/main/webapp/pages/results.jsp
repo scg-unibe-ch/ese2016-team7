@@ -246,7 +246,7 @@
 
 <div class="container" id="resultList">
 
-    <h1>Search results:</h1>
+    <h1>Search</h1>
 
     <hr/>
     <div>
@@ -401,18 +401,19 @@
         </form:form>
         <c:choose>
         <c:when test="${empty results}">
-        <p>No results found!
+        <h2>No results found!</h2>
             </c:when>
             <c:otherwise>
             <c:choose>
             <c:when test="${empty premium}">
-        <h2>No premium Ads found</h2>
         </div>
     </div>
     </c:when>
     <c:otherwise>
         <div class="row">
-        <c:forEach var="ad" items="${premium}">
+            <div id="resultsDiv" class="resultsDiv">
+
+            <c:forEach var="ad" items="${premium}">
             <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                             type="date" pattern="dd.MM.yyyy"/>
             <script>
@@ -509,7 +510,6 @@
         </c:forEach>
     </c:otherwise>
     </c:choose>
-    <div id="resultsDiv" class="row resultsDiv">
         <c:forEach var="ad" items="${results}">
             <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                             type="date" pattern="dd.MM.yyyy"/>

@@ -134,7 +134,7 @@
                 </tr>
 
                 <tr>
-                    <td><label for="field-Prize">Auction price</label></td>
+                    <td><label for="field-Prize">Starting price</label></td>
                     <td><label for="field-SquareFootage">Square Meters</label></td>
                     <td><label for="field-NumberRooms">Number of Rooms</label></td>
                 </tr>
@@ -276,7 +276,7 @@
                     </select>
 
 
-                        <div id="addVisitButton" class="smallPlusButton">+</div>
+                        <div id="addVisitButton" class="smallPlusButton">Add Visiting Time</div>
 
                         <div id="addedVisits"></div>
                     </td>

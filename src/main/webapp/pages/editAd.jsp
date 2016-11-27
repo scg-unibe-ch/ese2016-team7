@@ -370,7 +370,7 @@
                                 }
                             %>
                         </select>
-                        <div id="addVisitButton" class="smallPlusButton">+</div>
+                        <div id="addVisitButton" class="smallPlusButton">Add Visiting Time</div>
                         <div id="addedVisits"></div>
                     </td>
                 </tr>
