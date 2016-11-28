@@ -99,8 +99,8 @@ public class MessageController {
 	@RequestMapping(value="/profile/readMessage", method = RequestMethod.GET)
 	public @ResponseBody void readMessage(@RequestParam("id") long id) {
         receivedRequest("MessageController", "/profile/messages/readMessage");
-        handledRequestSuccessfully("MessageController", "/profile/messages/readMessage");
 		messageService.readMessage(id);
+		handledRequestSuccessfully("MessageController", "/profile/messages/readMessage");
 	}
 	
 	/**

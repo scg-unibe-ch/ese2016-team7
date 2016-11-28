@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team1.model.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class BidService {
 
     @Autowired
     private AdService adService;
+
+    private static final Logger logger = Logger.getLogger("logger");
 
     /**
      * Returns all bids for an advertisement.
@@ -53,7 +56,14 @@ public class BidService {
             bid.setAmount(amount);
             bidDao.save(bid);
             adService.changePrice(ad, amount);
+            logger.info(String.format("Successful bid of %s for ad no. %d.", user.getEmail(), ad.getId()));
         }
+        else if(ad.getExpired())
+            logger.error(String.format("Failed bid of %s for ad no. %d: " +
+                    "Ad already expired!", user.getEmail(), ad.getId()));
+        else if(!user.getHasCreditCard())
+            logger.info(String.format("Failed bid of %s for ad no. %d: " +
+                    "User %s has no credit card.", user.getEmail(), ad.getId(), user.getEmail()));
     }
 
 

@@ -7,6 +7,7 @@ import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.BidDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -37,6 +38,8 @@ public class AuctionService {
 
     @Autowired
     private UserDao userDao;
+
+    private static final Logger logger = Logger.getLogger("logger");
 
     private static double provision=0.05;
 
@@ -200,6 +203,9 @@ public class AuctionService {
     public void sendOverbiddenMessage(Ad ad, User user){
         Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
 
+        if (bid == null)
+            logger.error(String.format("Failed sending overbidden message of ad no. %d to user %s: " +
+                    "No bids found!", ad.getId(), user.getEmail()));
         if(bid != null) {
             User receiver = bid.getUser();
             messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",

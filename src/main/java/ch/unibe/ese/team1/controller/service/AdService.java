@@ -215,7 +215,10 @@ public class AdService {
         List<Ad> ads = new ArrayList<Ad>();
         for (Ad ad : allAds)
             ads.add(ad);
-        if (ads.size() == 0) return null;
+        if (ads.size() == 0) {
+            logger.info(String.format("Failed finding %d newest non-expired ads: All ads expired.", newest));
+            return null;
+        }
         Collections.sort(ads, new Comparator<Ad>() {
             @Override
             public int compare(Ad ad1, Ad ad2) {
@@ -223,8 +226,13 @@ public class AdService {
             }
         });
         List<Ad> fourNewest = new ArrayList<Ad>();
-        for (int i = 0; i < ads.size() && i < newest; i++)
+        int k=1;
+        for (int i = 0; i < ads.size() && i < newest; i++) {
             fourNewest.add(ads.get(i));
+            k++;
+        }
+        logger.info(String.format("Successful finding %d of the requested %d newest non-expired ads: " +
+                "If there is a difference in the numbers, there aren't enough non-expired ads.", k, newest));
         return fourNewest;
     }
 

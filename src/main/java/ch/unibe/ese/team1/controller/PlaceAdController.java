@@ -85,8 +85,6 @@ public class PlaceAdController {
 	@Autowired
 	private CreditCardService creditCardService;
 
-	private static final Logger logger = Logger.getLogger("logger");
-
 	/** Shows the place ad form. */
 	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET, params="id")
 	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {

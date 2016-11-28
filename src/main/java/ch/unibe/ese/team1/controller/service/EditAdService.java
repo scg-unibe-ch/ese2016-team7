@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.unibe.ese.team1.model.dao.VisitDao;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,8 @@ public class EditAdService {
 
     @Autowired
     private VisitService visitService;
+
+	private static final Logger logger = Logger.getLogger("logger");
 
 	/**
 	 * Handles persisting an edited ad to the database.
@@ -177,6 +180,9 @@ public class EditAdService {
 		Ad ad = adService.getAdById(adId);
 		List<AdPicture> pictures = ad.getPictures();
 		AdPicture picture = adPictureDao.findOne(pictureId);
+		if (!pictures.contains(picture))
+			logger.error(String.format("Failed deleting picture %d from ad %d: Picture not found for this ad!",
+					pictureId, adId));
 		pictures.remove(picture);
 		ad.setPictures(pictures);
 		adDao.save(ad);
