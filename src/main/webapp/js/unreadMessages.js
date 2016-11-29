@@ -2,7 +2,7 @@
 //for the inbox; if it is anything else, it returns the string for the header.
 
 function unreadMessages(place) {
-	$.get("/profile/unread", function(data){ 
+	$.get("/profile/unread", function(data){
 		var message;
 		if(place == "messages")
 			message = "Inbox";
@@ -10,9 +10,14 @@ function unreadMessages(place) {
 			message = "Messages";
 		if(data > 0)
 			message += " (" + data + ")";
-		if(place == "messages")
+		if(place == "messages") {
 			$("#inbox").html(message);
-		else
+		}else {
 			$("#messageLink").html(message);
+			if(data > 0) {
+				$("#messageNum").html(data);
+				$("#messageNum").css("display", "");
+			}
+		}
 	});
 }
