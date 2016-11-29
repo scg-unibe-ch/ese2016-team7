@@ -151,10 +151,6 @@
         map = new google.maps.Map(document.getElementById('map'), {});
         bounds = new google.maps.LatLngBounds();
         counter = 0;
-
-        $('#map').toggle('show');
-        //SjQuery('#map').hide();
-
     }
 
 
@@ -232,14 +228,15 @@
 
     jQuery(document).ready(function(){
         jQuery('#showMapList').on('click', function(event) {
+
             jQuery('#map').toggle('show');
             jQuery('#resultList').toggle('show');
 
             if(counter % 2 == 0) {
-                $("#showMapList").attr('value', 'Show List');
+                $("#showMapList").attr('value', 'Show Map');
             }
             else {
-                $("#showMapList").attr('value', 'Show Map');
+                $("#showMapList").attr('value', 'Show List');
             }
 
             counter ++;
@@ -250,7 +247,12 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6U6EuiTE7PWfkp9AZlfCMqYNIPj1OPY&callback=initMap">
 </script>
 
-<center><div id="map"></div></center>
+<center><div id="map">
+    <script>
+        $('#map').toggle('show');
+    </script>
+</div>
+</center>
 <input class="myButton" type='button' id='showMapList' value='Show Map' align = 'right'>
 
 
