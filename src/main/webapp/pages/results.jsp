@@ -224,22 +224,21 @@
 
     }
 
-    var counter = 0;
 
     jQuery(document).ready(function(){
         jQuery('#showMapList').on('click', function(event) {
 
-            jQuery('#map').toggle('show');
-            jQuery('#resultList').toggle('show');
-
-            if(counter % 2 == 0) {
+            if ( $('#map').is(':visible') ) {
                 $("#showMapList").attr('value', 'Show Map');
             }
             else {
                 $("#showMapList").attr('value', 'Show List');
             }
 
-            counter ++;
+            jQuery('#map').toggle('show');
+            jQuery('#resultList').toggle('show');
+
+
         });
     });
 </script>
