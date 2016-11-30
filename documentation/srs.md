@@ -91,11 +91,11 @@ We expect the sellers to be families of deceased people or individuals within an
 - For the flat he must add a description of the property, including the amount of rooms (_Done_) and can tick the following options: Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage.
 - He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
 - The manager can add visiting times by choosing them in a calendar and setting the time.
-- An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, if he hasn't he is asked to do so. (_To be done_)
+- An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, if he hasn't he is asked to do so. (_Done_)
 - Manager should be able to add ads for selling houses, apartments and studios via auctions.(_Done_).
 - If he wants so he can make an instant buy option for a fixed price (_Done_)
 
-<h5>Auctions</h5> (_To be done_)
+<h5>Auctions</h5> (_TDone_)
 - If a user gets overbid, he will be messaged. (_Done_)
 - If a user is overbid he is messaged and told on which ad and by how much (_Done_)
 - If an auction ends, the manager is messaged and told on who won and for how much, including a link to the ad. (_Done_)
@@ -149,6 +149,7 @@ We expect the sellers to be families of deceased people or individuals within an
 - The user should be able to have an 'advanced search' option with which he can hide and show additional search criteria (_Done_).
 - The user sees a log of the bids, the remaining time and has the option to enter his bid (_Done_)
 - The time left should be prominent and clear to see (_Done_)
+- The user sees the found properties on a map that can be displayed or hided.
 
 
 <h4>Admin</h4>(_Done_)
