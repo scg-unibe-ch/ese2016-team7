@@ -76,6 +76,8 @@
         attachBookmarkedClickHandler();
         showTimeLeft();
 
+        showBidFeedback();
+
 
         $.post("/bookmark", {id: shownAdvertisementID, screening: true, bookmarked: true}, function (data) {
             if (data == 3) {
@@ -128,11 +130,12 @@
 
 
                 if (!hasCreditCard) {
-                    $("#bidErrorDiv").html("You need a credit card to do any bids.")
+                    $("#bidErrorDiv").html("You need a credit card to make a bid.")
                 }
                 else {
                     if (amount > currentPrice) {
                         $("#bidErrorDiv").html("");
+
                         $.post("ad/makeBid", {amount: amount, id: id}, function () {
                             // alert("You bid: " + amount + " CHF");
                             $("#bidAmount").val("");
@@ -228,6 +231,21 @@
     </script>
 
     <script>
+
+        //show the user if he made the last bid
+        function showBidFeedback() {
+            var lastBidEmail = 'no email';
+            var bidsLength = '${bids.size()}';
+            if(bidsLength > 0) {
+                lastBidEmail = '${bids[0].user.email}';
+            }
+
+            var userEmail = '${loggedInUserEmail}';
+            if(userEmail == lastBidEmail) {
+                $("#bidFeedbackDiv").html("You are the highest bidder.");
+            }
+
+        }
         function showTimeLeft() {
             //We need getTime() to make the countdown compatible with all browsers.
             var expired = ${shownAd.expireDate.getTime()};
@@ -281,11 +299,13 @@
                                                                    pattern="dd.MM.yyyy HH:mm:ss"/></h2>
 
                     <h2>Current Price: ${shownAd.price} CHF </h2>
+                    <div id="bidFeedbackDiv" style="color: #00cc00;font-size: 1.5em;"></div>
+
                     <c:choose>
                         <c:when test="${loggedIn}">
                             <c:if test="${loggedInUserEmail != shownAd.user.username }">
 
-                                <div id="bidErrorDiv" style="color: #cc0000"></div>
+                                <div id="bidErrorDiv" style="color: #cc0000;"></div>
                                 <form>
                                     <input class="bidInput" type="number" id="bidAmount" placeholder="Amount" value="${shownAd.price + 1}"
                                            style='width:300px'/>

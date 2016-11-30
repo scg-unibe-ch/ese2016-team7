@@ -10,9 +10,6 @@
 
 
 
-
-<input class="myButton" type='button' id='showMapList' value='Show List' align = 'right'>
-
 <style>
     .myButton {
         -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -142,7 +139,6 @@
     }
 </style>
 
-<center><div id="map"></div></center>
 <script>
 
     var map;
@@ -151,13 +147,10 @@
 
     function initMap() {
 
+
         map = new google.maps.Map(document.getElementById('map'), {});
         bounds = new google.maps.LatLngBounds();
         counter = 0;
-
-        // hide result list
-        jQuery('#resultList').toggle('show');
-        jQuery('#showMap').toggle('show');
     }
 
 
@@ -190,7 +183,7 @@
                     '<p >'+ address +'</p>'+
                     '<p >'+ property +'</p>'+
                     '<p > Available from:  '+ moveInDate +'</p>'+
-                    '<p > Price:  <b>'+ price +'</b></p>'+
+                    '<p > Price:  <b>'+ price +' CHF</b></p>'+
                     '</div>';
 
             var infowindow = new google.maps.InfoWindow({
@@ -231,17 +224,35 @@
 
     }
 
+
     jQuery(document).ready(function(){
         jQuery('#showMapList').on('click', function(event) {
+
+            if ( $('#map').is(':visible') ) {
+                $("#showMapList").attr('value', 'Show Map');
+            }
+            else {
+                $("#showMapList").attr('value', 'Show List');
+            }
+
             jQuery('#map').toggle('show');
             jQuery('#resultList').toggle('show');
-            $("#showMapList").attr('value', 'Show Map');
+
+
         });
     });
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6U6EuiTE7PWfkp9AZlfCMqYNIPj1OPY&callback=initMap">
 </script>
+
+<center><div id="map">
+    <script>
+        $('#map').toggle('show');
+    </script>
+</div>
+</center>
+<input class="myButton" type='button' id='showMapList' value='Show Map' align = 'right'>
 
 
 <div class="container" id="resultList">
@@ -402,6 +413,9 @@
         <c:choose>
         <c:when test="${empty results}">
         <h2>No results found!</h2>
+            <script>
+                $('#showMapList').toggle("show");
+            </script>
             </c:when>
             <c:otherwise>
             <c:choose>

@@ -65,6 +65,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/">Home</a></li>
 				<li><a href="/about">About</a></li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<c:url value='/searchAd' />">Search</a></li>
@@ -79,12 +80,14 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<img height="25" class="logo" src="<% out.print(filePath); %>" />
+
 								<% out.print(realUser.getFirstName() + " " + realUser.getLastName()); %>
+						<button type="button" id="messageNum" class="btn btn-primary btn-xs" style="display: none;" href="/profile/messages"></button>
+
 								<span class="caret"></span>
 
+						</a>
 
-
-							</a>
 							<ul class="dropdown-menu">
 								<li><a href="/profile/placeAd">Place an ad</a></li>
 								<li><a href="/profile/myRooms">My rooms</a></li>
@@ -103,7 +106,10 @@
 								</li>
 								<li><a href="/logout">Logout</a></li>
 							</ul>
+
 						</li>
+
+
 					</c:when>
 					<c:otherwise>
 						<li><a href="/login">Login</a></li>
