@@ -1,14 +1,12 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import java.util.List;
+import ch.unibe.ese.team1.model.Property;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import ch.unibe.ese.team1.model.Property;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Required;
+import java.util.List;
 
 /** This form is used when a user wants to place a new ad. */
 public class PlaceAdForm {
@@ -35,7 +33,8 @@ public class PlaceAdForm {
     private Integer squareFootage;
 
     @Min(value = 1, message = "Has to be equal to 1 or more")
-    private float numberRooms;
+	@NotNull(message = "Has to be a valid number.")
+    private Float numberRooms;
 
 	@NotBlank(message = "Required")
 	private String roomDescription;
@@ -94,7 +93,11 @@ public class PlaceAdForm {
 	}
 
     public float getNumberRooms() {
-        return numberRooms;
+		if (numberRooms != null) {
+			return numberRooms;
+		}
+		else
+			return 1;
     }
 
     public void setNumberRooms(float numberRooms) {
