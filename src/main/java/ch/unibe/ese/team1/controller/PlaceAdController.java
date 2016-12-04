@@ -1,37 +1,29 @@
 package ch.unibe.ese.team1.controller;
 
-import java.io.IOException;
-import java.security.Principal;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.servlet.ServletContext;
-import javax.validation.Valid;
-
+import ch.unibe.ese.team1.controller.pojos.PictureUploader;
+import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team1.controller.service.*;
-import org.apache.log4j.Logger;
+import ch.unibe.ese.team1.model.Ad;
+import ch.unibe.ese.team1.model.PictureMeta;
+import ch.unibe.ese.team1.model.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.unibe.ese.team1.controller.pojos.PictureUploader;
-import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.PictureMeta;
-import ch.unibe.ese.team1.model.User;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.servlet.ServletContext;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import static ch.unibe.ese.team1.logger.LogInterceptor.*;
 
@@ -107,6 +99,8 @@ public class PlaceAdController {
 			adForm.setFurnished(ad.getFurnished());
 			adForm.setGarage(ad.getGarage());
 			adForm.setGarden(ad.getGarden());
+			adForm.setDishwasher(ad.getDishwasher());
+			adForm.setWashingMachine(ad.getWashingMachine());
 			adForm.setMoveInDate(ad.getMoveInDate().toString());
 			adForm.setNumberRooms(ad.getNumberRooms());
 			adForm.setPrice(ad.getPrice());

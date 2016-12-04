@@ -41,5 +41,7 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	public long countByCellar(boolean cellar);
 	public long countByFurnished(boolean furnished);
 	public long countByGarage(boolean garage);
+	public long countByDishwasher(boolean dishwasher);
+	public long countByWashingMachine(boolean washingMachine);
 
 }

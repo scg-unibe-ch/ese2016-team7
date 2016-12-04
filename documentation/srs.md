@@ -88,7 +88,7 @@ We expect the sellers to be families of deceased people or individuals within an
 - A Manager must specify the general infos of the flat ad. He must add a title, the address (containing a Street and a City).
 - Further he has to add the date of the move-in. (no move-out date: _Done_)
 - He adds the price, the type of the flat (where he can choose between Apartment, House and Studio) and the area of the flat in square meters.
-- For the flat he must add a description of the property, including the amount of rooms (_Done_) and can tick the following options: Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage.
+- For the flat he must add a description of the property, including the amount of rooms (_Done_) and can tick the following options: Animals allowed, garden, Cellar or Attic, Smoking inside allowed, balcony or patio, furnished, garage, dishwasher, washing machine (_Done_).
 - He can add pictures (optional) by uploading them. If he has uploaded pictures, he sees the name, the size and a delete option in a table.
 - The manager can add visiting times by choosing them in a calendar and setting the time.
 - An Ad can be marked as a Premium Ad where such will appear on top in the search. This is only possible if he has added a credit card, if he hasn't he is asked to do so. (_To be done_)

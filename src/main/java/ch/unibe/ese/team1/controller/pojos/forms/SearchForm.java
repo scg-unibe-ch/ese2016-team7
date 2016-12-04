@@ -1,11 +1,10 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import ch.unibe.ese.team1.model.Property;
-import org.hibernate.validator.constraints.NotBlank;
 
 /** This form is used for searching for an ad. */
 public class SearchForm {
@@ -87,6 +86,8 @@ public class SearchForm {
 	private boolean cellar;
 	private boolean furnished;
 	private boolean garage;
+	private boolean dishwasher;
+	private boolean washingMachine;
 
 	private long instantBuyPrice;
 
@@ -147,6 +148,22 @@ public class SearchForm {
 		this.garage = garage;
 	}
 
+	public boolean getDishwasher() {
+		return dishwasher;
+	}
+
+	public void setDishwasher(boolean dishwasher) {
+		this.dishwasher = dishwasher;
+	}
+
+	public boolean getWashingMachine() {
+		return washingMachine;
+	}
+
+	public void setWashingMachine(boolean washingMachine) {
+		this.washingMachine = washingMachine;
+	}
+
 	public String getEarliestMoveInDate() {
 		return earliestMoveInDate;
 	}
@@ -170,4 +187,5 @@ public class SearchForm {
 	public void setInstantBuyPrice(long instantBuyPrice) {
 		this.instantBuyPrice = instantBuyPrice;
 	}
+
 }

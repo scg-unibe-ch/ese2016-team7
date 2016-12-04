@@ -198,6 +198,18 @@
                                                    checked="whatever"/>
                                 </c:when>
                             </c:choose>
+                            <c:choose>
+                                <c:when test="${alert.dishwasher}">
+                                    <form:checkbox style="opacity:0;" id="field-dishwasher" path="dishwasher"
+                                                   checked="whatever"/>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${alert.washingMachine}">
+                                    <form:checkbox style="opacity:0;" id="field-washingMachine" path="washingMachine"
+                                                   checked="whatever"/>
+                                </c:when>
+                            </c:choose>
 
                             <td>
                                 <button type="submit" onClick="form.action='/results';">Search</button>
