@@ -637,7 +637,7 @@
 
 
     <script>
-        var valid = false;
+        var valid = true;
         var injected = false;
 
         $(document).ready(function () {

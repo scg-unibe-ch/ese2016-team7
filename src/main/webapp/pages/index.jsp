@@ -69,7 +69,7 @@
         <p>The worlds greatest platform to buy and sell real estate. Our auction system ensures that you get the best
             deals. Buy your dream house today and start living your life.</p>
         <form class="form-inline" method="post" action="/quicksearch" onsubmit="return isValid();">
-            <input pattern="^[0-9]{4} - [-\w\s\u00C0-\u00FF]*" type="text" id="city" name="city"
+            <input type="text" id="city" name="city"
                    class="form-control input-lg"
                    placeholder="Enter Area (e.g. Bern)"/>
             <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span>

@@ -17,12 +17,28 @@
 
 
 <script>
+    var valid = true;
+    var injected = false;
         $(document).ready(function () {
             $("#field-city").autocomplete({
                 minLength: 2
             });
             $("#field-city").autocomplete({
-                source: <c:import url="getzipcodes.jsp" />
+                source: <c:import url="getzipcodes.jsp" />,
+                select: function (e) {
+                    valid = true;
+                },
+                response: function (event, ui) {
+                    valid = false;
+                    $.each(ui.content, function (key,value) {
+                        for(k in value){
+                            if(value[k] == $("#field-city").val()){
+                                valid = true;
+                            }
+                        }
+                    });
+                }
+
             });
             $("#field-city").autocomplete("option", {
                 enabled: true,
@@ -116,6 +132,14 @@
             });
         });
 
+    function isValid() {
+        if(!valid && !injected){
+            $("#field-city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
+            injected = true;
+        }
+        return valid
+    }
+
 
     </script>
 
@@ -127,12 +151,12 @@
 
 <div class="container">
 
-    <row>
+
     <h1>Edit Ad</h1>
     <hr/>
     <form:form method="post" modelAttribute="placeAdForm"
                action="/profile/editAd" id="placeAdForm" autocomplete="off"
-               enctype="multipart/form-data">
+               enctype="multipart/form-data" onsubmit="return isValid();">
         <input type="hidden" name="adId" value="${ad.id}"/>
     <div class="table-responsive">
 
