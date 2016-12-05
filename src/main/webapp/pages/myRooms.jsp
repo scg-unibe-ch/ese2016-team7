@@ -79,7 +79,7 @@
 
 
     <c:choose>
-        <c:when test="${empty ownAdvertisements}">
+        <c:when test="${empty bookmarkedAdvertisements}">
             <div class="page-header"><h2>My Bookmarks</h2></div>
             <p>You have not bookmarked anything yet.</p>
             <br/><br/>
