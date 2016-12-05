@@ -73,6 +73,7 @@
             $("#addVisitButton").click(function () {
                 var date = $("#field-visitDay").val();
                 if (date == "") {
+                    alert("Please pick a date.");
                     return;
                 }
 
@@ -181,12 +182,10 @@
                                      step="50" value="${ad.price}" cssClass="form-control"/>
                         <form:errors path="price" cssClass="validationErrorText"/>
                     </td>
-                    <td><form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Prize per month" step="5" value="${ad.squareFootage }" cssClass="form-control"/><form:errors path="squareFootage" cssClass="validationErrorText"/></td>
-                    <td>
-                        <form:input id="field-NumberRooms" type="number"
-                                    path="numberRooms" placeholder="Prize per month" step="0.5"
-                                    value="${ad.numberRooms}"
-                                    cssClass="form-control"/>
+                    <td><form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Price per month" step="5" value="${ad.squareFootage }" cssClass="form-control"/>
+                        <form:errors path="squareFootage" cssClass="validationErrorText"/>
+                    </td>
+                    <td><form:input id="field-NumberRooms" type="number" path="numberRooms" placeholder="Price per month" step="0.5" value="${ad.numberRooms}" cssClass="form-control"/>
                         <form:errors path="numberRooms" cssClass="validationErrorText"/>
                     </td>
                 </tr>
@@ -288,7 +287,7 @@
                             </c:when>
                             <c:otherwise>
                                 <form:checkbox id="field-cellar" path="cellar" cssClass="checkbox"/>
-                                <label>Cellar or Atticd</label>
+                                <label>Cellar or Attic</label>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -309,11 +308,36 @@
                 <tr>
                     <td>
                         <c:choose>
-                            <c:when test="${ad.garage}"><form:checkbox id="field-garage" path="garage" checked="checked" cssClass="checkbox"/><label>Garage</label>
+                            <c:when test="${ad.garage}"><form:checkbox id="field-garage" path="garage" checked="checked" cssClass="checkbox"/>
+                                <label>Garage</label>
                             </c:when>
                             <c:otherwise>
                                 <form:checkbox id="field-garage" path="garage" cssClass="checkbox"/>
                                 <label>Garage</label>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${ad.dishwasher}"><form:checkbox id="field-dishwasher" path="dishwasher" checked="checked" cssClass="checkbox"/>
+                                <label>Dishwasher</label>
+                            </c:when>
+                            <c:otherwise>
+                                <form:checkbox id="field-dishwasher" path="dishwasher" cssClass="checkbox"/>
+                                <label>Dishwasher</label>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <c:choose>
+                            <c:when test="${ad.washingMachine}"><form:checkbox id="field-washingMachine" path="washingMachine" checked="checked" cssClass="checkbox"/>
+                                <label>Washing Machine</label>
+                            </c:when>
+                            <c:otherwise>
+                                <form:checkbox id="field-washingMachine" path="washingMachine" cssClass="checkbox"/>
+                                <label>Washing Machine</label>
                             </c:otherwise>
                         </c:choose>
                     </td>

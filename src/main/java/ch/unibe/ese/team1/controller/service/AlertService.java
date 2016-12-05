@@ -1,20 +1,18 @@
 package ch.unibe.ese.team1.controller.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.lang.Math;
-
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.model.*;
+import ch.unibe.ese.team1.model.dao.AlertDao;
+import ch.unibe.ese.team1.model.dao.MessageDao;
+import ch.unibe.ese.team1.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.unibe.ese.team1.model.dao.AlertDao;
-import ch.unibe.ese.team1.model.dao.MessageDao;
-import ch.unibe.ese.team1.model.dao.UserDao;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Provides and handles persistence operations for adding, editing and deleting
@@ -66,6 +64,8 @@ public class AlertService {
 		alert.setCellar(alertForm.getCellar());
 		alert.setFurnished(alertForm.getFurnished());
 		alert.setGarage(alertForm.getGarage());
+		alert.setDishwasher(alertForm.getDishwasher());
+		alert.setWashingMachine(alertForm.getWashingMachine());
 
 		alert.setUser(user);
 		alertDao.save(alert);

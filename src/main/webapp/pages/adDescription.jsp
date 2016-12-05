@@ -582,7 +582,7 @@
                     </tr>
 
                     <tr>
-                        <td><h3>Furnished Room</h3></td>
+                        <td><h3>Furnished room</h3></td>
                         <td>
                             <c:choose>
                                 <c:when test="${shownAd.furnished}"><img src="/img/check-mark.png"></c:when>
@@ -626,6 +626,26 @@
                         <td>
                             <c:choose>
                                 <c:when test="${shownAd.garden}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Dishwasher</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.dishwasher}"><img src="/img/check-mark.png"></c:when>
+                                <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><h3>Washing machine</h3></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.washingMachine}"><img src="/img/check-mark.png"></c:when>
                                 <c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
                             </c:choose>
                         </td>

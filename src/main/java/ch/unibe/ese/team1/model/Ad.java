@@ -1,15 +1,11 @@
 package ch.unibe.ese.team1.model;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 /** Describes an advertisement that users can place and search for. */
 @Entity
@@ -77,6 +73,12 @@ public class Ad {
 
 	@Column(nullable = false)
 	private boolean garage;
+
+	@Column(nullable = false)
+	private boolean dishwasher;
+
+    @Column(nullable = false)
+    private boolean washingMachine;
 
     @Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -203,6 +205,22 @@ public class Ad {
 	public void setGarage(boolean garage) {
 		this.garage = garage;
 	}
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+
+    public boolean getWashingMachine() {
+        return washingMachine;
+    }
+
+    public void setWashingMachine(boolean washingMachine) {
+        this.washingMachine = washingMachine;
+    }
 
 	public long getId() {
 		return id;

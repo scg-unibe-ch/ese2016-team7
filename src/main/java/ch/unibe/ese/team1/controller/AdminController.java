@@ -55,6 +55,8 @@ public class AdminController {
         Integer cellarCount = adService.getCountByCellar(true);
         Integer furnishedCount = adService.getCountByFurnished(true);
         Integer garageCount = adService.getCountByGarage(true);
+        Integer dishwasherCount = adService.getCountByDishwasher(true);
+        Integer washingMachineCount = adService.getCountByWashingMachine(true);
         Integer provisionsMade = system.getMoneyEarned();
         Integer moneySpent = getTotalMoneySpent();
         Long premiumAdMoney = system.getPremiumAdMoney();
@@ -67,6 +69,8 @@ public class AdminController {
         model.addObject("cellarCount", cellarCount);
         model.addObject("furnishedCount", furnishedCount);
         model.addObject("garageCount", garageCount);
+        model.addObject("dishwasherCount", dishwasherCount);
+        model.addObject("washingMachineCount", washingMachineCount);
         model.addObject("houseCount", houseCount);
         model.addObject("apartmentCount", apartmentCount);
         model.addObject("studioCount", studioCount);

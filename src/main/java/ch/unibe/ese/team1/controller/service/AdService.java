@@ -1,33 +1,23 @@
 package ch.unibe.ese.team1.controller.service;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
-import org.apache.log4j.Logger;
-
-import ch.unibe.ese.team1.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
+import ch.unibe.ese.team1.model.*;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static ch.unibe.ese.team1.logger.LogInterceptor.exceptionLog;
 
@@ -123,6 +113,8 @@ public class AdService {
         ad.setCellar(placeAdForm.getCellar());
         ad.setFurnished(placeAdForm.isFurnished());
         ad.setGarage(placeAdForm.getGarage());
+        ad.setDishwasher(placeAdForm.getDishwasher());
+        ad.setWashingMachine(placeAdForm.getWashingMachine());
 
         // Save instant buy price
         ad.setInstantBuyPrice(placeAdForm.getInstantBuyPrice());
@@ -421,6 +413,26 @@ public class AdService {
             }
         }
 
+        // dishwasher
+        if (searchForm.getDishwasher()) {
+            Iterator<Ad> iterator = locatedResults.iterator();
+            while (iterator.hasNext()) {
+                Ad ad = iterator.next();
+                if (!ad.getDishwasher())
+                    iterator.remove();
+            }
+        }
+
+        // washingMachine
+        if (searchForm.getWashingMachine()) {
+            Iterator<Ad> iterator = locatedResults.iterator();
+            while (iterator.hasNext()) {
+                Ad ad = iterator.next();
+                if (!ad.getWashingMachine())
+                    iterator.remove();
+            }
+        }
+
         // Filter for instant buy price
         if (searchForm.getInstantBuyPrice() > 0) {
             Iterator<Ad> iterator = locatedResults.iterator();
@@ -582,5 +594,13 @@ public class AdService {
 
     public int getCountByGarage(boolean garage) {
         return (int) adDao.countByGarage(garage);
+    }
+
+    public int getCountByDishwasher(boolean dishwasher) {
+        return (int) adDao.countByDishwasher(dishwasher);
+    }
+
+    public int getCountByWashingMachine(boolean washingMachine) {
+        return (int) adDao.countByWashingMachine(washingMachine);
     }
 }

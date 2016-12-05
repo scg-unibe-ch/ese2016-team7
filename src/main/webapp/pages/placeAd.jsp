@@ -58,6 +58,7 @@
         $("#addVisitButton").click(function () {
             var date = $("#field-visitDay").val();
             if (date == "") {
+                alert("Please pick a date.");
                 return;
             }
 
@@ -230,6 +231,12 @@
                 </tr>
                 <tr>
                     <td><form:checkbox id="field-garage" path="garage" value="1"/><label>Garage</label>
+                    </td>
+                    <td><form:checkbox id="field-dishwasher" path="dishwasher" value="1"/><label>Dishwasher</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><form:checkbox id="field-washingMachine" path="washingMachine" value="1"/><label>Washing machine</label>
                     </td>
                 </tr>
 
