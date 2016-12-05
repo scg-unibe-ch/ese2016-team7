@@ -50,6 +50,7 @@ Use cases with no explanation are seen to be self explanatory and a description 
 | Create alert | user      | Create an alert by specifying the criteria for matching new ads. If a new ad matches the search criteria, an alert will be send to the user | User is logged in | user drops the waterfall menu from his profile pic -> user clicks on the button "Alerts" -> user clicks on "Subscribe"<br>alernative path: user clicks button "search" -> search form is displayed -> users fills form according to his needs -> user clicks on subscribe|
 | Delete alert | user      |     | User is already logged in | User (real estate manager) drops waterfall menu from his profile picture -> clicks on "Schedule"  -> user clicks on "Visit" -> Ad opens -> user clicks "Delete" button |
 | Log in      | guest |  | User has to own an active account | user clicks the "login" button on the homepage -> login form is displayed -> user enters email and password -> user clicks login -> home page is displayed |
+| Social Media Log in      | guest |  | User has to own a social media account | user clicks the "login" button on the homepage -> login form is displayed -> user choses the social media -> user enters email and password -> user clicks login -> home page is displayed |
 | Edit profile | user      |     | user has to be logged in | user drops waterfall menu from his profile picture ->user clicks on "Public profile" -> profile info are displayed -> user click "edit" button -> user changes what he needs to change -> user clicks on "update" -> success feedback from the application |
 | Logout | user      |     | user has to be logged in | user drops waterfall menu from profile pic -> user clicks the button "Logout" -> user gets logged out and home page is displayed |
 | Search ads | user      |     | user (which doesn't necessarily have to own an account) is on the home page | user clicks button "search" -> search form is displayed -> users fills form according to his needs -> user clicks on "search" -> the application shows a list of apartments that fullfil the user's needs |
@@ -102,8 +103,8 @@ We expect the sellers to be families of deceased people or individuals within an
 - If an auction ends unsuccessfully, the manager is messaged with the possibility to restart the auction with (optional) adjusted parameters.(_Done_)
 - When a user doesn't enter a bid high enough, he is told so by a nice looking message (_done_)
 - There is an instant buy option (_Done_)
-- If a user instant buys an ad, the highest bidder will be informed of that by a message appropriately. (_To be done_)
-- If a user instant buys an ad, the manager is messaged and told who bought the property and for how much, including a link to the ad. (_To be done_)
+- If a user instant buys an ad, the highest bidder will be informed of that by a message appropriately. (_Done_)
+- If a user instant buys an ad, the manager is messaged and told who bought the property and for how much, including a link to the ad. (_Done_)
 
 <h5>Messages</h5>
 - In the messages the user can choose between the following three options:
@@ -125,11 +126,12 @@ We expect the sellers to be families of deceased people or individuals within an
 - He can easily search by just clicking a button beside the alert (_Done_)
 
 <h5>User Profile</h5>
-- His picture, username, name, credit card and description are displayed with the options to message and edit profile if its the users. (_To be done_)
+- His picture, username, name, credit card and description are displayed with the options to message and edit profile if its the users. (_Done_)
 
 <h5>Edit Profile</h5>
 - He can change the username, first name, last name and password and change the description. Its applied by clicking on update.
 - The user can add a credit card to his profile. (_Done_)
+- The user can edit his credit card. (_To be done_)
 
 <h4>Home</h4>
 - The user sees the newest ads. An ad contains the picture, title, price, type, address and move-in-date. He has the profile options and the search.
@@ -142,6 +144,7 @@ We expect the sellers to be families of deceased people or individuals within an
 - A Premium Ad is marked as such. Such a premium ad only shows up when the criterias match (_Done_)
 - The user has a search filter where he can adjust the filter and redo the search (_Done_)
 - In the ad preview the user sees also the number of rooms and the square meters of the property.
+- The user can display his search on a map. (_To be done_)
 
 <h4>Display Ad</h4>
 - The users sees the title, the details (tpye, address, avaiable from, area and ad creation date), an object description, and filters. It has possible visiting times where a user can send an enquiry and the profile of the advertiser, which a user can enter.
@@ -164,6 +167,6 @@ We expect the sellers to be families of deceased people or individuals within an
 - An ad/user should be unique.
 - The website should be designed elegantly and modern.
 - There mustn't be more than a fixed amount of premium ads. (_To be done_)
-- The Homepage should be personalized for each user (_To be done_)
+- The Homepage should be personalized for each user (_Done_)
 
 
