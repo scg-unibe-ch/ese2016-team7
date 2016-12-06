@@ -160,6 +160,8 @@ public class AdService {
             ad.setVisits(visits);
         }
 
+        ad.setPremium(placeAdForm.getPremium());
+
         ad.setUser(user);
 
         adDao.save(ad);
