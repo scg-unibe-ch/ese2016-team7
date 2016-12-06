@@ -1,11 +1,10 @@
 package ch.unibe.ese.team1.controller;
 
-import java.security.Principal;
-import java.util.List;
-
-import javax.validation.Valid;
-
+import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
 import ch.unibe.ese.team1.controller.service.*;
+import ch.unibe.ese.team1.model.Ad;
+import ch.unibe.ese.team1.model.User;
+import ch.unibe.ese.team1.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.User;
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 import static ch.unibe.ese.team1.logger.LogInterceptor.*;
 
@@ -31,6 +30,9 @@ public class AdController {
 
 	@Autowired
 	private AdService adService;
+
+    @Autowired
+    private UserDao userDao;
 	
 	@Autowired
 	private UserService userService;
@@ -58,8 +60,12 @@ public class AdController {
 		model.addObject("messageForm", new MessageForm());
 
 		String loggedInUserEmail = (principal == null) ? "" : principal.getName();
+        User user = userDao.findByUsername(loggedInUserEmail);
+        // if user does not exist (= not logged in), he has no credit card
+        boolean hasCreditCard = user != null && user.getHasCreditCard();
 
 		model.addObject("loggedInUserEmail", loggedInUserEmail);
+		model.addObject("loggedInUserHasCreditCard", hasCreditCard);
 		model.addObject("visits", visitService.getVisitsByAd(ad));
 		model.addObject("bids", bidService.getBidsByAd(ad));
 		model.addObject("numBids", bidService.getNumBidsByAd(ad));

@@ -126,8 +126,7 @@
                 var amount = $("#bidAmount").val();
                 var id = ${shownAd.id};
                 var currentPrice = ${shownAd.price};
-                var hasCreditCard = true;
-
+                var hasCreditCard = ${loggedInUserHasCreditCard};
 
                 if (!hasCreditCard) {
                     $("#bidErrorDiv").html("You need a credit card to make a bid.")
@@ -318,17 +317,26 @@
                                         <script type="text/javascript">
                                             $(document).ready(function () {
                                                 $("#instantBuy").click(function () {
-                                                    $.post("/instantBuy", {id: "${shownAd.id}"})
-                                                            .done(function () {
-                                                                location.reload();
-                                                            });
+                                                    var hasCreditCard = ${loggedInUserHasCreditCard};
+                                                    if (!hasCreditCard) {
+                                                        $("#instantBuyErrorDiv").html("You need a credit card to instant buy.")
+                                                    }
+                                                    else {
+                                                        $("#instantBuyErrorDiv").html("");
+                                                        $.post("/instantBuy", {id: "${shownAd.id}"})
+                                                                .done(function () {
+                                                                    location.reload();
+                                                                });
+                                                    }
                                                 });
                                             })
                                         </script>
                                         <br/>
                                         <p>
-                                            <button type="button" id="instantBuy" class="btn bidButton">Instant Buy</button>
+                                        <div id="instantBuyErrorDiv" style="color: #cc0000";>
+                                        <button type="button" id="instantBuy" class="btn bidButton">Instant Buy</button>
                                             for CHF ${shownAd.instantBuyPrice}
+                                    </div>
                                         </p>
                                     </c:when>
                                 </c:choose>
