@@ -208,7 +208,12 @@ public class AdService {
         for (Ad ad : allAds)
             ads.add(ad);
         if (ads.size() == 0) {
-            logger.info(String.format("Failed finding %d newest non-expired ads: All ads expired.", newest));
+            if(premium) {
+                logger.info(String.format("Failed finding %d newest non-expired premium ads: All ads expired.", newest));
+            }
+            else{
+                logger.info(String.format("Failed finding %d newest non-expired ads: All ads expired.", newest));
+            }
             return null;
         }
         Collections.sort(ads, new Comparator<Ad>() {
@@ -223,8 +228,14 @@ public class AdService {
             fourNewest.add(ads.get(i));
             k++;
         }
-        logger.info(String.format("Successful finding %d of the requested %d newest non-expired ads: " +
-                "If there is a difference in the numbers, there aren't enough non-expired ads.", k, newest));
+        if(premium) {
+            logger.info(String.format("Successful finding %d of the requested %d newest non-expired premium ads: " +
+                    "If there is a difference in the numbers, there aren't enough non-expired ads.", k, newest));
+        }
+        else{
+            logger.info(String.format("Successful finding %d of the requested %d newest non-expiredads: " +
+                    "If there is a difference in the numbers, there aren't enough non-expired ads.", k, newest));
+        }
         return fourNewest;
     }
 
