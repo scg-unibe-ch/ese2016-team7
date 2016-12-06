@@ -64,6 +64,12 @@ public class Alert {
     private boolean garage;
 
     @Column
+    private boolean dishwasher;
+
+    @Column
+    private boolean washingMachine;
+
+    @Column
     private String latestMoveInDate;
 
     @Column
@@ -165,6 +171,16 @@ public class Alert {
     public boolean getFurnished() { return this.furnished; }
     public void setGarage(boolean garage) { this.garage = garage; }
     public boolean getGarage() { return this.garage; }
-
-
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+    public boolean getWashingMachine() {
+        return washingMachine;
+    }
+    public void setWashingMachine(boolean washingMachine) {
+        this.washingMachine = washingMachine;
+    }
 }

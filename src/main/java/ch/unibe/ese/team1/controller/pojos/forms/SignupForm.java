@@ -1,11 +1,8 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import ch.unibe.ese.team1.model.Gender;
+
+import javax.validation.constraints.*;
 
 /** This form is used when a user want to sign up for an account. */
 public class SignupForm {
@@ -22,7 +19,7 @@ public class SignupForm {
 	@NotNull
 	private String firstName;
 
-	@Pattern(regexp = "[a-zA-Z]+", message = "Last name must be a valid name")
+	@Pattern(regexp = "[a-zA-Z]*", message = "Last name must be a valid name")
 	@NotNull
 	private String lastName;
 	
@@ -39,15 +36,18 @@ public class SignupForm {
     private boolean hasCreditCard;
 
 	@Max(value = 12, message = "Please enter a valid Month")
+	@Min(value = 0, message = "Please enter a valid Month")
 	@NotNull
 	private int creditCardExpireMonth;
 
 	@NotNull
+	@Min(value = 0, message = "Please enter a valid year")
+	@Max(value = 99, message = "Please enter a valid year (e.g. 16")
 	private int creditCardExpireYear;
 
-	//@Pattern(regexp = "[0-9]+", message = "Please enter a valid securtiy code")
+	@Pattern(regexp = "[0-9]{3}", message = "Please enter a valid securtiy code")
 	@NotNull(message = "Please enter a valid securtiy code")
-	private int securityCode;
+	private String securityCode;
 
 	public String getEmail() {
 		return email;
@@ -113,11 +113,11 @@ public class SignupForm {
 		this.creditCardNumber = creditCardNumber;
 	}
 
-	public int getSecurityCode() {
+	public String getSecurityCode() {
 		return securityCode;
 	}
 
-	public void setSecurityCode(int securityCode) {
+	public void setSecurityCode(String securityCode) {
 		this.securityCode = securityCode;
 	}
 

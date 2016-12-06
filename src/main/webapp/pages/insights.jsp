@@ -76,41 +76,49 @@
             <div class="table-responsive">
                 <table class="table table-striped">
 
-        <tr>
-            <th>Frequency Features Offered</th>
-            <th>Count</th>
-        </tr>
-        <tr>
-            <td>Smoking allowed</td>
-            <td>${smokersCount}</td>
-        </tr>
-        <tr>
-            <td>Animals Allowed</td>
-            <td>${animalsCount}</td>
-        </tr>
-        <tr>
-            <td>Garden</td>
-            <td>${gardenCount}</td>
-        </tr>
-        <tr>
-            <td>Balcony</td>
-            <td>${balconyCount}</td>
-        </tr>
-        <tr>
-            <td>Cellar</td>
-            <td>${cellarCount}</td>
-        </tr>
-        <tr>
-            <td>Furnished</td>
-            <td>${furnishedCount}</td>
-        </tr>
-        <tr>
-            <td>Garage</td>
-            <td>${garageCount}</td>
-        </tr>
-    </table>
+                    <tr>
+                        <th>Frequency Features Offered</th>
+                        <th>Count</th>
+                    </tr>
+                    <tr>
+                        <td>Smoking Allowed</td>
+                        <td>${smokersCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Animals Allowed</td>
+                        <td>${animalsCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Garden</td>
+                        <td>${gardenCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Balcony</td>
+                        <td>${balconyCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Cellar</td>
+                        <td>${cellarCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Furnished</td>
+                        <td>${furnishedCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Garage</td>
+                        <td>${garageCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Dishwasher</td>
+                        <td>${dishwasherCount}</td>
+                    </tr>
+                    <tr>
+                        <td>Washing Machine</td>
+                        <td>${washingMachineCount}</td>
+                    </tr>
+                </table>
             </div>
-            </div>
+        </div>
 
         <div class = "col-md-4">
 

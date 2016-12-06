@@ -17,7 +17,7 @@ public class PlaceAdForm {
 	@NotBlank(message = "Required")
 	private String street;
 	
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
+	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
 	private String city;
 	
 	@NotBlank(message = "Required")
@@ -54,7 +54,9 @@ public class PlaceAdForm {
 	private boolean cellar;
 	private boolean furnished;
 	private boolean garage;
-	
+	private boolean dishwasher;
+	private boolean washingMachine;
+
 	private List<String> visits;
 
     @NotNull(message = "Has to be a valid number.")
@@ -159,6 +161,22 @@ public class PlaceAdForm {
 	public void setGarage(boolean garage) {
 		this.garage = garage;
 	}
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+
+    public boolean getWashingMachine() {
+        return washingMachine;
+    }
+
+    public void setWashingMachine(boolean washingMachine) {
+        this.washingMachine = washingMachine;
+    }
 
 	public String getMoveInDate() {
 		return moveInDate;

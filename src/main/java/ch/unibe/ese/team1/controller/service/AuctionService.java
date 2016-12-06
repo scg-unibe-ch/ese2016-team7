@@ -51,8 +51,10 @@ public class AuctionService {
     @Scheduled(fixedRate = 10000)
     public void checkForFinishedAuctions(){
         Iterable<Ad> expiredAds = adDao.findByExpireDateLessThanAndExpired(new Date(),false);
+
         for(Ad ad : expiredAds){
             ad.setExpired(true);
+            logger.info(String.format("Ad with Id %d, Title %s at %s by User %s expired",ad.getId(),ad.getTitle(),ad.getCity(),ad.getUser().getFirstName()+" "+ad.getUser().getLastName()));
             adDao.save(ad);
             if(bidDao.countByAd(ad) == 0){
                 sendNoBidsMessage(ad);
@@ -71,48 +73,58 @@ public class AuctionService {
     @Transactional
     public void instantBuy(long id, User winner){
         // Mark as expired
+
         Ad ad = adService.getAdById(id);
-        ad.setExpired(true);
-        adDao.save(ad);
+        if(!ad.getExpired() && winner.getHasCreditCard()) {
+            ad.setExpired(true);
+            adDao.save(ad);
 
-        // Send messages
-        User owner = ad.getUser();
+            // Send messages
+            User owner = ad.getUser();
 
-        StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("Dear "+winner.getFirstName()+",</br></br>");
-        messageBuilder.append("Thank you for buying the " + ad.getPropertyString());
-        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
-        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
-        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
-        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your Flatfindr team");
+            StringBuilder messageBuilder = new StringBuilder();
+            messageBuilder.append("Dear " + winner.getFirstName() + ",</br></br>");
+            messageBuilder.append("Thank you for buying the " + ad.getPropertyString());
+            messageBuilder.append(" <a href= ../ad?id=" + ad.getId() + " style=\"color: #0000ff\">" + ad.getTitle() + "</a>.</br>");
+            messageBuilder.append(owner.getFirstName() + " " + owner.getLastName() + " will contact you with the details.</br>");
+            messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+            messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+            messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+            messageBuilder.append("Your Flatfindr team");
 
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),winner,"Purchase confirmation",messageBuilder.toString());
+            messageService.sendMessage(userDao.findByUsername("FlatFindr"), winner, "Purchase confirmation", messageBuilder.toString());
 
-        messageBuilder = new StringBuilder();
-        messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
-        messageBuilder.append("You just sold the " + ad.getPropertyString());
-        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>");
-        messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getInstantBuyPrice() + " CHF.</br>");
-        messageBuilder.append("Please contact him as soon as possible.</br>");
-        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
-        messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
-        messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
-        messageBuilder.append("Your Flatfindr team");
+            messageBuilder = new StringBuilder();
+            messageBuilder.append("Dear " + owner.getFirstName() + ",</br></br>");
+            messageBuilder.append("You just sold the " + ad.getPropertyString());
+            messageBuilder.append(" <a href= ../ad?id=" + ad.getId() + " style=\"color: #0000ff\">" + ad.getTitle() + "</a>");
+            messageBuilder.append(" to " + winner.getFirstName() + " " + winner.getLastName() + " for " + ad.getInstantBuyPrice() + " CHF.</br>");
+            messageBuilder.append("Please contact him as soon as possible.</br>");
+            messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+            messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
+            messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
+            messageBuilder.append("Your Flatfindr team");
 
-        messageService.sendMessage(userDao.findByUsername("FlatFindr"),owner,"You sold a " + ad.getPropertyString(),messageBuilder.toString());
+            messageService.sendMessage(userDao.findByUsername("FlatFindr"), owner, "You sold a " + ad.getPropertyString(), messageBuilder.toString());
 
-        // update balance
-        long amount = ad.getInstantBuyPrice();
+            // update balance
+            long amount = ad.getInstantBuyPrice();
 
-        owner.addMoneyEarned((int) amount);
-        winner.addMoneySpent((int) amount);
-        User system = userDao.findByUsername("system");
-        system.addMoneyEarned((int) (amount*provision));
-        userDao.save(owner);
-        userDao.save(winner);
-        userDao.save(system);
+            owner.addMoneyEarned((int) amount);
+            winner.addMoneySpent((int) amount);
+            User system = userDao.findByUsername("system");
+            system.addMoneyEarned((int) (amount * provision));
+            userDao.save(owner);
+            userDao.save(winner);
+            userDao.save(system);
+            logger.info(String.format("Successful instant buy of user %s for ad no. %d.", winner.getEmail(), ad.getId()));
+        }
+        else if(ad.getExpired())
+            logger.error(String.format("Failed instant buy of user %s for ad no. %d: " +
+                    "Ad already expired!", winner.getEmail(), ad.getId()));
+        else if(!winner.getHasCreditCard())
+            logger.info(String.format("Failed instant buy of user %s for ad no. %d: " +
+                    "User %s has no credit card.", winner.getEmail(), ad.getId(), winner.getEmail()));
     }
 
     /**

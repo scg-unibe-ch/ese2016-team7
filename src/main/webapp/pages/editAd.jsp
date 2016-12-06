@@ -21,8 +21,9 @@
             $("#field-city").autocomplete({
                 minLength: 2
             });
+            citys = <c:import url="getzipcodes.jsp" />;
             $("#field-city").autocomplete({
-                source: <c:import url="getzipcodes.jsp" />
+                source: citys
             });
             $("#field-city").autocomplete("option", {
                 enabled: true,
@@ -73,6 +74,7 @@
             $("#addVisitButton").click(function () {
                 var date = $("#field-visitDay").val();
                 if (date == "") {
+                    alert("Please pick a date.");
                     return;
                 }
 
@@ -94,6 +96,26 @@
                 var newVisitLabel = date + " " + startHour + ":" + startMinutes +
                         " to " + endHour + ":" + endMinutes;
 
+                var dateParts = date.split("-");
+                var dateCheck = new Date(dateParts[1]+"-"+dateParts[0]+"-"+dateParts[2]);
+                console.log(dateCheck.toString());
+                if(!(/^[0-9]{2}-[0-9]{2}-[0-9]{4}/.test(date.toString()))){
+                    alert("No valid date! Please enter valid date. Wrong Pattern");
+                    return;
+                }
+                if(isNaN(dateCheck.getTime())){
+
+                    alert("No valid date. Please enter valid date.");
+                    return;
+                }
+
+                var now = new Date();
+                if(dateCheck.getTime()<=now.getTime()){
+                    alert("Visits in the past don't help anyone. Try one from the future.");
+                    return;
+                }
+
+
                 var index = $("#addedVisits input").length;
 
                 var label = "<p>" + newVisitLabel + "</p>";
@@ -114,6 +136,21 @@
 
             });
         });
+        var injected = false;
+    function isValid() {
+        var valid = false;
+        citys.forEach(function (entry) {
+            if($("#city").val().trim() == entry.toString().trim()){
+                valid = true;
+            }
+        });
+        if(valid) return true;
+        if(!injected){
+            $("#city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
+            injected = true;
+        }
+        return false;
+    }
 
 
     </script>
@@ -126,12 +163,12 @@
 
 <div class="container">
 
-    <row>
+
     <h1>Edit Ad</h1>
     <hr/>
     <form:form method="post" modelAttribute="placeAdForm"
                action="/profile/editAd" id="placeAdForm" autocomplete="off"
-               enctype="multipart/form-data">
+               enctype="multipart/form-data" onsubmit="return isValid();">
         <input type="hidden" name="adId" value="${ad.id}"/>
     <div class="table-responsive">
 
@@ -181,12 +218,10 @@
                                      step="50" value="${ad.price}" cssClass="form-control"/>
                         <form:errors path="price" cssClass="validationErrorText"/>
                     </td>
-                    <td><form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Prize per month" step="5" value="${ad.squareFootage }" cssClass="form-control"/><form:errors path="squareFootage" cssClass="validationErrorText"/></td>
-                    <td>
-                        <form:input id="field-NumberRooms" type="number"
-                                    path="numberRooms" placeholder="Prize per month" step="0.5"
-                                    value="${ad.numberRooms}"
-                                    cssClass="form-control"/>
+                    <td><form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Price per month" step="5" value="${ad.squareFootage }" cssClass="form-control"/>
+                        <form:errors path="squareFootage" cssClass="validationErrorText"/>
+                    </td>
+                    <td><form:input id="field-NumberRooms" type="number" path="numberRooms" placeholder="Price per month" step="0.5" value="${ad.numberRooms}" cssClass="form-control"/>
                         <form:errors path="numberRooms" cssClass="validationErrorText"/>
                     </td>
                 </tr>
@@ -288,7 +323,7 @@
                             </c:when>
                             <c:otherwise>
                                 <form:checkbox id="field-cellar" path="cellar" cssClass="checkbox"/>
-                                <label>Cellar or Atticd</label>
+                                <label>Cellar or Attic</label>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -309,11 +344,36 @@
                 <tr>
                     <td>
                         <c:choose>
-                            <c:when test="${ad.garage}"><form:checkbox id="field-garage" path="garage" checked="checked" cssClass="checkbox"/><label>Garage</label>
+                            <c:when test="${ad.garage}"><form:checkbox id="field-garage" path="garage" checked="checked" cssClass="checkbox"/>
+                                <label>Garage</label>
                             </c:when>
                             <c:otherwise>
                                 <form:checkbox id="field-garage" path="garage" cssClass="checkbox"/>
                                 <label>Garage</label>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${ad.dishwasher}"><form:checkbox id="field-dishwasher" path="dishwasher" checked="checked" cssClass="checkbox"/>
+                                <label>Dishwasher</label>
+                            </c:when>
+                            <c:otherwise>
+                                <form:checkbox id="field-dishwasher" path="dishwasher" cssClass="checkbox"/>
+                                <label>Dishwasher</label>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <c:choose>
+                            <c:when test="${ad.washingMachine}"><form:checkbox id="field-washingMachine" path="washingMachine" checked="checked" cssClass="checkbox"/>
+                                <label>Washing Machine</label>
+                            </c:when>
+                            <c:otherwise>
+                                <form:checkbox id="field-washingMachine" path="washingMachine" cssClass="checkbox"/>
+                                <label>Washing Machine</label>
                             </c:otherwise>
                         </c:choose>
                     </td>

@@ -1,24 +1,23 @@
 package ch.unibe.ese.team1.test.testData;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import ch.unibe.ese.team1.model.Property;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.AdPicture;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import static ch.unibe.ese.team1.model.Property.APARTMENT;
-import static ch.unibe.ese.team1.model.Property.HOUSE;
-import static ch.unibe.ese.team1.model.Property.STUDIO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static ch.unibe.ese.team1.model.Property.*;
 
 /** This inserts several ad elements into the database. */
 @Service
@@ -89,6 +88,8 @@ public class AdTestDataSaver {
 		adBern.setCellar(true);
 		adBern.setFurnished(true);
 		adBern.setGarage(true);
+		adBern.setDishwasher(true);
+		adBern.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
         adBern.setExpireDate(getTimedDate(10));
 		adBern.setPremium(true);
@@ -128,6 +129,8 @@ public class AdTestDataSaver {
 		adBern2.setFurnished(false);
 		adBern2.setGarage(false);
 		adBern2.setPremium(true);
+		adBern2.setDishwasher(false);
+		adBern2.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
 		adBern2.setExpireDate(getTimedDate(4));
 		pictures = new ArrayList<>();
@@ -167,6 +170,8 @@ public class AdTestDataSaver {
 		adBasel.setCellar(false);
 		adBasel.setFurnished(false);
 		adBasel.setGarage(false);
+        adBasel.setDishwasher(false);
+        adBasel.setWashingMachine(true);
 		adBasel.setExpireDate(getTimedDate(100000));
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBasel, "/img/test/ad3_1.jpg"));
@@ -203,6 +208,8 @@ public class AdTestDataSaver {
 		adOlten.setCellar(true);
 		adOlten.setFurnished(true);
 		adOlten.setGarage(false);
+        adOlten.setDishwasher(false);
+        adOlten.setWashingMachine(false);
 		adOlten.setExpireDate(getTimedDate(40));
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adOlten, "/img/test/ad4_1.png"));
@@ -237,6 +244,8 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCellar(true);
 		adNeuchâtel.setFurnished(true);
 		adNeuchâtel.setGarage(false);
+        adNeuchâtel.setDishwasher(true);
+        adNeuchâtel.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adNeuchâtel.setExpireDate(getTimedDate(50000));
         pictures = new ArrayList<>();
@@ -270,6 +279,8 @@ public class AdTestDataSaver {
 		adBiel.setCellar(false);
 		adBiel.setFurnished(false);
 		adBiel.setGarage(false);
+        adBiel.setDishwasher(true);
+        adBiel.setWashingMachine(false);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adBiel.setExpireDate(getTimedDate(100000));
 		pictures = new ArrayList<>();
@@ -307,6 +318,8 @@ public class AdTestDataSaver {
 		adZurich.setCellar(false);
 		adZurich.setFurnished(true);
 		adZurich.setGarage(true);
+        adZurich.setDishwasher(false);
+        adZurich.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adZurich.setExpireDate(getTimedDate(1));
 		pictures = new ArrayList<>();
@@ -347,6 +360,8 @@ public class AdTestDataSaver {
 		adLuzern.setCellar(false);
 		adLuzern.setFurnished(false);
 		adLuzern.setGarage(false);
+        adLuzern.setDishwasher(true);
+        adLuzern.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adLuzern.setExpireDate(getTimedDate(10));
 		pictures = new ArrayList<>();
@@ -385,6 +400,8 @@ public class AdTestDataSaver {
 		adAarau.setCellar(false);
 		adAarau.setFurnished(true);
 		adAarau.setGarage(false);
+        adAarau.setDishwasher(true);
+        adAarau.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adAarau.setExpireDate(getTimedDate(2));
 		pictures = new ArrayList<>();
@@ -425,6 +442,8 @@ public class AdTestDataSaver {
 		adDavos.setCellar(true);
 		adDavos.setFurnished(true);
 		adDavos.setGarage(false);
+        adDavos.setDishwasher(true);
+        adDavos.setWashingMachine(false);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adDavos.setExpireDate(getTimedDate(3));
 		pictures = new ArrayList<>();
@@ -460,6 +479,8 @@ public class AdTestDataSaver {
 		adLausanne.setCellar(true);
 		adLausanne.setFurnished(true);
 		adLausanne.setGarage(false);
+        adLausanne.setDishwasher(false);
+        adLausanne.setWashingMachine(false);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adLausanne.setExpireDate(getTimedDate(20));
 		pictures = new ArrayList<>();
@@ -493,6 +514,8 @@ public class AdTestDataSaver {
 		adLocarno.setCellar(false);
 		adLocarno.setFurnished(false);
 		adLocarno.setGarage(false);
+        adLocarno.setDishwasher(true);
+        adLocarno.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(10));
 		adLocarno.setExpireDate(getTimedDate(10));
 		pictures = new ArrayList<>();
