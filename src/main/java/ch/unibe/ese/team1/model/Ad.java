@@ -28,12 +28,12 @@ public class Ad {
 	private String city;
 	
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 
 	//@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date expireDate;
 
 	@Column(nullable = false)
