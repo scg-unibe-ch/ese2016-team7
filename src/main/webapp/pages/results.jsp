@@ -8,59 +8,6 @@
 
 <c:import url="template/header.jsp"/>
 
-
-
-<style>
-    .myButton {
-        -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-        box-shadow:inset 0px 1px 0px 0px #ffffff;
-        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
-        background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-        background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-        background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-        background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-        background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-        background-color:#ffffff;
-        -moz-border-radius:6px;
-        -webkit-border-radius:6px;
-        border-radius:6px;
-        border:1px solid #dcdcdc;
-        display:inline-block;
-        cursor:pointer;
-        color:#666666;
-        font-family:Arial;
-        font-size:15px;
-        font-weight:bold;
-        padding:6px 24px;
-        text-decoration:none;
-        text-shadow:0px 1px 0px #ffffff;
-        position:relative;
-        transition: .5s ease;
-        top: 50%;
-        left: 90%;
-    }
-    .myButton:hover {
-        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
-        background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-        background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-        background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-        background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-        background-color:#f6f6f6;
-    }
-    .myButton:active {
-        position:relative;
-        top:1px;
-    }
-
-</style>
-
-
-<!--<pre><a href="/">Home</a> &gt; <a href="/searchAd/">Search</a> &gt; Results</pre>-->
-
 <script>
     /*
      * This script takes all the resultAd divs and sorts them by a parameter specified by the user.
@@ -136,6 +83,9 @@
     #map {
         height: 550px;
         width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
     }
 </style>
 
@@ -146,7 +96,6 @@
     var counter;
 
     function initMap() {
-
 
         map = new google.maps.Map(document.getElementById('map'), {});
         bounds = new google.maps.LatLngBounds();
@@ -170,21 +119,20 @@
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({address : address }, function (results, status) {
 
-
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location,
                     url: "/ad?id=" + id,
                 });
 
-            var contentString = '<div>'+
+            var contentString = '<center><div>'+
                     '<img src=' + picture + ' width="35%" height="35%" align="left"/>' +
                     '<h2 ><b>'+ title  +'</b></h2>'+
                     '<p >'+ address +'</p>'+
                     '<p >'+ property +'</p>'+
                     '<p > Available from:  '+ moveInDate +'</p>'+
                     '<p > Price:  <b>'+ price +' CHF</b></p>'+
-                    '</div>';
+                    '</div></center>';
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString,
@@ -204,41 +152,40 @@
                 window.location.href = this.url;
             });
 
-
-
             counter++;
             var location = results[0].geometry.location;
 
-
-            // If result is one then center there otherwise use bounds
-            if(counter == 1) {
-                map.setCenter(location);
-                map.setZoom(13);
-                bounds.extend(location);
-            }
-            else {
-                bounds.extend(location);
-                map.fitBounds(bounds);
-            }
+            bounds.extend(location);
         });
-
     }
+
+    function adjustBounds() {
+        if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+            var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.005, bounds.getNorthEast().lng() + 0.005);
+            var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.005, bounds.getNorthEast().lng() - 0.005);
+            bounds.extend(extendPoint1);
+            bounds.extend(extendPoint2);
+        }
+        map.fitBounds(bounds);
+    }
+
 
 
     jQuery(document).ready(function(){
         jQuery('#showMapList').on('click', function(event) {
 
-            if ( $('#map').is(':visible') ) {
-                $("#showMapList").attr('value', 'Show Map');
+            if ( $('#map').css("display") == 'none') {
+                $("#map").css("display", "");
+                $("#showMapList").html("Hide Map");
+                // reload Map
+                google.maps.event.trigger(map, 'resize');
+                adjustBounds()
             }
             else {
-                $("#showMapList").attr('value', 'Show List');
+                $("#map").css('display', "none");
+                $("#showMapList").html("Show Map");
+
             }
-
-            jQuery('#map').toggle('show');
-            jQuery('#resultList').toggle('show');
-
-
         });
     });
 </script>
@@ -246,16 +193,9 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu6U6EuiTE7PWfkp9AZlfCMqYNIPj1OPY&callback=initMap">
 </script>
 
-<center><div id="map">
-    <script>
-        $('#map').toggle('show');
-    </script>
-</div>
-</center>
-<input class="myButton" type='button' id='showMapList' value='Show Map' align = 'right'>
 
 
-<div class="container" id="resultList">
+<div class="container">
 
     <h1>Search</h1>
 
@@ -283,9 +223,12 @@
         </div>
         <div class="col-md-8">
             <button id="showSearch" onclick="showSearch()">Show Search</button>
+            <button id='showMapList' value='Show Map'>Show Map</button>
         </div>
+            <div id="map" style="display: none;"></div>
         </div>
         <div class="row">
+
         <form:form method="post" modelAttribute="searchForm" action="/results"
                    id="filterForm" autocomplete="off" onsubmit="return isValid();">
             <div>
@@ -414,12 +357,13 @@
         <c:when test="${empty results}">
         <h2>No results found!</h2>
             <script>
-                $('#showMapList').toggle("show");
+                $("#showMapList").hide();
             </script>
             </c:when>
             <c:otherwise>
             <c:choose>
             <c:when test="${empty premium}">
+
         </div>
     </div>
     </c:when>
@@ -439,7 +383,7 @@
                         "${formattedMoveInDate}",
                         "${ad.price}");
             </script>
-            <div class="col-md-4">
+            <div class="col-md-4" >
                 <div class="thumbnail thumbnailPremium">
                     <a href="<c:url value='/ad?id=${ad.id}' />">
                         <img src="${ad.pictures[0].filePath}" alt="" class="img-responsive">
