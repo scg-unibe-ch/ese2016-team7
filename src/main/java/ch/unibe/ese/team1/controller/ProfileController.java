@@ -88,12 +88,11 @@ public class ProfileController {
 			signupForm.setLastName("");
 			signupForm.setEmail(email);
 
-			//Set a unhackable password
+			//Set an unhackable password
 			final SecureRandom rand = new SecureRandom();
 			String randomPassword = new BigInteger(130, rand).toString(32);
 			signupForm.setPassword(randomPassword);
 
-			//TODO: I shouldn't have to set the credit card information
 			signupForm.setGender(Gender.MALE);
 			signupForm.setSecurityCode("111");
 			signupForm.setCreditCardNumber("1111111111111111");

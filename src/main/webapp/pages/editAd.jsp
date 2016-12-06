@@ -111,6 +111,26 @@
                 var newVisitLabel = date + " " + startHour + ":" + startMinutes +
                         " to " + endHour + ":" + endMinutes;
 
+                var dateParts = date.split("-");
+                var dateCheck = new Date(dateParts[1]+"-"+dateParts[0]+"-"+dateParts[2]);
+                console.log(dateCheck.toString());
+                if(!(/^[0-9]{2}-[0-9]{2}-[0-9]{4}/.test(date.toString()))){
+                    alert("No valid date! Please enter valid date. Wrong Pattern");
+                    return;
+                }
+                if(isNaN(dateCheck.getTime())){
+
+                    alert("No valid date. Please enter valid date.");
+                    return;
+                }
+
+                var now = new Date();
+                if(dateCheck.getTime()<=now.getTime()){
+                    alert("Visits in the past don't help anyone. Try one from the future.");
+                    return;
+                }
+
+
                 var index = $("#addedVisits input").length;
 
                 var label = "<p>" + newVisitLabel + "</p>";
