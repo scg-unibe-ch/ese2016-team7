@@ -19,7 +19,7 @@ public class SignupForm {
 	@NotNull
 	private String firstName;
 
-	@Pattern(regexp = "[a-zA-Z]+", message = "Last name must be a valid name")
+	@Pattern(regexp = "[a-zA-Z]*", message = "Last name must be a valid name")
 	@NotNull
 	private String lastName;
 	
