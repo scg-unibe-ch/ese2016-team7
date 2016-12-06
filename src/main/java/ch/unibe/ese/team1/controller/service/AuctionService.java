@@ -51,8 +51,10 @@ public class AuctionService {
     @Scheduled(fixedRate = 10000)
     public void checkForFinishedAuctions(){
         Iterable<Ad> expiredAds = adDao.findByExpireDateLessThanAndExpired(new Date(),false);
+
         for(Ad ad : expiredAds){
             ad.setExpired(true);
+            logger.info(String.format("Ad with Id %d, Title %s at %s by User %s expired",ad.getId(),ad.getTitle(),ad.getCity(),ad.getUser().getFirstName()+" "+ad.getUser().getLastName()));
             adDao.save(ad);
             if(bidDao.countByAd(ad) == 0){
                 sendNoBidsMessage(ad);
