@@ -28,7 +28,7 @@ public class Ad {
 	private String city;
 	
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 
 	//@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
