@@ -1,21 +1,10 @@
 package ch.unibe.ese.team1.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /** Describes a user on the platform. */
 @Entity
@@ -78,7 +67,7 @@ public class User {
 	private int creditCardExpireYear;
 
     @Column(nullable = true)
-    private int securityCode;
+    private String securityCode;
 
 	private int moneySpent;
 
@@ -235,11 +224,11 @@ public class User {
 		this.creditCardNumber = creditCardNumber;
 	}
 
-    public int getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(int securityCode) {
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
     }
 

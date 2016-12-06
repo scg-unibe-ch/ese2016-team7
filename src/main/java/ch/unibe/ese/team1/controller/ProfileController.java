@@ -1,35 +1,30 @@
 package ch.unibe.ese.team1.controller;
 
-import java.math.BigInteger;
-import java.security.Principal;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-
-import javax.validation.Valid;
-
+import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
+import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
+import ch.unibe.ese.team1.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team1.controller.service.*;
+import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
+import ch.unibe.ese.team1.model.User;
+import ch.unibe.ese.team1.model.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
-import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
-import ch.unibe.ese.team1.controller.pojos.forms.SignupForm;
-import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.Visit;
+import javax.validation.Valid;
+import java.math.BigInteger;
+import java.security.Principal;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 
 import static ch.unibe.ese.team1.logger.LogInterceptor.*;
 
@@ -100,7 +95,7 @@ public class ProfileController {
 
 			//TODO: I shouldn't have to set the credit card information
 			signupForm.setGender(Gender.MALE);
-			signupForm.setSecurityCode(111);
+			signupForm.setSecurityCode("111");
 			signupForm.setCreditCardNumber("1111111111111111");
 			signupForm.setCreditCardExpireMonth(10);
 			signupForm.setCreditCardExpireYear(2018);
@@ -171,9 +166,12 @@ public class ProfileController {
             handledRequestSuccessfully("ProfileController", "/profile/editProfile");
 			return model;
 		} else {
-			model = new ModelAndView("updatedProfile");
+			model = new ModelAndView("editProfile");
+			//model.addObject("editProfileForm", editProfileForm);
+			/*
 			model.addObject("message",
 					"Something went wrong, please contact the WebAdmin if the problem persists!");
+					*/
             handlingRequestFailed("ProfileController", "/profile/editProfile", "BindingResult error");
 			return model;
 		}

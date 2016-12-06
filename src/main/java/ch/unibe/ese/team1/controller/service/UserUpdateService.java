@@ -1,15 +1,15 @@
 package ch.unibe.ese.team1.controller.service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
+import ch.unibe.ese.team1.model.User;
+import ch.unibe.ese.team1.model.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
-import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.dao.UserDao;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
 
 /** Handles updating a user's profile. */
 @Service
@@ -26,7 +26,7 @@ public class UserUpdateService {
 
 	/** Handles updating an existing user in the database. */
 	@Transactional
-	public void updateFrom(EditProfileForm editProfileForm) {
+	public void updateFrom(@Valid EditProfileForm editProfileForm) {
 		
 		User currentUser = userService.findUserByUsername(editProfileForm.getUsername());
 		

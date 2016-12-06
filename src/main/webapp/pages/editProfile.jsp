@@ -15,6 +15,15 @@
         });
     </script>
 
+    <script>
+        function validateCreditCard() {
+            var creditCardNumber = document.getElementById('creditCardNumber');
+            var creditCardExpireMonth = document.getElementById('creditCardExpireMonth');
+            var creditCardExpireYear = document.getElementById('creditCardExpireYear');
+            var securityCode = document.getElementById('securityCode');
+        }
+    </script>
+
     <!--<pre><a href="/">Home</a>   &gt;   <a href="/user?id=${currentUser.id}">Public Profile</a>   &gt;   Edit profile</pre>-->
 
     <div class="container">
@@ -63,8 +72,9 @@
                 <tr>
                     <td class="spacingTable"><label for="creditCardNumber">Credit Card
                         Number:</label><a>&emsp;&thinsp;</a>
-                        <form:input id="creditCardNumber" path="creditCardNumber"
-                                    value="${currentUser.creditCardNumber}"/></td>
+                        <form:input id="creditCardNumber" path="creditCardNumber" value="${currentUser.creditCardNumber}" cssClass="form-control"/>
+                        <form:errors path="creditCardNumber" cssClass="validationErrorText"/>
+                    </td>
                 </tr>
             </table>
             <table class="editProfileNumberTable">
@@ -72,13 +82,16 @@
                     <td class="spacingTable"><label>Credit Card Expire Month/Year:</label>
                         <form:input type="number" id="creditCardExpireMonth" path="creditCardExpireMonth"
                                     value="${currentUser.creditCardExpireMonth}"/>
+                        <form:errors path="creditCardExpireMonth" cssClass="validationErrorText"/>
                         <form:input type="number" id="creditCardExpireYear" path="creditCardExpireYear"
-                                    value="${currentUser.creditCardExpireYear}"/></td>
+                                    value="${currentUser.creditCardExpireYear}"/>
+                        <form:errors path="creditCardExpireYear" cssClass="validationErrorText"/></td>
                 </tr>
                 <tr>
                     <td class="spacingTable"><label>Credit Card Security Code:</label>
-                        <form:input type="number" id="securityCode" path="securityCode"
-                                    value="${currentUser.securityCode}"/></td>
+                        <form:input id="securityCode" path="securityCode"
+                                    value="${currentUser.securityCode}" cssClass="form-control"/>
+                        <form:errors path="securityCode" cssClass="validationErrorText"/></td>
                 </tr>
 
                 <tr>
@@ -89,7 +102,7 @@
             </table>
 
             <div>
-                <button type="submit">Update</button>
+                <button type="submit" onClick=";validateCreditCard();form.action='/profile/editProfile';">Update</button>
             </div>
 
         </form:form>
