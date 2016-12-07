@@ -38,23 +38,6 @@
     </script>
 
     <script>
-        /*
-        document.onload = creditCard();
-        */
-    </script>
-
-
-    <script>
-        function creditCard() {
-            if (${hasCreditCard}) {
-                $("#creditCard").show();
-            } else {
-                $("#creditCard").hide();
-            }
-        }
-    </script>
-
-    <script>
         function determineHasCreditCard() {
             var creditCardNumber = document.getElementById("creditCardNumber");
             var hasCreditCard = document.getElementById("hasCreditCard");
@@ -111,7 +94,7 @@
                         <form:input type="password" id="password" path="password" value="${currentUser.password}"/></td>
                 </tr>
             </table>
-            <div id="creditCard" style="">
+            <div id="creditCard">
             <table>
                 <tr>
                     <td class="spacingTable"><label for="creditCardNumber">Credit Card
@@ -148,7 +131,7 @@
                         <tr>
                             <td>
                                 <div class="deleteCreditCard">
-                                    <button type="button"  id="deleteCreditCardButton" onclick="deleteCreditCard()" data-user-id="${currentUser.id }">Delete credit card</button>
+                                    <button type="button"  id="deleteCreditCardButton" data-user-id="${currentUser.id }">Delete credit card</button>
                                 </div>
                             </td>
                         </tr>
@@ -157,7 +140,7 @@
                         <tr>
                             <td>
                                 <div class="addCreditCard">
-                                    <button type="button" id="addCreditCardButton" onclick="addCreditCard()" data-user-id="${currentUser.id }">Add credit card</button>
+                                    <button type="button" id="addCreditCardButton" data-user-id="${currentUser.id }">Add credit card</button>
                                 </div>
                             </td>
                         </tr>
@@ -172,7 +155,7 @@
             </table>
 
             <div>
-                <button type="submit" onclick="determineHasCreditCard()" form.action='/profile/editProfile'>Update</button>
+                <button type="submit" onclick="determineHasCreditCard()">Update</button>
             </div>
 
         </form:form>
