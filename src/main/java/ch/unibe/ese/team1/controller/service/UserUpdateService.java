@@ -46,6 +46,23 @@ public class UserUpdateService {
 		userDao.save(currentUser);
 	}
 
-	
-	
+    public void deleteCreditCardFromUser(long userId) {
+		User user = userDao.findUserById(userId);
+		user.setCreditCardNumber(null);
+		user.setHasCreditCard(false);
+        user.setCreditCardExpireMonth(0);
+        user.setCreditCardExpireYear(0);
+        user.setSecurityCode("000");
+		userDao.save(user);
+    }
+
+    public void addCreditCardToUser(long userId) {
+        User user = userDao.findUserById(userId);
+        user.setCreditCardNumber("0000000000000000");
+        user.setHasCreditCard(true);
+        user.setCreditCardExpireMonth(0);
+        user.setCreditCardExpireYear(0);
+        user.setSecurityCode("000");
+        userDao.save(user);
+    }
 }

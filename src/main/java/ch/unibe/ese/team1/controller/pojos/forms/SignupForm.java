@@ -28,7 +28,7 @@ public class SignupForm {
 
 	/*Check out http://www.regular-expressions.info/creditcard.html*/
 	// TODO bring regex from webpage above to work
-	@Pattern(regexp = "[0-9]{16}"
+	@Pattern(regexp = "[0-9]{16}|null|"
 			, message = "Please enter a valid Credit Card Number")
 	private String creditCardNumber;
 

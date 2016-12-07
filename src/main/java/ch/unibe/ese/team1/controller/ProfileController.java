@@ -142,11 +142,39 @@ public class ProfileController {
 		ModelAndView model = new ModelAndView("editProfile");
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
+        boolean hasCreditCard = false;
+        if (user.getCreditCardNumber() != null && user.getCreditCardNumber() !="" && user.getHasCreditCard())
+            hasCreditCard = user != null;
 		model.addObject("editProfileForm", new EditProfileForm());
 		model.addObject("currentUser", user);
+        model.addObject("hasCreditCard", hasCreditCard);
         handledRequestSuccessfully("ProfileController", "/profile/editProfile");
 		return model;
 	}
+
+    /**
+     * Deletes the credit card of the user with the given id.
+     */
+    @RequestMapping(value = "/profile/editProfile/deleteCreditCardFromUser", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    void deleteCreditCardFromUser(@RequestParam long userId) {
+        receivedRequest("ProfileController", "/profile/editProfile/deleteCreditCardFromUser");
+        userUpdateService.deleteCreditCardFromUser(userId);
+        handledRequestSuccessfully("ProfileController", "/profile/editProfile/deleteCreditCardFromUser");
+    }
+
+    /**
+     * Adds a basic credit card to the user with the given id.
+     */
+    @RequestMapping(value = "/profile/editProfile/addCreditCardToUser", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    void addCreditCardFromUser(@RequestParam long userId) {
+        receivedRequest("ProfileController", "/profile/editProfile/addCreditCardToUser");
+        userUpdateService.addCreditCardToUser(userId);
+        handledRequestSuccessfully("ProfileController", "/profile/editProfile/addCreditCardToUser");
+    }
 
 	/** Handles the request for editing the user profile. */
 	@RequestMapping(value = "/profile/editProfile", method = RequestMethod.POST)
@@ -167,10 +195,6 @@ public class ProfileController {
 		} else {
 			model = new ModelAndView("editProfile");
 			//model.addObject("editProfileForm", editProfileForm);
-			/*
-			model.addObject("message",
-					"Something went wrong, please contact the WebAdmin if the problem persists!");
-					*/
             handlingRequestFailed("ProfileController", "/profile/editProfile", "BindingResult error");
 			return model;
 		}

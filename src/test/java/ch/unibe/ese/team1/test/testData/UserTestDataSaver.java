@@ -1,17 +1,16 @@
 package ch.unibe.ese.team1.test.testData;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserPicture;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This inserts some user test data into the database.
@@ -26,30 +25,30 @@ public class UserTestDataSaver {
 	public void saveTestData() throws Exception {
 		// system account
 		User system = createUser("System", "1234", "FlatFindr", "Admin",
-				"/img/test/system.jpg", Gender.ADMIN, "4040404040404040", 12,12);
+				"/img/test/system.jpg", Gender.ADMIN, "4040404040404040", 12,12, "257");
 		system.setAboutMe("We keep you off the streets.");
 		userDao.save(system);
 
 		User administrator = createUser("Admin", "admin", "FlatFindr", "Admin",
-				"/img/test/system.jpg", Gender.ADMIN, "4040404040404040", 12,12);
+				"/img/test/system.jpg", Gender.ADMIN, "4040404040404040", 12,12, "257");
 		administrator.setAboutMe("King.");
 		userDao.save(administrator);
 
 		// Main test-user for the assistants (advertiser)
 		User ese = createUser("ese@unibe.ch", "ese", "John", "Wayne",
-				"/img/test/portrait.jpg", Gender.MALE, "4040404040404040", 12,12);
+				"/img/test/portrait.jpg", Gender.MALE, "4040404040404040", 12,12, "257");
 		ese.setAboutMe(getDummyText());
 		userDao.save(ese);
 		
 		// Searcher
 		User janeDoe = createUser("jane@doe.com", "password", "Jane", "Doe",
-				Gender.FEMALE, "4040404040404040", 12,12);
+				Gender.FEMALE, "4040404040404040", 12,12, "257");
 		janeDoe.setAboutMe(getDummyText());
 		userDao.save(janeDoe);
 
 		// Another advertiser & searcher
 		User bernerBaer = createUser("user@bern.com", "password",
-				"Berner", "Bär", Gender.MALE, "4040404040404040", 12,12);
+				"Berner", "Bär", Gender.MALE, null, 12,12, "257");
 		UserPicture picture = new UserPicture();
 		picture.setFilePath("/img/test/berner_baer.png");
 		picture.setUser(bernerBaer);
@@ -64,26 +63,27 @@ public class UserTestDataSaver {
 		
 		// Another advertiser & searcher
 		User oprah = createUser("oprah@winfrey.com", "password", "Oprah", "Winfrey",
-				"/img/test/oprah.jpg", Gender.FEMALE , "4040404040404040", 12,12);
+				"/img/test/oprah.jpg", Gender.FEMALE , "4040404040404040", 12,12, "257");
 		oprah.setAboutMe(getDummyText());
 		userDao.save(oprah);
 		
 		// Dummy users to be added for Roommates
 		User hans = createUser("hans@unibe.ch", "password", "Hans", "DummyOne",
-				Gender.MALE, "4040404040404040", 12,12);
+				Gender.MALE, "4040404040404040", 12,12, "257");
 		hans.setAboutMe("Hello, I am the dummy user Hans for the AdBern. I am living" +
 				"at Kramgasse 22 and I am very very happy there.");
 		userDao.save(hans);
 		
 		User mathilda = createUser("mathilda@unibe.ch", "password", "Mathilda",
-				"DummyTwo", Gender.FEMALE, "4040404040404040", 12,12);
+				"DummyTwo", Gender.FEMALE, "4040404040404040", 12,12, "257");
 		mathilda.setAboutMe("Hello, I am the dummy user Mathilda for the AdBern. I am living" +
 				"at Kramgasse 22 and I am very very happy there.");
 		userDao.save(mathilda);
 	}
 
 	public User createUser(String email, String password, String firstName,
-			String lastName, Gender gender, String creditCardNumber, int creditCardexpireMonth, int creditCardexpireYear) {
+			String lastName, Gender gender, String creditCardNumber, int creditCardexpireMonth,
+                           int creditCardexpireYear, String securityCode) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -101,13 +101,15 @@ public class UserTestDataSaver {
 		user.setCreditCardNumber(creditCardNumber);
 		user.setCreditCardExpireMonth(creditCardexpireMonth);
 		user.setCreditCardExpireYear(creditCardexpireYear);
-        if (creditCardNumber != null)
+        user.setSecurityCode(securityCode);
+        if (creditCardNumber != null && creditCardNumber != "")
             user.setHasCreditCard(true);
 		return user;
 	}
 
 	public User createUser(String email, String password, String firstName,
-			String lastName, String picPath, Gender gender,  String creditCardNumber, int creditCardexpireMonth, int creditCardexpireYear) {
+			String lastName, String picPath, Gender gender, String creditCardNumber, int creditCardexpireMonth,
+                           int creditCardexpireYear, String securityCode) {
 		User user = new User();
 		user.setUsername(email);
 		user.setPassword(password);
@@ -137,7 +139,8 @@ public class UserTestDataSaver {
 		user.setCreditCardNumber(creditCardNumber);
 		user.setCreditCardExpireMonth(creditCardexpireMonth);
 		user.setCreditCardExpireYear(creditCardexpireYear);
-		if (creditCardNumber != null)
+        user.setSecurityCode(securityCode);
+		if (creditCardNumber != null && creditCardNumber != "")
 			user.setHasCreditCard(true);
 		return user;
 	}

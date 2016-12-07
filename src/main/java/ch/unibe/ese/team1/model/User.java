@@ -193,7 +193,15 @@ public class User {
 	}
 
     public boolean getHasCreditCard() {
+        updateHasCreditCard();
         return hasCreditCard;
+    }
+
+    private void updateHasCreditCard() {
+        if (getCreditCardNumber() == "" || getCreditCardNumber() == null)
+            setHasCreditCard(false);
+        else
+            setHasCreditCard(true);
     }
 
     public void setHasCreditCard(boolean hasCreditCard) {

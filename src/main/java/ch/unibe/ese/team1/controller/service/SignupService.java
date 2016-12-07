@@ -1,17 +1,15 @@
 package ch.unibe.ese.team1.controller.service;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import ch.unibe.ese.team1.model.Gender;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import ch.unibe.ese.team1.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /** Handles the persisting of new users */
 @Service
@@ -34,7 +32,7 @@ public class SignupService {
 		user.setEnabled(true);
 		user.setGender(signupForm.getGender());
 		user.setCreditCardNumber(signupForm.getCreditCardNumber());
-		if (user.getCreditCardNumber() != null)
+		if (user.getCreditCardNumber() != null && user.getCreditCardNumber() != "")
 			user.setHasCreditCard(true);
 		else
 			user.setHasCreditCard(false);
