@@ -14,8 +14,7 @@
 
 
 <script>
-    var valid = false;
-    var injected = false;
+    // INject error message for city
     $(document).ready(function () {
 
         // Go to controller take what you need from user
@@ -26,22 +25,10 @@
         $("#field-city").autocomplete({
             minLength: 2
         });
+
+        citys = <c:import url="getzipcodes.jsp" />;
         $("#field-city").autocomplete({
-            source: <c:import url="getzipcodes.jsp" />,
-            select: function (e) {
-                valid = true;
-            },
-            response: function (event, ui) {
-                valid = false;
-                $.each(ui.content, function (key,value) {
-                    for(k in value){
-                        if(value[k] == $("#field-city").val()){
-                            valid = true;
-                        }
-                    }
-                });
-            }
-        });
+            source: citys });
         $("#field-city").autocomplete("option", {
             enabled: true,
             autoFocus: true
@@ -107,12 +94,21 @@
             $("#addedVisits").append(label + input);
         });
     });
+
+    var injected = false;
     function isValid() {
-        if(!valid && !injected){
+        var valid = false;
+        citys.forEach(function (entry) {
+           if($("#field-city").val().trim() == entry.toString().trim()){
+               valid = true;
+           }
+        });
+        if(valid) return true;
+        if(!injected){
             $("#field-city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
             injected = true;
         }
-        return valid
+        return false;
     }
 </script>
 

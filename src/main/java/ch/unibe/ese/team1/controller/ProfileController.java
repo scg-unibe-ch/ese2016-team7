@@ -85,24 +85,25 @@ public class ProfileController {
 		if(!existsAlready) {
 			SignupForm signupForm = new SignupForm();
 			signupForm.setFirstName(name);
-			signupForm.setLastName("");
+			signupForm.setLastName(".");
 			signupForm.setEmail(email);
 
 			//Set an unhackable password
 			final SecureRandom rand = new SecureRandom();
 			String randomPassword = new BigInteger(130, rand).toString(32);
 			signupForm.setPassword(randomPassword);
-
 			signupForm.setGender(Gender.MALE);
-			signupForm.setSecurityCode("111");
-			signupForm.setCreditCardNumber("1111111111111111");
-			signupForm.setCreditCardExpireMonth(10);
-			signupForm.setCreditCardExpireYear(2018);
-			signupForm.setHasCreditCard(true);
+
+            //Set no credit card
+			signupForm.setSecurityCode("");
+			signupForm.setCreditCardNumber("");
+			signupForm.setCreditCardExpireMonth(0);
+			signupForm.setCreditCardExpireYear(0);
+			signupForm.setHasCreditCard(false);
 			signupService.saveFrom(signupForm);
 		}
 			userService.login(email);
-        handledRequestSuccessfully("ProfileController", "/googleSignup");
+            handledRequestSuccessfully("ProfileController", "/googleSignup");
 	}
 
 
@@ -184,7 +185,7 @@ public class ProfileController {
         receivedRequest("ProfileController", "/profile/editProfile");
 		ModelAndView model;
 		String username = principal.getName();
-		User user = userService.findUserByUsername(username);
+        User user = userService.findUserByUsername(username);
 		if (!bindingResult.hasErrors()) {
 			userUpdateService.updateFrom(editProfileForm);
 			model = new ModelAndView("updatedProfile");

@@ -11,39 +11,33 @@
 <sec:authorize var="loggedIn" url="/profile" />
 
 <script type="text/javascript">
-    var valid = false;
-    var injected = false;
     $(document).ready(function () {
         $("#city").autocomplete({
             minLength: 2
         });
+        citys = <c:import url="getzipcodes.jsp" />;
         $("#city").autocomplete({
-            source: <c:import url="getzipcodes.jsp" />,
-            select: function (e) {
-                valid = true;
-            },
-            response: function (event, ui) {
-                valid = false;
-                $.each(ui.content, function (key,value) {
-                   for(k in value){
-                       if(value[k] == $("#city").val()){
-                           valid = true;
-                       }
-                   }
-                });
-            }
+            source: citys
         });
         $("#city").autocomplete("option", {
             enabled: true,
             autoFocus: true
         });
     });
+    var injected = false;
     function isValid() {
-        if(!valid && !injected){
+        var valid = false;
+        citys.forEach(function (entry) {
+            if($("#city").val().trim() == entry.toString().trim()){
+                valid = true;
+            }
+        });
+        if(valid) return true;
+        if(!injected){
             $("#city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
             injected = true;
         }
-        return valid
+        return false;
     }
 </script>
 <script type="text/javascript">

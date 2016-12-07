@@ -33,7 +33,7 @@ public class Ad {
 
 	//@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date expireDate;
 
 	@Column(nullable = false)
