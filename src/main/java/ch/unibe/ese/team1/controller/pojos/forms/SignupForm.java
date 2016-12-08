@@ -42,7 +42,7 @@ public class SignupForm {
 
 	@NotNull
 	@Min(value = 0, message = "Please enter a valid year")
-	@Max(value = 99, message = "Please enter a valid year (e.g. 16")
+	@Max(value = 99, message = "Please enter a valid year (e.g. 16)")
 	private int creditCardExpireYear;
 
 	@Pattern(regexp = "[0-9]{3}", message = "Please enter a valid securtiy code")

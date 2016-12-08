@@ -19,6 +19,18 @@
                 }
             });
         });
+        var deleteCreditCardButton = document.getElementById("deleteCreditCardButton");
+        var creditCard = document.getElementById("creditCard");
+        $("#deleteCreditCardButton").hide();
+        $("#creditCard").hide();
+        var securityCode = document.getElementById("securityCode");
+        var creditCardExpireMonth = document.getElementById("creditCardExpireMonth");
+        var creditCardExpireYear = document.getElementById("creditCardExpireYear");
+        var creditCardNumber = document.getElementById("creditCardNumber");
+        $("#securityCode").val("000");
+        $("#creditCardExpireMonth").val("0");
+        $("#creditCardExpireYear").val("0");
+        $("#creditCardNumber").val("");
     });
 </script>
 
@@ -31,6 +43,48 @@
         else {
             hasCreditCard.checked = true;
         }
+    }
+</script>
+
+<script>
+    function deleteCreditCard() {
+        var creditCard = document.getElementById("creditCard");
+        var addCreditCardButton = document.getElementById("addCreditCardButton");
+        var deleteCreditCardButton = document.getElementById("deleteCreditCardButton");
+        var securityCode = document.getElementById("securityCode");
+        var creditCardExpireMonth = document.getElementById("creditCardExpireMonth");
+        var creditCardExpireYear = document.getElementById("creditCardExpireYear");
+        var creditCardNumber = document.getElementById("creditCardNumber");
+        $("#creditCard").hide();
+        $("#addCreditCardButton").show();
+        $("#deleteCreditCardButton").hide();
+        $("#securityCode").val("000");
+        $("#creditCardExpireMonth").val("0");
+        $("#creditCardExpireYear").val("0");
+        $("#creditCardNumber").val("");
+        var hasCreditCard = document.getElementById("hasCreditCard");
+        hasCreditCard.checked=false;
+    }
+</script>
+
+<script>
+    function addCreditCard() {
+        var creditCard = document.getElementById("creditCard");
+        var addCreditCardButton = document.getElementById("addCreditCardButton");
+        var deleteCreditCardButton = document.getElementById("deleteCreditCardButton");
+        var securityCode = document.getElementById("securityCode");
+        var creditCardExpireMonth = document.getElementById("creditCardExpireMonth");
+        var creditCardExpireYear = document.getElementById("creditCardExpireYear");
+        var creditCardNumber = document.getElementById("creditCardNumber");
+        $("#creditCard").show();
+        $("#addCreditCardButton").hide();
+        $("#deleteCreditCardButton").show();
+        $("#securityCode").val("000");
+        $("#creditCardExpireMonth").val("0");
+        $("#creditCardExpireYear").val("0");
+        $("#creditCardNumber").val("0000000000000000");
+        var hasCreditCard = document.getElementById("hasCreditCard");
+        hasCreditCard.checked=true;
     }
 </script>
 
@@ -64,6 +118,7 @@
                 <form:option value="MALE" label="Male"/>
             </form:select>
 
+            <div id="creditCard">
             <label>Credit Card Number:</label>
             <form:input path="creditCardNumber" id="creditCardNumber" cssClass="form-control"/>
             <form:errors path="creditCardNumber" cssClass="validationErrorText"/>
@@ -74,22 +129,31 @@
             <label>Credit Card Expire Month/Year</label>
             <div class="form-group row">
                 <div class="col-md-3">
-                    <form:input type="number" path="creditCardExpireMonth" cssClass="form-control"/>
+                    <form:input type="number" path="creditCardExpireMonth" id="creditCardExpireMonth" cssClass="form-control"/>
                     <form:errors path="creditCardExpireMonth" cssClass="validationErrorText"/>
                 </div>
                 <div class="col-md-1">
                     <p style="font-size: 20px;">/</p>
                 </div>
                 <div class="col-md-3">
-                    <form:input type="number" path="creditCardExpireYear" cssClass="form-control"/>
+                    <form:input type="number" path="creditCardExpireYear" id="creditCardExpireYear" cssClass="form-control"/>
                     <form:errors path="creditCardExpireYear" cssClass="validationErrorText"/>
                 </div>
             </div>
 
             <label>Credit Card Security Code</label>
-            <form:input type="number" path="securityCode" cssClass="form-control"/>
+            <form:input path="securityCode" id="securityCode" cssClass="form-control"/>
             <form:errors path="securityCode" cssClass="validationErrorText"/>
+
+            </div>
+
             <br/>
+
+            <button type="button"  id="deleteCreditCardButton" onclick="deleteCreditCard()">Delete credit card</button>
+
+            <button type="button"  id="addCreditCardButton" onclick="addCreditCard()">Add credit card</button>
+
+            <br/><br/>
             <button type="submit" onclick="determineHasCreditCard()">Sign up</button>
 
         </form:form>

@@ -499,6 +499,14 @@ footer nav ul li {
 .signupDescription{
 	vertical-align: top;
 }
+
+.deleteCreditCardButton {
+
+}
+
+.addCreditCardButton {
+
+}
 /* -------------------------------------------------------------------- */
 /* search.jsp */
 #searchForm {
