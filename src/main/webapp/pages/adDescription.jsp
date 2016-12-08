@@ -333,10 +333,9 @@
                                         </script>
                                         <br/>
                                         <p>
-                                        <div id="instantBuyErrorDiv" style="color: #cc0000";>
+                                        <div id="instantBuyErrorDiv" style="color: #cc0000";></div>
                                         <button type="button" id="instantBuy" class="btn bidButton">Instant Buy</button>
                                             for CHF ${shownAd.instantBuyPrice}
-                                    </div>
                                         </p>
                                     </c:when>
                                 </c:choose>

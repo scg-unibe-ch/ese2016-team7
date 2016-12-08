@@ -112,6 +112,16 @@
     }
 </script>
 
+<script>
+    function checkForCreditCard() {
+        var premiumAd = document.getElementById("premium");
+        if (!${hasCreditCard}) {
+            premiumAd.checked = false;
+            $("#premiumAdErrorDiv").html("You need a credit card to place a premium ad.")
+        }
+    }
+</script>
+
 <!--<pre>
 <a href="/">Home</a> &gt; Place ad</pre>-->
 
@@ -333,9 +343,11 @@
 
         <fieldset>
             <legend>Premium Ad</legend>
+            <div id="premiumAdErrorDiv" style="color: #cc0000;">
+            </div>
             <table>
                 <tr>
-                    <td><form:checkbox path="premium" value="0"/></td>
+                    <td><form:checkbox path="premium" id="premium" value="0" onclick="checkForCreditCard()"/></td>
                     <td>Premium Ad</td>
                 </tr>
                 <tr>
