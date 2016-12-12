@@ -86,8 +86,9 @@ public class AuctionService {
             messageBuilder.append("Dear " + winner.getFirstName() + ",</br></br>");
             messageBuilder.append("Thank you for buying the " + ad.getPropertyString());
             messageBuilder.append(" <a href= ../ad?id=" + ad.getId() + " style=\"color: #0000ff\">" + ad.getTitle() + "</a>.</br>");
-            messageBuilder.append(owner.getFirstName() + " " + owner.getLastName() + " will contact you with the details.</br>");
-            messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+            messageBuilder.append("<a href= ../user/?id=" + owner.getId() + " style=\"color: #0000ff\"> " + owner.getFirstName() + " " + owner.getLastName() +  "</a>"+ " will contact you with the details.</br>");
+            messageBuilder.append("You can reach <a href= ../user/?id=" + owner.getId() + " style=\"color: #0000ff\"> " + owner.getFirstName() + " " + owner.getLastName() +  "</a>"+ " at  <a href= mailto:" + owner.getEmail() + " style=\"color: #0000ff\">"+ owner.getEmail() +"</a>.</br>");
+            messageBuilder.append(" If you have any questions please contact us by email at <a href= mailto:support@flatfindr.com style=\"color: #0000ff\"> support@flatfindr.com </a>.");
             messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
             messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
             messageBuilder.append("Your Flatfindr team");
@@ -98,9 +99,12 @@ public class AuctionService {
             messageBuilder.append("Dear " + owner.getFirstName() + ",</br></br>");
             messageBuilder.append("You just sold the " + ad.getPropertyString());
             messageBuilder.append(" <a href= ../ad?id=" + ad.getId() + " style=\"color: #0000ff\">" + ad.getTitle() + "</a>");
-            messageBuilder.append(" to " + winner.getFirstName() + " " + winner.getLastName() + " for " + ad.getInstantBuyPrice() + " CHF.</br>");
-            messageBuilder.append("Please contact him as soon as possible.</br>");
-            messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+
+            messageBuilder.append(" to <a href= ../user/?id=" + winner.getId() + " style=\"color: #0000ff\"> " + winner.getFirstName() + " " + winner.getLastName() +  "</a>"+ " for "+ ad.getInstantBuyPrice()+ " CHF.</br>");
+            messageBuilder.append("You can reach <a href= ../user/?id=" + winner.getId() + " style=\"color: #0000ff\"> " + winner.getFirstName() + " " + winner.getLastName() +  "</a>"+ " at  <a href= mailto:" + winner.getEmail() + " style=\"color: #0000ff\">"+ winner.getEmail() +"</a>.</br>");
+            messageBuilder.append("Please contact him/her as soon as possible.</br>");
+
+            messageBuilder.append(" If you have any questions please contact us by email at <a href= mailto:support@flatfindr.com style=\"color: #0000ff\"> support@flatfindr.com </a>.</br>");
             messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
             messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
             messageBuilder.append("Your Flatfindr team");
@@ -140,7 +144,7 @@ public class AuctionService {
         messageBuilder.append("We are sorry to inform you that your auction expired and no one placed a bid on your " + ad.getPropertyString());
         messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
         messageBuilder.append("To place a new ad with the same information <a href= ../profile/placeAd?id="+ad.getId()+" style=\"color: #0000ff\">click here</a>.</br></br>"); // TODO add link to reinstate the ad
-        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" If you have any questions please contact us by email at <a href= mailto:support@flatfindr.com style=\"color: #0000ff\"> support@flatfindr.com </a>.");
         messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your Flatfindr team");
@@ -164,8 +168,9 @@ public class AuctionService {
         messageBuilder.append("Dear "+winner.getFirstName()+",</br></br>");
         messageBuilder.append("Congratulations! You won the auction on the " + ad.getPropertyString());
         messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>.</br>");
-        messageBuilder.append(owner.getFirstName()+" "+owner.getLastName()+" will contact you with the details.</br>");
-        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append("<a href= ../user/?id=" + owner.getId() + " style=\"color: #0000ff\"> " + owner.getFirstName() + " " + owner.getLastName() +  "</a>"+ " will contact you with the details.</br>");
+        messageBuilder.append("You can reach <a href= ../user/?id=" + owner.getId() + " style=\"color: #0000ff\"> " + owner.getFirstName() + " " + owner.getLastName() +  "</a>"+ " at  <a href= mailto:" + owner.getEmail() + " style=\"color: #0000ff\">"+ owner.getEmail() +"</a>.</br>");
+        messageBuilder.append(" If you have any questions please contact us by email at <a href= mailto:support@flatfindr.com style=\"color: #0000ff\"> support@flatfindr.com </a>.");
         messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your Flatfindr team");
@@ -174,10 +179,10 @@ public class AuctionService {
         messageBuilder = new StringBuilder();
         messageBuilder.append("Dear "+owner.getFirstName()+",</br></br>");
         messageBuilder.append("You just sold the " + ad.getPropertyString());
-        messageBuilder.append(" <a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle()+"</a>");
-        messageBuilder.append(" to " + winner.getFirstName()+ " " + winner.getLastName() + " for "+ ad.getPrice() + " CHF.</br>");
+        messageBuilder.append(" to <a href= ../user/?id=" + winner.getId() + " style=\"color: #0000ff\"> " + winner.getFirstName() + " " + winner.getLastName() +  "</a>"+ " for "+ ad.getInstantBuyPrice()+ " CHF.</br>");
+        messageBuilder.append("You can reach <a href= ../user/?id=" + winner.getId() + " style=\"color: #0000ff\"> " + winner.getFirstName() + " " + winner.getLastName() +  "</a>"+ " at  <a href= mailto:" + winner.getEmail() + " style=\"color: #0000ff\">"+ winner.getEmail() +"</a>.</br>");
         messageBuilder.append("Please contact him/her as soon as possible.</br>");
-        messageBuilder.append(" If you have any questions please contact us by email at " + "support@flatfindr.com" + ".");
+        messageBuilder.append(" If you have any questions please contact us by email at <a href= mailto:support@flatfindr.com style=\"color: #0000ff\"> support@flatfindr.com </a>.");
         messageBuilder.append(" We hope you will continue to enjoy using Flatfindr.</br></br>");
         messageBuilder.append("This message was automatically generated. Please do not reply.</br>");
         messageBuilder.append("Your Flatfindr team");
@@ -215,15 +220,19 @@ public class AuctionService {
     public void sendOverbiddenMessage(Ad ad, User user){
         Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
 
-        if (bid == null)
-            logger.error(String.format("Failed sending overbidden message of ad no. %d to user %s: " +
-                    "No bids found!", ad.getId(), user.getEmail()));
-        if(bid != null) {
-            User receiver = bid.getUser();
-            messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",
-                    "You have been overbid by "+user.getFirstName()+
-                    " on the " + ad.getPropertyString() + " " + "<a href= ../ad?id="+ad.getId()+" style=\"color: #0000ff\">"+ad.getTitle() +"</a>.</br>"+
-                    "The new highest bid is "+ad.getPrice());
+        //Don't message the user if he overbid himself.
+            if (bid == null) {
+                logger.error(String.format("Failed sending overbidden message of ad no. %d to user %s: " +
+                        "No bids found!", ad.getId(), user.getEmail()));
+            }
+            if (bid != null) {
+                User receiver = bid.getUser();
+
+                    messageService.sendMessage(userDao.findByUsername("FlatFindr"), receiver, "Overbid",
+                        "You have been overbid by " + user.getFirstName() +
+                                " on the " + ad.getPropertyString() + " " + "<a href= ../ad?id=" + ad.getId() + " style=\"color: #0000ff\">" + ad.getTitle() + "</a>.</br>" +
+                                "The new highest bid is " + ad.getPrice() + " CHF.");
+
         }
     }
 }
