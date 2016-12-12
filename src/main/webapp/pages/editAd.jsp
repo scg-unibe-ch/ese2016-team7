@@ -17,28 +17,13 @@
 
 
 <script>
-    var valid = true;
-    var injected = false;
         $(document).ready(function () {
             $("#field-city").autocomplete({
                 minLength: 2
             });
+            citys = <c:import url="getzipcodes.jsp" />;
             $("#field-city").autocomplete({
-                source: <c:import url="getzipcodes.jsp" />,
-                select: function (e) {
-                    valid = true;
-                },
-                response: function (event, ui) {
-                    valid = false;
-                    $.each(ui.content, function (key,value) {
-                        for(k in value){
-                            if(value[k] == $("#field-city").val()){
-                                valid = true;
-                            }
-                        }
-                    });
-                }
-
+                source: citys
             });
             $("#field-city").autocomplete("option", {
                 enabled: true,
@@ -151,13 +136,20 @@
 
             });
         });
-
+        var injected = false;
     function isValid() {
-        if(!valid && !injected){
-            $("#field-city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
+        var valid = false;
+        citys.forEach(function (entry) {
+            if($("#city").val().trim() == entry.toString().trim()){
+                valid = true;
+            }
+        });
+        if(valid) return true;
+        if(!injected){
+            $("#city").after("<span id=\"city.errors\" class=\"validationErrorText\">Please pick a city from the list</span>");
             injected = true;
         }
-        return valid
+        return false;
     }
 
 

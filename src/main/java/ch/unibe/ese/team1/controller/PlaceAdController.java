@@ -79,9 +79,13 @@ public class PlaceAdController {
 
 	/** Shows the place ad form. */
 	@RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET, params="id")
-	public ModelAndView placeAd(@RequestParam("id") long id) throws IOException {
+	public ModelAndView placeAd(@RequestParam("id") long id, Principal principal) throws IOException {
         receivedRequest("PlaceAdController", "/profile/placeAd");
 		ModelAndView model = new ModelAndView("placeAd");
+
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+        boolean hasCreditCard = user != null && user.getHasCreditCard();
 
 		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
 		if (pictureUploader == null) {
@@ -111,6 +115,7 @@ public class PlaceAdController {
 			adForm.setProperty(ad.getProperty());
 			//this.placeAdForm = adForm;
 			model.addObject("placeAdForm",adForm);
+            model.addObject("hasCreditCard", hasCreditCard);
 		}
 		handledRequestSuccessfully("PlaceAdController", "/profile/placeAd");
 		return model;
@@ -118,14 +123,19 @@ public class PlaceAdController {
 
     /** Shows the place ad form.*/
     @RequestMapping(value = {"","/profile/placeAd"},method = RequestMethod.GET)
-    public ModelAndView placeAd() throws IOException {
+    public ModelAndView placeAd(Principal principal) throws IOException {
         receivedRequest("PlaceAdController", "/profile/placeAd");
         ModelAndView model = new ModelAndView("placeAd");
+
+        String username = principal.getName();
+        User user = userService.findUserByUsername(username);
+        boolean hasCreditCard = user != null && user.getHasCreditCard();
 
         String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
         if (pictureUploader == null) {
             pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
         }
+        model.addObject("hasCreditCard", hasCreditCard);
         handledRequestSuccessfully("PlaceAdController", "/profile/placeAd");
         return model;
     }

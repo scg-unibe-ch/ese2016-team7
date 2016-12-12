@@ -7,6 +7,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:import url="template/header.jsp"/>
+
+<script src="/js/editProfile.js"></script>
+
 <div class="container-fluid">
 
     <script>
@@ -14,13 +17,35 @@
             $("#about-me").val("${currentUser.aboutMe}")
         });
     </script>
+    <script>
+        $(window).load(function(){
+            var creditCardNumber = document.getElementById("creditCardNumber");
+            var hasCreditCard = document.getElementById("hasCreditCard");
+            if (${hasCreditCard}) {
+                $("#creditCard").show();
+                hasCreditCard.checked = true;
+            } else {
+                $("#creditCard").hide();
+                hasCreditCard.checked = false;
+            }
+            if (creditCardNumber == null || creditCardNumber == "")
+                hasCreditCard.checked = false;
+            else {
+                hasCreditCard.checked = true;
+            }
+            $("#about-me").val("${currentUser.aboutMe}")
+        })
+    </script>
 
     <script>
-        function validateCreditCard() {
-            var creditCardNumber = document.getElementById('creditCardNumber');
-            var creditCardExpireMonth = document.getElementById('creditCardExpireMonth');
-            var creditCardExpireYear = document.getElementById('creditCardExpireYear');
-            var securityCode = document.getElementById('securityCode');
+        function determineHasCreditCard() {
+            var creditCardNumber = document.getElementById("creditCardNumber");
+            var hasCreditCard = document.getElementById("hasCreditCard");
+            if (creditCardNumber == null || creditCardNumber == "")
+                hasCreditCard.checked = false;
+            else {
+                hasCreditCard.checked = true;
+            }
         }
     </script>
 
@@ -68,12 +93,16 @@
                     <td class="spacingTable"><label for="password">Password:</label><a>&emsp;&thinsp;</a>
                         <form:input type="password" id="password" path="password" value="${currentUser.password}"/></td>
                 </tr>
-
+            </table>
+            <div id="creditCard">
+            <table>
                 <tr>
                     <td class="spacingTable"><label for="creditCardNumber">Credit Card
                         Number:</label><a>&emsp;&thinsp;</a>
                         <form:input id="creditCardNumber" path="creditCardNumber" value="${currentUser.creditCardNumber}" cssClass="form-control"/>
                         <form:errors path="creditCardNumber" cssClass="validationErrorText"/>
+                        <form:checkbox style="display:none" name="hasCreditCard" id="hasCreditCard" path="hasCreditCard"
+                                       cssClass="checkbox"/>
                     </td>
                 </tr>
             </table>
@@ -93,6 +122,30 @@
                                     value="${currentUser.securityCode}" cssClass="form-control"/>
                         <form:errors path="securityCode" cssClass="validationErrorText"/></td>
                 </tr>
+                </table>
+            </div>
+
+            <table>
+                <c:choose>
+                    <c:when test="${hasCreditCard}">
+                        <tr>
+                            <td>
+                                <div class="deleteCreditCard">
+                                    <button type="button"  id="deleteCreditCardButton" data-user-id="${currentUser.id }">Delete credit card</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td>
+                                <div class="addCreditCard">
+                                    <button type="button" id="addCreditCardButton" data-user-id="${currentUser.id }">Add credit card</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
 
                 <tr>
                     <td class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br>
@@ -102,7 +155,7 @@
             </table>
 
             <div>
-                <button type="submit" onClick=";validateCreditCard();form.action='/profile/editProfile';">Update</button>
+                <button type="submit" onclick="determineHasCreditCard()">Update</button>
             </div>
 
         </form:form>

@@ -333,10 +333,9 @@
                                         </script>
                                         <br/>
                                         <p>
-                                        <div id="instantBuyErrorDiv" style="color: #cc0000";>
+                                        <div id="instantBuyErrorDiv" style="color: #cc0000";></div>
                                         <button type="button" id="instantBuy" class="btn bidButton">Instant Buy</button>
                                             for CHF ${shownAd.instantBuyPrice}
-                                    </div>
                                         </p>
                                     </c:when>
                                 </c:choose>
@@ -362,8 +361,10 @@
                             <td>
                                 <fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
                                 <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
-                                    ${bid.user.firstName}
-                                    ${bid.user.lastName}
+                                <a href="/user?id=${bid.user.id}" style='color:#0000ff'>
+                                        ${bid.user.firstName}
+                                        ${bid.user.lastName} </a>
+
                                     ${bid.amount} CHF
                             </td>
 

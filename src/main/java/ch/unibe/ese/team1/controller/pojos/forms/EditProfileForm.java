@@ -24,7 +24,7 @@ public class EditProfileForm {
 	
 	private String aboutMe;
 
-	@Pattern(regexp = "[0-9]{16}", message = "Please enter a valid Credit Card Number")
+	@Pattern(regexp = "[0-9]{16}|null|", message = "Please enter a valid Credit Card Number")
 	private String creditCardNumber;
 
     @NotNull

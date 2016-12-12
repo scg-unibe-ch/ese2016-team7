@@ -28,7 +28,7 @@ public class SignupForm {
 
 	/*Check out http://www.regular-expressions.info/creditcard.html*/
 	// TODO bring regex from webpage above to work
-	@Pattern(regexp = "[0-9]{16}"
+	@Pattern(regexp = "[0-9]{16}|null|"
 			, message = "Please enter a valid Credit Card Number")
 	private String creditCardNumber;
 
@@ -42,7 +42,7 @@ public class SignupForm {
 
 	@NotNull
 	@Min(value = 0, message = "Please enter a valid year")
-	@Max(value = 99, message = "Please enter a valid year (e.g. 16")
+	@Max(value = 99, message = "Please enter a valid year (e.g. 16)")
 	private int creditCardExpireYear;
 
 	@Pattern(regexp = "[0-9]{3}", message = "Please enter a valid securtiy code")
