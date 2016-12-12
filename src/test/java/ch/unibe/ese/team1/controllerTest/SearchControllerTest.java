@@ -63,9 +63,9 @@ public class SearchControllerTest {
     @Test
     public void resultsFailedTest() throws Exception{
         mockMvc.perform(post("/results")
-                .param("city", "300 - Bern")
+                .param("city", "3000 - Bern")
                 .param("radius", "50")
-                .param("price", "sdafdsjk"))
+                .param("price", "-50"))
                 .andExpect(view().name("searchAd"))
                 .andExpect(model().attributeHasFieldErrors("searchForm", "price"))
                 .andExpect(status().isOk());
@@ -82,19 +82,5 @@ public class SearchControllerTest {
                 .andExpect(model().attributeExists("results", "results", "premium"));
 
     }
-
-
-
-    /*
-    @Test
-    public void resultsQuicksearchFailed() throws Exception{
-        mockMvc.perform(post("/quicksearch")
-                .param("city", null))
-                //.andExpect(view().name("index"))
-                .andExpect(model().attributeDoesNotExist("searchForm","city"))
-                .andExpect(status().isOk());
-    }
-    */
-
 
 }

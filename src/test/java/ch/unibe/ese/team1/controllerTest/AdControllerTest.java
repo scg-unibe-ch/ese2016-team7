@@ -3,6 +3,7 @@ package ch.unibe.ese.team1.controllerTest;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -30,10 +31,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AdControllerTest {
 
     private MockMvc mockMvc;
-   // private Principal principal;
 
     @Autowired
     protected WebApplicationContext context;
+    @Autowired
+    MockHttpServletRequest request;
+
 
     @Before
     public void setUp() {
@@ -63,6 +66,18 @@ public class AdControllerTest {
     public void watchProfile() throws Exception{
         this.mockMvc.perform(get("/ad").principal(getPrincipal("jane@doe.ch")).param("id","1"));
     }
+
+
+    @Test
+    public void sendInvalidMessageTest() throws Exception {
+        this.mockMvc.perform(post("/ad")
+                .param("id", "1")
+                .param("recipient", ""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("adDescription"));
+    }
+
+
 
     @Test
     public void isBookmarked() throws Exception{
