@@ -220,7 +220,6 @@ public class AuctionService {
     public void sendOverbiddenMessage(Ad ad, User user){
         Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
 
-        //Don't message the user if he overbid himself.
             if (bid == null) {
                 logger.error(String.format("Failed sending overbidden message of ad no. %d to user %s: " +
                         "No bids found!", ad.getId(), user.getEmail()));
