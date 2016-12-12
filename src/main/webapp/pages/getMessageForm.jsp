@@ -17,7 +17,7 @@
 		<label>Subject: <span>*</span></label>
 		<form:input path="subject" class="msgInput" type="text" id="msgSubject" placeholder="Subject" />
 		<br><br>
-		<label>Message: </label>
+		<label>Message: <span>*</span></label>
 		<form:textarea path="text" id="msgTextarea" placeholder="Message" />
 
 		<button type="submit" id="messageSend">Send</button>

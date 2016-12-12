@@ -675,7 +675,7 @@
             <label>Subject: <span>*</span></label>
             <input class="msgInput" type="text" id="msgSubject" placeholder="Subject"/>
             <br><br>
-            <label>Message: </label>
+            <label>Message: <span>*</span></label>
             <textarea id="msgTextarea" placeholder="Message"></textarea>
             <br/>
             <button type="button" id="messageSend">Send</button>
