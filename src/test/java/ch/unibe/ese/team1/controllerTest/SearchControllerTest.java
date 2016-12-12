@@ -1,6 +1,5 @@
 package ch.unibe.ese.team1.controllerTest;
 
-import static com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -51,7 +50,7 @@ public class SearchControllerTest {
 
 
     @Test
-    public void resultsSuccess() throws Exception{
+    public void resultsSuccessTest() throws Exception{
         mockMvc.perform(post("/results")
                 .param("city", "3000 - Bern")
                 .param("radius", "50")
@@ -62,7 +61,7 @@ public class SearchControllerTest {
     }
 
     @Test
-    public void resultsFailed() throws Exception{
+    public void resultsFailedTest() throws Exception{
         mockMvc.perform(post("/results")
                 .param("city", "300 - Bern")
                 .param("radius", "50")
@@ -75,23 +74,27 @@ public class SearchControllerTest {
 
 
     @Test
-    public void resultsQuicksearchSuccess() throws Exception{
+    public void resultsQuicksearchSuccessTest() throws Exception{
         mockMvc.perform(post("/quicksearch")
                 .param("city", "3000 - Bern"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("results"))
                 .andExpect(model().attributeExists("results", "results", "premium"));
+
     }
+
+
 
     /*
     @Test
     public void resultsQuicksearchFailed() throws Exception{
         mockMvc.perform(post("/quicksearch")
-                .param("city", "111"))
+                .param("city", null))
                 //.andExpect(view().name("index"))
-                .andExpect(model().attributeHasFieldErrors("searchForm", "city"))
+                .andExpect(model().attributeDoesNotExist("searchForm","city"))
                 .andExpect(status().isOk());
     }
     */
+
 
 }

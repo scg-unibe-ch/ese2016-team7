@@ -9,9 +9,11 @@ import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +48,11 @@ public class AdService {
     private GeoDataService geoDataService;
 
     private static final Logger logger = Logger.getLogger("logger");
+
+    public boolean check(Principal principal, long id){
+        Ad ad = adDao.findOne(id);
+        return ad.getUser().getEmail().equals(principal.getName());
+    }
 
     /**
      * Handles persisting a new ad to the database.

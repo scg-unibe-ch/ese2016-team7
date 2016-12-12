@@ -41,10 +41,6 @@ public class PlaceAdForm {
 
 	private boolean premium;
 
-	// optional for input
-	private String roomFriends;
-	
-
 	private Property property;
 	
 	private boolean smokers;
