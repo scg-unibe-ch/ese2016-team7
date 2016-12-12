@@ -15,11 +15,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.security.Principal;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -49,9 +46,7 @@ public class AdminControllerTest {
                         "apartmentCount", "expiredAdsCount", "adsCount", "usersCount", "currentUser", "moneySpent",
                         "userName", "provisionsMade", "premiumAdMoney"))
                 .andReturn();
-        assertEquals(result.getModelAndView().getModel().)
     }
-
 
 
     private Principal getPrincipal(String name){
