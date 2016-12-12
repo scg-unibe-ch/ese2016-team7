@@ -97,11 +97,22 @@ public class EnquiryControllerTest {
         assertEquals(enquiry.getState(),VisitEnquiryState.OPEN);
     }
 
+
     @Test
-    @WithMockUser(username = "jane@doe.com")
     public void rateUser() throws Exception{
-        this.mockMvc.perform(get("/profile/rateUser").principal(getPrincipal("jane@doe.com"))
-        .param("rate","2").param("stars","3")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/profile/rateUser")
+                .principal(getPrincipal("jane@doe.com"))
+                .param("rate","2")
+                .param("stars","3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getRatingTest() throws Exception{
+        this.mockMvc.perform(get("/profile/ratingFor")
+                .principal(getPrincipal("jane@doe.com"))
+                .param("user","2"))
+                .andExpect(status().isOk());
     }
 
     private Principal getPrincipal(String name){

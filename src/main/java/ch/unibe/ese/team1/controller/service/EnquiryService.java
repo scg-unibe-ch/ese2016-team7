@@ -145,7 +145,16 @@ public class EnquiryService {
 
 		// ugly hack, but works
 		Iterator<Rating> iterator = ratings.iterator();
-		Rating next = iterator.next();
-		return next;
+		if(iterator.hasNext()) {
+			Rating next = iterator.next();
+			return next;
+		}else{
+			//default rating
+			Rating rating = new Rating();
+			rating.setRater(rater);
+			rating.setRatee(ratee);
+			rating.setRating(5);
+			return rating;
+		}
 	}
 }

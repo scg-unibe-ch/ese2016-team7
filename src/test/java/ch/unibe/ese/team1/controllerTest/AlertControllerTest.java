@@ -49,10 +49,12 @@ public class AlertControllerTest {
                 .andExpect(model().attributeHasNoErrors("alertForm"));
     }
 
+    /*
     @Test (expected = NestedServletException.class)
     public void createUnfinishedFakeAlertAndShowAlertViewFails() throws Exception {
         this.mockMvc.perform(post("/profile/alerts").principal(getPrincipal("ese@unibe.ch")));
     }
+    */
 
 
     private Principal getPrincipal(String name){

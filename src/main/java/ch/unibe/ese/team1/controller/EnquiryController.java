@@ -122,7 +122,6 @@ public class EnquiryController {
 		User principe = userService.findUserByUsername(principal.getName());
 		User ratee = userService.findUserById(id);
         handledRequestSuccessfully("EnquiryController", "/profile/ratingFor");
-		return enquiryService.getRatingByRaterAndRatee(principe, ratee)
-				.getRating();
+		return enquiryService.getRatingByRaterAndRatee(principe, ratee).getRating();
 	}
 }
