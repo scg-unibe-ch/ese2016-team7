@@ -54,7 +54,7 @@ public class AdController {
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public ModelAndView ad(@RequestParam("id") long id, Principal principal) {
 		receivedRequest("AdController", "/ad");
-		ModelAndView model = new ModelAndView("pageNotFound");
+		ModelAndView model = new ModelAndView("adDescription");
 		Ad ad = adService.getAdById(id);
 		if(ad!=null) {
 			model = new ModelAndView("adDescription");
