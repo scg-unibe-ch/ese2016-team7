@@ -22,8 +22,6 @@
 		<security:csrf disabled="true"/>
 	</security:http>
 
-
-
     <security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider>
 			<security:jdbc-user-service
