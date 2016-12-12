@@ -11,6 +11,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.util.NestedServletException;
+
+import java.security.Principal;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,14 +38,69 @@ public class AuctionControllerTest {
     }
 
     @Test
-    public void makeBid() throws Exception {
-        this.mockMvc.perform(post("/ad/makeBid").param("id", "1"))
+    public void makeBidOnUnexpiredAdWorks() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "2").param("amount", "100000").principal(getPrincipal("ese@unibe.ch")))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void instantBuy() throws Exception {
-        this.mockMvc.perform(post("/instantBuy").param("id", "1"))
+    public void makeBidOnExpiredAdWorks() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "5").param("amount", "100000").principal(getPrincipal("ese@unibe.ch")))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void makeBidOnUnexpiredAdWithoutCreditCardWorks() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "2").param("amount", "100000").principal(getPrincipal("user@bern.com")))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void makeBidOnExpiredAdWithoutCreditCardWorks() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "5").param("amount", "100000").principal(getPrincipal("user@bern.com")))
+                .andExpect(status().isOk());
+    }
+
+    @Test(expected=NestedServletException.class)
+    public void makeBidAnonymouslyFails() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "5").param("amount", "100000"));
+    }
+
+    @Test(expected=NestedServletException.class)
+    public void makeBidOnNonExistingAdFails() throws Exception {
+        this.mockMvc.perform(post("/ad/makeBid").param("id", "399").param("amount", "100000").principal(getPrincipal("ese@unibe.ch")));
+    }
+
+    @Test
+    public void instantBuyWorks() throws Exception {
+        this.mockMvc.perform(post("/instantBuy").param("id", "3").principal(getPrincipal("ese@unibe.ch")))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void instantBuyWithoutCreditCardWorks() throws Exception {
+        this.mockMvc.perform(post("/instantBuy").param("id", "3").principal(getPrincipal("user@bern.com")))
+                .andExpect(status().isOk());
+    }
+
+    @Test(expected=NestedServletException.class)
+    public void instantBuyAnonymouslyFails() throws Exception {
+        this.mockMvc.perform(post("/instantBuy").param("id", "3"));
+    }
+
+    @Test(expected=NestedServletException.class)
+    public void instantBuyNonExistingAdFails() throws Exception {
+        this.mockMvc.perform(post("/instantBuy").param("id", "399").principal(getPrincipal("ese@unibe.ch")));
+    }
+
+
+    private Principal getPrincipal(String name){
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return name;
+            }
+        };
+        return principal;
     }
 }

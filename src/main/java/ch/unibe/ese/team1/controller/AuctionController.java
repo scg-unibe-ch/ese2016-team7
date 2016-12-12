@@ -35,7 +35,7 @@ public class AuctionController {
 
     @RequestMapping(value = "/ad/makeBid", method = RequestMethod.POST)
     public @ResponseBody
-    void makeBid(@RequestParam Integer amount, @RequestParam("id") long id,
+    void makeBid(@RequestParam("amount") Integer amount, @RequestParam("id") long id,
                  Principal principal) {
         receivedRequest("AuctionController", "/ad/makeBid");
         User user = userService.findUserByUsername(principal.getName());
