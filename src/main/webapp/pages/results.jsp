@@ -234,6 +234,7 @@
             <div>
                 <div id="resultsSearchDiv" style="display: none">
                     <h2>Search</h2>
+                    <p style="color:red">* required</p>
 
                     <form:form method="post" modelAttribute="searchForm" action="/results"
                                id="searchForm" autocomplete="off">
@@ -247,7 +248,7 @@
                                 <div class="col-lg-3">
 
                                     <label for="city">
-                                        <div class="searchText">City / zip code:</div>
+                                        <div class="searchText">City / zip code: <span style="color:red">*</span></div>
                                     </label>
 
                                 </div>
@@ -262,7 +263,7 @@
                             <div class="form-group">
                                 <div class="col-sm-3">
                                     <label for="radius">
-                                        <div class="searchText"> Within radius of (max.):</div>
+                                        <div class="searchText"> Within radius of (max.): <span style="color:red">*</span></div>
                                     </label>
                                 </div>
                                 <div class="col-lg-4">
@@ -276,7 +277,7 @@
                             <div class="form-group">
                                 <div class="col-lg-3">
                                     <label for="price">
-                                        <div class="searchText"> Price (max.):</div>
+                                        <div class="searchText"> Price (max.): <span style="color:red">*</span></div>
                                     </label>
                                 </div>
                                 <div class="col-lg-4">

@@ -91,6 +91,7 @@
 
     <h1>Search for an ad</h1>
     <hr/>
+    <p style="color:red">* required</p>
     <form:form method="post" modelAttribute="searchForm" action="/results"
                id="searchForm" autocomplete="off" onsubmit="return isValid();">
         <div class="check-box">
@@ -106,7 +107,7 @@
                     <div class="form-group">
                         <div class="col-lg-3">
 
-            <label for="city"><div class="searchText">City / zip code:</div></label>
+            <label for="city"><div class="searchText">City / zip code:  <span style="color:red">*</span></div></label>
 
                         </div>
                         <div class="col-lg-4">
@@ -119,7 +120,7 @@
         <div class ="row">
              <div class="form-group">
                  <div class="col-sm-3">
-            <label for="radius"><div class="searchText"> Within radius of (max.):</div></label>
+            <label for="radius"><div class="searchText"> Within radius of (max.):  <span style="color:red">*</span></div></label>
                  </div>
                  <div class="col-lg-4">
             <form:input id="radiusInput" type="number" path="radius" placeholder="e.g. 5" step="5" cssClass="searchText"/> km
@@ -131,7 +132,7 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-lg-3">
-            <label for="price"><div class="searchText"> Price (max.):</div></label>
+            <label for="price"><div class="searchText"> Price (max.):  <span style="color:red">*</span></div></label>
                 </div>
                 <div class="col-lg-4">
             <form:input id="prizeInput" type="number" path="price" placeholder="e.g. 5" step="50" cssClass="searchText"/> CHF

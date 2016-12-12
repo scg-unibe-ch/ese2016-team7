@@ -55,6 +55,7 @@
 
         <h1>Edit your Profile</h1>
         <hr/>
+        <p style="color:red; margin-left: 1em;">* required</p>
 
         <!-- check if user is logged in -->
         <sec:authorize var="loggedIn" url="/profile"/>
@@ -77,12 +78,12 @@
 
             <table class="editProfileTable">
                 <tr>
-                    <td class="spacingTable"><label for="user-name">Username:</label><a>&emsp;</a>
+                    <td class="spacingTable"><label for="user-name">Username: <span style="color:red">*</span></label><a>&emsp;</a>
                         <form:input id="user-name" path="username" value="${currentUser.username}"/></td>
 
                 </tr>
                 <tr>
-                    <td class="spacingTable"><label for="first-name">First name:</label><a>&emsp;</a>
+                    <td class="spacingTable"><label for="first-name">First name: <span style="color:red">*</span></label><a>&emsp;</a>
                         <form:input id="first-name" path="firstName" value="${currentUser.firstName}"/></td>
                 </tr>
                 <tr>
@@ -90,7 +91,7 @@
                         <form:input id="last-name" path="lastName" value="${currentUser.lastName}"/></td>
                 </tr>
                 <tr>
-                    <td class="spacingTable"><label for="password">Password:</label><a>&emsp;&thinsp;</a>
+                    <td class="spacingTable"><label for="password">Password: <span style="color:red">*</span></label><a>&emsp;&thinsp;</a>
                         <form:input type="password" id="password" path="password" value="${currentUser.password}"/></td>
                 </tr>
             </table>

@@ -138,13 +138,14 @@
                action="/profile/placeAd" id="placeAdForm" autocomplete="off"
                enctype="multipart/form-data" onsubmit="return isValid();">
 
+    <p style="color:red; margin-left: 2em;">* required</p>
     <div class="table-responsive">
     <fieldset>
-            <legend>General info</legend>
+            <legend>General info <span style="color:red">*</span></legend>
                 <table class="table table-striped">
                 <tr>
-                    <td><label for="field-title">Ad Title</label></td>
-                    <td><label for="type-house">Type:</label></td>
+                    <td><label for="field-title">Ad Title <span style="color:red">*</span></label></td>
+                    <td><label for="type-house">Type: <span style="color:red">*</span></label></td>
                 </tr>
 
                 <tr>
@@ -159,8 +160,8 @@
                 </tr>
 
                 <tr>
-                    <td><label for="field-street">Street</label></td>
-                    <td><label for="field-city">City / Zip code</label></td>
+                    <td><label for="field-street">Street <span style="color:red">*</span></label></td>
+                    <td><label for="field-city">City / Zip code <span style="color:red">*</span></label></td>
                 </tr>
 
                 <tr>
@@ -171,7 +172,7 @@
                 </tr>
 
                 <tr>
-                    <td><label for="moveInDate">Move-in date</label></td>
+                    <td><label for="moveInDate">Move-in date <span style="color:red">*</span></label></td>
                 </tr>
                 <tr>
                     <td><form:input type="text" id="field-moveInDate"
@@ -182,9 +183,9 @@
                 </tr>
 
                 <tr>
-                    <td><label for="field-Prize">Starting price</label></td>
-                    <td><label for="field-SquareFootage">Square Meters</label></td>
-                    <td><label for="field-NumberRooms">Number of Rooms</label></td>
+                    <td><label for="field-Prize">Starting price <span style="color:red">*</span></label></td>
+                    <td><label for="field-SquareFootage">Square Meters <span style="color:red">*</span></label></td>
+                    <td><label for="field-NumberRooms">Number of Rooms <span style="color:red">*</span></label></td>
                 </tr>
                 <tr>
                     <td><form:input id="field-Prize" type="number" path="price"
@@ -233,7 +234,7 @@
         </fieldset>
         <br/>
         <fieldset>
-            <legend>Room Description</legend>
+            <legend>Room Description <span style="color:red">*</span></legend>
 
             <table class="placeAdTable">
                 <tr>

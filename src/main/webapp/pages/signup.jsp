@@ -95,8 +95,9 @@
         <h1>Sign up</h1>
         <form:form id="signupForm" method="post" modelAttribute="signupForm"
                    action="signup">
+            <p style="color:red">* required</p>
 
-            <label for="field-firstName">First Name:</label>
+            <label for="field-firstName">First Name: <span style="color:red">*</span></label>
             <form:input path="firstName" id="field-firstName" cssClass="form-control"/>
             <form:errors path="firstName" cssClass="validationErrorText"/>
 
@@ -104,15 +105,15 @@
             <form:input path="lastName" id="field-lastName" cssClass="form-control"/>
             <form:errors path="lastName" cssClass="validationErrorText"/>
 
-            <label for="field-password">Password:</label>
+            <label for="field-password">Password: <span style="color:red">*</span></label>
             <form:input path="password" id="field-password" type="password" cssClass="form-control"/>
             <form:errors path="password" cssClass="validationErrorText"/>
 
-            <label for="field-email">Email:</label></td>
+            <label for="field-email">Email: <span style="color:red">*</span></label></td>
             <form:input path="email" id="field-email" cssClass="form-control"/>
             <form:errors path="email" cssClass="validationErrorText"/>
 
-            <label for="field-gender">Gender:</label>
+            <label for="field-gender">Gender: <span style="color:red">*</span></label>
             <form:select id="field-gender" path="gender" cssClass="form-control">
                 <form:option value="FEMALE" label="Female"/>
                 <form:option value="MALE" label="Male"/>
