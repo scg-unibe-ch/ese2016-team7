@@ -56,21 +56,24 @@ public class AdController {
 		receivedRequest("AdController", "/ad");
 		ModelAndView model = new ModelAndView("adDescription");
 		Ad ad = adService.getAdById(id);
-		model.addObject("shownAd", ad);
-		model.addObject("messageForm", new MessageForm());
+		if(ad!=null) {
+			model = new ModelAndView("adDescription");
+			model.addObject("shownAd", ad);
+			model.addObject("messageForm", new MessageForm());
 
-		String loggedInUserEmail = (principal == null) ? "" : principal.getName();
-        User user = userDao.findByUsername(loggedInUserEmail);
-        // if user does not exist (= not logged in), he has no credit card
-        boolean hasCreditCard = user != null && user.getHasCreditCard();
+			String loggedInUserEmail = (principal == null) ? "" : principal.getName();
+			User user = userDao.findByUsername(loggedInUserEmail);
+			// if user does not exist (= not logged in), he has no credit card
+			boolean hasCreditCard = user != null && user.getHasCreditCard();
 
-		model.addObject("loggedInUserEmail", loggedInUserEmail);
-		model.addObject("loggedInUserHasCreditCard", hasCreditCard);
-		model.addObject("visits", visitService.getVisitsByAd(ad));
-		model.addObject("bids", bidService.getBidsByAd(ad));
-		model.addObject("numBids", bidService.getNumBidsByAd(ad));
+			model.addObject("loggedInUserEmail", loggedInUserEmail);
+			model.addObject("loggedInUserHasCreditCard", hasCreditCard);
+			model.addObject("visits", visitService.getVisitsByAd(ad));
+			model.addObject("bids", bidService.getBidsByAd(ad));
+			model.addObject("numBids", bidService.getNumBidsByAd(ad));
 
-		handledRequestSuccessfully("AdController", "/ad");
+			handledRequestSuccessfully("AdController", "/ad");
+		}
 		return model;
 	}
 
