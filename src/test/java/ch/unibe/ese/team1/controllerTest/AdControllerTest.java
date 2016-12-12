@@ -17,6 +17,7 @@ import java.security.Principal;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -84,6 +85,18 @@ public class AdControllerTest {
     }
 
     @Test
+    public void openMyRoomsNotLoggedIn() throws Exception{
+        this.mockMvc.perform(get("/profile/myRooms")).andExpect(view().name("home"));
+    }
+
+    @Test
+    public void openMyRoomsLoggedIn() throws Exception{
+        this.mockMvc.perform(get("/profile/myRooms").principal(getPrincipal("jane@doe.com")))
+                .andExpect(view().name("myRooms")).andExpect(model().attributeExists("bookmarkedAdvertisements","ownAdvertisements"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void bookmarkOwnAdandFail() throws Exception{
         MvcResult result  = this.mockMvc.perform(post("/bookmark").principal(getPrincipal("user@bern.com"))
                 .param("id","1").param("screening","true").param("bookmarked","true"))
@@ -91,6 +104,16 @@ public class AdControllerTest {
                 .andReturn();
 
         assertEquals("4",result.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void bookmarkNotLoggedIn() throws Exception{
+        MvcResult result  = this.mockMvc.perform(post("/bookmark")
+                .param("id","1").param("screening","true").param("bookmarked","true"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals("0",result.getResponse().getContentAsString());
     }
 
 
