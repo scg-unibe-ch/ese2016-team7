@@ -72,6 +72,7 @@
     }
 
     $(document).ready(function () {
+
         attachBookmarkClickHandler();
         attachBookmarkedClickHandler();
         showTimeLeft();
@@ -135,11 +136,20 @@
                     if (amount > currentPrice) {
                         $("#bidErrorDiv").html("");
 
-                        $.post("ad/makeBid", {amount: amount, id: id}, function () {
+                        $.post("ad/makeBid", {amount: amount, id: id}, function (data) {
                             // alert("You bid: " + amount + " CHF");
-                            $("#bidAmount").val("");
-                            location.reload();
-                        })
+                            if(data == false){
+                                url = window.location.href;
+                                url += '&err';
+                                window.location = url;
+                            }else{
+                                url = window.location.href;
+                                if(url.substring(url.length - 3) == 'err'){
+                                    url = url.replace('&err','');
+                                }
+                                window.location = url;
+                            }
+                        });
                     } else {
                         $("#bidErrorDiv").html("You have to bid higher than the current price.")
                     }
@@ -205,8 +215,7 @@
         }
 
         function showButtonOnlyIfBidsExist() {
-            if (${numBids} == 0
-        )
+            if (${numBids} == 0)
             {
                 $("#bids").css("display", "none");
                 $("#showBids").html("");
@@ -305,6 +314,12 @@
                             <c:if test="${loggedInUserEmail != shownAd.user.username }">
 
                                 <div id="bidErrorDiv" style="color: #cc0000;"></div>
+                                <script>
+                                    url = window.location.href;
+                                    if(url.substring(url.length - 3) == 'err'){
+                                        $('#bidErrorDiv').html('You have to bid higher than the current price.')
+                                    }
+                                </script>
                                 <form>
                                     <input class="bidInput" type="number" id="bidAmount" placeholder="Amount" value="${shownAd.price + 1}"
                                            style='width:300px'/>
@@ -359,6 +374,7 @@
                     <c:forEach items="${bids }" var="bid">
                         <tr>
                             <td>
+                                <div class="bid" data-date="${bid.timestamp}">
                                 <fmt:formatDate value="${bid.timestamp}" pattern="dd-MM-yyyy "/>
                                 <fmt:formatDate value="${bid.timestamp}" pattern=" HH:mm "/>
                                 <a href="/user?id=${bid.user.id}" style='color:#0000ff'>
@@ -366,6 +382,7 @@
                                         ${bid.user.lastName} </a>
 
                                     ${bid.amount} CHF
+                                </div>
                             </td>
 
                         </tr>

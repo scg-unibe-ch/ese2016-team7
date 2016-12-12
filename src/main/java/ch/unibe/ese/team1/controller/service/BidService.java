@@ -38,6 +38,16 @@ public class BidService {
 
     }
 
+    public boolean isBiggerThan(int amount, Ad ad){
+        Bid bid = bidDao.findTop1ByAdOrderByIdDesc(ad);
+        if(bid == null) return true;
+        return amount > bid.getAmount();
+    }
+
+    public Bid getHighestBid(Ad ad){
+        return bidDao.findTop1ByAdOrderByIdDesc(ad);
+    }
+
     public long getNumBidsByAd(Ad ad) {
         return bidDao.countByAd(ad);
     }
@@ -45,6 +55,7 @@ public class BidService {
 
     /** Saves a new bid with the given parameters in the DB.
      */
+    @Transactional
     public void makeBid(Integer amount, User user, Ad ad) {
         // Only allow making bids when auction is not over yet.
         //(So that people can't use a direct link)
