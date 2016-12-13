@@ -47,6 +47,14 @@ public class IndexControllerTest {
     }
 
     @Test
+    public void getIndexWithPrincipal() throws Exception {
+        this.mockMvc.perform(get("/")
+                .principal(getPrincipal("ese@unibe.ch")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
+    }
+
+    @Test
     public void getAbout() throws Exception {
         this.mockMvc.perform(get("/about"))
                 .andExpect(status().isOk())
@@ -58,6 +66,16 @@ public class IndexControllerTest {
         this.mockMvc.perform(get("/disclaimer"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("disclaimer"));
+    }
+
+    private Principal getPrincipal(String name){
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return name;
+            }
+        };
+        return principal;
     }
 
 }

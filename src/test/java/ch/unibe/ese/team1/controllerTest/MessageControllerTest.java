@@ -96,24 +96,25 @@ public class MessageControllerTest {
 
     @Test
     @WithMockUser(username = "jane@doe.com")
-    public void messageSentTest() throws Exception {
-
+    public void messageSentSuccessTest() throws Exception {
         mockMvc.perform(post("/profile/messages").principal(getPrincipal("jane@doe.com"))
-                .param("recipient", "jane@doe.com")
-                .param("text", "whatever")
-                .param("subject", "whatever"))
+                .param("recipient", "ese@unibe.ch")
+                .param("subject","testSubject")
+                .param("text", "testText"))
                 .andExpect(view().name("messages"))
                 .andExpect(model().attributeExists("messageForm", "messages"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void messageSentWithBindigResultNotValid() throws Exception {
-
+    public void messageSentFailedTest() throws Exception {
         mockMvc.perform(post("/profile/messages").principal(getPrincipal("jane@doe.com"))
-                .param("messageForm", "messageForm")
-                .param("bindingResult", "notValid"))
+                .param("recipient", "")
+                .param("subject","testSubject")
+                .param("text", "testText"))
                 .andExpect(view().name("messages"))
+                .andExpect(model().attributeExists("messageForm"))
+                .andExpect(model().attributeHasFieldErrors("messageForm", "recipient"))
                 .andExpect(status().isOk());
     }
 
