@@ -130,7 +130,7 @@
                 var hasCreditCard = ${loggedInUserHasCreditCard};
 
                 if (!hasCreditCard) {
-                    $("#bidErrorDiv").html("You need a credit card to make a bid.")
+                    $("#bidErrorDiv").html("You need a credit card to make a bid. </br> <a href=\"/profile/editProfile\" style=\"color:#0000ff\"> Click here to add a credit card.</a>")
                 }
                 else {
                     if (amount > currentPrice) {

@@ -453,6 +453,7 @@ public class AdService {
             }
         }
 
+
         // Filter for instant buy price
         if (searchForm.getInstantBuyPrice() > 0) {
             Iterator<Ad> iterator = locatedResults.iterator();
@@ -464,6 +465,7 @@ public class AdService {
                 }
             }
         }
+
 
 
         return locatedResults;
