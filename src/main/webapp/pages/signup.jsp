@@ -32,6 +32,19 @@
         $("#creditCardExpireYear").val("0");
         $("#creditCardNumber").val("");
     });
+
+   $(document).ready(function () {
+
+            var text = $("#field-email").val();
+            $.post("/signup/doesEmailExist", {email: text}, function (data) {
+                if (data) {
+                    alert("This username is taken. Please choose another one!");
+                    $("#field-email").val("");
+                }
+            });
+    });
+
+
 </script>
 
 <script>
@@ -94,7 +107,7 @@
     <div class="well">
         <h1>Sign up</h1>
         <form:form id="signupForm" method="post" modelAttribute="signupForm"
-                   action="signup">
+                   action="signup" autocomplete="false">
             <p style="color:red">* required</p>
 
             <label for="field-firstName">First Name: <span style="color:red">*</span></label>
