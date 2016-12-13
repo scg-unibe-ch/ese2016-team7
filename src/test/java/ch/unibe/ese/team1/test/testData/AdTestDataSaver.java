@@ -120,7 +120,7 @@ public class AdTestDataSaver {
 		adBern2.setAnimals(true);
 		adBern2.setRoomDescription(studioDescription2);
 		adBern2.setUser(ese);
-		adBern2.setTitle("Chill studio in Bern!");
+		adBern2.setTitle("Chill studio in Bern");
 		adBern2.setStreet("Längassstr. 40");
 		adBern2.setCity("Bern");
 		adBern2.setGarden(false);
@@ -132,7 +132,7 @@ public class AdTestDataSaver {
 		adBern2.setDishwasher(false);
 		adBern2.setWashingMachine(true);
 		date.setTime(date.getTime() + TimeUnit.MINUTES.toMillis(1));
-		adBern2.setExpireDate(getTimedDate(4));
+		adBern2.setExpireDate(getTimedDate(7));
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));
 		pictures.add(createPicture(adBern2, "/img/test/ad2_2.jpg"));
@@ -200,7 +200,7 @@ public class AdTestDataSaver {
 		adOlten.setAnimals(false);
 		adOlten.setRoomDescription(studioDescription4);
 		adOlten.setUser(ese);
-		adOlten.setTitle("Roommate wanted in Olten City");
+		adOlten.setTitle("Olten City Villa");
 		adOlten.setStreet("Zehnderweg 5");
 		adOlten.setCity("Olten");
 		adOlten.setGarden(false);
@@ -236,7 +236,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setAnimals(false);
 		adNeuchâtel.setRoomDescription(studioDescription5);
 		adNeuchâtel.setUser(bernerBaer);
-		adNeuchâtel.setTitle("BIG FAT STUDIO in Neuchâtel");
+		adNeuchâtel.setTitle("Tremendous Studio");
 		adNeuchâtel.setStreet("Rue de l'Hôpital 11");
 		adNeuchâtel.setCity("Neuchâtel");
 		adNeuchâtel.setGarden(true);
@@ -271,7 +271,7 @@ public class AdTestDataSaver {
 		adBiel.setAnimals(false);
 		adBiel.setRoomDescription(studioDescription6);
 		adBiel.setUser(ese);
-		adBiel.setTitle("Direkt am Quai: hübsches Studio");
+		adBiel.setTitle("Classy Studio");
 		adBiel.setStreet("Oberer Quai 12");
 		adBiel.setCity("Biel/Bienne");
 		adBiel.setGarden(false);
@@ -310,7 +310,7 @@ public class AdTestDataSaver {
 		adZurich.setAnimals(false);
 		adZurich.setRoomDescription(roomDescription7);
 		adZurich.setUser(oprah);
-		adZurich.setTitle("Roommate wanted in Zürich");
+		adZurich.setTitle("Big Casa Nova");
 		adZurich.setStreet("Hauptstrasse 61");
 		adZurich.setCity("Zürich");
 		adZurich.setGarden(false);
@@ -352,7 +352,7 @@ public class AdTestDataSaver {
 		adLuzern.setAnimals(false);
 		adLuzern.setRoomDescription(studioDescription8);
 		adLuzern.setUser(oprah);
-		adLuzern.setTitle("Elegant Studio in Lucerne");
+		adLuzern.setTitle("Elegant Studio");
 		adLuzern.setStreet("Schwanenplatz 61");
 		adLuzern.setCity("Luzern");
 		adLuzern.setGarden(false);
@@ -392,7 +392,7 @@ public class AdTestDataSaver {
 		adAarau.setAnimals(false);
 		adAarau.setRoomDescription(studioDescription9);
 		adAarau.setUser(oprah);
-		adAarau.setTitle("Beautiful studio in Aarau");
+		adAarau.setTitle("Beautiful Studio");
 		adAarau.setStreet("Bruderholzstrasse 32");
 		adAarau.setCity("Aarau");
 		adAarau.setGarden(false);
@@ -434,7 +434,7 @@ public class AdTestDataSaver {
 		adDavos.setAnimals(false);
 		adDavos.setRoomDescription(studioDescription10);
 		adDavos.setUser(oprah);
-		adDavos.setTitle("Free room in Davos City");
+		adDavos.setTitle("Cheap House in Davos");
 		adDavos.setStreet("Kathrinerweg 5");
 		adDavos.setCity("Davos");
 		adDavos.setGarden(false);
@@ -471,7 +471,7 @@ public class AdTestDataSaver {
 		adLausanne.setAnimals(false);
 		adLausanne.setRoomDescription(studioDescription11);
 		adLausanne.setUser(oprah);
-		adLausanne.setTitle("Studio extrèmement bon marché à Lausanne");
+		adLausanne.setTitle("Studio Lausanne");
 		adLausanne.setStreet("Rue de l'Eglise 26");
 		adLausanne.setCity("Lausanne");
 		adLausanne.setGarden(true);

@@ -52,8 +52,8 @@ public class SearchController {
 	public ModelAndView quicksearch(@RequestParam("city") String city){
 		receivedRequest("SearchController", "/quicksearch");
 		searchForm.setCity(city);
-		searchForm.setRadius(500);
-		searchForm.setPrice(20000);
+		searchForm.setRadius(50);
+		searchForm.setPrice(2000000);
 		searchForm.setStudio(true);
 		searchForm.setHouse(true);
 		searchForm.setApartment(true);
