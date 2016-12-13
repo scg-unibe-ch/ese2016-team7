@@ -11,11 +11,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.util.NestedServletException;
 
 import java.security.Principal;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,13 +48,34 @@ public class AlertControllerTest {
                 .andExpect(model().attributeHasNoErrors("alertForm"));
     }
 
-    /*
-    @Test (expected = NestedServletException.class)
-    public void createUnfinishedFakeAlertAndShowAlertViewFails() throws Exception {
-        this.mockMvc.perform(post("/profile/alerts").principal(getPrincipal("ese@unibe.ch")));
+    @Test
+    public void postInvalidAlertAndShowAlertViewLeadsToShowNewSearchForm() throws Exception {
+        this.mockMvc.perform(post("/profile/alerts").principal(getPrincipal("ese@unibe.ch"))
+                .param("house", "true")
+                .param("city", "3000 - Bern")
+                .param("radius", "5")
+                .param("price", "a"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("searchAd"))
+                .andExpect(model().attributeDoesNotExist("user", "alertForm", "alerts"))
+                .andExpect(model().attributeExists("searchForm"));
     }
-    */
 
+    @Test
+    public void getAlertPage() throws Exception {
+        this.mockMvc.perform(get("/profile/alerts").principal(getPrincipal("ese@unibe.ch")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("alerts"))
+                .andExpect(model().attributeExists("user", "alertForm", "alerts", "searchForm"))
+                .andExpect(model().attributeHasNoErrors("alertForm"));
+    }
+
+    @Test
+    public void deleteAlert() throws Exception {
+        this.mockMvc.perform(get("/profile/alerts/deleteAlert").principal(getPrincipal("ese@unibe.ch"))
+                .param("id", "1"))
+                .andExpect(status().isOk());
+    }
 
     private Principal getPrincipal(String name){
         Principal principal = new Principal() {
