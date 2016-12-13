@@ -67,11 +67,11 @@ public class ProfileControllerTest {
 
 
 
-    //TODO: This should go to login page, not signup page! Thus doesn't work yet!
+
     @Test
     public void signupSucessTest() throws Exception {
         this.mockMvc.perform(post("/signup")
-                .param("email", "testTester@test.com")
+                .param("email", "test@test.com")
                 .param("password", "superPassword")
                 .param("firstName", "superKid")
                 .param("lastName", "superMan")
