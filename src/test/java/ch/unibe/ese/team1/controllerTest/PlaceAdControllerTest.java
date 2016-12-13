@@ -94,6 +94,24 @@ public class PlaceAdControllerTest {
     }
 
     @Test
+    public void createAdWithParameterandId() throws  Exception{
+        this.mockMvc.perform(post("/profile/placeAd").principal(getPrincipal("jane@doe.com"))
+                .param("title","title")
+                .param("property","HOUSE")
+                .param("street","street")
+                .param("city","3000 - Bern")
+                .param("moveInDate","12-12-2017")
+                .param("price","100")
+                .param("squareFootage","100")
+                .param("NumberRooms","2.5")
+                .param("roomDescription","description")
+                .param("instantBuyPrice","0")
+                .param("id","0")
+                .param("premium","true")
+        ).andExpect(status().is3xxRedirection()).andExpect(model().hasNoErrors());
+    }
+
+    @Test
     public void getNoUploadedPictures() throws Exception{
         MvcResult result = this.mockMvc.perform(post("/profile/placeAd/getUploadedPictures").principal(getPrincipal("jane@doe.com"))
         ).andExpect(status().isOk()).andReturn();
