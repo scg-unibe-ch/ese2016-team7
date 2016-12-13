@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -81,11 +82,9 @@ public class AdControllerTest {
     }
 
 
-    //TODO: make this test work
-    /*
     @Test
+    @WithMockUser(username = "jane@doe.com")
     public void sendMessageSuccessTest() throws Exception{
-
         this.mockMvc.perform(post("/ad")
                 .principal(getPrincipal("jane@doe.com"))
                 .param("id","4")
@@ -94,8 +93,6 @@ public class AdControllerTest {
                 .param("text", "testText"))
                 .andExpect(status().isOk());
     }
-    */
-
 
 
     @Test
