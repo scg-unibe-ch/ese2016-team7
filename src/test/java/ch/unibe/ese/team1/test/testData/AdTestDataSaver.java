@@ -393,7 +393,7 @@ public class AdTestDataSaver {
 		adAarau.setRoomDescription(studioDescription9);
 		adAarau.setUser(oprah);
 		adAarau.setTitle("Beautiful Studio");
-		adAarau.setStreet("Bruderholzstrasse 32");
+		adAarau.setStreet("Gönhardweg 22");
 		adAarau.setCity("Aarau");
 		adAarau.setGarden(false);
 		adAarau.setBalcony(true);
@@ -435,7 +435,7 @@ public class AdTestDataSaver {
 		adDavos.setRoomDescription(studioDescription10);
 		adDavos.setUser(oprah);
 		adDavos.setTitle("Cheap House in Davos");
-		adDavos.setStreet("Kathrinerweg 5");
+		adDavos.setStreet("Talstrasse 42D");
 		adDavos.setCity("Davos");
 		adDavos.setGarden(false);
 		adDavos.setBalcony(true);
@@ -507,7 +507,7 @@ public class AdTestDataSaver {
 		adLocarno.setRoomDescription(studioDescription12);
 		adLocarno.setUser(jane);
 		adLocarno.setTitle("Malibu-style Beachhouse");
-		adLocarno.setStreet("Kirchweg 12");
+		adLocarno.setStreet("via dei Patrizi 1");
 		adLocarno.setCity("Locarno");
 		adLocarno.setGarden(false);
 		adLocarno.setBalcony(false);

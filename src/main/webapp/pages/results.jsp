@@ -157,6 +157,8 @@
 
             bounds.extend(location);
         });
+
+
     }
 
     function adjustBounds() {
@@ -479,7 +481,6 @@
             <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
                             type="date" pattern="dd.MM.yyyy"/>
             <script>
-
                 geocodeAndMark("${ad.zipcode} " + "${ad.city}" + " ${ad.street}",
                         "${ad.pictures[0].filePath}",
                         "${ad.title}",
