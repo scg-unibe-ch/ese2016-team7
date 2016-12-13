@@ -99,8 +99,9 @@ public class MessageControllerTest {
     public void messageSentTest() throws Exception {
 
         mockMvc.perform(post("/profile/messages").principal(getPrincipal("jane@doe.com"))
-                .param("messageForm", "messageForm")
-                .param("bindingResult", "bindingResult"))
+                .param("recipient", "jane@doe.com")
+                .param("text", "whatever")
+                .param("subject", "whatever"))
                 .andExpect(view().name("messages"))
                 .andExpect(model().attributeExists("messageForm", "messages"))
                 .andExpect(status().isOk());
