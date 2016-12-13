@@ -70,6 +70,13 @@ public class AlertControllerTest {
                 .andExpect(model().attributeHasNoErrors("alertForm"));
     }
 
+    @Test
+    public void deleteAlert() throws Exception {
+        this.mockMvc.perform(get("/profile/alerts/deleteAlert").principal(getPrincipal("ese@unibe.ch"))
+                .param("id", "1"))
+                .andExpect(status().isOk());
+    }
+
     private Principal getPrincipal(String name){
         Principal principal = new Principal() {
             @Override
