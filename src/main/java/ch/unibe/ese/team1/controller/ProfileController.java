@@ -263,4 +263,20 @@ public class ProfileController {
         handledRequestSuccessfully("ProfileController", "/profile/visitors");
 		return model;
 	}
+
+	/** Displays the balance us page. */
+	@RequestMapping(value = "/profile/balance")
+	public ModelAndView balance(Principal principal) {
+		receivedRequest("IndexController", "/profile/balance");
+		handledRequestSuccessfully("IndexController", "/about");
+		ModelAndView model = new ModelAndView("balance");
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+
+		model.addObject("moneyEarned", user.getMoneyEarned());
+		model.addObject("moneySpent", user.getMoneySpent());
+
+		handledRequestSuccessfully("IndexController", "/profile/balance");
+		return model;
+	}
 }
