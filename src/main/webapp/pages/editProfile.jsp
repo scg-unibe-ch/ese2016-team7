@@ -96,7 +96,7 @@
                 </tr>
             </table>
             <div id="creditCard">
-            <table>
+            <table class="editProfileTable">
                 <tr>
                     <td class="spacingTable"><label for="creditCardNumber">Credit Card
                         Number:</label><a>&emsp;&thinsp;</a>

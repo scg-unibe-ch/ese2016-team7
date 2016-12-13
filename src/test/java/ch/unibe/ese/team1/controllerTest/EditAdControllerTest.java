@@ -1,9 +1,5 @@
 package ch.unibe.ese.team1.controllerTest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import ch.unibe.ese.team1.model.Property;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +15,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -97,6 +97,13 @@ public class EditAdControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void deleteVisitFromAdTest() throws Exception {
+        this.mockMvc.perform(post("/profile/editAd/deleteVisistFromAd")
+                .principal(getPrincipal("ese@unibe.ch"))
+                .param("adId", "4").param("pictureId", "1"))
+                .andExpect(status().isOk());
+    }
 
     private Principal getPrincipal(String name){
         Principal principal = new Principal() {
@@ -107,5 +114,4 @@ public class EditAdControllerTest {
         };
         return principal;
     }
-
 }
