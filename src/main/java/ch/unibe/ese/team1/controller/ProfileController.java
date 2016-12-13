@@ -77,7 +77,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/googleSignup", method = RequestMethod.POST)
-	public @ResponseBody void makeBid(@RequestParam("name") String name, @RequestParam("email") String email,
+	public @ResponseBody void googleSignup(@RequestParam("name") String name, @RequestParam("email") String email,
 				 Principal principal) {
 
         receivedRequest("ProfileController", "/googleSignup");
