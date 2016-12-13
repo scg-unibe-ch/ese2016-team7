@@ -45,12 +45,18 @@ public class AdControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     }
 
-    /*
+
     @Test
     public void adNonExisting() throws Exception{
         this.mockMvc.perform(get("/ad").param("id","97699")).andExpect(view().name("pageNotFound"));
     }
-    */
+
+    @Test
+    public void adExisting() throws Exception{
+        this.mockMvc.perform(get("/ad").param("id","1")).andExpect(view().name("adDescription"));
+    }
+
+
 
     @Test
     public void messageSent() throws Exception{
