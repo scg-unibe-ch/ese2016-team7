@@ -1,21 +1,31 @@
 package ch.unibe.ese.team1.controllerTest;
 
+import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Property;
+import ch.unibe.ese.team1.model.Visit;
+import ch.unibe.ese.team1.model.dao.AdDao;
+import ch.unibe.ese.team1.model.dao.VisitDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -33,6 +43,12 @@ public class EditAdControllerTest {
     WebApplicationContext wac;
     @Autowired
     MockHttpServletRequest request;
+
+    @Autowired
+    AdDao adDao;
+
+    @Autowired
+    VisitDao visitDao;
 
     private MockMvc mockMvc;
 
@@ -114,4 +130,65 @@ public class EditAdControllerTest {
         };
         return principal;
     }
+
+    @Test
+    public void deleteExistingVisitFromAd()throws Exception{
+        Ad ad = adDao.findOne((long)1);
+        Visit visit=visitDao.findOne((long)1);
+        assertTrue(ad.getVisits().contains(visit));
+
+        this.mockMvc.perform(post("/profile/editAd/deleteVisitFromAd")
+        .param("adId","1").param("visitId","1")).andExpect(status().isOk());
+
+        assertFalse(ad.getVisits().contains(visit));
+    }
+
+    @Test
+    public void getUploadedPics() throws Exception{
+        MockMultipartFile pictureFile = new MockMultipartFile("pic", "pic.jpg", "image/png", "picture".getBytes());
+
+       this.mockMvc.perform(MockMvcRequestBuilders.fileUpload("/profile/editAd/uploadPictures")
+                .file(pictureFile))
+                .andExpect(status().isOk());
+
+        MvcResult result = this.mockMvc.perform(post("/profile/editAd/getUploadedPictures"))
+                .andReturn();
+
+        assertTrue(result.getResponse().getContentAsString().length()>0);
+    }
+
+    @Test
+    public void getNoUploadedPics() throws Exception{
+        MvcResult result = this.mockMvc.perform(post("/profile/editAd/getUploadedPictures"))
+                .andReturn();
+
+        assertEquals("",result.getResponse().getContentAsString());
+        assertTrue(result.getResponse().getContentAsString().length()==0);
+    }
+
+    @Test
+    public void deleteNoUploadedPics() throws Exception{
+        MvcResult result = this.mockMvc.perform(post("/profile/editAd/deletePicture"))
+                .andReturn();
+
+        assertEquals("",result.getResponse().getContentAsString());
+        assertTrue(result.getResponse().getContentAsString().length()==0);
+    }
+
+    @Test
+    public void deleteUploadedPics() throws Exception{
+        MockMultipartFile pictureFile = new MockMultipartFile("pic", "pic.jpg", "image/png", "picture".getBytes());
+
+        this.mockMvc.perform(MockMvcRequestBuilders.fileUpload("/profile/editAd/uploadPictures")
+                .file(pictureFile))
+                .andExpect(status().isOk());
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/profile/editAd/deletePicture")
+                .param("url","pic"))
+                .andReturn();
+
+
+        assertTrue(result.getResponse().getContentAsString().length()==0);
+    }
+
 }

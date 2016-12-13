@@ -144,10 +144,10 @@ public class PlaceAdControllerTest {
                 .file(pictureFile))
                 .andExpect(status().isOk()).andReturn();
 
-       this.mockMvc.perform(post("/profile/placeAd/deletePicture").principal(getPrincipal("jane@doe.com"))
-        .param("url","pic.png")).andExpect(status().isOk());
+      MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/profile/placeAd/deletePicture").principal(getPrincipal("jane@doe.com"))
+        .param("url","pic.png")).andReturn();
 
-        //assertTrue(result.getResponse().getContentAsString().length()>0);
+        assertTrue(result.getResponse().getContentAsString().length()==0);
     }
     @Test
     public void deleteFileNotExisting() throws NoSuchFileException,Exception{
